@@ -2,6 +2,9 @@
 
 Groupe pour le jeu Tetris de la SAÉ du semestre 3
 
+## Liens pratiques 
+- [ ] [Tableau des tâches](https://gitlabinfo.iutmontp.univ-montp2.fr/sae-tetris/main/-/boards)
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
