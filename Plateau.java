@@ -12,8 +12,8 @@ public class Plateau {
         this.remplirPlateau();
     }
 
-    public void placerPixel(boolean a, int x, int y) {
-        this.plateau[x][y] = a;
+    public void placerPixel(boolean a, int y, int x) {
+        this.plateau[y][x] = a;
     }
 
     private void remplirPlateau() {
