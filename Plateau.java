@@ -43,4 +43,61 @@ public class Plateau {
         }
 
     }
+
+    public void peutSupprimerLigne() {
+        boolean lignePleine = false;
+        int y = 19;
+        while (y < plateau.length && !lignePleine && y != 0) {
+            lignePleine = true;
+            for (int x = 0; x < plateau[0].length; x++) {
+                if (!plateau[y][x]) {
+                    lignePleine = false;
+                    break;
+                }
+            }
+            y--;
+        }
+        if (lignePleine) {
+            y++;
+            supprimerLigne((y));
+        }
+        //return lignePleine + " at " + (y);
+    }
+
+    public void supprimerLigne(int y) {
+        for (int x = 0; x < plateau[0].length; x++) {
+            plateau[y][x] = false;
+        }
+        int yDebut;
+        yDebut = y;
+        int i = y;
+        while (i < plateau.length) {
+            if (descendreLigne(i, yDebut)) {
+                break;
+            }
+            i--;
+        }
+    }
+
+    public boolean descendreLigne(int y, int yDebut) {
+        boolean ligneVide = true;
+        if (y != yDebut) {
+            for (int x = 0; x < plateau[0].length; x++) {
+                if (plateau[y][x]) {
+                    ligneVide = false;
+                    break;
+                }
+            }
+        } else {
+            ligneVide = false;
+        }
+
+        for (int x = 0; x < plateau[0].length; x++) {
+            if (y == 0) {
+                plateau[y][x] = false;
+            }
+            plateau[y][x] = plateau[(y-1)][x];
+        }
+        return ligneVide;
+    }
 }

@@ -45,6 +45,18 @@ public class Jeu {
 
          p.afficherPlateau();
          */
+        /**Partie pour tester la suppression de ligne
+        placerPiecesRotation(0, Piece.I, 19, 3);
+        placerPiecesRotation(90, Piece.I, 19, 9);
+        placerPiecesRotation(180, Piece.I, 16, 3);
+        placerPiecesRotation(270, Piece.I, 19, 1);
+        p.afficherPlateau();
+        p.supprimerLigne(19);
+        p.afficherPlateau();
+        placerPiecesRotation(0, Piece.O, 18, 1);
+        placerPiecesRotation(0, Piece.O, 18, 7);
+        p.afficherPlateau();
+        */
     }
 
 
@@ -83,6 +95,7 @@ public class Jeu {
                 System.out.println("Mauvaise pièce entrée !");
                 break;
         }
+        p.peutSupprimerLigne();
     }
 
     private static void gestionRotationPieces(String nomPiece, int rotation, int yDebut, int xDebut, Piece piece) {
