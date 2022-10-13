@@ -11,10 +11,10 @@ public enum Piece {
     J(new boolean[][]{{true, false, false}, {true, true, true}}, "J"),
     L(new boolean[][]{{false, false, true}, {true, true, true}}, "L");
 
-    private String nom;
-    private boolean[][] piece;
+    private final String nom;
+    private final boolean[][] piece;
 
-    private Piece(boolean[][] piece, String nom) {
+    Piece(boolean[][] piece, String nom) {
         this.piece = piece;
         this.nom = nom;
     }
@@ -24,14 +24,11 @@ public enum Piece {
     }
 
     public void afficherPiece() {
-        boolean[][] var1 = this.piece;
-        int var2 = var1.length;
 
-        for(int var3 = 0; var3 < var2; ++var3) {
-            boolean[] booleans = var1[var3];
+        for (boolean[] booleans : this.piece) {
             StringBuilder a = new StringBuilder();
 
-            for(int j = 0; this.piece[0].length > j; ++j) {
+            for (int j = 0; this.piece[0].length > j; ++j) {
                 if (booleans[j]) {
                     a.append("*");
                 } else {
@@ -42,5 +39,8 @@ public enum Piece {
             System.out.println(a);
         }
 
+    }
+    public String getNom() {
+        return nom;
     }
 }

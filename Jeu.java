@@ -45,6 +45,7 @@ public class Jeu {
 
          p.afficherPlateau();
          */
+
         /**Partie pour tester la suppression de ligne
         placerPiecesRotation(0, Piece.I, 19, 3);
         placerPiecesRotation(90, Piece.I, 19, 9);
@@ -105,18 +106,18 @@ public class Jeu {
                     switch (nomPiece) {
                         case "S ou Z":
                             switch (rotation) {
-                                case 0 -> placerSouZ("H", piece, yDebut - 1, xDebut - 1, i, j);
-                                case 90 -> placerSouZ("V", piece, yDebut - 1, xDebut, -i + 1, j);
-                                case 180 -> placerSouZ("H", piece, yDebut - 1, xDebut - 1, i + 1, j);
-                                case 270 -> placerSouZ("V", piece, yDebut - 1, xDebut, -i, j);
+                                case 0 -> placerSouZ("H", yDebut - 1, xDebut - 1, i, j);
+                                case 90 -> placerSouZ("V", yDebut - 1, xDebut, -i + 1, j);
+                                case 180 -> placerSouZ("H", yDebut - 1, xDebut - 1, i + 1, j);
+                                case 270 -> placerSouZ("V", yDebut - 1, xDebut, -i, j);
                             }
                             break;
                         case "L ou J":
                             switch (rotation) {
-                                case 0 -> placerJouL("H", piece, yDebut, xDebut - 1, i - 1, j);
-                                case 90 -> placerJouL("V", piece, yDebut, xDebut, -i + 1, j - 1);
-                                case 180 -> placerJouL("H", piece, yDebut, xDebut - 1, -i + 1, -j + 2);
-                                case 270 -> placerJouL("V", piece, yDebut, xDebut, i - 1, -j + 1);
+                                case 0 -> placerJouL("H", yDebut, xDebut - 1, i - 1, j);
+                                case 90 -> placerJouL("V", yDebut, xDebut, -i + 1, j - 1);
+                                case 180 -> placerJouL("H", yDebut, xDebut - 1, -i + 1, -j + 2);
+                                case 270 -> placerJouL("V", yDebut, xDebut, i - 1, -j + 1);
                             }
                             break;
                         case "T" :
@@ -133,7 +134,7 @@ public class Jeu {
         }
     }
 
-    public static void placerSouZ(String sens, Piece piece, int yDebut, int xDebut, int i, int j) {
+    public static void placerSouZ(String sens, int yDebut, int xDebut, int i, int j) {
         if (sens.equals("V")) {
             p.placerPixel(true, yDebut + j, xDebut + i);
         } else if (sens.equals("H")) {
@@ -141,7 +142,7 @@ public class Jeu {
         }
     }
 
-    public static void placerJouL(String sens, Piece piece, int yDebut, int xDebut, int i, int j) {
+    public static void placerJouL(String sens, int yDebut, int xDebut, int i, int j) {
         if (sens.equals("V")) {
             p.placerPixel(true, yDebut + j, xDebut + i);
         } else if (sens.equals("H")) {
