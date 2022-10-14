@@ -1,8 +1,10 @@
 import java.util.Arrays;
 //
 public class Plateau {
+    //On peut définir la hauteur le la longueur que l'on souhaite pour le plateau
     private final int longueur;
     private final int hauteur;
+    //Le plateau est une matrice de booleans car cela est plus simple pour le traitement parce qu'on peut directement savoir si une case est prise ou non
     private final boolean[][] plateau;
 
     public Plateau(int longueur, int hauteur) {
