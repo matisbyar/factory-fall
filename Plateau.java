@@ -101,7 +101,7 @@ public class Plateau {
         return ligneVide;
     }
 
-    public boolean colisionPieces(Piece piece, int positionY, int positionX, int rotation){
+    public boolean collisionPieces(Piece piece, int positionY, int positionX, int rotation){
         switch (piece) {
             case I :
                 switch (rotation) {
@@ -205,50 +205,207 @@ public class Plateau {
                 }
                 break;
             case S :
-                switch (rotation) {
-                    case 0 :
-                        break;
-                    case 90 :
-                        break;
-                    case 180 :
-                        break;
-                    case 270 :
-                        break;
-                }
-                break;
             case Z :
                 switch (rotation) {
                     case 0 :
+                        for (int y = positionY; y < (positionY + piece.getPiece().length); y++) {
+                            for (int x = positionX; x < (positionX + piece.getPiece()[0].length); x++) {
+                                if (piece.getPiece()[(y-positionY)][(x - positionX)]) {
+                                    if (plateau[y-1][x-1]) {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
                         break;
                     case 90 :
+                        for (int x = positionX; x < (positionX + piece.getPiece()[0].length-1); x++) {
+                            for (int y = positionY+1; y > (positionY - piece.getPiece().length); y--) {
+                                if (piece.getPiece()[(x-positionX)][(positionY-y+1)]) {
+                                    if (plateau[y][x]) {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
                         break;
                     case 180 :
+                        for (int y = positionY; y < (positionY + piece.getPiece().length); y++) {
+                            for (int x = positionX; x < (positionX + piece.getPiece()[0].length); x++) {
+                                if (piece.getPiece()[(y-positionY)][(x - positionX)]) {
+                                    if (plateau[y][x-1]) {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
                         break;
                     case 270 :
+                        for (int x = positionX; x < (positionX + piece.getPiece()[0].length-1); x++) {
+                            for (int y = positionY+1; y > (positionY - piece.getPiece().length); y--) {
+                                if (piece.getPiece()[(x-positionX)][(positionY-y+1)]) {
+                                    if (plateau[y][x-1]) {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
                         break;
                 }
                 break;
             case J :
                 switch (rotation) {
                     case 0 :
+                        for (int y = positionY; y < (positionY + piece.getPiece().length); y++) {
+                            for (int x = positionX; x < (positionX + piece.getPiece()[0].length); x++) {
+                                if (piece.getPiece()[(y - positionY)][(x - positionX)]) {
+                                    if (plateau[y-1][x]) {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
                         break;
                     case 90 :
+                        int i = 0;
+                        for (int x = positionY; x < (positionY + piece.getPiece().length); x++) {
+                            for (int y = positionX; y < (positionX + piece.getPiece()[0].length); y++) {
+                                if (x-positionY == 0) {
+                                    if (piece.getPiece()[x-positionY][y-positionX]) {
+                                        if (plateau[x-1][y+1]) {
+                                            return false;
+                                        }
+                                    }
+                                } else {
+                                    switch (y - positionX) {
+                                        case 0, 1, 2 -> {
+                                            if (plateau[x - i][y - i]) {
+                                                return false;
+                                            }
+                                        }
+                                    }
+                                    i++;
+                                }
+                            }
+                        }
                         break;
                     case 180 :
+                        for (int y = positionY+1; y > (positionY - piece.getPiece().length+1); y--) {
+                            for (int x = positionX+2; x > (positionX - piece.getPiece()[0].length+2); x--) {
+                                if (piece.getPiece()[(y - positionY)][(x - positionX)]) {
+                                    if (y-positionY == 0 && x - positionX == 0) {
+                                        if (plateau[y+1][x+1]) {
+                                            return false;
+                                        }
+                                    } else {
+                                        if (plateau[y-1][x-1]) {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         break;
                     case 270 :
+                        int z = 0;
+                        for (int x = positionY; x < (positionY + piece.getPiece().length); x++) {
+                            for (int y = positionX; y < (positionX + piece.getPiece()[0].length); y++) {
+                                if (x-positionY == 0) {
+                                    if (piece.getPiece()[x-positionY][y-positionX]) {
+                                        if (plateau[x+1][y-1]) {
+                                            return false;
+                                        }
+                                    }
+                                } else {
+                                    switch (y - positionX) {
+                                        case 0, 1, 2 -> {
+                                            if (plateau[x - z][y - z]) {
+                                                return false;
+                                            }
+                                        }
+                                    }
+                                    z++;
+                                }
+                            }
+                        }
                         break;
                 }
                 break;
             case L :
                 switch (rotation) {
                     case 0 :
+                        for (int y = positionY; y < (positionY + piece.getPiece().length); y++) {
+                            for (int x = positionX; x < (positionX + piece.getPiece()[0].length); x++) {
+                                if (piece.getPiece()[(y - positionY)][(x - positionX)]) {
+                                    if (plateau[y-1][x-1]) {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
                         break;
                     case 90 :
+                        int i = 0;
+                        for (int x = positionY; x < (positionY + piece.getPiece().length); x++) {
+                            for (int y = positionX; y < (positionX + piece.getPiece()[0].length); y++) {
+                                if (x-positionY == 0) {
+                                    if (piece.getPiece()[x-positionY][y-positionX]) {
+                                        if (plateau[x+1][y-1]) {
+                                            return false;
+                                        }
+                                    }
+                                } else {
+                                    switch (y - positionX) {
+                                        case 0, 1, 2 -> {
+                                            if (plateau[x - i][y - i]) {
+                                                return false;
+                                            }
+                                        }
+                                    }
+                                    i++;
+                                }
+                            }
+                        }
                         break;
                     case 180 :
+                        for (int y = positionY+1; y > (positionY - piece.getPiece().length+1); y--) {
+                            for (int x = positionX+2; x > (positionX - piece.getPiece()[0].length+2); x--) {
+                                if (piece.getPiece()[(y - positionY)][(x - positionX)]) {
+                                    if (y-positionY == 0 && x - positionX == 2) {
+                                        if (plateau[y+1][x-3]) {
+                                            return false;
+                                        }
+                                    } else {
+                                        if (plateau[y-1][x-1]) {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         break;
                     case 270 :
+                        int z = 0;
+                        for (int x = positionY; x < (positionY + piece.getPiece().length); x++) {
+                            for (int y = positionX; y < (positionX + piece.getPiece()[0].length); y++) {
+                                if (x-positionY == 0) {
+                                    if (piece.getPiece()[x-positionY][y-positionX]) {
+                                        if (plateau[x-1][y-3]) {
+                                            return false;
+                                        }
+                                    }
+                                } else {
+                                    switch (y - positionX) {
+                                        case 0, 1, 2 -> {
+                                            if (plateau[x - z][y - z]) {
+                                                return false;
+                                            }
+                                        }
+                                    }
+                                    z++;
+                                }
+                            }
+                        }
                         break;
                 }
                 break;
