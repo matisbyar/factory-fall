@@ -3,6 +3,9 @@
  * plusieurs catégories de pièces.
  *///
 public enum Piece {
+    /**Définition des instances de la classe, chaque pièce est définie comme une matrice de booleans pour plus de cohérence avec le plateau,
+     dans le futur nous pourront également ajouter un attribut couleur à chaque pièce pour l'interface graphique.
+     Chaque objet est créé puis initialisé dans cette classe, car c'est la particularité du type enum*/
     I(new boolean[][]{{true, true, true, true}}, "I"),
     O(new boolean[][]{{true, true}, {true, true}}, "O"),
     T(new boolean[][]{{false, true, false}, {true, true, true}}, "T"),
@@ -14,15 +17,18 @@ public enum Piece {
     private final String nom;
     private final boolean[][] piece;
 
+    /**Constructeur de la classe*/
     Piece(boolean[][] piece, String nom) {
         this.piece = piece;
         this.nom = nom;
     }
 
+    /**Retourne la matrice de la pièce*/
     public boolean[][] getPiece() {
         return this.piece;
     }
 
+    /**Fonction qui permet d'afficher une pièce (utile pour du debug)*/
     public void afficherPiece() {
 
         for (boolean[] booleans : this.piece) {
@@ -40,6 +46,7 @@ public enum Piece {
         }
 
     }
+    /**Retourne le nom de la pièce*/
     public String getNom() {
         return nom;
     }

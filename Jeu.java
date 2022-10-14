@@ -2,7 +2,7 @@
  * La classe Jeu instancie tous les éléments du jeu (Grille, Briques, ...) afin d'assurer le bon fonctionnement du jeu.
  */
 public class Jeu {
-    static Plateau p = new Plateau(10, 20);
+    static Plateau p = new Plateau(10, 20); //Création d'un objet plateau
     public static void main(String[] args) {
         /**C'est OK (pour tester sortez juste un bloc et l'exécuter)
 
@@ -60,29 +60,29 @@ public class Jeu {
         */
     }
 
-
+    /**Fonction qui sert à placer les pièces sur le plateau les angles de rotations possibles sont 0, 90, 180 et 270*/
     public static void placerPiecesRotation(int rotation, Piece piece, int yDebut, int xDebut) {
         switch (piece) {
             case I :
                 for (int i = 0; i < piece.getPiece()[0].length; i++) {
                     switch (rotation) {
-                        case 0 -> p.placerPixel(true, yDebut, xDebut + i);
-                        case 90 -> p.placerPixel(true, yDebut - i, xDebut);
-                        case 180 -> p.placerPixel(true, yDebut + 1, xDebut + i);
-                        case 270 -> p.placerPixel(true, yDebut - i, xDebut - 1);
+                        case 0 -> p.placerPixel(true, yDebut, xDebut + i);  //L'incrémentation se fait sur l'axe des X
+                        case 90 -> p.placerPixel(true, yDebut - i, xDebut); //L'incrémentation se fait sur l'axe des Y
+                        case 180 -> p.placerPixel(true, yDebut + 1, xDebut + i);    //L'incrémentation se fait sur l'axe des X
+                        case 270 -> p.placerPixel(true, yDebut - i, xDebut - 1);    //L'incrémentation se fait sur l'axe des Y
                         default -> System.out.println("Mauvais angle de rotation !");
                     }
                 }
                 break;
-            case S :
+            case S :    //le cas S et le cas Z sont similaires, ils seront donc traités au même endroit
             case Z:
-                gestionRotationPieces("S ou Z", rotation, yDebut, xDebut, piece);
+                gestionRotationPieces("S ou Z", rotation, yDebut, xDebut, piece); //appel de la fonction qui gère les S, Z, J, L et T
                 break;
-            case L :
+            case L :    //le cas L et le cas J sont similaires, ils seront donc traités au même endroit
             case J:
-                gestionRotationPieces("L ou J", rotation, yDebut, xDebut, piece);
+                gestionRotationPieces("L ou J", rotation, yDebut, xDebut, piece); //appel de la fonction qui gère les S, Z, J, L et T
                 break;
-            case O:
+            case O:         //Cette pièce est toujours la même peu importe le sens de rotation, on ne le prend donc pas en compte
                 for (int i = 0; i < piece.getPiece().length; i++) {
                     for (int j = 0; j < piece.getPiece()[0].length; j++) {
                         p.placerPixel(true, yDebut + i, xDebut + j);
@@ -90,7 +90,7 @@ public class Jeu {
                 }
                 break;
             case T:
-                gestionRotationPieces("T", rotation, yDebut, xDebut, piece);
+                gestionRotationPieces("T", rotation, yDebut, xDebut, piece);  //appel de la fonction qui gère les S, Z, J, L et T
                 break;
             default:
                 System.out.println("Mauvaise pièce entrée !");
@@ -99,6 +99,8 @@ public class Jeu {
         p.peutSupprimerLigne();
     }
 
+    /**Fonction tampon qui gère les S, Z, J, L et T séparément pour une meilleure lisibilité
+     (pour toute la fonction les -1 et les +1 servent à faire de l'ajustement graphique pour que chaque pixel soit bien placé)*/
     private static void gestionRotationPieces(String nomPiece, int rotation, int yDebut, int xDebut, Piece piece) {
         for (int i = 0; i < piece.getPiece().length; i++) {
             for (int j = 0; j < piece.getPiece()[0].length; j++) {
@@ -106,18 +108,18 @@ public class Jeu {
                     switch (nomPiece) {
                         case "S ou Z":
                             switch (rotation) {
-                                case 0 -> placerSouZ("H", yDebut - 1, xDebut - 1, i, j);
-                                case 90 -> placerSouZ("V", yDebut - 1, xDebut, -i + 1, j);
-                                case 180 -> placerSouZ("H", yDebut - 1, xDebut - 1, i + 1, j);
-                                case 270 -> placerSouZ("V", yDebut - 1, xDebut, -i, j);
+                                case 0 -> placerSouZouJouL("H", yDebut - 1, xDebut - 1, i, j);
+                                case 90 -> placerSouZouJouL("V", yDebut - 1, xDebut, -i + 1, j);
+                                case 180 -> placerSouZouJouL("H", yDebut - 1, xDebut - 1, i + 1, j);
+                                case 270 -> placerSouZouJouL("V", yDebut - 1, xDebut, -i, j);
                             }
                             break;
                         case "L ou J":
                             switch (rotation) {
-                                case 0 -> placerJouL("H", yDebut, xDebut - 1, i - 1, j);
-                                case 90 -> placerJouL("V", yDebut, xDebut, -i + 1, j - 1);
-                                case 180 -> placerJouL("H", yDebut, xDebut - 1, -i + 1, -j + 2);
-                                case 270 -> placerJouL("V", yDebut, xDebut, i - 1, -j + 1);
+                                case 0 -> placerSouZouJouL("H", yDebut, xDebut - 1, i - 1, j);
+                                case 90 -> placerSouZouJouL("V", yDebut, xDebut, -i + 1, j - 1);
+                                case 180 -> placerSouZouJouL("H", yDebut, xDebut - 1, -i + 1, -j + 2);
+                                case 270 -> placerSouZouJouL("V", yDebut, xDebut, i - 1, -j + 1);
                             }
                             break;
                         case "T" :
@@ -134,18 +136,11 @@ public class Jeu {
         }
     }
 
-    public static void placerSouZ(String sens, int yDebut, int xDebut, int i, int j) {
-        if (sens.equals("V")) {
+    /**Fonction qui traite les cas ou la pièce est un Z, un S, un J ou un L (elle existe pour éviter la duplication de code*/
+    public static void placerSouZouJouL(String sens, int yDebut, int xDebut, int i, int j) {
+        if (sens.equals("V")) {         //Si le sens est Vertical alors on inverse l'axe de X et des Y
             p.placerPixel(true, yDebut + j, xDebut + i);
-        } else if (sens.equals("H")) {
-            p.placerPixel(true, yDebut + i, xDebut + j);
-        }
-    }
-
-    public static void placerJouL(String sens, int yDebut, int xDebut, int i, int j) {
-        if (sens.equals("V")) {
-            p.placerPixel(true, yDebut + j, xDebut + i);
-        } else if (sens.equals("H")) {
+        } else if (sens.equals("H")) {  //Sinon on le place normalement
             p.placerPixel(true, yDebut + i, xDebut + j);
         }
     }
