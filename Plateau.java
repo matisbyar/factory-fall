@@ -15,8 +15,8 @@ public class Plateau {
     }
 
     /**Fonction qui sert à placer un pixel sur le plateau (vide ou non)*/
-    public void placerPixel(boolean a, int y, int x) {
-        this.plateau[y][x] = a;
+    public void placerPixel(boolean valeur, int y, int x) {
+        this.plateau[y][x] = valeur;
     }
 
     /**Fonction qui initialise le plateau pour qu'il soit vide*/
@@ -33,17 +33,17 @@ public class Plateau {
         System.out.println(Arrays.deepToString(this.plateau));
 
         for(int i = 0; this.hauteur > i; ++i) {
-            StringBuilder a = new StringBuilder("| ");
+            StringBuilder plateauString = new StringBuilder("| ");
 
             for(int j = 0; this.longueur > j; ++j) {
                 if (this.plateau[i][j]) {
-                    a.append("* | ");
+                    plateauString.append("* | ");
                 } else {
-                    a.append("  | ");
+                    plateauString.append("  | ");
                 }
             }
 
-            System.out.println(a);
+            System.out.println(plateauString);
         }
 
     }
@@ -69,16 +69,14 @@ public class Plateau {
         }
     }
 
-    /**Fonction qui permet de supprimer une ligne d'on l'identifiant est fourni et appelle la fonction pour descendre les lignes du dessus*/
+    /**Fonction qui permet de supprimer une ligne dont l'identifiant est fourni et appelle la fonction pour descendre les lignes du dessus*/
     private void supprimerLigne(int y) {
         for (int x = 0; x < plateau[0].length; x++) {
             plateau[y][x] = false;
         }
-        int yDebut;
-        yDebut = y;
         int i = y;
         while (i >= 0) {
-            if (descendreLigne(i, yDebut)) {    //si la ligne du dessus est vide alors la fonction s'arrête
+            if (descendreLigne(i, y)) {    //si la ligne du dessus est vide alors la fonction s'arrête
                 break;
             }
             i--;
@@ -86,7 +84,7 @@ public class Plateau {
         peutSupprimerLigne();
     }
 
-    /**Fonction qui permet de descendre une ligne, elle retourne si la ligne du dessus est vide ou non*/
+    /**Fonction qui permet de descendre une ligne, elle retourne vrai si la ligne du dessus est vide, faux sinon*/
     private boolean descendreLigne(int y, int yDebut) {
         boolean ligneVide = true;
         if (y != yDebut) {                                      //Ce if permet que la fonction ne renvoie pas true dans le premier appel
