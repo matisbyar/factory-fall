@@ -70,23 +70,24 @@ public class Plateau {
     }
 
     /**Fonction qui permet de supprimer une ligne d'on l'identifiant est fourni et appelle la fonction pour descendre les lignes du dessus*/
-    public void supprimerLigne(int y) {
+    private void supprimerLigne(int y) {
         for (int x = 0; x < plateau[0].length; x++) {
             plateau[y][x] = false;
         }
         int yDebut;
         yDebut = y;
         int i = y;
-        while (i < plateau.length) {
+        while (i >= 0) {
             if (descendreLigne(i, yDebut)) {    //si la ligne du dessus est vide alors la fonction s'arrête
                 break;
             }
             i--;
         }
+        peutSupprimerLigne();
     }
 
     /**Fonction qui permet de descendre une ligne, elle retourne si la ligne du dessus est vide ou non*/
-    public boolean descendreLigne(int y, int yDebut) {
+    private boolean descendreLigne(int y, int yDebut) {
         boolean ligneVide = true;
         if (y != yDebut) {                                      //Ce if permet que la fonction ne renvoie pas true dans le premier appel
             for (int x = 0; x < plateau[0].length; x++) {       //Cette boucle for permet de savoir si la ligne du dessus est vide
@@ -108,9 +109,74 @@ public class Plateau {
         return ligneVide;
     }
 
+    /**Fonction qui vérifie s'il y a une collision quelle qu'elle soit (true si collision et false sinon)*/
+    public boolean collisionPieces(Piece piece, int positionY, int positionX, int rotation) {
+        boolean sortiePlateau = true;
+
+
+       if ((positionX > -2 && positionX < 11) && (positionY > -2 && positionY < 20)) {
+           if ((piece.equals(Piece.I) && rotation == 180) && !(positionY > 18 || positionX > 6)) {  //pour I a 180°
+               sortiePlateau = false;
+           } else if ((piece.equals(Piece.O) || (piece.equals(Piece.I) && !(rotation == 270))) && positionX > -1) {   //cas où Y = 0 est possible
+               if (piece.equals(Piece.I)) {   //cas pour I - rota 270°
+                   if ((rotation == 0 && positionX < 7) || (rotation == 90 && positionX < 10 && positionY > 2)) {
+                       sortiePlateau = false;
+                   }
+               } else {  //cas où la pièce est un O
+                   if (positionX<9 && positionY > -1 && positionY < 19) {
+                       sortiePlateau = false;
+                   }
+               }
+           } else if (piece.equals(Piece.I) && rotation == 270) {  //I avec rota 270°
+               if (positionX > 0 && positionY > 0) {
+                   sortiePlateau = false;
+               }
+           } else if (positionX > 0) {
+               switch (rotation) {
+                   case 0 :
+                       if (positionY > 0 && positionX < 9) {
+                           sortiePlateau = false;
+                       }
+                       break;
+                   case 180 :
+                       if (positionY > -1 && positionY< 19 && positionX < 9) {
+                           sortiePlateau = false;
+                       }
+                       break;
+                   case 270 :
+                       if (positionY > 0 && positionY < 19 && positionX < 10) {
+                           sortiePlateau = false;
+                       }
+                       break;
+               }
+           } else {
+               if (rotation == 90 && positionX > -1 && positionY > 0 && positionY < 19) {
+                   sortiePlateau = false;
+               }
+           }
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+        if (!sortiePlateau) {
+            return !collisionEntrePieces(piece, positionY, positionX, rotation);
+        }else {
+            return true;
+        }
+    }
+
     /**Fonction permettant de vérifier si la pièce donnée en paramètres, aux coordonnées données
-     entre en collision avec une autre déjà existante*/
-    public boolean collisionPieces(Piece piece, int positionY, int positionX, int rotation){
+     entre en collision avec une autre déjà existante (renvoie false s'il y a une collision et true sinon)*/
+    public boolean collisionEntrePieces(Piece piece, int positionY, int positionX, int rotation) {
         switch (piece) {               //Switch case permettant de savoir quelle pièce est placé en paramètre et d'adopter le bon raisonnement
             case I :
                 switch (rotation) {    //Switch case permettant de connaitre la rotation de la piece
