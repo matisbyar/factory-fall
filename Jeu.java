@@ -60,7 +60,7 @@ public class Jeu {
         */
     }
 
-    /**Fonction qui sert à placer les pièces sur le plateau les angles de rotations possibles sont 0, 90, 180 et 270*/
+    /**Fonction qui sert à placer les pièces sur le plateau. Les angles de rotations possibles sont 0, 90, 180 et 270*/
     public static void placerPiecesRotation(int rotation, Piece piece, int yDebut, int xDebut) {
         switch (piece) {
             case I :

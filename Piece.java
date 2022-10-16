@@ -32,17 +32,17 @@ public enum Piece {
     public void afficherPiece() {
 
         for (boolean[] booleans : this.piece) {
-            StringBuilder a = new StringBuilder();
+            StringBuilder plateauString = new StringBuilder();
 
             for (int j = 0; this.piece[0].length > j; ++j) {
                 if (booleans[j]) {
-                    a.append("*");
+                    plateauString.append("*");
                 } else {
-                    a.append(" ");
+                    plateauString.append(" ");
                 }
             }
 
-            System.out.println(a);
+            System.out.println(plateauString);
         }
 
     }
