@@ -13,6 +13,10 @@ public class Plateau {
         this.remplirTableau();
     }
 
+    public int getLargeur() {
+        return largeur;
+    }
+
     /**
      * @return Le nom (string) de la pièce à l'emplacement indiqué
      */
@@ -45,7 +49,7 @@ public class Plateau {
      * @return Vrai si la case indiquée est dans les limites du plateau, et qu'elle est vide
      */
     public boolean placementValide(int ligne, int colonne, Piece piece) {
-        return 0 <= ligne && ligne <= this.hauteur && 0 <= colonne && colonne <= this.largeur && this.estVide(ligne, colonne);
+        return 0 <= ligne && ligne < this.hauteur && 0 <= colonne && colonne < this.largeur && this.estVide(ligne, colonne);
     }
 
     /**
@@ -71,6 +75,13 @@ public class Plateau {
         }
 
         return ligne >= 0;
+    }
+
+    /**
+     * Supprime la pièce à l'emplacement indiqué (la remplace par NULL)
+     */
+    public void supprimerPiece(int ligne, int colonne) {
+        this.plateau[ligne][colonne] = Piece.NULL;
     }
 
     /**
