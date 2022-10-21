@@ -1,6 +1,7 @@
 /**
  * La classe Jeu instancie tous les éléments du jeu (Grille, Briques, ...) afin d'assurer le bon fonctionnement du jeu.
  */
+/*
 public class Jeu {
     static Plateau p = new Plateau(10, 20); //Création d'un objet plateau
     public static void main(String[] args) {
@@ -58,9 +59,11 @@ public class Jeu {
         placerPiecesRotation(0, Piece.O, 18, 7);
         p.afficherPlateau();
         */
+        /*
     }
-
+*/
     /**Fonction qui sert à placer les pièces sur le plateau les angles de rotations possibles sont 0, 90, 180 et 270*/
+/*
     public static void placerPiecesRotation(int rotation, Piece piece, int yDebut, int xDebut) {
         switch (piece) {
             case I :
@@ -98,9 +101,10 @@ public class Jeu {
         }
         p.peutSupprimerLigne();
     }
-
+*/
     /**Fonction tampon qui gère les S, Z, J, L et T séparément pour une meilleure lisibilité
      (pour toute la fonction les -1 et les +1 servent à faire de l'ajustement graphique pour que chaque pixel soit bien placé)*/
+/*
     private static void gestionRotationPieces(String nomPiece, int rotation, int yDebut, int xDebut, Piece piece) {
         for (int i = 0; i < piece.getPiece().length; i++) {
             for (int j = 0; j < piece.getPiece()[0].length; j++) {
@@ -135,8 +139,9 @@ public class Jeu {
             }
         }
     }
-
+*/
     /**Fonction qui traite les cas ou la pièce est un Z, un S, un J ou un L (elle existe pour éviter la duplication de code*/
+/*
     public static void placerSouZouJouL(String sens, int yDebut, int xDebut, int i, int j) {
         if (sens.equals("V")) {         //Si le sens est Vertical alors on inverse l'axe de X et des Y
             p.placerPixel(true, yDebut + j, xDebut + i);
@@ -146,3 +151,4 @@ public class Jeu {
     }
 
 }
+*/

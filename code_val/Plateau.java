@@ -1,5 +1,6 @@
 import java.util.Arrays;
-//
+
+/*
 public class Plateau {
     //On peut définir la hauteur le la longueur que l'on souhaite pour le plateau
     private final int longueur;
@@ -15,11 +16,13 @@ public class Plateau {
     }
 
     /**Fonction qui sert à placer un pixel sur le plateau (vide ou non)*/
+/*
     public void placerPixel(boolean a, int y, int x) {
         this.plateau[y][x] = a;
     }
 
     /**Fonction qui initialise le plateau pour qu'il soit vide*/
+/*
     private void remplirPlateau() {
         for(int i = 0; this.hauteur > i; ++i) {
             for(int j = 0; this.longueur > j; ++j) {
@@ -29,6 +32,7 @@ public class Plateau {
     }
 
     /**Fonction permettant d'afficher le plateau dans le terminal (en cas de false il affiche un espace et * dans le cas d'un true)*/
+/*
     public void afficherPlateau() {
         System.out.println(Arrays.deepToString(this.plateau));
 
@@ -50,6 +54,7 @@ public class Plateau {
 
     /**Fonction qui permet de savoir si une ligne est supprimable, si elle est pleine,
      la fonction appelle la fonction de suppression de ligne*/
+/*
     public void peutSupprimerLigne() {
         boolean lignePleine = false;
         int y = 19;
@@ -70,6 +75,7 @@ public class Plateau {
     }
 
     /**Fonction qui permet de supprimer une ligne d'on l'identifiant est fourni et appelle la fonction pour descendre les lignes du dessus*/
+/*
     private void supprimerLigne(int y) {
         for (int x = 0; x < plateau[0].length; x++) {
             plateau[y][x] = false;
@@ -87,6 +93,7 @@ public class Plateau {
     }
 
     /**Fonction qui permet de descendre une ligne, elle retourne si la ligne du dessus est vide ou non*/
+/*
     private boolean descendreLigne(int y, int yDebut) {
         boolean ligneVide = true;
         if (y != yDebut) {                                      //Ce if permet que la fonction ne renvoie pas true dans le premier appel
@@ -110,6 +117,7 @@ public class Plateau {
     }
 
     /**Fonction qui vérifie s'il y a une collision quelle qu'elle soit (true si collision et false sinon)*/
+/*
     public boolean collisionPieces(Piece piece, int positionY, int positionX, int rotation) {
         boolean sortiePlateau = true;
 
@@ -155,18 +163,6 @@ public class Plateau {
                }
            }
        }
-
-
-
-
-
-
-
-
-
-
-
-
         if (!sortiePlateau) {
             return !collisionEntrePieces(piece, positionY, positionX, rotation);
         }else {
@@ -176,6 +172,7 @@ public class Plateau {
 
     /**Fonction permettant de vérifier si la pièce donnée en paramètres, aux coordonnées données
      entre en collision avec une autre déjà existante (renvoie false s'il y a une collision et true sinon)*/
+/*
     public boolean collisionEntrePieces(Piece piece, int positionY, int positionX, int rotation) {
         switch (piece) {               //Switch case permettant de savoir quelle pièce est placé en paramètre et d'adopter le bon raisonnement
             case I :
@@ -226,6 +223,7 @@ public class Plateau {
                 /*Ici le cas est très similaire au deux précédents, la seule différence est que l'on cherche à savoir
                 si un pixel de la pièce est a false (dans ce cas, on ne le prend pas en compte) ou a true (dans ce cas, on le prend en compte)
                 (tous les ajouts dans les [] sont là pour ajuster graphiquement les pièces ou pour ne pas avoir d'erreurs a l'exécution*/
+/*
                 switch (rotation) {
                     case 0 :
                         for (int y = positionY; y > (positionY - piece.getPiece().length); y--) {
@@ -290,6 +288,7 @@ public class Plateau {
                 /*Dans l'ensemble aucune différence fondamentale dans le traitement que dans le cas du T seul
                 des ajustements graphiques sont présents ces bouts de codes pourrait être réunis dans une fonction qui serait
                 appelée par les trois cas d'utilisation avec seulement de paramètres différents (à voir dans le futur si on a du temps)*/
+/*
                 switch (rotation) {
                     case 0 :
                         for (int y = positionY; y < (positionY + piece.getPiece().length); y++) {
@@ -358,6 +357,7 @@ public class Plateau {
                                 car le placement de la ligne d'étoile est très différente de la colonne, ce code
                                 peut largement être amélioré, mais il fonctionne, il faut le voir comme un premier jet du a un raz le bol
                                 comme tous les autres ifs pour un cas très précis des cas suivants*/
+/*
                                 if (x-positionY == 0) { //Ce if sert à placer le pixel de la ligne {true, false, false} en bas et le premier de la ligne entièrement en true
                                     if (piece.getPiece()[x-positionY][y-positionX]) {
                                         if (plateau[x-1][y+1]) {
@@ -501,3 +501,4 @@ public class Plateau {
         return true;
     }
 }
+*/

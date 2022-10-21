@@ -1,3 +1,4 @@
+/*
 public class Test {
     static Plateau p = new Plateau(10, 20);
     public static void main(String[] args) {
@@ -60,13 +61,13 @@ public class Test {
         */
         //placerPiecesRotation(90, Piece.O, 17, 0);
         //placerPiecesRotation(90, Piece.I, 15, 4);
-        placerPiecesRotation(270, Piece.L, 1, 1);
+        //placerPiecesRotation(270, Piece.L, 1, 1);
         //placerPiecesRotation(270, Piece.I, 15, 1);
-        p.afficherPlateau();
+        //p.afficherPlateau();
 
         //System.out.println(p.collisionEntrePieces(Piece.L, 15, 1, 180));
         //p.afficherPlateau();
-
+/*
     }
 
     public static void placerPiecesRotation(int rotation, Piece piece, int yDebut, int xDebut) {
