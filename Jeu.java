@@ -25,6 +25,8 @@ public class Jeu {
 
             if (i<0) tomberPieceActuelle();
             else deplacerPieceActuelle(i);
+
+            p.suppressionLignesRemplies();
         }
     }
 

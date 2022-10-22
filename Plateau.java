@@ -71,7 +71,7 @@ public class Plateau {
      */
     public boolean placerPieceParColonne(int colonne, Piece piece) {
         int ligne;
-        for(ligne = this.hauteur - 1; ligne >= 0 && !this.placerPiece(ligne, colonne, piece); --ligne) {
+        for (ligne = this.hauteur - 1; ligne >= 0 && !this.placerPiece(ligne, colonne, piece); --ligne) {
         }
 
         return ligne >= 0;
@@ -82,6 +82,44 @@ public class Plateau {
      */
     public void supprimerPiece(int ligne, int colonne) {
         this.plateau[ligne][colonne] = Piece.NULL;
+    }
+
+    /**
+     * Supprime la ligne à l'emplacement indiqué (remplace toutes les colonnes par NULL)
+     * @param ligne ligne observée
+     */
+    public void supprimerLigne(int ligne) {
+        for (int colonne = 0; colonne < this.largeur; colonne++) {
+            this.plateau[ligne][colonne] = Piece.NULL;
+        }
+    }
+
+    /**
+     * Vérifie pour chaque ligne, si elle est remplie, et appelle la méthode de suppression supprimerLigne() le cas échéant
+     */
+    public void suppressionLignesRemplies() {
+        // pour chaque ligne, on regarde si elle est remplie
+        for (int ligne = 0; ligne < this.hauteur; ligne++) {
+            if (ligneRemplie(ligne)) {
+                // le cas échéant, on remplace toutes les pièces par Piece.NULL
+                supprimerLigne(ligne);
+            }
+        }
+    }
+
+    /**
+     * Regarde la ligne et vérifie si elle est remplie
+     * @param ligne ligne observée
+     * @return vrai, si la ligne est remplie.
+     * Faux, sinon
+     */
+    public boolean ligneRemplie(int ligne) {
+        for (int colonne = 0; colonne < this.largeur; colonne++) {
+            if (this.estVide(ligne, colonne)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -98,6 +136,5 @@ public class Plateau {
 
             System.out.println(plateauString);
         }
-
     }
 }
