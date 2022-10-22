@@ -4,7 +4,7 @@ public class Plateau {
     private final Piece[][] plateau;
 
     /**
-     * Le plateau est définie en fonction des largeur et hauteur indiquées, et contient des pièces (NULL ou autre)
+     * Le plateau est défini en fonction des largeur et hauteur indiquées, et contient des pièces (NULL ou autre).
      */
     public Plateau(int largeur, int hauteur) {
         this.largeur = largeur;
@@ -39,7 +39,7 @@ public class Plateau {
     }
 
     /**
-     * @return Vrai si la case indiqué n'est pas occupée par une pièce non NULL
+     * @return Vrai si la case indiquée n'est pas occupée par une pièce non NULL
      */
     public boolean estVide(int ligne, int colonne) {
         return this.plateau[ligne][colonne].getNom().equals(" ");
@@ -53,7 +53,7 @@ public class Plateau {
     }
 
     /**
-     * Appelle placementValide() pour vérifier les coordonées, et place la pièce si le placement est valide
+     * Appelle placementValide() pour vérifier les coordonnées et place la pièce si le placement est valide
      * @return Vrai si la pièce a été placée
      */
     public boolean placerPiece(int ligne, int colonne, Piece piece) {
@@ -66,7 +66,7 @@ public class Plateau {
     }
 
     /**
-     * Le for est vide, car l'action se trouve dans la condition d'arret, via placerPiece()
+     * Le for est vide, car l'action se trouve dans la condition d'arrêt, via placerPiece()
      * @return Vrai si la pièce a pu être placée
      */
     public boolean placerPieceParColonne(int colonne, Piece piece) {
@@ -95,7 +95,7 @@ public class Plateau {
     }
 
     /**
-     * Vérifie pour chaque ligne, si elle est remplie, et appelle la méthode de suppression supprimerLigne() le cas échéant
+     * Vérifie pour chaque ligne, si elle est remplie et appelle la méthode de suppression supprimerLigne() le cas échéant
      */
     public void suppressionLignesRemplies() {
         // pour chaque ligne, on regarde si elle est remplie
@@ -103,6 +103,7 @@ public class Plateau {
             if (ligneRemplie(ligne)) {
                 // le cas échéant, on remplace toutes les pièces par Piece.NULL
                 supprimerLigne(ligne);
+                tomberLignesApresSuppression(ligne);
             }
         }
     }
@@ -110,7 +111,7 @@ public class Plateau {
     /**
      * Regarde la ligne et vérifie si elle est remplie
      * @param ligne ligne observée
-     * @return vrai, si la ligne est remplie.
+     * @return Vrai, si la ligne est remplie.
      * Faux, sinon
      */
     public boolean ligneRemplie(int ligne) {
@@ -120,6 +121,24 @@ public class Plateau {
             }
         }
         return true;
+    }
+
+    /**
+     * Fait tomber les pièces qui sont au-dessus d'une ligne venant d'être supprimée
+     * @param ligneSupprimee la ligne qui a été supprimée
+     */
+    public void tomberLignesApresSuppression(int ligneSupprimee) {
+        for (int ligne = ligneSupprimee; ligne >= 0 ; ligne--) {
+            for (int colonne = 0; colonne < this.largeur; colonne++) {
+                if (ligne != 0) {
+                    // On remplit la ligne observée par les pièces de la ligne ligne - 1
+                    this.plateau[ligne][colonne] = this.plateau[ligne - 1][colonne];
+                } else {
+                    // On remplit la colonne 0 (la plus haute) par des pièces NULL
+                    this.plateau[0][colonne] = Piece.NULL;
+                }
+            }
+        }
     }
 
     /**
