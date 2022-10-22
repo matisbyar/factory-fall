@@ -1,0 +1,80 @@
+ les test de validation pour les user story pour ce sprint seront 
+ des test unitaire java ( a voir si c'est que des tests )
+
+
+
+user story :
+affiche cadre
+affiche piece
+bouger piece
+jouer une partie
+termier le jeu
+lancer le jeu
+
+
+test pour affiche cadre :
+
+le tableau est crée
+
+le plateau est affiché
+
+
+
+test pour affiché piece :
+
+la piece est crée
+
+la piece est posé sur le plateau
+
+on voit la piece sur le plateau 
+condition : ( le plateau est affiché   true)
+
+
+
+test pour bouger piece :
+
+la piece est posé sur le plateau ( a voir pour celle la )
+
+la piece est bougé :(on la pose on verifie si elle est bien la ,
+on la deplace et on verifie si elle est bien deplacé) ?? a rediscuté
+
+
+
+test pour jouer une partie  : 
+
+le jeu marche 
+condition :( test affiche plateau true
+test affiche piece true
+test bouger piece true
+test desente piece true ( je sais pas comment on la geré )
+test supresion ligne pleine true ( a faire)
+test le jeu s'arrete si perdu 
+test arret du jeu true (on dit stop au jeu )
+)
+
+
+
+
+test pour terminer  le jeu :
+
+test jeu perdi( fin du jeu si une collone est remplit)
+
+test on ferme le jeu (on arrete le jeu avec un bouton ou autre )
+(a voir si on la fait)
+
+
+
+test lancer le jeu : 
+
+test toute les classes sont instancier 
+
+test la fonction run se lance sans bug ( a voir si on la met)
+
+
+
+
+
+
+
+
+
