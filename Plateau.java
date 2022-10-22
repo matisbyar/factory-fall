@@ -73,7 +73,6 @@ public class Plateau {
         int ligne;
         for (ligne = this.hauteur - 1; ligne >= 0 && !this.placerPiece(ligne, colonne, piece); --ligne) {
         }
-
         return ligne >= 0;
     }
 

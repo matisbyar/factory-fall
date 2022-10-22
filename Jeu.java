@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,21 +20,35 @@ public class Jeu {
         Scanner scan = new Scanner(System.in);
         nouvellePieceActuelle();
 
-        while(jeuEnCours) {
-            p.afficherPlateau();
 
-            System.out.println("Entrez un numéro de colonne :   (négatif pour drop)");
-            int i = scan.nextInt();
+        p.afficherPlateau();
+        JFrame myJFrame = new JFrame();
 
-            if (i<0) tomberPieceActuelle();
-            else if (i == 20) {
-                remplirLigne(21);
-                remplirLigne(20);
+        myJFrame.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                int keyCode = e.getKeyCode();
+                if (keyCode == KeyEvent.VK_DOWN) {
+                    System.out.println("fleshe du bas est actionnée!");
+                    tomberPieceActuelle();
+                    p.afficherPlateau();
+                    /**Bouger les pieces vers le bas**/
+                }
+                else if (keyCode == KeyEvent.VK_LEFT) {
+                    System.out.println("fleshe de gauche est actionnée!");
+                    deplacerPieceActuelle(colonneActuelle-1);
+                    p.afficherPlateau();
+                    /**Bouger les pieces vers la gauche**/
+                }
+                else if (keyCode == KeyEvent.VK_RIGHT) {
+                    System.out.println("fleshe de droite est actionnée!");
+                    deplacerPieceActuelle(colonneActuelle+1);
+                    p.afficherPlateau();
+                    /**Bouger les pieces vers la droite**/
+                }
             }
-            else deplacerPieceActuelle(i);
-
-            p.suppressionLignesRemplies();
-        }
+        });
+        /**Besoins d'afficher le JFrame pour que le code marche**/
+        myJFrame.setVisible(true);
     }
 
     /**
@@ -49,9 +66,8 @@ public class Jeu {
         pieceActuelle = genererPieceRandom();
         ligneActuelle = 0;
         colonneActuelle = p.getLargeur() / 2 - 1;
-
-        //p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
-        System.out.println("Prochaine pièce : " + pieceActuelle.getNom());
+        p.suppressionLignesRemplies();
+        p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
     }
 
     /**
