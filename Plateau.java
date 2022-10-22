@@ -1,9 +1,14 @@
+import java.awt.*;
 import java.util.Arrays;
+import javax.swing.*;
+
+import javax.swing.JFrame;
 //
-public class Plateau {
+public class Plateau extends JPanel{
     //On peut définir la hauteur le la longueur que l'on souhaite pour le plateau
     private final int longueur;
     private final int hauteur;
+
     //Le plateau est une matrice de booleans car cela est plus simple pour le traitement parce qu'on peut directement savoir si une case est prise ou non
     private final boolean[][] plateau;
 
@@ -12,6 +17,22 @@ public class Plateau {
         this.hauteur = hauteur;
         this.plateau = new boolean[hauteur][longueur];
         this.remplirPlateau();
+
+
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(Color.BLACK);
+        //g.fillRect(0,0,longueur,hauteur);
+
+        for (int ligne = 0; ligne<hauteur; ligne++){
+            g.drawLine(0,ligne*35,longueur*35, ligne*35);
+        }
+        for (int colone = 0; colone<longueur +1; colone++){
+            g.drawLine(colone * 35 ,0,35 * colone, 35 * hauteur);
+        }
     }
 
     /**Fonction qui sert à placer un pixel sur le plateau (vide ou non)*/

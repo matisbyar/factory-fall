@@ -1,5 +1,19 @@
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Random;
+import javax.swing.JFrame;
+
 public class Test {
     static Plateau p = new Plateau(10, 20);
+
+    private static final Random PIECE = new Random();
+
+    public static Piece randomPiece()  {
+        Piece[] directions = Piece.values();
+        return directions[PIECE.nextInt(directions.length)];
+    }
+
     public static void main(String[] args) {
         p.afficherPlateau();
 
@@ -17,8 +31,35 @@ public class Test {
         System.out.println("----");
         Piece.L.afficherPiece();
 
-        /**C'est OK
 
+        p.afficherPlateau();
+        JFrame myJFrame = new JFrame();
+
+        /**C'est OK**/
+
+
+
+         myJFrame.addKeyListener(new KeyAdapter() {
+         public void keyPressed(KeyEvent e) {
+         int keyCode = e.getKeyCode();
+         if (keyCode == KeyEvent.VK_DOWN) {
+         System.out.println("fleshe du bas est actionnée!");
+         /**Bouger les pieces vers le bas**/
+         }
+         else if (keyCode == KeyEvent.VK_LEFT) {
+         System.out.println("fleshe de gauche est actionnée!");
+         /**Bouger les pieces vers la gauche**/
+         }
+         else if (keyCode == KeyEvent.VK_RIGHT) {
+         System.out.println("fleshe de droite est actionnée!");
+         /**Bouger les pieces vers la droite**/
+         }
+         }
+         });
+        myJFrame.setVisible(true);
+        randomPiece().afficherPiece();
+
+    /**
         placerPiecesRotation(0, Piece.I, 19, 3);
         placerPiecesRotation(90, Piece.I, 19, 9);
         placerPiecesRotation(180, Piece.I, 16, 3);
@@ -61,8 +102,7 @@ public class Test {
         //placerPiecesRotation(90, Piece.O, 17, 0);
         //placerPiecesRotation(90, Piece.I, 15, 4);
         placerPiecesRotation(270, Piece.L, 1, 1);
-        //placerPiecesRotation(270, Piece.I, 15, 1);
-        p.afficherPlateau();
+
 
         //System.out.println(p.collisionEntrePieces(Piece.L, 15, 1, 180));
         //p.afficherPlateau();

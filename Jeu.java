@@ -1,9 +1,34 @@
 /**
  * La classe Jeu instancie tous les éléments du jeu (Grille, Briques, ...) afin d'assurer le bon fonctionnement du jeu.
  */
+
+import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
+
 public class Jeu {
     static Plateau p = new Plateau(10, 20); //Création d'un objet plateau
+
+    private Plateau plateau;
+    private JFrame page;
+
+    public static final int WIDTH = 445, HEIGHT = 629;
+
+
+    public Jeu(){
+        page = new JFrame("Tetris");
+        page.setSize(WIDTH,HEIGHT);
+        page.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        page.setResizable(false);
+        page.setLocationRelativeTo(null);
+
+        plateau = new Plateau(20,30);
+        page.add(plateau);
+        page.setVisible(true);
+    }
     public static void main(String[] args) {
+        new Jeu();
+
         /**C'est OK (pour tester sortez juste un bloc et l'exécuter)
 
          placerPiecesRotation(0, Piece.I, 19, 3);
