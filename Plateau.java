@@ -35,7 +35,6 @@ public class Plateau {
                 this.plateau[ligne][colonne] = piece;
             }
         }
-
     }
 
     /**

@@ -12,6 +12,7 @@ public class Jeu {
     static Piece pieceActuelle;
     static int ligneActuelle;
     static int colonneActuelle;
+    static JFrame myJFrame = new JFrame();
 
     public Jeu() {
     }
@@ -22,7 +23,6 @@ public class Jeu {
 
 
         p.afficherPlateau();
-        JFrame myJFrame = new JFrame();
 
         myJFrame.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
@@ -30,19 +30,19 @@ public class Jeu {
                 if (keyCode == KeyEvent.VK_DOWN) {
                     System.out.println("fleshe du bas est actionnée!");
                     tomberPieceActuelle();
-                    p.afficherPlateau();
+                    jouerTour();
                     /**Bouger les pieces vers le bas**/
                 }
                 else if (keyCode == KeyEvent.VK_LEFT) {
                     System.out.println("fleshe de gauche est actionnée!");
                     deplacerPieceActuelle(colonneActuelle-1);
-                    p.afficherPlateau();
+                    jouerTour();
                     /**Bouger les pieces vers la gauche**/
                 }
                 else if (keyCode == KeyEvent.VK_RIGHT) {
                     System.out.println("fleshe de droite est actionnée!");
                     deplacerPieceActuelle(colonneActuelle+1);
-                    p.afficherPlateau();
+                    jouerTour();
                     /**Bouger les pieces vers la droite**/
                 }
             }
@@ -50,6 +50,17 @@ public class Jeu {
         /**Besoins d'afficher le JFrame pour que le code marche**/
         myJFrame.setVisible(true);
     }
+
+
+    public static void jouerTour(){
+        if (!jeuEnCours){
+            System.out.println("Game Over");
+            myJFrame.setVisible(false);
+        }else{
+            p.afficherPlateau();
+        }
+    }
+
 
     /**
      * @return Une pièce non NULL aléatoire
@@ -94,7 +105,6 @@ public class Jeu {
         }
         else {
             jeuEnCours = false;
-            System.out.println("GAME OVER");
         }
     }
 
