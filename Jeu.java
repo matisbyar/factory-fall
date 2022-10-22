@@ -51,7 +51,9 @@ public class Jeu {
         myJFrame.setVisible(true);
     }
 
-
+    /**
+     * Affiche le Plateau si le jeu est toujours en cours et arrete la partie sinon
+     */
     public static void jouerTour(){
         if (!jeuEnCours){
             System.out.println("Game Over");
