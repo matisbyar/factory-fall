@@ -48,7 +48,16 @@ public class Plateau {
      * @return Vrai si la case indiquée est dans les limites du plateau, et qu'elle est vide
      */
     public boolean placementValide(int ligne, int colonne, Piece piece) {
-        return 0 <= ligne && ligne < this.hauteur && 0 <= colonne && colonne < this.largeur && this.estVide(ligne, colonne);
+        for(int numCase = 0; numCase < 4; numCase++) {
+            if (!(0 <= ligne-piece.getPiece()[numCase][0]
+                    && ligne-piece.getPiece()[numCase][0] < this.hauteur
+                    && 0 <= colonne+piece.getPiece()[numCase][1]
+                    && colonne+piece.getPiece()[numCase][1] < this.largeur
+                    && this.estVide(ligne-piece.getPiece()[numCase][0], colonne+piece.getPiece()[numCase][1]))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -57,7 +66,9 @@ public class Plateau {
      */
     public boolean placerPiece(int ligne, int colonne, Piece piece) {
         if (this.placementValide(ligne, colonne, piece)) {
-            this.plateau[ligne][colonne] = piece;
+            for (int numCase = 0; numCase < 4; numCase++) {
+                this.plateau[ligne-piece.getPiece()[numCase][0]][colonne+piece.getPiece()[numCase][1]] = piece;
+            }
             return true;
         } else {
             return false;

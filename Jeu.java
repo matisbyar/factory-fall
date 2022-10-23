@@ -76,22 +76,25 @@ public class Jeu {
      */
     public static void nouvellePieceActuelle() {
         pieceActuelle = genererPieceRandom();
-        ligneActuelle = 0;
+        ligneActuelle = 1;
         colonneActuelle = p.getLargeur() / 2 - 1;
         p.suppressionLignesRemplies();
         p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
     }
 
     /**
-     * Déplace la pièce actuelle horizontalement, la positionne sur la colonne indiquée.
-     * Si la nouvelle pièce actuelle a bien été placée, supprime l'ancienne piece, et
-     * actualise les coordonnées actuelles
+     * Supprime la pièce actuelle. Essaie de placer la pièce sur la colonne indiqué.
+     * Si la nouvelle pièce actuelle a bien été placée, actualise les coordonnées actuelles.
+     * Sinon, replace l'ancienne pièce actuelle.
      */
     public static void deplacerPieceActuelle(int colonne) {
+        for (int numCase = 0; numCase < 4; numCase++) {
+            p.supprimerPiece(ligneActuelle-pieceActuelle.getPiece()[numCase][0], colonneActuelle+pieceActuelle.getPiece()[numCase][1]);
+        }
         if (p.placerPiece(ligneActuelle, colonne, pieceActuelle)) {
-            p.supprimerPiece(ligneActuelle, colonneActuelle);
             colonneActuelle = colonne;
         }
+        else p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
     }
 
     /**
@@ -101,7 +104,9 @@ public class Jeu {
      */
     public static void tomberPieceActuelle() {
         if(p.placerPieceParColonne(colonneActuelle, pieceActuelle)) {
-            p.supprimerPiece(ligneActuelle, colonneActuelle);
+            for (int numCase = 0; numCase < 4; numCase++) {
+                p.supprimerPiece(ligneActuelle-pieceActuelle.getPiece()[numCase][0], colonneActuelle+pieceActuelle.getPiece()[numCase][1]);
+            }
             nouvellePieceActuelle();
         }
         else {
