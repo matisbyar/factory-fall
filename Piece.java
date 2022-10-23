@@ -14,7 +14,7 @@ public enum Piece {
     private final String nom;
     private final int [][] piece;
 
-    private Piece(String nom, int [][] piece) {
+    Piece(String nom, int [][] piece) {
         this.nom = nom;
         this.piece = piece;
     }

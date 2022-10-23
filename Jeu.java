@@ -21,33 +21,32 @@ public class Jeu {
         Scanner scan = new Scanner(System.in);
         nouvellePieceActuelle();
 
-
         p.afficherPlateau();
 
         myJFrame.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
                 if (keyCode == KeyEvent.VK_DOWN) {
-                    System.out.println("fleshe du bas est actionnée!");
+                    // Bouger les pieces vers le bas
+                    System.out.println("Flèche du bas est actionnée !");
                     tomberPieceActuelle();
                     jouerTour();
-                    /**Bouger les pieces vers le bas**/
                 }
                 else if (keyCode == KeyEvent.VK_LEFT) {
-                    System.out.println("fleshe de gauche est actionnée!");
-                    deplacerPieceActuelle(colonneActuelle-1);
+                    // Bouger les pieces vers la gauche
+                    System.out.println("Flèche de gauche est actionnée !");
+                    deplacerPieceActuelle(colonneActuelle - 1);
                     jouerTour();
-                    /**Bouger les pieces vers la gauche**/
                 }
                 else if (keyCode == KeyEvent.VK_RIGHT) {
-                    System.out.println("fleshe de droite est actionnée!");
-                    deplacerPieceActuelle(colonneActuelle+1);
+                    // Bouger les pieces vers la droite
+                    System.out.println("Flèche de droite est actionnée !");
+                    deplacerPieceActuelle(colonneActuelle + 1);
                     jouerTour();
-                    /**Bouger les pieces vers la droite**/
                 }
             }
         });
-        /**Besoins d'afficher le JFrame pour que le code marche**/
+        // Besoin d'afficher le JFrame pour que le code marche
         myJFrame.setVisible(true);
     }
 
@@ -58,11 +57,10 @@ public class Jeu {
         if (!jeuEnCours){
             System.out.println("Game Over");
             myJFrame.setVisible(false);
-        }else{
+        } else {
             p.afficherPlateau();
         }
     }
-
 
     /**
      * @return Une pièce non NULL aléatoire
@@ -72,8 +70,9 @@ public class Jeu {
     }
 
     /**
-     * Créer une nouvelle pièce sur le plateau, au spawn.
+     * Créé une nouvelle pièce sur le plateau, au spawn.
      * Si la case de spawn est occupée, alors le jeu se termine.
+     * La méthode supprime également les lignes remplies
      */
     public static void nouvellePieceActuelle() {
         pieceActuelle = genererPieceRandom();
@@ -110,6 +109,10 @@ public class Jeu {
         }
     }
 
+    /**
+     * Méthode de debug qui remplit les colonnes 0 à 8 du tableau à la ligne donnée
+     * @param ligne Ligne que l'on souhaite remplir
+     */
     public static void remplirLigne(int ligne) {
         for (int colonne = 0; colonne < p.getLargeur() - 1; colonne++) {
             p.placerPiece(ligne, colonne, Piece.I);
