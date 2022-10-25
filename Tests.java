@@ -4,9 +4,16 @@ import static org.testng.Assert.*;
 
 
 public class Tests {
+
+    void clear(){
+        Jeu.p.remplirTableau();
+        Jeu.nouvellePieceActuelle();
+    }
+
+
     @Test
     public void testDeplacerPiecesGauche(){
-        Jeu.nouvellePieceActuelle();
+        clear();
         System.out.println("Colonne de spawn : " + Jeu.colonneActuelle);
         System.out.println("Flèche de gauche est actionnée !");
         Jeu.deplacerPieceActuelle(Jeu.colonneActuelle-1);
@@ -16,7 +23,7 @@ public class Tests {
 
     @Test
     public void testDeplacerPiecesDroite(){
-        Jeu.nouvellePieceActuelle();
+        clear();
         System.out.println("Colonne de spawn : " + Jeu.colonneActuelle);
         System.out.println("Flèche de droite est actionnée !");
         Jeu.deplacerPieceActuelle(Jeu.colonneActuelle+1);
@@ -26,7 +33,7 @@ public class Tests {
 
     @Test
     public void testTomberPiece(){
-        Jeu.nouvellePieceActuelle();
+        clear();
         String nomPieceEnCours = Jeu.pieceActuelle.getNom();
         System.out.println("Nom de la piece qui a spawn (avant le drop): " + nomPieceEnCours);
         System.out.println("Flèche du bas est actionnée !");
@@ -38,7 +45,7 @@ public class Tests {
 
     @Test
     public void testTomberPieceAvecPieceDejaEnBas(){
-        Jeu.nouvellePieceActuelle();
+        clear();
         Jeu.tomberPieceActuelle();
         String nomPieceEnCours = Jeu.pieceActuelle.getNom();
         String nomPieceTombé = Jeu.p.getPieceNom(21, 4);
@@ -47,7 +54,8 @@ public class Tests {
         Jeu.tomberPieceActuelle();
         System.out.println("Nom de la piece qui est tombée au dessus (apres le drop): " + Jeu.p.getPieceNom(21 - 2, 4));
         assertEquals(Jeu.colonneActuelle, 4);
-        assertNotEquals(Jeu.p.getPieceNom(21 - 2, 4), nomPieceTombé);
+        /** La fonction assertNotEquals sert a rien, elle marche pas dans le cas ou le randomPiece nous affiche 2 fois la meme piece, dans ce cas les pieces l'une sur l'autre ont le meme nom*/
+        //assertNotEquals(Jeu.p.getPieceNom(21 - 2, 4), nomPieceTombé);
         assertEquals(Jeu.p.getPieceNom(21 - 2, 4), nomPieceEnCours);
     }
 
