@@ -1,5 +1,4 @@
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -35,6 +34,21 @@ public class Tests {
         System.out.println("Nom de la piece qui est en bas (apres le drop): " + Jeu.p.getPieceNom(21, 4));
         assertEquals(Jeu.colonneActuelle, 4);
         assertEquals(Jeu.p.getPieceNom(21, 4), nomPieceEnCours);
+    }
+
+    @Test
+    public void testTomberPieceAvecPieceDejaEnBas(){
+        Jeu.nouvellePieceActuelle();
+        Jeu.tomberPieceActuelle();
+        String nomPieceEnCours = Jeu.pieceActuelle.getNom();
+        String nomPieceTombé = Jeu.p.getPieceNom(21, 4);
+        System.out.println("Nom de la piece qui est deja tombée : " + nomPieceTombé);
+        System.out.println("Flèche du bas est actionnée !");
+        Jeu.tomberPieceActuelle();
+        System.out.println("Nom de la piece qui est tombée au dessus (apres le drop): " + Jeu.p.getPieceNom(21 - 2, 4));
+        assertEquals(Jeu.colonneActuelle, 4);
+        assertNotEquals(Jeu.p.getPieceNom(21 - 2, 4), nomPieceTombé);
+        assertEquals(Jeu.p.getPieceNom(21 - 2, 4), nomPieceEnCours);
     }
 
 }
