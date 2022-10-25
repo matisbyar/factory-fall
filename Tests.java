@@ -36,4 +36,5 @@ public class Tests {
         assertEquals(Jeu.colonneActuelle, 4);
         assertEquals(Jeu.p.getPieceNom(21, 4), nomPieceEnCours);
     }
+
 }
