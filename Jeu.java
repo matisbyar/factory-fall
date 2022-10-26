@@ -44,6 +44,10 @@ public class Jeu {
                     deplacerPieceActuelle(colonneActuelle + 1);
                     jouerTour();
                 }
+                else if (keyCode == KeyEvent.VK_ESCAPE) {
+                    jeuEnCours = false;
+                    jouerTour();
+                }
             }
         });
         // Besoin d'afficher le JFrame pour que le code marche
