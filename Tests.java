@@ -8,8 +8,33 @@ public class Tests {
     void clear(){
         Jeu.p.remplirTableau();
         Jeu.nouvellePieceActuelle();
+    
     }
 
+
+   
+    @Test
+    public void testPlateauExiste() {
+        clear()
+        assertNotEquals(Jeu.p, Plateau.NULL);
+
+    }
+
+    @Test
+    public void testPlateauAffichee() {
+        Jeu.p.remplirTableau();
+        boolean estVide = true;
+           
+        for (int i = 0; i < Jeu.p.getHauteur(); i++) {
+            for (int j = 0; j < Jeu.p.getLargeur(); j++) {
+                if (Jeu.p.getCase(i, j) != Plateau.NULL) {
+                    estVide = false;
+                }
+            }
+        }
+        assertTrue(estVide);
+    }
+  
 
     @Test
     public void testDeplacerPiecesGauche(){
