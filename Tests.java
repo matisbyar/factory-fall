@@ -1,5 +1,11 @@
 
 import org.testng.annotations.Test;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import static org.testng.Assert.*;
 
 
@@ -8,10 +14,7 @@ public class Tests {
     void clear(){
         Jeu.p.remplirTableau();
         Jeu.nouvellePieceActuelle();
-    
     }
-
-  
 
     @Test
     public void testDeplacerPiecesGauche(){
@@ -94,7 +97,7 @@ public class Tests {
         assertFalse(estVide);
     }
 
-    @Test
+    /*@Test
     public void testPlateauExiste() {
         clear();
         Plateau p2 = new Plateau(10,22);
@@ -114,7 +117,16 @@ public class Tests {
             }
         }
         assertTrue(estVide);
+    }*/
+
+    @Test
+    public void testJeuQuiLance() throws IOException {
+        System.out.println("main");
+        String[] args = null;
+        final InputStream original = System.in;
+        final FileInputStream fips = new FileInputStream(new File("Jeu.java"));
+        System.setIn(fips);
+        Jeu.main(args);
+        System.setIn(original);
     }
-
-
 }
