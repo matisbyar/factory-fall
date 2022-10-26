@@ -117,4 +117,27 @@ public class Tests {
         assertFalse(estVide);
     }
 
+    @Test
+    public void testPlateauExiste() {
+        clear();
+        Plateau p2 = new Plateau(10,22);
+        assertNotEquals(Jeu.p, p2);
+    }
+
+    @Test
+    public void testPlateauAffichee() {
+        Plateau courant = new Plateau(10, 22);
+        boolean estVide = true;
+        for (int i = 0; i<Jeu.p.getPlateau().length; i++) {
+            for (int j = 0; j<Jeu.p.getPlateau()[0].length; j++) {
+                if (Jeu.p.getPlateau()[i][j] != courant.getPlateau()[i][j]) {
+                    estVide = false;
+                    break;
+                }
+            }
+        }
+        assertTrue(estVide);
+    }
+
+
 }
