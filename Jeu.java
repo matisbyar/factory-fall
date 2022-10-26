@@ -59,6 +59,7 @@ public class Jeu {
      */
     public static void jouerTour(){
         if (!jeuEnCours){
+            p.afficherPlateau();
             System.out.println("Game Over");
             myJFrame.setVisible(false);
         } else {
@@ -83,7 +84,9 @@ public class Jeu {
         ligneActuelle = 1;
         colonneActuelle = p.getLargeur() / 2 - 1;
         p.suppressionLignesRemplies();
-        p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
+        if(!p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle)){
+            jeuEnCours = false;
+        }
     }
 
     /**
@@ -107,10 +110,10 @@ public class Jeu {
      * dépasse les limites. On met alors fin au jeu.
      */
     public static void tomberPieceActuelle() {
-        if(p.placerPieceParColonne(colonneActuelle, pieceActuelle)) {
-            for (int numCase = 0; numCase < 4; numCase++) {
+        if(p.placerPieceParColonne(ligneActuelle, colonneActuelle, pieceActuelle)) {
+            /**for (int numCase = 0; numCase < 4; numCase++) {
                 p.supprimerPiece(ligneActuelle-pieceActuelle.getPiece()[numCase][0], colonneActuelle+pieceActuelle.getPiece()[numCase][1]);
-            }
+            }**/
             nouvellePieceActuelle();
         }
         else {

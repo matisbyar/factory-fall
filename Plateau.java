@@ -80,12 +80,17 @@ public class Plateau {
     /**
      * Le for est vide, car l'action se trouve dans la condition d'arrêt, via placerPiece()
      * @return Vrai si la pièce a pu être placée
+     * Pré-requis : la position actuelle donnée en paramêtre est valide.
      */
-    public boolean placerPieceParColonne(int colonne, Piece piece) {
-        int ligne;
-        for (ligne = this.hauteur - 1; ligne >= 0 && !this.placerPiece(ligne, colonne, piece); --ligne) {
+    public boolean placerPieceParColonne(int ligneDepart, int colonne, Piece piece) {
+        for (int numCase = 0; numCase < 4; numCase++) {
+            supprimerPiece(ligneDepart-piece.getPiece()[numCase][0], colonne+piece.getPiece()[numCase][1]);
         }
-        return ligne >= 0;
+
+        if(placementValide(ligneDepart+1, colonne, piece)){
+            return placerPieceParColonne(ligneDepart+1, colonne, piece);
+        }
+        else return placerPiece(ligneDepart, colonne, piece);
     }
 
     /**
