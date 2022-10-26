@@ -17,6 +17,26 @@ public class Tests {
     }
 
     @Test
+    public void TestTerminerjeu(){
+        Jeu.p.remplirTableau();
+        jeu.p.rempirligne(5) // on ajoute une colone remplie pour avoir game over desuite
+        Jeu.nouvellePieceActuelle();
+        Jeu.jouerTour();
+        assertFalse(Jeu.jeuEnCours);
+    }
+
+
+    @disabled
+    @Test
+    public void TestTerminerjeuManuelement(){
+        Jeu.p.remplirTableau();
+        jeu.jeuEnCours =false; // simulation de on apuie sur echap pour quité , je vous pas comment faire
+        assertFalse(Jeu.jeuEnCours);
+    }
+
+
+
+    @Test
     public void testDeplacerPiecesGauche(){
         clear();
         System.out.println("Colonne de spawn : " + Jeu.colonneActuelle);
