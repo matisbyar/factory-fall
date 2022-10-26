@@ -59,4 +59,37 @@ public class Tests {
         assertEquals(Jeu.p.getPieceNom(21 - 2, 4), nomPieceEnCours);
     }
 
+    @Test
+    public void testPieceExiste() {
+        clear();
+        assertNotEquals(Jeu.pieceActuelle, Piece.NULL);
+
+    }
+
+    @Test
+    public void testPieceAffichee() {
+        Jeu.p.remplirTableau();
+        boolean estVide = true;
+        for (int i = 0; i<Jeu.p.getPlateau().length; i++) {
+            for (int j = 0; j<Jeu.p.getPlateau()[0].length; j++) {
+                if (Jeu.p.getPlateau()[i][j]!=Piece.NULL) {
+                    estVide = false;
+                    break;
+                }
+            }
+        }
+        assertTrue(estVide);
+        Jeu.nouvellePieceActuelle();
+
+        for (int i = 0; i<Jeu.p.getPlateau().length; i++) {
+            for (int j = 0; j<Jeu.p.getPlateau()[0].length; j++) {
+                if (Jeu.p.getPlateau()[i][j]!=Piece.NULL) {
+                    estVide = false;
+                    break;
+                }
+            }
+        }
+        assertFalse(estVide);
+    }
+
 }

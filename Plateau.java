@@ -16,6 +16,8 @@ public class Plateau {
     public int getLargeur() {
         return largeur;
     }
+    public int getHauteur() { return hauteur; }
+    public Piece[][] getPlateau() { return plateau;}
 
     /**
      * @return Le nom (string) de la pièce à l'emplacement indiqué
