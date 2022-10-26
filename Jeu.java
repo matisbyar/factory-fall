@@ -122,7 +122,7 @@ public class Jeu {
     }
 
     /**
-     * Méthode de debug qui remplit les colonnes 0 à 8 du tableau à la ligne donnée
+     * Méthode de debug qui remplit les colonnes 0 à 10 du tableau à la ligne donnée
      * @param ligne Ligne que l'on souhaite remplir
      */
     public static void remplirLigne(int ligne) {
