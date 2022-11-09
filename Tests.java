@@ -1,4 +1,5 @@
 
+import jdk.jfr.Enabled;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -16,21 +17,22 @@ public class Tests {
         Jeu.nouvellePieceActuelle();
     }
 
+
     @Test
     public void TestTerminerjeu(){
         Jeu.p.remplirTableau();
-        jeu.p.rempirligne(5) // on ajoute une colone remplie pour avoir game over desuite
+        Jeu.remplirLigne(1); // on ajoute une ligne remplie pour avoir game over desuite
         Jeu.nouvellePieceActuelle();
         Jeu.jouerTour();
         assertFalse(Jeu.jeuEnCours);
     }
 
 
-    @disabled
+
     @Test
     public void TestTerminerjeuManuelement(){
         Jeu.p.remplirTableau();
-        jeu.jeuEnCours =false; // simulation de on apuie sur echap pour quité , je vous pas comment faire
+        Jeu.jeuEnCours =false; // simulation de on apuie sur echap pour quité , je vous pas comment faire
         assertFalse(Jeu.jeuEnCours);
     }
 
