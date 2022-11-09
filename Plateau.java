@@ -83,9 +83,7 @@ public class Plateau {
      * Pré-requis : la position actuelle donnée en paramêtre est valide.
      */
     public boolean placerPieceParColonne(int ligneDepart, int colonne, Piece piece) {
-        for (int numCase = 0; numCase < 4; numCase++) {
-            supprimerPiece(ligneDepart-piece.getPiece()[numCase][0], colonne+piece.getPiece()[numCase][1]);
-        }
+        supprimerPieceTotale(ligneDepart, colonne, piece);
 
         if(placementValide(ligneDepart+1, colonne, piece)){
             return placerPieceParColonne(ligneDepart+1, colonne, piece);
@@ -96,8 +94,10 @@ public class Plateau {
     /**
      * Supprime la pièce à l'emplacement indiqué (la remplace par NULL)
      */
-    public void supprimerPiece(int ligne, int colonne) {
-        this.plateau[ligne][colonne] = Piece.NULL;
+    public void supprimerPieceTotale(int ligne, int colonne, Piece piece) {
+        for (int numCase = 0; numCase < 4; numCase++) {
+            this.plateau[ligne-piece.getPiece()[numCase][0]][colonne+piece.getPiece()[numCase][1]] = Piece.NULL;
+        }
     }
 
     /**

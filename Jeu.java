@@ -95,9 +95,7 @@ public class Jeu {
      * Sinon, replace l'ancienne pièce actuelle.
      */
     public static void deplacerPieceActuelle(int colonne) {
-        for (int numCase = 0; numCase < 4; numCase++) {
-            p.supprimerPiece(ligneActuelle-pieceActuelle.getPiece()[numCase][0], colonneActuelle+pieceActuelle.getPiece()[numCase][1]);
-        }
+        p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
         if (p.placerPiece(ligneActuelle, colonne, pieceActuelle)) {
             colonneActuelle = colonne;
         }
