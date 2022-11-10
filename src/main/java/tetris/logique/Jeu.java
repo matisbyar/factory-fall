@@ -1,3 +1,5 @@
+package tetris.logique;
+
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -5,7 +7,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Jeu {
-    static Plateau p = new Plateau(10, 22);
+    public static Plateau p = new Plateau(10, 22);
     static Random random = new Random();
     static boolean jeuEnCours =true;
 
@@ -13,9 +15,6 @@ public class Jeu {
     static int ligneActuelle;
     static int colonneActuelle;
     static JFrame myJFrame = new JFrame();
-
-    public Jeu() {
-    }
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -128,4 +127,21 @@ public class Jeu {
             p.placerPiece(ligne, colonne, Piece.I);
         }
     }
+
+    public static boolean isJeuEnCours() {
+        return jeuEnCours;
+    }
+
+    public static void setJeuEnCours(boolean jeuEnCours) {
+        Jeu.jeuEnCours = jeuEnCours;
+    }
+
+    public static Piece getPieceActuelle() {
+        return pieceActuelle;
+    }
+
+    public static int getColonneActuelle() {
+        return colonneActuelle;
+    }
+
 }

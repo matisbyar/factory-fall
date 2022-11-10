@@ -1,5 +1,8 @@
+package tetris;
 
 import org.testng.annotations.Test;
+import tetris.logique.Jeu;
+import tetris.logique.Piece;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,7 +26,7 @@ public class Tests {
         Jeu.remplirLigne(1); // on ajoute une ligne remplie pour avoir game over desuite
         Jeu.nouvellePieceActuelle();
         Jeu.jouerTour();
-        assertFalse(Jeu.jeuEnCours);
+        assertFalse(Jeu.isJeuEnCours());
     }
 
 
@@ -31,8 +34,8 @@ public class Tests {
     @Test
     public void TestTerminerjeuManuelement(){
         Jeu.p.remplirTableau();
-        Jeu.jeuEnCours = false; // simulation de on apuie sur echap pour quité , je vous pas comment faire
-        assertFalse(Jeu.jeuEnCours);
+        Jeu.setJeuEnCours(false); // simulation de on apuie sur echap pour quité , je vous pas comment faire
+        assertFalse(Jeu.isJeuEnCours());
     }
 
 
@@ -40,32 +43,32 @@ public class Tests {
     @Test
     public void testDeplacerPiecesGauche(){
         clear();
-        System.out.println("Colonne de spawn : " + Jeu.colonneActuelle);
+        System.out.println("Colonne de spawn : " + Jeu.getColonneActuelle());
         System.out.println("Flèche de gauche est actionnée !");
-        Jeu.deplacerPieceActuelle(Jeu.colonneActuelle-1);
-        System.out.println("Colonne déplacé : " + Jeu.colonneActuelle);
-        assertEquals(Jeu.colonneActuelle, 3);
+        Jeu.deplacerPieceActuelle(Jeu.getColonneActuelle() -1);
+        System.out.println("Colonne déplacé : " + Jeu.getColonneActuelle());
+        assertEquals(Jeu.getColonneActuelle(), 3);
     }
 
     @Test
     public void testDeplacerPiecesDroite(){
         clear();
-        System.out.println("Colonne de spawn : " + Jeu.colonneActuelle);
+        System.out.println("Colonne de spawn : " + Jeu.getColonneActuelle());
         System.out.println("Flèche de droite est actionnée !");
-        Jeu.deplacerPieceActuelle(Jeu.colonneActuelle+1);
-        System.out.println("Colonne déplacé : " + Jeu.colonneActuelle);
-        assertEquals(Jeu.colonneActuelle, 5);
+        Jeu.deplacerPieceActuelle(Jeu.getColonneActuelle() +1);
+        System.out.println("Colonne déplacé : " + Jeu.getColonneActuelle());
+        assertEquals(Jeu.getColonneActuelle(), 5);
     }
 
     @Test
     public void testTomberPiece(){
         clear();
-        String nomPieceEnCours = Jeu.pieceActuelle.getNom();
+        String nomPieceEnCours = Jeu.getPieceActuelle().getNom();
         System.out.println("Nom de la piece qui a spawn (avant le drop): " + nomPieceEnCours);
         System.out.println("Flèche du bas est actionnée !");
         Jeu.tomberPieceActuelle();
         System.out.println("Nom de la piece qui est en bas (apres le drop): " + Jeu.p.getPieceNom(21, 4));
-        assertEquals(Jeu.colonneActuelle, 4);
+        assertEquals(Jeu.getColonneActuelle(), 4);
         assertEquals(Jeu.p.getPieceNom(21, 4), nomPieceEnCours);
     }
 
@@ -73,13 +76,13 @@ public class Tests {
     public void testTomberPieceAvecPieceDejaEnBas(){
         clear();
         Jeu.tomberPieceActuelle();
-        String nomPieceEnCours = Jeu.pieceActuelle.getNom();
+        String nomPieceEnCours = Jeu.getPieceActuelle().getNom();
         String nomPieceTombé = Jeu.p.getPieceNom(21, 4);
         System.out.println("Nom de la piece qui est deja tombée : " + nomPieceTombé);
         System.out.println("Flèche du bas est actionnée !");
         Jeu.tomberPieceActuelle();
         System.out.println("Nom de la piece qui est tombée au dessus (apres le drop): " + Jeu.p.getPieceNom(21 - 2, 4));
-        assertEquals(Jeu.colonneActuelle, 4);
+        assertEquals(Jeu.getColonneActuelle(), 4);
         /** La fonction assertNotEquals sert a rien, elle marche pas dans le cas ou le randomPiece nous affiche 2 fois la meme piece, dans ce cas les pieces l'une sur l'autre ont le meme nom*/
         //assertNotEquals(Jeu.p.getPieceNom(21 - 2, 4), nomPieceTombé);
         assertEquals(Jeu.p.getPieceNom(21 - 2, 4), nomPieceEnCours);
@@ -88,7 +91,7 @@ public class Tests {
     @Test
     public void testPieceExiste() {
         clear();
-        assertNotEquals(Jeu.pieceActuelle, Piece.NULL);
+        assertNotEquals(Jeu.getPieceActuelle(), Piece.NULL);
 
     }
 

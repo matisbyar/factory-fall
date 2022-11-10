@@ -1,3 +1,5 @@
+package tetris.logique;
+
 public class Plateau {
     private final int hauteur;
     private final int largeur;

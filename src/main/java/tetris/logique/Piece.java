@@ -1,3 +1,5 @@
+package tetris.logique;
+
 /**
  * Les pièces sont définies par un nom
  */
