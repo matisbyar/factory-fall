@@ -1,6 +1,8 @@
 package tetris.logique;
 
-public class Plateau {
+import tetris.IPlateau;
+
+public class Plateau implements IPlateau {
     private final int hauteur;
     private final int largeur;
     private final Piece[][] plateau;

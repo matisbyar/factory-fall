@@ -1,12 +1,14 @@
 package tetris.logique;
 
+import tetris.IJeu;
+
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Jeu {
+public class Jeu implements IJeu {
     public static Plateau p = new Plateau(10, 22);
     static Random random = new Random();
     static boolean jeuEnCours =true;

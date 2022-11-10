@@ -1,9 +1,11 @@
 package tetris.logique;
 
+import tetris.IPiece;
+
 /**
  * Les pièces sont définies par un nom
  */
-public enum Piece {
+public enum Piece implements IPiece {
     NULL(" ", new int[][]{{0,0}}),
     I("I", new int[][]{{0, -1}, {0, 0}, {0, 1}, {0, 2}}),
     O("O", new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}}),
