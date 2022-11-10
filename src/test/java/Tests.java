@@ -1,5 +1,4 @@
 
-import jdk.jfr.Enabled;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -32,7 +31,7 @@ public class Tests {
     @Test
     public void TestTerminerjeuManuelement(){
         Jeu.p.remplirTableau();
-        Jeu.jeuEnCours =false; // simulation de on apuie sur echap pour quité , je vous pas comment faire
+        Jeu.jeuEnCours = false; // simulation de on apuie sur echap pour quité , je vous pas comment faire
         assertFalse(Jeu.jeuEnCours);
     }
 
