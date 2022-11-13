@@ -27,10 +27,16 @@ public class Jeu implements IJeu {
         myJFrame.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
+                if (keyCode == KeyEvent.VK_SPACE) {
+                    // Bouger les pieces tout en bas
+                    System.out.println("Flèche du bas est actionnée !");
+                    tomberPieceActuelle();
+                    jouerTour();
+                }
                 if (keyCode == KeyEvent.VK_DOWN) {
                     // Bouger les pieces vers le bas
                     System.out.println("Flèche du bas est actionnée !");
-                    tomberPieceActuelle();
+                    tomberPieceActuelle1Ligne();
                     jouerTour();
                 }
                 else if (keyCode == KeyEvent.VK_LEFT) {
@@ -44,6 +50,11 @@ public class Jeu implements IJeu {
                     System.out.println("Flèche de droite est actionnée !");
                     deplacerPieceActuelle(colonneActuelle + 1);
                     jouerTour();
+                }
+                else if (keyCode == KeyEvent.VK_UP) {
+                    System.out.println("Flèche du haut est actionnée !");
+                    Jeu.tournerPieceActuelle();
+                    Jeu.jouerTour();
                 }
                 else if (keyCode == KeyEvent.VK_ESCAPE) {
                     jeuEnCours = false;
@@ -110,14 +121,35 @@ public class Jeu implements IJeu {
      */
     public static void tomberPieceActuelle() {
         if(p.placerPieceParColonne(ligneActuelle, colonneActuelle, pieceActuelle)) {
-            /**for (int numCase = 0; numCase < 4; numCase++) {
-                p.supprimerPiece(ligneActuelle-pieceActuelle.getPiece()[numCase][0], colonneActuelle+pieceActuelle.getPiece()[numCase][1]);
-            }**/
             nouvellePieceActuelle();
         }
         else {
             jeuEnCours = false;
         }
+    }
+
+    /**
+     * Fait tomber la pièce d'une ligne dans la colonne actuelle.
+     * Si ça échoue, pose la pièce actuelle aux coordonées actuelles
+     * (donc sans baisser de ligne).
+     */
+    public static void tomberPieceActuelle1Ligne() {
+        p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
+        if (p.placerPiece(ligneActuelle+1, colonneActuelle, pieceActuelle)) {
+            ligneActuelle++;
+        }
+        else {
+            p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
+            nouvellePieceActuelle();
+        }
+    }
+
+    public static void tournerPieceActuelle() {
+        p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
+        if (p.placementValide(ligneActuelle, colonneActuelle, pieceActuelle.creerPieceTournee())) {
+            pieceActuelle = pieceActuelle.creerPieceTournee();
+        }
+        p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
     }
 
     /**
