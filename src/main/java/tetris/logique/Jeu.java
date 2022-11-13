@@ -3,15 +3,17 @@ package tetris.logique;
 import tetris.IJeu;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Jeu implements IJeu {
     public static Plateau p = new Plateau(10, 22);
     static Random random = new Random();
     static boolean jeuEnCours =true;
+    static Timer timer;
 
     static Piece pieceActuelle;
     static int ligneActuelle;
@@ -19,9 +21,18 @@ public class Jeu implements IJeu {
     static JFrame myJFrame = new JFrame();
 
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        nouvellePieceActuelle();
+        // On définit l'action à faire automatiquement, et le donne au Timer, qui l'executera tout seul
+        ActionListener descenteAuto = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tomberPieceActuelle1Ligne();
+                jouerTour();
+            }
+        };
+        timer = new Timer(1000, descenteAuto);
+        timer.start();
 
+        nouvellePieceActuelle();
         p.afficherPlateau();
 
         myJFrame.addKeyListener(new KeyAdapter() {
@@ -71,11 +82,13 @@ public class Jeu implements IJeu {
      */
     public static void jouerTour(){
         if (!jeuEnCours){
+            timer.stop();
             p.afficherPlateau();
             System.out.println("Game Over");
             myJFrame.setVisible(false);
         } else {
             p.afficherPlateau();
+            System.out.println("_________________________________________\n");
         }
     }
 
