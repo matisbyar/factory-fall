@@ -6,7 +6,7 @@ import tetris.IPiece;
  * Les pièces sont définies par un nom
  */
 public enum Piece implements IPiece {
-    NULL(" ", new int[][]{{0,0}}),
+    NULL(" ", new int[][]{{0,0},{0,0},{0,0},{0,0}}),
     I("I", new int[][]{{0, -1}, {0, 0}, {0, 1}, {0, 2}}),
     O("O", new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}}),
     T("T", new int[][]{{0, -1}, {0, 0}, {0, 1}, {1, 0}}),
@@ -32,5 +32,14 @@ public enum Piece implements IPiece {
 
     public int[][] getPiece() {
         return piece;
+    }
+
+    public Piece creerPieceTournee() {
+        Piece nouvellePiece = Piece.NULL;
+        for(int i = 0; i < 4; ++i) {
+            nouvellePiece.getPiece()[i][0] = this.getPiece()[i][1] * -1;
+            nouvellePiece.getPiece()[i][1] = this.getPiece()[i][0];
+        }
+        return nouvellePiece;
     }
 }
