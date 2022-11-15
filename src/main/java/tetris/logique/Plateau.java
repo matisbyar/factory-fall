@@ -117,15 +117,18 @@ public class Plateau implements IPlateau {
     /**
      * Vérifie pour chaque ligne, si elle est remplie et appelle la méthode de suppression supprimerLigne() le cas échéant
      */
-    public void suppressionLignesRemplies() {
+    public int suppressionLignesRemplies() {
+        int lignesSupprimees = 0;
         // pour chaque ligne, on regarde si elle est remplie
         for (int ligne = 0; ligne < this.hauteur; ligne++) {
             if (ligneRemplie(ligne)) {
                 // le cas échéant, on remplace toutes les pièces par Piece.NULL
                 supprimerLigne(ligne);
                 tomberLignesApresSuppression(ligne);
+                lignesSupprimees++;
             }
         }
+        return lignesSupprimees;
     }
 
     /**
