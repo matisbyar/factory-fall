@@ -9,7 +9,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Jeu implements IJeu {
-    public static Plateau p = new Plateau(10, 22);
+    public static Joueur j = new Joueur("Luther");
+    public static Plateau p = new Plateau(10, 22, j);
+
     static Random random = new Random();
     static boolean jeuEnCours =true;
 
@@ -61,10 +63,12 @@ public class Jeu implements IJeu {
     public static void jouerTour(){
         if (!jeuEnCours){
             p.afficherPlateau();
+            System.out.println(j.getScore());
             System.out.println("Game Over");
             myJFrame.setVisible(false);
         } else {
             p.afficherPlateau();
+            System.out.println(p.getJoueur().getScore());
         }
     }
 
@@ -84,7 +88,8 @@ public class Jeu implements IJeu {
         pieceActuelle = genererPieceRandom();
         ligneActuelle = 1;
         colonneActuelle = p.getLargeur() / 2 - 1;
-        p.suppressionLignesRemplies();
+        p.incrementerScoreJoueur(p.suppressionLignesRemplies());
+        //p.suppressionLignesRemplies();
         if(!p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle)){
             jeuEnCours = false;
         }
