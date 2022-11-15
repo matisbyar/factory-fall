@@ -10,7 +10,9 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class Jeu implements IJeu {
-    public static Plateau p = new Plateau(10, 22);
+    public static Joueur j = new Joueur("Luther");
+    public static Plateau p = new Plateau(10, 22, j);
+
     static Random random = new Random();
     static boolean jeuEnCours =true;
     static Timer timer;
@@ -33,17 +35,12 @@ public class Jeu implements IJeu {
         timer.start();
 
         nouvellePieceActuelle();
+
         p.afficherPlateau();
 
         myJFrame.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
-                if (keyCode == KeyEvent.VK_SPACE) {
-                    // Bouger les pieces tout en bas
-                    System.out.println("Flèche du bas est actionnée !");
-                    tomberPieceActuelle();
-                    jouerTour();
-                }
                 if (keyCode == KeyEvent.VK_DOWN) {
                     // Bouger les pieces vers le bas
                     System.out.println("Flèche du bas est actionnée !");
@@ -84,6 +81,7 @@ public class Jeu implements IJeu {
         if (!jeuEnCours){
             timer.stop();
             p.afficherPlateau();
+            System.out.println(j.getScore());
             System.out.println("Game Over");
             myJFrame.setVisible(false);
         } else {
@@ -108,7 +106,8 @@ public class Jeu implements IJeu {
         pieceActuelle = genererPieceRandom();
         ligneActuelle = 1;
         colonneActuelle = p.getLargeur() / 2 - 1;
-        p.suppressionLignesRemplies();
+        p.incrementerScoreJoueur(p.suppressionLignesRemplies());
+        //p.suppressionLignesRemplies();
         if(!p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle)){
             jeuEnCours = false;
         }

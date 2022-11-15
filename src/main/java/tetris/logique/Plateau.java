@@ -6,28 +6,41 @@ public class Plateau implements IPlateau {
     private final int hauteur;
     private final int largeur;
     private final Piece[][] plateau;
+    private Joueur joueur;
+    private int rang;
 
     /**
-     * Le plateau est défini en fonction des largeur et hauteur indiquées, et contient des pièces (NULL ou autre).
+     * Le plateau est défini en fonction des largeur et hauteur indiquées, et contient des pièces (NULL ou autre). Un joueur est aussi necessaire
+     * pour definir le plateau dans l'obejectif du 2joueurs plus tard.
      */
-    public Plateau(int largeur, int hauteur) {
+    public Plateau(int largeur, int hauteur, Joueur joueur) {
         this.largeur = largeur;
         this.hauteur = hauteur;
         this.plateau = new Piece[hauteur][largeur];
         this.remplirTableau();
+        this.joueur = joueur;
+        this.rang = 1;
     }
 
     public int getLargeur() {
         return largeur;
     }
-    public int getHauteur() { return hauteur; }
-    public Piece[][] getPlateau() { return plateau;}
+    public int getHauteur() {
+        return hauteur;
+    }
+    public Piece[][] getPlateau() {
+        return plateau;
+    }
 
     /**
      * @return Le nom (string) de la pièce à l'emplacement indiqué
      */
     public String getPieceNom(int ligne, int colonne) {
         return this.plateau[ligne][colonne].getNom();
+    }
+
+    public Joueur getJoueur() {
+        return joueur;
     }
 
     /**
@@ -131,6 +144,7 @@ public class Plateau implements IPlateau {
         return lignesSupprimees;
     }
 
+
     /**
      * Regarde la ligne et vérifie si elle est remplie
      * @param ligne ligne observée
@@ -163,6 +177,26 @@ public class Plateau implements IPlateau {
             }
         }
     }
+
+    /**
+     * Incrémente le score du joueur attribué au plateau en fonction du rang et du nombres de ligne(s) supprimée(s)
+     */
+    public void incrementerScoreJoueur(int lignes){
+        if (lignes == 1) {
+            joueur.setScore(joueur.getScore()+(40*rang));
+        }
+        if (lignes == 2) {
+            joueur.setScore(joueur.getScore()+(100*rang));
+        }
+        if (lignes == 3) {
+            joueur.setScore(joueur.getScore()+(300*rang));
+        }
+        if (lignes == 4) {
+            joueur.setScore(joueur.getScore()+(1200*rang));
+        }
+    }
+
+
 
     /**
      * Affiche le plateau mis en forme dans le terminal. Les pièces NULL ne sont pas affichées,
