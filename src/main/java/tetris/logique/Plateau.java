@@ -47,7 +47,7 @@ public class Plateau implements IPlateau {
      * Place des pièces NULL dans toutes les cases du plateau. C'est l'initialisation du plateau
      */
     public void remplirTableau() {
-        Piece piece = Piece.NULL;
+        Piece piece = new Piece(Forme.NULL);
 
         for(int ligne = 0; ligne < this.hauteur; ++ligne) {
             for(int colonne = 0; colonne < this.largeur; ++colonne) {
@@ -68,11 +68,11 @@ public class Plateau implements IPlateau {
      */
     public boolean placementValide(int ligne, int colonne, Piece piece) {
         for(int numCase = 0; numCase < 4; numCase++) {
-            if (!(0 <= ligne-piece.getPiece()[numCase][0]
-                    && ligne-piece.getPiece()[numCase][0] < this.hauteur
-                    && 0 <= colonne+piece.getPiece()[numCase][1]
-                    && colonne+piece.getPiece()[numCase][1] < this.largeur
-                    && this.estVide(ligne-piece.getPiece()[numCase][0], colonne+piece.getPiece()[numCase][1]))) {
+            if (!(0 <= ligne-piece.getForme()[numCase][0]
+                    && ligne-piece.getForme()[numCase][0] < this.hauteur
+                    && 0 <= colonne+piece.getForme()[numCase][1]
+                    && colonne+piece.getForme()[numCase][1] < this.largeur
+                    && this.estVide(ligne-piece.getForme()[numCase][0], colonne+piece.getForme()[numCase][1]))) {
                 return false;
             }
         }
@@ -86,7 +86,7 @@ public class Plateau implements IPlateau {
     public boolean placerPiece(int ligne, int colonne, Piece piece) {
         if (this.placementValide(ligne, colonne, piece)) {
             for (int numCase = 0; numCase < 4; numCase++) {
-                this.plateau[ligne-piece.getPiece()[numCase][0]][colonne+piece.getPiece()[numCase][1]] = piece;
+                this.plateau[ligne-piece.getForme()[numCase][0]][colonne+piece.getForme()[numCase][1]] = piece;
             }
             return true;
         } else {
@@ -113,7 +113,7 @@ public class Plateau implements IPlateau {
      */
     public void supprimerPieceTotale(int ligne, int colonne, Piece piece) {
         for (int numCase = 0; numCase < 4; numCase++) {
-            this.plateau[ligne-piece.getPiece()[numCase][0]][colonne+piece.getPiece()[numCase][1]] = Piece.NULL;
+            this.plateau[ligne-piece.getForme()[numCase][0]][colonne+piece.getForme()[numCase][1]] = new Piece(Forme.NULL);
         }
     }
 
@@ -123,7 +123,7 @@ public class Plateau implements IPlateau {
      */
     public void supprimerLigne(int ligne) {
         for (int colonne = 0; colonne < this.largeur; colonne++) {
-            this.plateau[ligne][colonne] = Piece.NULL;
+            this.plateau[ligne][colonne] = new Piece(Forme.NULL);
         }
     }
 
@@ -172,7 +172,7 @@ public class Plateau implements IPlateau {
                     this.plateau[ligne][colonne] = this.plateau[ligne - 1][colonne];
                 } else {
                     // On remplit la colonne 0 (la plus haute) par des pièces NULL
-                    this.plateau[0][colonne] = Piece.NULL;
+                    this.plateau[0][colonne] = new Piece(Forme.NULL);
                 }
             }
         }

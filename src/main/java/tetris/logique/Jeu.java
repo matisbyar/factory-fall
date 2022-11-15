@@ -47,6 +47,11 @@ public class Jeu implements IJeu {
                     tomberPieceActuelle1Ligne();
                     jouerTour();
                 }
+                else if (keyCode == KeyEvent.VK_SPACE) {
+                    System.out.println("Barre Espace est actionnée !");
+                    Jeu.tomberPieceActuelle();
+                    Jeu.jouerTour();
+                }
                 else if (keyCode == KeyEvent.VK_LEFT) {
                     // Bouger les pieces vers la gauche
                     System.out.println("Flèche de gauche est actionnée !");
@@ -86,6 +91,7 @@ public class Jeu implements IJeu {
             myJFrame.setVisible(false);
         } else {
             p.afficherPlateau();
+            System.out.println(j.getScore());
             System.out.println("_________________________________________\n");
         }
     }
@@ -94,7 +100,7 @@ public class Jeu implements IJeu {
      * @return Une pièce non NULL aléatoire
      */
     public static Piece genererPieceRandom() {
-        return Piece.values()[Math.abs(random.nextInt()) % 7 + 1];
+        return new Piece(Forme.values()[Math.abs(random.nextInt()) % 7 + 1]);
     }
 
     /**
@@ -170,7 +176,7 @@ public class Jeu implements IJeu {
      */
     public static void remplirLigne(int ligne) {
         for (int colonne = 0; colonne < p.getLargeur() - 1; colonne++) {
-            p.placerPiece(ligne, colonne, Piece.I);
+            p.placerPiece(ligne, colonne, new Piece(Forme.I));
         }
     }
 

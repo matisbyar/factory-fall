@@ -5,22 +5,14 @@ import tetris.IPiece;
 /**
  * Les pièces sont définies par un nom
  */
-public enum Piece implements IPiece {
-    NULL(" ", new int[][]{{0,0},{0,0},{0,0},{0,0}}),
-    I("I", new int[][]{{0, -1}, {0, 0}, {0, 1}, {0, 2}}),
-    O("O", new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}}),
-    T("T", new int[][]{{0, -1}, {0, 0}, {0, 1}, {1, 0}}),
-    S("S", new int[][]{{0, -1}, {0, 0}, {1, 0}, {1, 1}}),
-    Z("Z", new int[][]{{1, -1}, {1, 0}, {0, 0}, {0, 1}}),
-    J("J", new int[][]{{1, -1}, {0, -1}, {0, 0}, {0, 1}}),
-    L("L", new int[][]{{0, -1}, {0,0}, {0, 1}, {1,1}});
+public class Piece implements IPiece {
 
-    private final String nom;
-    private final int [][] piece;
+    private String nom;
+    private int[][] coords = new int[4][2];
 
-    Piece(String nom, int [][] piece) {
-        this.nom = nom;
-        this.piece = piece;
+    public Piece(Forme forme) {
+        this.nom = forme.getNom();
+        System.arraycopy(forme.getFormeInit(), 0, coords, 0, 4);
     }
 
     /**
@@ -30,16 +22,17 @@ public enum Piece implements IPiece {
         return this.nom;
     }
 
-    public int[][] getPiece() {
-        return piece;
+    public int[][] getForme() {
+        return coords;
     }
 
     public Piece creerPieceTournee() {
-        Piece nouvellePiece = Piece.NULL;
-        for(int i = 0; i < 4; ++i) {
-            nouvellePiece.getPiece()[i][0] = this.getPiece()[i][1] * -1;
-            nouvellePiece.getPiece()[i][1] = this.getPiece()[i][0];
+        int[][] temp = new int[4][2];
+        System.arraycopy(this.coords, 0, temp, 0, 4);
+        for(int i = 0; i < 4; i++) {
+            this.coords[i][0] = temp[i][1] * -1;
+            this.coords[i][1] = temp[i][0];
         }
-        return nouvellePiece;
+        return this;
     }
 }

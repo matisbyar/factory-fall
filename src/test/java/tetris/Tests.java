@@ -1,6 +1,7 @@
 package tetris;
 
 import org.testng.annotations.Test;
+import tetris.logique.Forme;
 import tetris.logique.Jeu;
 import tetris.logique.Piece;
 
@@ -91,7 +92,7 @@ public class Tests {
     @Test
     public void testPieceExiste() {
         clear();
-        assertNotEquals(Jeu.getPieceActuelle(), Piece.NULL);
+        assertNotEquals(Jeu.getPieceActuelle(), new Piece(Forme.NULL));
 
     }
 
@@ -99,9 +100,10 @@ public class Tests {
     public void testPieceAffichee() {
         Jeu.p.remplirTableau();
         boolean estVide = true;
+        Piece piece = new Piece(Forme.NULL);
         for (int i = 0; i<Jeu.p.getPlateau().length; i++) {
             for (int j = 0; j<Jeu.p.getPlateau()[0].length; j++) {
-                if (Jeu.p.getPlateau()[i][j]!=Piece.NULL) {
+                if (Jeu.p.getPlateau()[i][j]!=piece) {
                     estVide = false;
                     break;
                 }
@@ -112,7 +114,7 @@ public class Tests {
 
         for (int i = 0; i<Jeu.p.getPlateau().length; i++) {
             for (int j = 0; j<Jeu.p.getPlateau()[0].length; j++) {
-                if (Jeu.p.getPlateau()[i][j]!=Piece.NULL) {
+                if (Jeu.p.getPlateau()[i][j]!=piece) {
                     estVide = false;
                     break;
                 }
