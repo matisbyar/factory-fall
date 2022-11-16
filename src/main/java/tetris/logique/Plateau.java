@@ -6,22 +6,31 @@ public class Plateau implements IPlateau {
     private final int hauteur;
     private final int largeur;
     private final Piece[][] plateau;
+    private Joueur joueur;
+    private int rang;
 
     /**
-     * Le plateau est défini en fonction des largeur et hauteur indiquées, et contient des pièces (NULL ou autre).
+     * Le plateau est défini en fonction des largeur et hauteur indiquées, et contient des pièces (NULL ou autre). Un joueur est aussi necessaire
+     * pour definir le plateau dans l'obejectif du 2joueurs plus tard.
      */
-    public Plateau(int largeur, int hauteur) {
+    public Plateau(int largeur, int hauteur, Joueur joueur) {
         this.largeur = largeur;
         this.hauteur = hauteur;
         this.plateau = new Piece[hauteur][largeur];
         this.remplirTableau();
+        this.joueur = joueur;
+        this.rang = 1;
     }
 
     public int getLargeur() {
         return largeur;
     }
-    public int getHauteur() { return hauteur; }
-    public Piece[][] getPlateau() { return plateau;}
+    public int getHauteur() {
+        return hauteur;
+    }
+    public Piece[][] getPlateau() {
+        return plateau;
+    }
 
     /**
      * @return Le nom (string) de la pièce à l'emplacement indiqué
@@ -30,11 +39,15 @@ public class Plateau implements IPlateau {
         return this.plateau[ligne][colonne].getNom();
     }
 
+    public Joueur getJoueur() {
+        return joueur;
+    }
+
     /**
      * Place des pièces NULL dans toutes les cases du plateau. C'est l'initialisation du plateau
      */
     public void remplirTableau() {
-        Piece piece = Piece.NULL;
+        Piece piece = new Piece(Forme.NULL);
 
         for(int ligne = 0; ligne < this.hauteur; ++ligne) {
             for(int colonne = 0; colonne < this.largeur; ++colonne) {
@@ -55,11 +68,11 @@ public class Plateau implements IPlateau {
      */
     public boolean placementValide(int ligne, int colonne, Piece piece) {
         for(int numCase = 0; numCase < 4; numCase++) {
-            if (!(0 <= ligne-piece.getPiece()[numCase][0]
-                    && ligne-piece.getPiece()[numCase][0] < this.hauteur
-                    && 0 <= colonne+piece.getPiece()[numCase][1]
-                    && colonne+piece.getPiece()[numCase][1] < this.largeur
-                    && this.estVide(ligne-piece.getPiece()[numCase][0], colonne+piece.getPiece()[numCase][1]))) {
+            if (!(0 <= ligne-piece.getForme()[numCase][0]
+                    && ligne-piece.getForme()[numCase][0] < this.hauteur
+                    && 0 <= colonne+piece.getForme()[numCase][1]
+                    && colonne+piece.getForme()[numCase][1] < this.largeur
+                    && this.estVide(ligne-piece.getForme()[numCase][0], colonne+piece.getForme()[numCase][1]))) {
                 return false;
             }
         }
@@ -73,7 +86,7 @@ public class Plateau implements IPlateau {
     public boolean placerPiece(int ligne, int colonne, Piece piece) {
         if (this.placementValide(ligne, colonne, piece)) {
             for (int numCase = 0; numCase < 4; numCase++) {
-                this.plateau[ligne-piece.getPiece()[numCase][0]][colonne+piece.getPiece()[numCase][1]] = piece;
+                this.plateau[ligne-piece.getForme()[numCase][0]][colonne+piece.getForme()[numCase][1]] = piece;
             }
             return true;
         } else {
@@ -100,7 +113,7 @@ public class Plateau implements IPlateau {
      */
     public void supprimerPieceTotale(int ligne, int colonne, Piece piece) {
         for (int numCase = 0; numCase < 4; numCase++) {
-            this.plateau[ligne-piece.getPiece()[numCase][0]][colonne+piece.getPiece()[numCase][1]] = Piece.NULL;
+            this.plateau[ligne-piece.getForme()[numCase][0]][colonne+piece.getForme()[numCase][1]] = new Piece(Forme.NULL);
         }
     }
 
@@ -110,7 +123,7 @@ public class Plateau implements IPlateau {
      */
     public void supprimerLigne(int ligne) {
         for (int colonne = 0; colonne < this.largeur; colonne++) {
-            this.plateau[ligne][colonne] = Piece.NULL;
+            this.plateau[ligne][colonne] = new Piece(Forme.NULL);
         }
     }
 
@@ -130,6 +143,7 @@ public class Plateau implements IPlateau {
         }
         return lignesSupprimees;
     }
+
 
     /**
      * Regarde la ligne et vérifie si elle est remplie
@@ -158,11 +172,31 @@ public class Plateau implements IPlateau {
                     this.plateau[ligne][colonne] = this.plateau[ligne - 1][colonne];
                 } else {
                     // On remplit la colonne 0 (la plus haute) par des pièces NULL
-                    this.plateau[0][colonne] = Piece.NULL;
+                    this.plateau[0][colonne] = new Piece(Forme.NULL);
                 }
             }
         }
     }
+
+    /**
+     * Incrémente le score du joueur attribué au plateau en fonction du rang et du nombres de ligne(s) supprimée(s)
+     */
+    public void incrementerScoreJoueur(int lignes){
+        if (lignes == 1) {
+            joueur.setScore(joueur.getScore()+(40*rang));
+        }
+        if (lignes == 2) {
+            joueur.setScore(joueur.getScore()+(100*rang));
+        }
+        if (lignes == 3) {
+            joueur.setScore(joueur.getScore()+(300*rang));
+        }
+        if (lignes == 4) {
+            joueur.setScore(joueur.getScore()+(1200*rang));
+        }
+    }
+
+
 
     /**
      * Affiche le plateau mis en forme dans le terminal. Les pièces NULL ne sont pas affichées,

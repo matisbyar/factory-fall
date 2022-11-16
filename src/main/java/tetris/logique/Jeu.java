@@ -3,15 +3,19 @@ package tetris.logique;
 import tetris.IJeu;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Jeu implements IJeu {
-    public static Plateau p = new Plateau(10, 22);
+    public static Joueur j = new Joueur("Luther");
+    public static Plateau p = new Plateau(10, 22, j);
+
     static Random random = new Random();
     static boolean jeuEnCours =true;
+    static Timer timer;
 
     static Piece pieceActuelle;
     static int ligneActuelle;
@@ -19,7 +23,17 @@ public class Jeu implements IJeu {
     static JFrame myJFrame = new JFrame();
 
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+        // On définit l'action à faire automatiquement, et le donne au Timer, qui l'executera tout seul
+        ActionListener descenteAuto = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tomberPieceActuelle1Ligne();
+                jouerTour();
+            }
+        };
+        timer = new Timer(1000, descenteAuto);
+        timer.start();
+
         nouvellePieceActuelle();
 
         p.afficherPlateau();
@@ -30,8 +44,13 @@ public class Jeu implements IJeu {
                 if (keyCode == KeyEvent.VK_DOWN) {
                     // Bouger les pieces vers le bas
                     System.out.println("Flèche du bas est actionnée !");
-                    tomberPieceActuelle();
+                    tomberPieceActuelle1Ligne();
                     jouerTour();
+                }
+                else if (keyCode == KeyEvent.VK_SPACE) {
+                    System.out.println("Barre Espace est actionnée !");
+                    Jeu.tomberPieceActuelle();
+                    Jeu.jouerTour();
                 }
                 else if (keyCode == KeyEvent.VK_LEFT) {
                     // Bouger les pieces vers la gauche
@@ -44,6 +63,11 @@ public class Jeu implements IJeu {
                     System.out.println("Flèche de droite est actionnée !");
                     deplacerPieceActuelle(colonneActuelle + 1);
                     jouerTour();
+                }
+                else if (keyCode == KeyEvent.VK_UP) {
+                    System.out.println("Flèche du haut est actionnée !");
+                    Jeu.tournerPieceActuelle();
+                    Jeu.jouerTour();
                 }
                 else if (keyCode == KeyEvent.VK_ESCAPE) {
                     jeuEnCours = false;
@@ -60,11 +84,15 @@ public class Jeu implements IJeu {
      */
     public static void jouerTour(){
         if (!jeuEnCours){
+            timer.stop();
             p.afficherPlateau();
+            System.out.println(j.getScore());
             System.out.println("Game Over");
             myJFrame.setVisible(false);
         } else {
             p.afficherPlateau();
+            System.out.println(j.getScore());
+            System.out.println("_________________________________________\n");
         }
     }
 
@@ -72,7 +100,7 @@ public class Jeu implements IJeu {
      * @return Une pièce non NULL aléatoire
      */
     public static Piece genererPieceRandom() {
-        return Piece.values()[Math.abs(random.nextInt()) % 7 + 1];
+        return new Piece(Forme.values()[Math.abs(random.nextInt()) % 7 + 1]);
     }
 
     /**
@@ -84,7 +112,8 @@ public class Jeu implements IJeu {
         pieceActuelle = genererPieceRandom();
         ligneActuelle = 1;
         colonneActuelle = p.getLargeur() / 2 - 1;
-        p.suppressionLignesRemplies();
+        p.incrementerScoreJoueur(p.suppressionLignesRemplies());
+        //p.suppressionLignesRemplies();
         if(!p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle)){
             jeuEnCours = false;
         }
@@ -110,9 +139,6 @@ public class Jeu implements IJeu {
      */
     public static void tomberPieceActuelle() {
         if(p.placerPieceParColonne(ligneActuelle, colonneActuelle, pieceActuelle)) {
-            /**for (int numCase = 0; numCase < 4; numCase++) {
-                p.supprimerPiece(ligneActuelle-pieceActuelle.getPiece()[numCase][0], colonneActuelle+pieceActuelle.getPiece()[numCase][1]);
-            }**/
             nouvellePieceActuelle();
         }
         else {
@@ -121,12 +147,36 @@ public class Jeu implements IJeu {
     }
 
     /**
+     * Fait tomber la pièce d'une ligne dans la colonne actuelle.
+     * Si ça échoue, pose la pièce actuelle aux coordonées actuelles
+     * (donc sans baisser de ligne).
+     */
+    public static void tomberPieceActuelle1Ligne() {
+        p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
+        if (p.placerPiece(ligneActuelle+1, colonneActuelle, pieceActuelle)) {
+            ligneActuelle++;
+        }
+        else {
+            p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
+            nouvellePieceActuelle();
+        }
+    }
+
+    public static void tournerPieceActuelle() {
+        p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
+        if (p.placementValide(ligneActuelle, colonneActuelle, pieceActuelle.creerPieceTournee())) {
+            pieceActuelle = pieceActuelle.creerPieceTournee();
+        }
+        p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
+    }
+
+    /**
      * Méthode de debug qui remplit les colonnes 0 à 10 du tableau à la ligne donnée
      * @param ligne Ligne que l'on souhaite remplir
      */
     public static void remplirLigne(int ligne) {
         for (int colonne = 0; colonne < p.getLargeur() - 1; colonne++) {
-            p.placerPiece(ligne, colonne, Piece.I);
+            p.placerPiece(ligne, colonne, new Piece(Forme.I));
         }
     }
 
