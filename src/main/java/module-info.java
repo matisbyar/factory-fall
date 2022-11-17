@@ -9,6 +9,7 @@ module tetris {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires javafx.graphics;
 
     opens tetris to javafx.fxml;
     exports tetris;
