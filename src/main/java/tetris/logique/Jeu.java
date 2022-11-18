@@ -124,6 +124,10 @@ public class Jeu implements IJeu {
         }
     }
 
+    /**
+     * Supprimer la pièce courante, puis vérifie la validité du placement de la rotation de la pièce
+     * actuelle aux coordonées actuelles. Si c'est valide, place la nouvelle pièce, sinon replace l'ancienne
+     */
     public void tournerPieceActuelle() {
         p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
         if (p.placementValide(ligneActuelle, colonneActuelle, pieceActuelle.creerPieceTournee())) {
