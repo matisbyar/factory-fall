@@ -43,6 +43,10 @@ public class Plateau implements IPlateau {
         return joueur;
     }
 
+    public int getRang() {
+        return rang;
+    }
+
     /**
      * Place des pièces NULL dans toutes les cases du plateau. C'est l'initialisation du plateau
      */
@@ -193,6 +197,15 @@ public class Plateau implements IPlateau {
         }
         if (lignes == 4) {
             joueur.setScore(joueur.getScore()+(1200*rang));
+        }
+    }
+
+    /**
+     * incremente le rang de la partie en fonction des palier defini par 2*rang*100
+     */
+    public  void incrementerRang(){
+        if (joueur.getScore()>= 2*rang*100){
+            rang++;
         }
     }
 

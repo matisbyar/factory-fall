@@ -50,11 +50,13 @@ public class Jeu implements IJeu {
             timer.stop();
             p.afficherPlateau();
             System.out.println(j.getScore());
+            System.out.println(p.getRang());
             System.out.println("Game Over");
             myJFrame.setVisible(false);
         } else {
             p.afficherPlateau();
             System.out.println(j.getScore());
+            System.out.println(p.getRang());
             System.out.println("_________________________________________\n");
         }
     }
@@ -70,12 +72,15 @@ public class Jeu implements IJeu {
      * Créé une nouvelle pièce sur le plateau, au spawn.
      * Si la case de spawn est occupée, alors le jeu se termine.
      * La méthode supprime également les lignes remplies
+     * Incremente le score et suprime les lignes si necessaire
+     * Incremente le niveau de la partie
      */
     public void nouvellePieceActuelle() {
         pieceActuelle = genererPieceRandom();
         ligneActuelle = 1;
         colonneActuelle = p.getLargeur() / 2 - 1;
         p.incrementerScoreJoueur(p.suppressionLignesRemplies());
+        p.incrementerRang();
         if(!p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle)){
             jeuEnCours = false;
         }
