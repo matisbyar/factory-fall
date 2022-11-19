@@ -201,10 +201,10 @@ public class Plateau implements IPlateau {
     }
 
     /**
-     * incremente le rang de la partie en fonction des palier defini par 2*rang*100
+     * incremente le rang de la partie en fonction des palier defini par (2^rang)*100
      */
     public  void incrementerRang(){
-        if (joueur.getScore()>= 2*rang*100){
+        if (joueur.getScore()>= Math.pow(2,rang)*100){
             rang++;
         }
     }
