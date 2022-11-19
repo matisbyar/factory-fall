@@ -66,23 +66,33 @@ public class TetrisIHM extends Application {
     }
 
     public GridPane afficherplateau() {
+
+        Image vide = new Image("file:src/main/resources/img/vide.png");
+
+        Image imgS = new Image("file:src/main/resources/img/S.jpg");
+        Image imgI = new Image("file:src/main/resources/img/I.jpg");
+        Image imgJ = new Image("file:src/main/resources/img/J.jpg");
+        Image imgL = new Image("file:src/main/resources/img/L.jpg");
+        Image imgO = new Image("file:src/main/resources/img/O.jpg");
+        Image imgT = new Image("file:src/main/resources/img/T.jpg");
+        Image imgZ = new Image("file:src/main/resources/img/Z.jpg");
+
         for (int i = 0; i < p.getPlateau().length; i++) {
             for (int y = 0; y < p.getPlateau()[0].length; y++) {
-                Label tf = new Label();
-                tf.setPrefHeight(45);
-                tf.setPrefWidth(45);
-                tf.setAlignment(Pos.CENTER);
+                ImageView tf = new ImageView();
+                tf.setImage(vide);
+                tf.setFitHeight(45);
+                tf.setFitWidth(45);
                 String s = p.getPlateau()[i][y].getNom();
                 switch (s) {
-                    case "S" -> tf.setStyle("-fx-background-color: limegreen;");
-                    case "I" -> tf.setStyle("-fx-background-color: #00bbff;");
-                    case "J" -> tf.setStyle("-fx-background-color: blue;");
-                    case "L" -> tf.setStyle("-fx-background-color: orange;");
-                    case "O" -> tf.setStyle("-fx-background-color: yellow;");
-                    case "T" -> tf.setStyle("-fx-background-color: purple;");
-                    case "Z" -> tf.setStyle("-fx-background-color: red;");
+                    case "S" -> tf.setImage(imgS);
+                    case "I" -> tf.setImage(imgI);
+                    case "J" -> tf.setImage(imgJ);
+                    case "L" -> tf.setImage(imgL);
+                    case "O" -> tf.setImage(imgO);
+                    case "T" -> tf.setImage(imgT);
+                    case "Z" -> tf.setImage(imgZ);
                 }
-                tf.setText(s);
                 //tf.setStyle("-fx-background-color: limegreen;");
                 GridPane.setRowIndex(tf,i);
                 GridPane.setColumnIndex(tf,y);
