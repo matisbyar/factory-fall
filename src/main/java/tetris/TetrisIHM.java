@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
@@ -21,14 +22,15 @@ import tetris.logique.Plateau;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Objects;
 
-
 public class TetrisIHM extends Application {
+    Pane pane = new Pane();
     GridPane gp = new GridPane();
 
     IJeu jeu;
@@ -101,6 +103,8 @@ public class TetrisIHM extends Application {
         }
         return gp;
     }
+
+
 
     public void effacerGridPane() {
         gp.getChildren().clear();
