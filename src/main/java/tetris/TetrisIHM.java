@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -11,9 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 
@@ -33,7 +32,8 @@ import java.security.PublicKey;
 import java.util.Objects;
 
 public class TetrisIHM extends Application {
-    Pane pane = new Pane();
+    StackPane pane = new StackPane();
+
     GridPane gp = new GridPane();
 
     IJeu jeu;
@@ -58,17 +58,18 @@ public class TetrisIHM extends Application {
         jeu = new Jeu();
         p = jeu.getPlateau();
 
-        GridPane gridPane = new GridPane();
+        pane.setStyle("-fx-background-color: black");
 
-        //Creating Buttons
+        Button button = new Button("Menu");
 
-
-        gridPane.add(afficherBackground(), 1, 0);
-        gridPane.add(afficherplateau(), 0, 0);
+        BorderPane borderPane = new BorderPane();
+        borderPane.setStyle("-fx-background-color: black");
+        borderPane.setLeft(pane);
+        borderPane.setCenter(gp);
 
         //gridPane.add(afficherButtonMenu(), 1,1);
 
-        scene = new Scene(gridPane);
+        scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -94,34 +95,35 @@ public class TetrisIHM extends Application {
 
         for (int i = 0; i < p.getPlateau().length; i++) {
             for (int y = 0; y < p.getPlateau()[0].length; y++) {
-                ImageView tf = new ImageView();
-                tf.setImage(vide);
-                tf.setFitHeight(45);
-                tf.setFitWidth(45);
+                ImageView imgView = new ImageView();
+                imgView.setImage(vide);
+                imgView.setFitHeight(45);
+                imgView.setFitWidth(45);
                 String s = p.getPlateau()[i][y].getNom();
                 switch (s) {
-                    case "S" -> tf.setImage(imgS);
-                    case "I" -> tf.setImage(imgI);
-                    case "J" -> tf.setImage(imgJ);
-                    case "L" -> tf.setImage(imgL);
-                    case "O" -> tf.setImage(imgO);
-                    case "T" -> tf.setImage(imgT);
-                    case "Z" -> tf.setImage(imgZ);
+                    case "S" -> imgView.setImage(imgS);
+                    case "I" -> imgView.setImage(imgI);
+                    case "J" -> imgView.setImage(imgJ);
+                    case "L" -> imgView.setImage(imgL);
+                    case "O" -> imgView.setImage(imgO);
+                    case "T" -> imgView.setImage(imgT);
+                    case "Z" -> imgView.setImage(imgZ);
                 }
-                GridPane.setRowIndex(tf,i);
-                GridPane.setColumnIndex(tf,y);
-                gp.getChildren().add(tf);
+                GridPane.setRowIndex(imgView,i);
+                GridPane.setColumnIndex(imgView,y);
+                gp.getChildren().add(imgView);
             }
         }
         return gp;
     }
 
     public Pane afficherBackground(){
-        Pane tf = new Pane();
-        tf.setStyle("-fx-background-color: black");
-        tf.setPrefHeight(990);
-        tf.setPrefWidth(400);
-        pane.getChildren().add(tf);
+        Button text = new Button("Menu");
+        pane.setStyle("-fx-color: white" + text);
+        pane.setStyle("-fx-background-color: black");
+        pane.setPrefHeight(990);
+        pane.setPrefWidth(400);
+
         return pane;
     }
     public Button afficherButtonMenu(){
