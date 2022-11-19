@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 import tetris.logique.Jeu;
 import tetris.logique.Joueur;
 import tetris.logique.Plateau;
+import tetris.logique.ServiceDuJeu;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
@@ -27,6 +29,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.security.PublicKey;
 import java.util.Objects;
 
 public class TetrisIHM extends Application {
@@ -42,6 +45,8 @@ public class TetrisIHM extends Application {
     private Scene scene;
     ActionListener descenteAuto;
 
+
+
     @Override
     public void start(Stage stage) {
         this.primaryStage = new Stage();
@@ -53,7 +58,17 @@ public class TetrisIHM extends Application {
         jeu = new Jeu();
         p = jeu.getPlateau();
 
-        scene = new Scene(afficherplateau());
+        GridPane gridPane = new GridPane();
+
+        //Creating Buttons
+
+
+        gridPane.add(afficherBackground(), 1, 0);
+        gridPane.add(afficherplateau(), 0, 0);
+
+        //gridPane.add(afficherButtonMenu(), 1,1);
+
+        scene = new Scene(gridPane);
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -61,8 +76,6 @@ public class TetrisIHM extends Application {
 
         Jeu.timer = new Timer(1000, descenteAuto);
         Jeu.timer.start();
-
-        afficherplateau();
         primaryStage.show();
 
     }
@@ -95,7 +108,6 @@ public class TetrisIHM extends Application {
                     case "T" -> tf.setImage(imgT);
                     case "Z" -> tf.setImage(imgZ);
                 }
-                //tf.setStyle("-fx-background-color: limegreen;");
                 GridPane.setRowIndex(tf,i);
                 GridPane.setColumnIndex(tf,y);
                 gp.getChildren().add(tf);
@@ -104,7 +116,18 @@ public class TetrisIHM extends Application {
         return gp;
     }
 
-
+    public Pane afficherBackground(){
+        Pane tf = new Pane();
+        tf.setStyle("-fx-background-color: black");
+        tf.setPrefHeight(990);
+        tf.setPrefWidth(400);
+        pane.getChildren().add(tf);
+        return pane;
+    }
+    public Button afficherButtonMenu(){
+        Button buttonMenu = new Button("Menu");
+        return buttonMenu;
+    }
 
     public void effacerGridPane() {
         gp.getChildren().clear();
