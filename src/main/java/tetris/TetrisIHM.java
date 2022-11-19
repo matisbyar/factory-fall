@@ -92,7 +92,7 @@ public class TetrisIHM extends Application {
         score.setLayoutY(50);
         labelsValue.setLayoutX(20);
         labelsValue.setLayoutY(20);
-        score.setMinSize(50, 50);
+        score.setMinSize(150, 150);
 
         rang.setStyle("-fx-font-size: 15px");
         rang.setMinSize(150, 150);
