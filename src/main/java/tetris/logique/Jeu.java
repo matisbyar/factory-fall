@@ -1,7 +1,7 @@
 package tetris.logique;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
+import javafx.beans.value.ObservableDoubleValue;
 import tetris.IJeu;
 
 import javax.swing.*;
@@ -49,14 +49,14 @@ public class Jeu implements IJeu {
         if (!jeuEnCours){
             timer.stop();
             p.afficherPlateau();
-            System.out.println(j.getScore());
-            System.out.println(p.getRang());
+            System.out.println(j.getScore().getValue());
+            System.out.println(p.getRang().getValue());
             System.out.println("Game Over");
             myJFrame.setVisible(false);
         } else {
             p.afficherPlateau();
-            System.out.println(j.getScore());
-            System.out.println(p.getRang());
+            System.out.println(j.getScore().getValue());
+            System.out.println(p.getRang().getValue());
             System.out.println("_________________________________________\n");
         }
     }
@@ -224,5 +224,25 @@ public class Jeu implements IJeu {
     @Override
     public boolean isJeuEnCours() {
         return jeuEnCours;
+    }
+
+    @Override
+    public double getScoreJoueurChoisi(Joueur joueurChoisi) {
+        return joueurChoisi.getScore().getValue();
+    }
+
+    @Override
+    public String getPseudoJoueurChoisi(Joueur joueurChoisi) {
+        return joueurChoisi.getPseudo();
+    }
+
+    @Override
+    public IntegerProperty getRang(Plateau plateauChoisi) {
+        return plateauChoisi.getRang();
+    }
+
+    @Override
+    public DoubleProperty scoreProperty() {
+        return getJoueur().getScore();
     }
 }

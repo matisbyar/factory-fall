@@ -2,6 +2,8 @@ package tetris;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -13,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -22,7 +25,6 @@ import tetris.logique.Plateau;
 import tetris.logique.ServiceDuJeu;
 
 import javax.swing.*;
-import javax.swing.event.ChangeListener;
 import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,6 +38,13 @@ public class TetrisIHM extends Application {
 
     GridPane gp = new GridPane();
 
+    Label score = new Label("0.0");
+
+    Label pseudo = new Label("User");
+
+    Label rang = new Label("Rang : 1");
+
+    VBox labelsValue = new VBox(pseudo, score, rang);
     IJeu jeu;
 
     Plateau p;
@@ -57,6 +66,7 @@ public class TetrisIHM extends Application {
         //VuePlateau plateau = new VuePlateau();
         jeu = new Jeu();
         p = jeu.getPlateau();
+        pseudo.setText(jeu.getPseudoJoueurChoisi(jeu.getJoueur()));
 
         pane.setStyle("-fx-background-color: black");
 
@@ -66,8 +76,32 @@ public class TetrisIHM extends Application {
         borderPane.setStyle("-fx-background-color: black");
         borderPane.setLeft(pane);
         borderPane.setCenter(gp);
+        gp.setAlignment(Pos.CENTER);
+
+        borderPane.getChildren().add(labelsValue);
+        score.setTextFill(Color.WHITE);
+        score.setAlignment(Pos.BASELINE_LEFT);
+        pseudo.setTextFill(Color.WHITE);
+        rang.setTextFill(Color.WHITE);
+        score.setLayoutX(150);
+        score.setLayoutY(150);
+        score.setStyle("-fx-font-size: 15px");
+        pseudo.setStyle("-fx-font-size: 15px");
+        pseudo.setMinSize(50, 50);
+        pseudo.setLayoutX(150);
+        score.setLayoutY(50);
+        labelsValue.setLayoutX(20);
+        labelsValue.setLayoutY(20);
+        score.setMinSize(50, 50);
+
+        rang.setStyle("-fx-font-size: 15px");
+        rang.setMinSize(150, 150);
+        rang.setLayoutX(150);
+        rang.setLayoutY(200);
 
         //gridPane.add(afficherButtonMenu(), 1,1);
+        borderPane.setPrefWidth(700);
+        borderPane.setPrefHeight(1000);
 
         scene = new Scene(borderPane);
         primaryStage.setScene(scene);
@@ -192,6 +226,19 @@ public class TetrisIHM extends Application {
             }
         };
 
+        jeu.getJoueur().getScore().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                score.setText(jeu.getJoueur().getScore().getValue()+"");
+            }
+        });
+
+        jeu.getRang(jeu.getPlateau()).addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                rang.setText("Rang : " + jeu.getRang(jeu.getPlateau()).getValue());
+            }
+        });
     }
 
     private String test(String path) {

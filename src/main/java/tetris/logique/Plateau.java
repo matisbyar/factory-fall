@@ -1,5 +1,7 @@
 package tetris.logique;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import tetris.IPlateau;
 
 public class Plateau implements IPlateau {
@@ -7,7 +9,7 @@ public class Plateau implements IPlateau {
     private final int largeur;
     private final Piece[][] plateau;
     private Joueur joueur;
-    private int rang;
+    private IntegerProperty rang = new SimpleIntegerProperty();
 
     /**
      * Le plateau est défini en fonction des largeur et hauteur indiquées, et contient des pièces (NULL ou autre). Un joueur est aussi necessaire
@@ -19,7 +21,7 @@ public class Plateau implements IPlateau {
         this.plateau = new Piece[hauteur][largeur];
         this.remplirTableau();
         this.joueur = joueur;
-        this.rang = 1;
+        this.rang.setValue(1);
     }
 
     public int getLargeur() {
@@ -43,7 +45,7 @@ public class Plateau implements IPlateau {
         return joueur;
     }
 
-    public int getRang() {
+    public IntegerProperty getRang() {
         return rang;
     }
 
@@ -187,16 +189,16 @@ public class Plateau implements IPlateau {
      */
     public void incrementerScoreJoueur(int lignes){
         if (lignes == 1) {
-            joueur.setScore(joueur.getScore()+(40*rang));
+            joueur.getScore().setValue(joueur.getScore().getValue()+(40*rang.getValue()));
         }
         if (lignes == 2) {
-            joueur.setScore(joueur.getScore()+(100*rang));
+            joueur.getScore().setValue(joueur.getScore().getValue()+(100*rang.getValue()));
         }
         if (lignes == 3) {
-            joueur.setScore(joueur.getScore()+(300*rang));
+            joueur.getScore().setValue(joueur.getScore().getValue()+(300*rang.getValue()));
         }
         if (lignes == 4) {
-            joueur.setScore(joueur.getScore()+(1200*rang));
+            joueur.getScore().setValue(joueur.getScore().getValue()+(1200*rang.getValue()));
         }
     }
 
@@ -204,8 +206,8 @@ public class Plateau implements IPlateau {
      * incremente le rang de la partie en fonction des palier defini par (2^rang)*100
      */
     public  void incrementerRang(){
-        if (joueur.getScore()>= Math.pow(2,rang)*100){
-            rang++;
+        if (joueur.getScore().getValue() >= Math.pow(2,rang.getValue())*100){
+            rang.setValue(rang.getValue()+1);
         }
     }
 
