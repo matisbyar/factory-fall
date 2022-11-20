@@ -68,12 +68,12 @@ public class TetrisIHM extends Application {
         p = jeu.getPlateau();
         pseudo.setText(jeu.getPseudoJoueurChoisi(jeu.getJoueur()));
 
-        pane.setStyle("-fx-background-color: black");
+        pane.setStyle("-fx-background-color: #1E1E1E");
 
         Button button = new Button("Menu");
 
         BorderPane borderPane = new BorderPane();
-        borderPane.setStyle("-fx-background-color: black");
+        borderPane.setStyle("-fx-background-color: #1E1E1E");
         borderPane.setLeft(pane);
         borderPane.setCenter(gp);
         gp.setAlignment(Pos.CENTER);
@@ -154,7 +154,7 @@ public class TetrisIHM extends Application {
     public Pane afficherBackground(){
         Button text = new Button("Menu");
         pane.setStyle("-fx-color: white" + text);
-        pane.setStyle("-fx-background-color: black");
+        pane.setStyle("-fx-background-color: #1E1E1E");
         pane.setPrefHeight(990);
         pane.setPrefWidth(400);
 
