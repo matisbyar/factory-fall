@@ -6,34 +6,25 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-
 import tetris.logique.Jeu;
 import tetris.logique.Joueur;
 import tetris.logique.Plateau;
-import tetris.logique.ServiceDuJeu;
 
 import javax.swing.*;
-import javax.swing.text.View;
-import java.awt.*;
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.security.PublicKey;
 import java.util.Objects;
 
-public class TetrisIHM extends Application {
+public class TetrisIHM extends Application implements EventHandler<ActionEvent>{
     StackPane pane = new StackPane();
 
     GridPane gp = new GridPane();
@@ -50,16 +41,34 @@ public class TetrisIHM extends Application {
     Plateau p;
     Joueur j;
 
-    private Stage primaryStage;
+    private Stage primaryStage = new Stage();
     private Scene scene;
     ActionListener descenteAuto;
 
+    Button start;
 
 
     @Override
-    public void start(Stage stage) {
-        this.primaryStage = new Stage();
-        demarrerPartie();
+    public void start(Stage primaryStage) throws Exception {
+        this.primaryStage.setTitle("MENU PRINCIPALE !!!!");
+        start = new Button();
+        start.setText("START");
+        start.setOnAction(this);
+
+        StackPane paneMenu = new StackPane();
+        paneMenu.setStyle("-fx-background-color: black");
+        paneMenu.getChildren().add(start);
+
+        Scene sceneMenu  = new Scene(paneMenu, 300,250);
+        this.primaryStage.setScene(sceneMenu);
+        this.primaryStage.show();
+    }
+
+    @Override
+    public void handle(ActionEvent actionEvent) {
+        if (actionEvent.getSource()==start){
+            demarrerPartie();
+        }
     }
 
     public void demarrerPartie() {
@@ -212,8 +221,9 @@ public class TetrisIHM extends Application {
 
         // On définit l'action à faire automatiquement et le donne au Timer, qui l'exécutera tout seul
         descenteAuto = new ActionListener() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
