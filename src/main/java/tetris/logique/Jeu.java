@@ -1,14 +1,9 @@
 package tetris.logique;
 
 import javafx.beans.property.*;
-import javafx.beans.value.ObservableDoubleValue;
 import tetris.IJeu;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,7 +14,7 @@ public class Jeu implements IJeu {
     public ArrayList<Piece> prochainesPieces;
 
     static Random random;
-    public boolean jeuEnCours;
+    public BooleanProperty jeuEnCours = new SimpleBooleanProperty();
     public static Timer timer;
 
     static Piece pieceActuelle;
@@ -33,7 +28,7 @@ public class Jeu implements IJeu {
         plateau = new SimpleObjectProperty<>();
 
         random = new Random();
-        jeuEnCours = true;
+        jeuEnCours.setValue(true);
 
         prochainesPieces = new ArrayList<Piece>();
         this.tableauProchainesPieces();
@@ -50,7 +45,7 @@ public class Jeu implements IJeu {
      * Affiche le Plateau si le jeu est toujours en cours et arrete la partie sinon
      */
     public void jouerTour(){
-        if (!jeuEnCours){
+        if (!jeuEnCours.getValue()){
             timer.stop();
             p.afficherPlateau();
             System.out.println(j.getScore().getValue());
@@ -104,7 +99,7 @@ public class Jeu implements IJeu {
         p.incrementerScoreJoueur(p.suppressionLignesRemplies());
         p.incrementerRang();
         if(!p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle)){
-            jeuEnCours = false;
+            jeuEnCours.setValue(false);
         }
     }
 
@@ -131,7 +126,7 @@ public class Jeu implements IJeu {
             nouvellePieceActuelle();
         }
         else {
-            jeuEnCours = false;
+            jeuEnCours.setValue(false);
         }
     }
 
@@ -239,13 +234,13 @@ public class Jeu implements IJeu {
 
     @Override
     public void actionEchap() {
-        jeuEnCours = false;
+        jeuEnCours.setValue(false);
         jouerTour();
     }
 
     @Override
     public boolean isJeuEnCours() {
-        return jeuEnCours;
+        return jeuEnCours.getValue();
     }
 
     @Override
@@ -266,5 +261,9 @@ public class Jeu implements IJeu {
     @Override
     public DoubleProperty scoreProperty() {
         return getJoueur().getScore();
+    }
+
+    public BooleanProperty getJeuEnCoursProperty() {
+        return jeuEnCours;
     }
 }

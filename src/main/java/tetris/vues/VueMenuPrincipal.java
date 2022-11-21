@@ -1,17 +1,10 @@
 package tetris.vues;
-
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
-
-import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class VueMenuPrincipal extends Stage {
 

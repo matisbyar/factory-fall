@@ -2,7 +2,6 @@ package tetris.logique;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import tetris.TetrisIHM;
 
 public class Joueur {
     private String pseudo;

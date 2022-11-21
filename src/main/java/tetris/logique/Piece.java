@@ -2,7 +2,6 @@ package tetris.logique;
 
 import tetris.IPiece;
 
-import java.util.Arrays;
 
 /**
  * Les pièces sont définies par un nom

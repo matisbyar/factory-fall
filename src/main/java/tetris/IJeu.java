@@ -1,11 +1,9 @@
 package tetris;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.value.ObservableDoubleValue;
-import javafx.beans.value.ObservableValue;
-import tetris.logique.Jeu;
 import tetris.logique.Joueur;
 import tetris.logique.Plateau;
 
@@ -13,6 +11,8 @@ public interface IJeu {
     ObjectProperty<Plateau> plateauProperty();
 
     DoubleProperty scoreProperty();
+
+    BooleanProperty getJeuEnCoursProperty();
     
     void actionGauche();
     void actionDroite();
@@ -37,4 +37,6 @@ public interface IJeu {
     String getPseudoJoueurChoisi(Joueur joueurChoisi);
 
     IntegerProperty getRang(Plateau plateauChoisi);
+
+
 }

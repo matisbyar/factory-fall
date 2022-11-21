@@ -15,18 +15,18 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+
 import tetris.logique.Jeu;
 import tetris.logique.Joueur;
 import tetris.logique.Plateau;
+import tetris.vues.VueGameOver;
 
 import javax.swing.*;
 import javafx.event.ActionEvent;
 import tetris.vues.VueMenuPrincipal;
-import tetris.vues.VuePlateau;
 
-import java.awt.*;
 import java.awt.event.ActionListener;
-import java.security.cert.PolicyNode;
 import java.util.Objects;
 
 public class TetrisIHM extends Application {
@@ -260,10 +260,36 @@ public class TetrisIHM extends Application {
                 rang.setText("Rang : " + jeu.getRang(jeu.getPlateau()).getValue());
             }
         });
+
+        jeu.getJeuEnCoursProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                if (!jeu.isJeuEnCours()) {
+                    VueGameOver vueGameOver = new VueGameOver();
+                    vueGameOver.arreterJeuProperty().addListener(new ChangeListener<Boolean>() {
+                        @Override
+                        public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                            if (vueGameOver.arreterJeuProperty().getValue()) {
+                                Platform.exit();
+                            }
+                        }
+                    });
+
+                    vueGameOver.retryProperty().addListener(new ChangeListener<Boolean>() {
+                        @Override
+                        public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                            if (vueGameOver.retryProperty().getValue()) {
+                                demarrerPartie();
+                            }
+                        }
+                    });
+                    vueGameOver.show();
+                }
+            }
+        });
     }
 
     private String test(String path) {
         return Objects.requireNonNull(getClass().getResource(path)).toString();
     }
 }
-
