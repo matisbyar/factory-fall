@@ -21,13 +21,30 @@ import tetris.logique.Plateau;
 
 import javax.swing.*;
 import javafx.event.ActionEvent;
+import tetris.vues.VueMenuPrincipal;
+import tetris.vues.VuePlateau;
+
+import java.awt.*;
 import java.awt.event.ActionListener;
+import java.security.cert.PolicyNode;
 import java.util.Objects;
 
-public class TetrisIHM extends Application implements EventHandler<ActionEvent>{
+public class TetrisIHM extends Application {
+
+    private final EventHandler<ActionEvent> quandLeButtonEstClique = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            demarrerPartie();
+            vueMenuPrincipal.close();
+
+        }
+    };
     StackPane pane = new StackPane();
+    BorderPane borderPane = new BorderPane();
+    BorderPane borderPaneAvantLancement = new BorderPane();
 
     GridPane gp = new GridPane();
+
 
     Label score = new Label("0.0");
 
@@ -45,31 +62,18 @@ public class TetrisIHM extends Application implements EventHandler<ActionEvent>{
     private Scene scene;
     ActionListener descenteAuto;
 
-    Button start;
+    Button startMenu = new Button("Lancer Jeu");
+    Button startJeu = new Button("Start");
 
+    VueMenuPrincipal vueMenuPrincipal;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        this.primaryStage.setTitle("MENU PRINCIPALE !!!!");
-        start = new Button();
-        start.setText("START");
-        start.setOnAction(this);
-
-        StackPane paneMenu = new StackPane();
-        paneMenu.setStyle("-fx-background-color: black");
-        paneMenu.getChildren().add(start);
-
-        Scene sceneMenu  = new Scene(paneMenu, 300,250);
-        this.primaryStage.setScene(sceneMenu);
-        this.primaryStage.show();
+        vueMenuPrincipal = new VueMenuPrincipal();
+        vueMenuPrincipal.setButtonCliqueListener(quandLeButtonEstClique);
+        vueMenuPrincipal.show();
     }
 
-    @Override
-    public void handle(ActionEvent actionEvent) {
-        if (actionEvent.getSource()==start){
-            demarrerPartie();
-        }
-    }
 
     public void demarrerPartie() {
         //VuePlateau plateau = new VuePlateau();
@@ -79,9 +83,6 @@ public class TetrisIHM extends Application implements EventHandler<ActionEvent>{
 
         pane.setStyle("-fx-background-color: #1E1E1E");
 
-        Button button = new Button("Menu");
-
-        BorderPane borderPane = new BorderPane();
         borderPane.setStyle("-fx-background-color: #1E1E1E");
         borderPane.setLeft(pane);
         borderPane.setCenter(gp);
@@ -118,8 +119,18 @@ public class TetrisIHM extends Application implements EventHandler<ActionEvent>{
 
         creerBindings();
 
+        pane.getChildren().add(startJeu);
+
+        startJeu.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+            @Override
+            public void handle(javafx.event.ActionEvent actionEvent) {
+                Jeu.timer.start();
+                startJeu.setDisable(true);
+            }
+        });
+
         Jeu.timer = new Timer(1000, descenteAuto);
-        Jeu.timer.start();
+        //Jeu.timer.start();
         primaryStage.show();
 
     }
@@ -255,3 +266,4 @@ public class TetrisIHM extends Application implements EventHandler<ActionEvent>{
         return Objects.requireNonNull(getClass().getResource(path)).toString();
     }
 }
+
