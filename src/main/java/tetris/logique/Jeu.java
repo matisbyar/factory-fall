@@ -9,12 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Jeu implements IJeu {
     public Joueur j;
     public Plateau p;
     public ObjectProperty<Plateau> plateau;
+    public ArrayList<Piece> prochainesPieces;
 
     static Random random;
     public boolean jeuEnCours;
@@ -33,6 +35,8 @@ public class Jeu implements IJeu {
         random = new Random();
         jeuEnCours = true;
 
+        prochainesPieces = new ArrayList<Piece>();
+        this.tableauProchainesPieces();
         nouvellePieceActuelle();
     }
 
@@ -69,6 +73,24 @@ public class Jeu implements IJeu {
     }
 
     /**
+     * Crée une liste des 3 prochaines pieces
+     */
+    public void tableauProchainesPieces(){
+        for (int i = 0; i<3; i++){
+            prochainesPieces.add(genererPieceRandom());
+        }
+    }
+
+    /**
+     * Supprime et retourne la premiere piece de la liste des pieces suivantes. Ajoute une piece a cette liste
+     * @return la premiere piece de la liste en attente
+     */
+    public Piece recurperProchainePiece(){
+        prochainesPieces.add(genererPieceRandom());
+        return prochainesPieces.remove(0);
+    }
+
+    /**
      * Créé une nouvelle pièce sur le plateau, au spawn.
      * Si la case de spawn est occupée, alors le jeu se termine.
      * La méthode supprime également les lignes remplies
@@ -76,7 +98,7 @@ public class Jeu implements IJeu {
      * Incremente le niveau de la partie
      */
     public void nouvellePieceActuelle() {
-        pieceActuelle = genererPieceRandom();
+        pieceActuelle = recurperProchainePiece();
         ligneActuelle = 1;
         colonneActuelle = p.getLargeur() / 2 - 1;
         p.incrementerScoreJoueur(p.suppressionLignesRemplies());
