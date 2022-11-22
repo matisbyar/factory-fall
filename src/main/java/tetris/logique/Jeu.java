@@ -201,11 +201,6 @@ public class Jeu implements IJeu {
     }
 
     @Override
-    public DoubleProperty scoreProperty() {
-        return getJoueur().getScore();
-    }
-
-    @Override
     public Joueur getJoueur() {
         return j;
     }
