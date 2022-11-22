@@ -1,8 +1,11 @@
 package tetris.vues;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Screen;
+import tetris.TetrisIHM;
 import tetris.logique.Plateau;
 
 public class VuePlateau extends GridPane {
@@ -15,6 +18,8 @@ public class VuePlateau extends GridPane {
     private final Image imgO = new Image("file:src/main/resources/img/O.jpg");
     private final Image imgT = new Image("file:src/main/resources/img/T.jpg");
     private final Image imgZ = new Image("file:src/main/resources/img/Z.jpg");
+
+    Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
     Plateau p;
 
@@ -30,8 +35,8 @@ public class VuePlateau extends GridPane {
         for (int colonne = 0; colonne < p.getPlateau().length; colonne++) {
             for (int ligne = 0; ligne < p.getPlateau()[0].length; ligne++) {
                 ImageView imagePiece = new ImageView(vide);
-                imagePiece.setFitHeight(45);
-                imagePiece.setFitWidth(45);
+                imagePiece.setFitHeight((primaryScreenBounds.getHeight()*0.04));
+                imagePiece.setFitWidth((primaryScreenBounds.getHeight()*0.04));
                 String nomPiece = p.getPlateau()[colonne][ligne].getNom();
                 switch (nomPiece) {
                     case "S" -> imagePiece.setImage(imgS);

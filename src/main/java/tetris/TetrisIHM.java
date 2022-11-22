@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
@@ -38,6 +40,8 @@ public class TetrisIHM extends Application {
     // Vues personnelles (créées par l'équipe)
     private VueMenuPrincipal vueMenuPrincipal;
     private VuePlateau vuePlateau;
+
+    Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
     // Objets de la logique du jeu
     IJeu jeu;
@@ -171,8 +175,8 @@ public class TetrisIHM extends Application {
     public void styliser() {
         // BorderPane
         borderPane.setStyle("-fx-background-color: #1E1E1E");
-        borderPane.setPrefWidth(700);
-        borderPane.setPrefHeight(1000);
+        borderPane.setPrefWidth((primaryScreenBounds.getHeight()*0.65));
+        borderPane.setPrefHeight(primaryScreenBounds.getHeight()*0.97);
 
         // Pseudo
         pseudo.setTextFill(Color.WHITE);
