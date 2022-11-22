@@ -1,23 +1,13 @@
 package tetris.Test;
 
-
-
-
-
-
-
 import javafx.beans.property.*;
-
-
 import org.testng.annotations.Test;
 import tetris.logique.*;
-
-import javax.swing.*;
 
 
 import static org.testng.AssertJUnit.*;
 
-public class Test_validation {
+public class TestUnitaireSprint2 {
 
    // static Timer timer;
 
@@ -41,28 +31,27 @@ public class Test_validation {
      * faire vers la droite quand ce sera implementé
      */
     @Test
-    public void test_Rotation_PieceGauche() {
+    public void testRotationPieceGauche() {
         start();
 
-        int[][] coord_PieceEnCours = j.getPieceActuelle().getForme();
+        int[][] coord_PieceEnCours = Jeu.getPieceActuelle().getForme();
 
         System.out.println("rotation est actionnée !");
         j.tournerPieceActuelle();
-        int[][] cord_a_verif =  coord_PieceEnCours;
 
         for(int i = 0; i < 4; i++) {
-            coord_PieceEnCours[i][0] = cord_a_verif[i][1] * -1;
-            coord_PieceEnCours[i][1] = cord_a_verif[i][0];
+            coord_PieceEnCours[i][0] = coord_PieceEnCours[i][1] * -1;
+            coord_PieceEnCours[i][1] = coord_PieceEnCours[i][0];
         }
         System.out.println("piece rotate !");
-        assertEquals(coord_PieceEnCours,cord_a_verif);
+        assertEquals(coord_PieceEnCours, coord_PieceEnCours);
     }
 
     /**
      * Test si le rang est bien initialisé a 1
      */
     @Test
-    public void test_rang_basse() {
+    public void testRangDeBasse() {
         start();
         IntegerProperty rang = new SimpleIntegerProperty();
         rang.setValue(1);
@@ -75,7 +64,7 @@ public class Test_validation {
      * Test si le rang est bien augmenté apres appel de la fonction mais le score doit etre augmenté avant
      */
     @Test
-    public void test_rang_sup() {
+    public void testRangSuperieur() {
         start();
         IntegerProperty rang = new SimpleIntegerProperty();
         rang.setValue(3);
@@ -132,19 +121,18 @@ public class Test_validation {
     @Test
     public void testTomberPiece() {
         start();
-        int[][] coord_PieceEnCours = j.getPieceActuelle().getForme();
+        int[][] coord_PieceEnCours = Jeu.getPieceActuelle().getForme();
         System.out.println("barre espace est actionnée !");
         j.tomberPieceActuelle();
 
         // assertEquals(j.getColonneActuelle(), 4);
-        int[][] cord_a_verif = coord_PieceEnCours;
 
         for(int i = 0; i < 4; i++) {
-            cord_a_verif[i][0] = coord_PieceEnCours[i][1] + 20;
-            cord_a_verif[i][1] = coord_PieceEnCours[i][0] + 20;
+            coord_PieceEnCours[i][0] = coord_PieceEnCours[i][1] + 20;
+            coord_PieceEnCours[i][1] = coord_PieceEnCours[i][0] + 20;
         }
         j.tomberPieceActuelle1Ligne();
-        assertEquals(coord_PieceEnCours,cord_a_verif);
+        assertEquals(coord_PieceEnCours, coord_PieceEnCours);
     }
 
 
@@ -162,19 +150,18 @@ public class Test_validation {
     @Test
     public void testTomberPiece1ligne() {
         start();
-        int[][] coord_PieceEnCours = j.getPieceActuelle().getForme();
+        int[][] coord_PieceEnCours = Jeu.getPieceActuelle().getForme();
         System.out.println("Flèche du bas est actionnée !");
         j.tomberPieceActuelle1Ligne();
 
         // assertEquals(j.getColonneActuelle(), 4);
-        int[][] cord_a_verif = coord_PieceEnCours;
 
         for(int i = 0; i < 4; i++) {
-            cord_a_verif[i][0] = coord_PieceEnCours[i][1] + 1;
-            cord_a_verif[i][1] = coord_PieceEnCours[i][0] + 1;
+            coord_PieceEnCours[i][0] = coord_PieceEnCours[i][1] + 1;
+            coord_PieceEnCours[i][1] = coord_PieceEnCours[i][0] + 1;
         }
         j.tomberPieceActuelle1Ligne();
-        assertEquals(coord_PieceEnCours,cord_a_verif);
+        assertEquals(coord_PieceEnCours, coord_PieceEnCours);
     }
 
 
@@ -189,16 +176,15 @@ public class Test_validation {
         Joueur joueur= new Joueur(j.getJoueur().getPseudo());
 
 
-        DoubleProperty dou;
-        double i = 100.0;
-        dou = new SimpleDoubleProperty(i) ;
+        DoubleProperty score = new SimpleDoubleProperty();
+        score.setValue(100);
 
 
 
 
         // a voir pour ca erreur de type
 
-        joueur.setScore(dou); // on set  le score a 100 soit une ligne
+        joueur.setScore(score); // on set  le score a 100 soit une ligne
         j.remplirLigne(20);
         j.remplirLigne(21); // les ligne remplie sont censé entre suprimé et add 100 au score du jeu ??
         //sinon test a revoir , question a posé ;
