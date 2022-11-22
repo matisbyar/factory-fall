@@ -2,6 +2,8 @@ package tetris.vues;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
@@ -20,7 +22,9 @@ public class VueMenuPrincipal extends Stage {
 
         this.setTitle("MENU PRINCIPAL !!!!");
 
-        lancerJeu = new Button("LANCER JEU");
+        lancerJeu = new Button();
+        lancerJeu.setGraphic(new ImageView(new Image("file:src/main/resources/img/start_new_game.png")));
+        lancerJeu.setStyle("-fx-background-color: transparent");
 
         BorderPane borderPane = new BorderPane();
         borderPane.setStyle("-fx-background-color: #1E1E1E");
