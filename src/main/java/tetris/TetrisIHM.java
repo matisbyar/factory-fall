@@ -61,22 +61,20 @@ public class TetrisIHM extends Application {
 
     public void demarrerPartie() {
         // Initialisations des objets nécessaires
-        // squelette du javaFX
-        Stage primaryStage = new Stage();
-        scene = new Scene(borderPane);
+        // classes de la logique du jeu
+        jeu = new Jeu();
+        p = jeu.getPlateau();
+        vuePlateau = new VuePlateau(p);
 
         // javaFX
         borderPane = new BorderPane();
+        Stage primaryStage = new Stage();
+        scene = new Scene(borderPane);
         pane = new StackPane();
         startJeu = new Button();
         score = new Label("0.0");
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("Rang : 1");
-
-        // classes de la logique du jeu
-        jeu = new Jeu();
-        p = jeu.getPlateau();
-        vuePlateau = new VuePlateau(p);
 
         // Affectations et constitution de vues
         informationsJoueur = new VBox(pseudo, score, rang);
