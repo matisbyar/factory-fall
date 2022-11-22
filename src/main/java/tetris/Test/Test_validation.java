@@ -1,4 +1,4 @@
-package tetris.Test;
+/**package tetris.Test;
 
 
 
@@ -28,7 +28,7 @@ public class Test_validation {
     /**
      * fonction qui fait un nouveau jeu
      */
-    void start() {
+/**    void start() {
         Jeu j = new Jeu();
         //  Joueur jo = new Joueur("Luther");
         //  Plateau p = new Plateau(10, 22, jo);
@@ -40,7 +40,7 @@ public class Test_validation {
      * Test si la piece a bien été rotate selon la formule vers la gauche
      * faire vers la droite quand ce sera implementé
      */
-    @Test
+/**    @Test
     public void test_Rotation_PieceGauche() {
         start();
 
@@ -61,7 +61,7 @@ public class Test_validation {
     /**
      * Test si le rang est bien initialisé a 1
      */
-    @Test
+/**    @Test
     public void test_rang_basse() {
         start();
         IntegerProperty rang = new SimpleIntegerProperty();
@@ -74,7 +74,7 @@ public class Test_validation {
     /**
      * Test si le rang est bien augmenté apres appel de la fonction mais le score doit etre augmenté avant
      */
-    @Test
+/**    @Test
     public void test_rang_sup() {
         start();
         IntegerProperty rang = new SimpleIntegerProperty();
@@ -129,7 +129,7 @@ public class Test_validation {
      *test qui crée une piece sur un plateau et la fait décendre en bas
      *  assert que la coordonnée de la piece descendu est la bonne.
      */
-    @Test
+/**    @Test
     public void testTomberPiece() {
         start();
         int[][] coord_PieceEnCours = j.getPieceActuelle().getForme();
@@ -159,7 +159,7 @@ public class Test_validation {
      *test qui crée une piece sur un plateau et la fait décendre de 1 ligne
      *  assert que la coordonnée de la piece descendu est la bonne.
      */
-    @Test
+/**    @Test
     public void testTomberPiece1ligne() {
         start();
         int[][] coord_PieceEnCours = j.getPieceActuelle().getForme();
@@ -183,7 +183,7 @@ public class Test_validation {
      * et fait le joueur de jeu remplir ligne donc add 100 au score,
      * assert equal que les 2 joueurs on le même score
      */
-    @Test
+/**    @Test
     public void TestCalculScore() {
         start();
         Joueur joueur= new Joueur(j.getJoueur().getPseudo());
@@ -215,3 +215,4 @@ public class Test_validation {
     }
 
 }
+**/
