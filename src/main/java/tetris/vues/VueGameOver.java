@@ -60,13 +60,18 @@ public class VueGameOver extends Stage {
         vb.setLayoutX(125);
         this.setResizable(false);
         btExit.setOnAction(actionEvent -> arreterJeu());
-        btRetry.setOnAction(actionEvent -> retry.setValue(true));
+        btRetry.setOnAction(actionEvent -> relancerPartie());
 
         this.setScene(scene);
     }
 
     public void arreterJeu() {
         arreterJeu.setValue(true);
+        close();
+    }
+
+    public void relancerPartie() {
+        retry.setValue(true);
         close();
     }
 

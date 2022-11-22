@@ -279,7 +279,7 @@ public class TetrisIHM extends Application {
                         @Override
                         public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                             if (vueGameOver.retryProperty().getValue()) {
-                                demarrerPartie();
+                                relancerPartie();
                             }
                         }
                     });
@@ -291,5 +291,15 @@ public class TetrisIHM extends Application {
 
     private String test(String path) {
         return Objects.requireNonNull(getClass().getResource(path)).toString();
+    }
+
+    private void relancerPartie() {
+        jeu = new Jeu();
+        p = jeu.getPlateau();
+        pseudo.setText(jeu.getPseudoJoueurChoisi(jeu.getJoueur()));
+        primaryStage.show();
+        startJeu.setDisable(false);
+        System.out.println(jeu.isJeuEnCours());
+        creerBindings();
     }
 }
