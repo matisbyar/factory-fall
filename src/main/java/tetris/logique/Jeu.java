@@ -6,44 +6,32 @@ import tetris.IJeu;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 public class Jeu implements IJeu {
-    public Joueur j;
-    public Plateau p;
-    public ObjectProperty<Plateau> plateau;
-    public ArrayList<Piece> sacProchainesPieces;
+    private Joueur j;
+    private Plateau p;
 
-    static Random random;
-    public BooleanProperty jeuEnCours = new SimpleBooleanProperty();
+    private ArrayList<Piece> sacProchainesPieces;
+    private BooleanProperty jeuEnCours;
+
     public static Timer timer;
-
-    static Piece pieceActuelle;
-    static int ligneActuelle;
-    static int colonneActuelle;
-    static JFrame myJFrame = new JFrame();
+    public static Piece pieceActuelle;
+    public static int ligneActuelle;
+    public static int colonneActuelle;
 
     public Jeu() {
         j = new Joueur("Luther");
         p = new Plateau(10, 22, j);
-        plateau = new SimpleObjectProperty<>();
 
-        random = new Random();
-        jeuEnCours.setValue(true);
+        jeuEnCours = new SimpleBooleanProperty(true);
 
-        sacProchainesPieces = new ArrayList<Piece>();
+        sacProchainesPieces = new ArrayList<>();
         this.remplirSacProchainesPieces();
         nouvellePieceActuelle();
     }
 
-    /*public static void main(String[] args) {
-        /
-
-        p.afficherPlateau();
-    }*/
-
     /**
-     * Affiche le Plateau si le jeu est toujours en cours et arrete la partie sinon
+     * Affiche le Plateau si le jeu est toujours en cours et arrête la partie sinon
      */
     public void jouerTour(){
         if (!jeuEnCours.getValue()){
@@ -52,7 +40,6 @@ public class Jeu implements IJeu {
             System.out.println(j.getScore().getValue());
             System.out.println(p.getRang().getValue());
             System.out.println("Game Over");
-            myJFrame.setVisible(false);
         } else {
             p.afficherPlateau();
             remplirSacProchainesPieces();
@@ -86,8 +73,8 @@ public class Jeu implements IJeu {
      * Créé une nouvelle pièce sur le plateau, au spawn.
      * Si la case de spawn est occupée, alors le jeu se termine.
      * La méthode supprime également les lignes remplies
-     * Incremente le score et suprime les lignes si necessaire
-     * Incremente le niveau de la partie
+     * Incrémente le score et supprime les lignes si nécessaires
+     * Incrémente le niveau de la partie.
      */
     public void nouvellePieceActuelle() {
         pieceActuelle = recupererProchainePiece();
@@ -129,7 +116,7 @@ public class Jeu implements IJeu {
 
     /**
      * Fait tomber la pièce d'une ligne dans la colonne actuelle.
-     * Si ça échoue, pose la pièce actuelle aux coordonées actuelles
+     * Si ça échoue, pose la pièce actuelle aux coordonnées actuelles
      * (donc sans baisser de ligne).
      */
     public void tomberPieceActuelle1Ligne() {
@@ -145,7 +132,7 @@ public class Jeu implements IJeu {
 
     /**
      * Supprimer la pièce courante, puis vérifie la validité du placement de la rotation de la pièce
-     * actuelle aux coordonées actuelles. Si c'est valide, place la nouvelle pièce, sinon replace l'ancienne
+     * actuelle aux coordonnées actuelles. Si c'est valide, place la nouvelle pièce, sinon replace l'ancienne
      */
     public void tournerPieceActuelle(char sens) {
         p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
@@ -155,46 +142,8 @@ public class Jeu implements IJeu {
         p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
     }
 
-    /**
-     * Méthode de debug qui remplit les colonnes 0 à 9 du tableau à la ligne donnée
-     * @param ligne Ligne que l'on souhaite remplir
-     */
-    public void remplirLigne(int ligne) {
-        for (int colonne = 0; colonne < p.getLargeur() - 1; colonne++) {
-            p.placerPiece(ligne, colonne, new Piece(Forme.I));
-        }
-    }
-
-    public static Piece getPieceActuelle() {
-        return pieceActuelle;
-    }
-
-    public static int getColonneActuelle() {
-        return colonneActuelle;
-    }
-
-    @Override
-    public Joueur getJoueur() {
-        return j;
-    }
-
-    @Override
-    public Plateau getPlateau() {
-        return p;
-    }
-
-    public static int getLigneActuelle() {
-        return ligneActuelle;
-    }
-
-    @Override
-    public ObjectProperty<Plateau> plateauProperty() {
-        return plateau;
-    }
-
     @Override
     public void actionGauche() {
-        // Bouger les pieces vers la gauche
         System.out.println("Flèche de gauche est actionnée !");
         deplacerPieceActuelle(colonneActuelle - 1);
         jouerTour();
@@ -202,7 +151,6 @@ public class Jeu implements IJeu {
 
     @Override
     public void actionDroite() {
-        // Bouger les pieces vers la droite
         System.out.println("Flèche de droite est actionnée !");
         deplacerPieceActuelle(colonneActuelle + 1);
         jouerTour();
@@ -248,16 +196,6 @@ public class Jeu implements IJeu {
     }
 
     @Override
-    public double getScoreJoueurChoisi(Joueur joueurChoisi) {
-        return joueurChoisi.getScore().getValue();
-    }
-
-    @Override
-    public String getPseudoJoueurChoisi(Joueur joueurChoisi) {
-        return joueurChoisi.getPseudo();
-    }
-
-    @Override
     public IntegerProperty getRang(Plateau plateauChoisi) {
         return plateauChoisi.getRang();
     }
@@ -267,7 +205,17 @@ public class Jeu implements IJeu {
         return getJoueur().getScore();
     }
 
-    public BooleanProperty getJeuEnCoursProperty() {
+    @Override
+    public Joueur getJoueur() {
+        return j;
+    }
+
+    @Override
+    public Plateau getPlateau() {
+        return p;
+    }
+
+    public BooleanProperty jeuEnCoursProperty() {
         return jeuEnCours;
     }
 }
