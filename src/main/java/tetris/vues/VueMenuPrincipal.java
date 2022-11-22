@@ -16,7 +16,6 @@ public class VueMenuPrincipal extends Stage {
     Background background;
     Button lancerJeu;
 
-
     public VueMenuPrincipal() {
         background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, new BackgroundSize(889,500, false, false, false, false)));
         borderPane = new BorderPane();
