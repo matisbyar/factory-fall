@@ -43,15 +43,14 @@ public class VueGameOver extends Stage {
         gameOver.setFitWidth(250);
         gameOver.setFitHeight(180);
         VBox vb = new VBox(gameOver);
-        Button btExit = new Button("Exit");
-        Button btRetry = new Button("Retry");
+        Button btExit = new Button();
+        Button btRetry = new Button();
         btRetry.setGraphic(retryImgView);
         btRetry.setStyle("-fx-background-color: transparent");
         btExit.setGraphic(exitImgView);
         btExit.setStyle("-fx-background-color: transparent");
         HBox hbButtons = new HBox(btRetry, btExit);
         vb.getChildren().add(hbButtons);
-
         btExit.setMinSize(96, 24);
         btRetry.setMinSize(116, 24);
 

@@ -63,7 +63,7 @@ public class TetrisIHM extends Application {
     ActionListener descenteAuto;
 
     Button startMenu = new Button("Lancer Jeu");
-    Button startJeu = new Button("Start");
+    Button startJeu = new Button();
 
     VueMenuPrincipal vueMenuPrincipal;
 
@@ -80,6 +80,8 @@ public class TetrisIHM extends Application {
         jeu = new Jeu();
         p = jeu.getPlateau();
         pseudo.setText(jeu.getPseudoJoueurChoisi(jeu.getJoueur()));
+        startJeu.setGraphic(new ImageView(new Image("file:src/main/resources/img/start.png")));
+        startJeu.setStyle("-fx-background-color: transparent");
 
         pane.setStyle("-fx-background-color: #1E1E1E");
 
