@@ -215,6 +215,11 @@ public class TetrisIHM extends Application {
                             effacerGridPane();
                             afficherplateau();
                         }
+                        case R -> {
+                            jeu.actionR();
+                            effacerGridPane();
+                            afficherplateau();
+                        }
                         case ESCAPE -> {
                             jeu.actionEchap();
                             effacerGridPane();

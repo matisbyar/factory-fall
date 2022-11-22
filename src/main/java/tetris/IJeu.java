@@ -18,6 +18,7 @@ public interface IJeu {
     void actionDroite();
     void actionBas();
     void actionHaut();
+    void actionR();
     void actionEspace();
     void actionEchap();
 

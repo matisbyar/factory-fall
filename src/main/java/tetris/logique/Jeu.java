@@ -147,10 +147,10 @@ public class Jeu implements IJeu {
      * Supprimer la pièce courante, puis vérifie la validité du placement de la rotation de la pièce
      * actuelle aux coordonées actuelles. Si c'est valide, place la nouvelle pièce, sinon replace l'ancienne
      */
-    public void tournerPieceActuelle() {
+    public void tournerPieceActuelle(char sens) {
         p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
-        if (p.placementValide(ligneActuelle, colonneActuelle, pieceActuelle.creerPieceTournee())) {
-            pieceActuelle = pieceActuelle.creerPieceTournee();
+        if (p.placementValide(ligneActuelle, colonneActuelle, pieceActuelle.creerPieceTournee(sens))) {
+            pieceActuelle = pieceActuelle.creerPieceTournee(sens);
         }
         p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
     }
@@ -225,7 +225,14 @@ public class Jeu implements IJeu {
     @Override
     public void actionHaut() {
         System.out.println("Flèche du haut est actionnée !");
-        tournerPieceActuelle();
+        tournerPieceActuelle('d');
+        jouerTour();
+    }
+
+    @Override
+    public void actionR() {
+        System.out.println("Touche R est actionnée !");
+        tournerPieceActuelle('g');
         jouerTour();
     }
 

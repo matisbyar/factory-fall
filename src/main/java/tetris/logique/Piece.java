@@ -40,16 +40,30 @@ public class Piece implements IPiece {
     }
 
     /**
-     * Créé une nouvelle pièce, y inscrit des positions de cases tournée par rapport à this
+     * Créé une nouvelle pièce, y inscrit des positions de cases tournée par rapport à this. Si la pièce est O,
+     * on la retourne tout de suite
      * @return la nouvelle pièce
+     * @param sens : de type char, indique la transformation à appliquer sur this selon le
+     *             sens dans lequel on veut tourner
      */
-    public Piece creerPieceTournee() {
-        Piece nouvellePiece = new Piece(Forme.NULL);
-        for(int i = 0; i < 4; i++) {
-            nouvellePiece.coords[i][0] = this.coords[i][1] * -1;
-            nouvellePiece.coords[i][1] = this.coords[i][0];
+    public Piece creerPieceTournee(char sens) {
+        if (this.getNom().equals("O")) return this;
+        else {
+            Piece nouvellePiece = new Piece(Forme.NULL);
+            if (sens == 'd') {
+                for (int i = 0; i < 4; i++) {
+                    nouvellePiece.coords[i][0] = this.coords[i][1] * -1;
+                    nouvellePiece.coords[i][1] = this.coords[i][0];
+                }
+            }
+            else if (sens == 'g') {
+                for (int i = 0; i < 4; i++) {
+                    nouvellePiece.coords[i][0] = this.coords[i][1];
+                    nouvellePiece.coords[i][1] = this.coords[i][0] * -1;
+                }
+            }
+            nouvellePiece.setNom(this.getNom());
+            return nouvellePiece;
         }
-        nouvellePiece.setNom(this.getNom());
-        return nouvellePiece;
     }
 }
