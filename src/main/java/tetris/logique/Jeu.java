@@ -5,13 +5,14 @@ import tetris.IJeu;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class Jeu implements IJeu {
     public Joueur j;
     public Plateau p;
     public ObjectProperty<Plateau> plateau;
-    public ArrayList<Piece> prochainesPieces;
+    public ArrayList<Piece> sacProchainesPieces;
 
     static Random random;
     public BooleanProperty jeuEnCours = new SimpleBooleanProperty();
@@ -30,8 +31,8 @@ public class Jeu implements IJeu {
         random = new Random();
         jeuEnCours.setValue(true);
 
-        prochainesPieces = new ArrayList<Piece>();
-        this.tableauProchainesPieces();
+        sacProchainesPieces = new ArrayList<Piece>();
+        this.remplirSacProchainesPieces();
         nouvellePieceActuelle();
     }
 
@@ -54,6 +55,7 @@ public class Jeu implements IJeu {
             myJFrame.setVisible(false);
         } else {
             p.afficherPlateau();
+            remplirSacProchainesPieces();
             System.out.println(j.getScore().getValue());
             System.out.println(p.getRang().getValue());
             System.out.println("_________________________________________\n");
@@ -61,28 +63,23 @@ public class Jeu implements IJeu {
     }
 
     /**
-     * @return Une pièce non NULL aléatoire
+     * Si le sac des prochaines pièces est vide, le rempli avec une pièce de chaque forme
      */
-    public Piece genererPieceRandom() {
-        return new Piece(Forme.values()[Math.abs(random.nextInt()) % 7 + 1]);
-    }
-
-    /**
-     * Crée une liste des 3 prochaines pieces
-     */
-    public void tableauProchainesPieces(){
-        for (int i = 0; i<3; i++){
-            prochainesPieces.add(genererPieceRandom());
+    public void remplirSacProchainesPieces(){
+        if (sacProchainesPieces.isEmpty()) {
+            for (int i = 1; i<8; i++) {
+                sacProchainesPieces.add(new Piece(Forme.values()[i]));
+            }
+            Collections.shuffle(sacProchainesPieces);
         }
     }
 
     /**
-     * Supprime et retourne la premiere piece de la liste des pieces suivantes. Ajoute une piece a cette liste
+     * Supprime et retourne la premiere piece de la liste des pieces suivantes.
      * @return la premiere piece de la liste en attente
      */
-    public Piece recurperProchainePiece(){
-        prochainesPieces.add(genererPieceRandom());
-        return prochainesPieces.remove(0);
+    public Piece recupererProchainePiece(){
+        return sacProchainesPieces.remove(0);
     }
 
     /**
@@ -93,7 +90,7 @@ public class Jeu implements IJeu {
      * Incremente le niveau de la partie
      */
     public void nouvellePieceActuelle() {
-        pieceActuelle = recurperProchainePiece();
+        pieceActuelle = recupererProchainePiece();
         ligneActuelle = 1;
         colonneActuelle = p.getLargeur() / 2 - 1;
         p.incrementerScoreJoueur(p.suppressionLignesRemplies());
