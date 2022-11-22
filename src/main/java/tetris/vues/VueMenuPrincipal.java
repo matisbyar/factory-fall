@@ -2,7 +2,9 @@ package tetris.vues;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
@@ -18,15 +20,21 @@ public class VueMenuPrincipal extends Stage {
 
     public void afficherVueMenuPrincipal(){
 
-        this.setTitle("MENU PRINCIPAL !!!!");
+        this.setTitle("Menu Principal");
 
-        lancerJeu = new Button("LANCER JEU");
+        lancerJeu = new Button();
+        lancerJeu.setGraphic(new ImageView(new Image("file:src/main/resources/img/start_new_game.png")));
+        lancerJeu.setStyle("-fx-background-color: transparent");
 
         BorderPane borderPane = new BorderPane();
-        borderPane.setStyle("-fx-background-color: #1E1E1E");
+        //borderPane.setStyle("-fx-background-color: #1E1E1E");
         borderPane.setCenter(lancerJeu);
-
-        Scene scene = new Scene(borderPane, 300,250);
+        BackgroundSize bgSize = new BackgroundSize(889,500, false, false, false, false);
+        BackgroundImage backgroundImg = new BackgroundImage(new Image("file:src/main/resources/img/background.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, bgSize);
+        Background background = new Background(backgroundImg);
+        borderPane.setBackground(background);
+        Scene scene = new Scene(borderPane, 800,500);
+        this.setResizable(false);
         this.setScene(scene);
     }
 
