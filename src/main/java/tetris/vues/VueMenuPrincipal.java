@@ -10,100 +10,48 @@ import javafx.scene.control.Button;
 
 public class VueMenuPrincipal extends Stage {
 
+    Scene scene;
+    BorderPane borderPane;
+
+    Background background;
     Button lancerJeu;
 
-    //BooleanProperty demarerPartie = new SimpleBooleanProperty();
 
     public VueMenuPrincipal() {
-        afficherVueMenuPrincipal();
-    }
-
-    public void afficherVueMenuPrincipal(){
-
-        this.setTitle("Menu Principal");
+        background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, new BackgroundSize(889,500, false, false, false, false)));
+        borderPane = new BorderPane();
 
         lancerJeu = new Button();
+
+        scene = new Scene(borderPane, 800,500);
+
+        styliser();
+
+        this.setScene(scene);
+    }
+
+    /**
+     * Applique tous les styles souhaités aux objets JavaFX
+     */
+    public void styliser() {
+        // Général
+        this.setTitle("Menu Principal");
+        this.setResizable(false);
+
+        // BorderPane
+        borderPane.setCenter(lancerJeu);
+        borderPane.setBackground(background);
+
+        // Button
         lancerJeu.setGraphic(new ImageView(new Image("file:src/main/resources/img/start_new_game.png")));
         lancerJeu.setStyle("-fx-background-color: transparent");
-
-        BorderPane borderPane = new BorderPane();
-        //borderPane.setStyle("-fx-background-color: #1E1E1E");
-        borderPane.setCenter(lancerJeu);
-        BackgroundSize bgSize = new BackgroundSize(889,500, false, false, false, false);
-        BackgroundImage backgroundImg = new BackgroundImage(new Image("file:src/main/resources/img/background.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, bgSize);
-        Background background = new Background(backgroundImg);
-        borderPane.setBackground(background);
-        Scene scene = new Scene(borderPane, 800,500);
-        this.setResizable(false);
-        this.setScene(scene);
     }
 
-public void setButtonCliqueListener(EventHandler<ActionEvent> quandLeButtonEstClique) {
+    /**
+     * Listener interclasses qui permet à TetrisIHM de savoir quand le bouton start a été cliqué
+     * @param quandLeButtonEstClique listener passé en paramètre dans la classe TetrisIHM (voir la classe en question)
+     */
+    public void setButtonCliqueListener(EventHandler<ActionEvent> quandLeButtonEstClique) {
         lancerJeu.setOnAction(quandLeButtonEstClique);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*    BooleanProperty arreterJeu = new SimpleBooleanProperty();
-    BooleanProperty retry = new SimpleBooleanProperty();
-
-    public VueMenuPrincipal() {
-        afficherVueMenuPrincipal();
-    }
-
-    public void afficherVueGameOver() {
-        arreterJeu.setValue(false);
-        retry.setValue(false);
-        BorderPane borderPane = new BorderPane();
-        borderPane.setStyle("-fx-background-color: #1E1E1E");
-        borderPane.setPrefWidth(500);
-        borderPane.setPrefHeight(500);
-        Scene scene = new Scene(borderPane);
-
-
-        Button btExit = new Button("Exit");
-        Button btRetry = new Button("Retry");
-
-        HBox hbButtons = new HBox(btExit, btRetry);
-
-        btExit.setMinSize(50, 30);
-        btRetry.setMinSize(50, 30);
-
-
-        borderPane.getChildren().add(hbButtons);
-
-        btExit.setOnAction(actionEvent -> arreterJeu());
-        btRetry.setOnAction(actionEvent -> retry.setValue(true));
-
-        this.setScene(scene);
-    }
-
-    public void arreterJeu() {
-        arreterJeu.setValue(true);
-        close();
-    }
-
-    public BooleanProperty arreterJeuProperty() {
-        return arreterJeu;
-    }
-
-    public BooleanProperty retryProperty() {
-        return retry;
-    }*/
 }
