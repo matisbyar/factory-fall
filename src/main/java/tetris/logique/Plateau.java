@@ -9,29 +9,36 @@ public class Plateau implements IPlateau {
     private final int largeur;
     private final Piece[][] plateau;
     private Joueur joueur;
-    private IntegerProperty rang = new SimpleIntegerProperty();
+    private IntegerProperty rang;
 
     /**
-     * Le plateau est défini en fonction des largeur et hauteur indiquées, et contient des pièces (NULL ou autre). Un joueur est aussi necessaire
-     * pour definir le plateau dans l'obejectif du 2joueurs plus tard.
+     * Le plateau est défini en fonction des largeur et hauteur indiquées, et contient des pièces (NULL ou autre). Un joueur est aussi nécessaire
+     * pour définir le plateau dans l'objectif du 2 joueurs plus tard.
      */
     public Plateau(int largeur, int hauteur, Joueur joueur) {
         this.largeur = largeur;
         this.hauteur = hauteur;
-        this.plateau = new Piece[hauteur][largeur];
-        this.remplirTableau();
         this.joueur = joueur;
-        this.rang.setValue(1);
+        plateau = new Piece[hauteur][largeur];
+        remplirTableau();
+        rang = new SimpleIntegerProperty();
+        rang.setValue(1);
     }
 
     public int getLargeur() {
         return largeur;
     }
+
     public int getHauteur() {
         return hauteur;
     }
+
     public Piece[][] getPlateau() {
         return plateau;
+    }
+
+    public Joueur getJoueur() {
+        return joueur;
     }
 
     /**
@@ -39,10 +46,6 @@ public class Plateau implements IPlateau {
      */
     public String getPieceNom(int ligne, int colonne) {
         return this.plateau[ligne][colonne].getNom();
-    }
-
-    public Joueur getJoueur() {
-        return joueur;
     }
 
     public IntegerProperty getRang() {
@@ -103,7 +106,7 @@ public class Plateau implements IPlateau {
     /**
      * Le for est vide, car l'action se trouve dans la condition d'arrêt, via placerPiece()
      * @return Vrai si la pièce a pu être placée
-     * Pré-requis : la position actuelle donnée en paramêtre est valide.
+     * Pré-requis : la position actuelle donnée en paramètre est valide.
      */
     public boolean placerPieceParColonne(int ligneDepart, int colonne, Piece piece) {
         supprimerPieceTotale(ligneDepart, colonne, piece);
@@ -150,7 +153,6 @@ public class Plateau implements IPlateau {
         return lignesSupprimees;
     }
 
-
     /**
      * Regarde la ligne et vérifie si elle est remplie
      * @param ligne ligne observée
@@ -185,7 +187,7 @@ public class Plateau implements IPlateau {
     }
 
     /**
-     * Incrémente le score du joueur attribué au plateau en fonction du rang et du nombres de ligne(s) supprimée(s)
+     * Incrémente le score du joueur attribué au plateau en fonction du rang et du nombre de lignes supprimées
      */
     public void incrementerScoreJoueur(int lignes){
         if (lignes == 1) {
@@ -203,15 +205,13 @@ public class Plateau implements IPlateau {
     }
 
     /**
-     * incremente le rang de la partie en fonction des palier defini par (2^rang)*100
+     * Incrémente le rang de la partie en fonction des paliers définis par (2^rang)*100
      */
     public  void incrementerRang(){
         if (joueur.getScore().getValue() >= Math.pow(2,rang.getValue())*100){
             rang.setValue(rang.getValue()+1);
         }
     }
-
-
 
     /**
      * Affiche le plateau mis en forme dans le terminal. Les pièces NULL ne sont pas affichées,

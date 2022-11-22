@@ -9,7 +9,7 @@ import tetris.IPiece;
 public class Piece implements IPiece {
 
     private String nom;
-    private int[][] coords = new int[4][2];
+    private int[][] coords;
 
     public Piece(Forme forme) {
         int[][][] casesDefaut = {
@@ -40,7 +40,7 @@ public class Piece implements IPiece {
     }
 
     /**
-     * Créé une nouvelle pièce, y inscrit des positions de cases tournée par rapport à this. Si la pièce est O,
+     * Créé une nouvelle pièce, y inscrit des positions de cases tournées par rapport à this. Si la pièce est O,
      * on la retourne tout de suite
      * @return la nouvelle pièce
      * @param sens : de type char, indique la transformation à appliquer sur this selon le
