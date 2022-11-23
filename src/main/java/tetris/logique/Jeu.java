@@ -43,6 +43,7 @@ public class Jeu implements IJeu {
         } else {
             p.afficherPlateau();
             remplirSacProchainesPieces();
+            timer.setDelay( (int)(Math.pow(0.8-((p.getRang().getValue()-1)*0.007) ,p.getRang().getValue()-1) *1000 ));
             System.out.println(j.getScore().getValue());
             System.out.println(p.getRang().getValue());
             System.out.println("_________________________________________\n");

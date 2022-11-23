@@ -30,6 +30,7 @@ public class TetrisIHM extends Application {
 
     // Objets issus de JavaFX pour l'IHM du jeu
     private Scene scene;
+    Stage primaryStage;
     private StackPane pane;
     private BorderPane borderPane;
     private VBox informationsJoueur;
@@ -72,7 +73,7 @@ public class TetrisIHM extends Application {
 
         // javaFX
         borderPane = new BorderPane();
-        Stage primaryStage = new Stage();
+        primaryStage = new Stage();
         scene = new Scene(borderPane);
         pane = new StackPane();
         startJeu = new Button();
@@ -165,8 +166,12 @@ public class TetrisIHM extends Application {
      * Relance la partie, en réinitialisant l'état du jeu
      */
     private void relancerPartie() {
+        primaryStage.close();
         startJeu.setDisable(false);
         demarrerPartie();
+        score.setText("0");
+        rang.setText("Rang : 1");
+        pseudo.setText(jeu.getJoueur().getPseudo());
     }
 
     /**
