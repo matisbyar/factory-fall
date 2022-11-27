@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import tetris.logique.Jeu;
@@ -37,6 +38,8 @@ public class TetrisIHM extends Application {
     private ActionListener descenteAuto;
     private Button startJeu;
     Label score, pseudo, rang;
+
+    private final Font police = Font.loadFont("file:src/main/resources/fonts/Bazaroni.ttf", 18);
 
     // Vues personnelles (créées par l'équipe)
     private VueMenuPrincipal vueMenuPrincipal;
@@ -79,7 +82,7 @@ public class TetrisIHM extends Application {
         startJeu = new Button();
         score = new Label("0.0");
         pseudo = new Label(jeu.getJoueur().getPseudo());
-        rang = new Label("Rang : 1");
+        rang = new Label("rang : 1");
 
         // Affectations et constitution de vues
         informationsJoueur = new VBox(pseudo, score, rang);
@@ -133,7 +136,7 @@ public class TetrisIHM extends Application {
         jeu.getJoueur().getScore().addListener((observableValue, number, t1) -> score.setText(jeu.getJoueur().getScore().getValue() + ""));
 
         // Listener pour actualiser le rang de la partie
-        jeu.getRang(jeu.getPlateau()).addListener((observableValue, number, t1) -> rang.setText("Rang : " + jeu.getRang(jeu.getPlateau()).getValue()));
+        jeu.getRang(jeu.getPlateau()).addListener((observableValue, number, t1) -> rang.setText("rang : " + jeu.getRang(jeu.getPlateau()).getValue()));
 
         // Listener pour agir en cas de fin de jeu
         // Gère les cas : Rejouer et Réessayer
@@ -170,7 +173,7 @@ public class TetrisIHM extends Application {
         startJeu.setDisable(false);
         demarrerPartie();
         score.setText("0");
-        rang.setText("Rang : 1");
+        rang.setText("rang : 1");
         pseudo.setText(jeu.getJoueur().getPseudo());
     }
 
@@ -185,14 +188,16 @@ public class TetrisIHM extends Application {
 
         // Pseudo
         pseudo.setTextFill(Color.WHITE);
-        pseudo.setStyle("-fx-font-size: 15px");
-        pseudo.setMinSize(50, 50);
+        pseudo.setFont(police);
+        //pseudo.setStyle("-fx-font-size: 15px");
+        pseudo.setMinSize(150, 150);
         pseudo.setLayoutX(150);
 
         // Score
         score.setLayoutX(150);
         score.setLayoutY(150);
-        score.setStyle("-fx-font-size: 15px");
+        score.setFont(police);
+        //score.setStyle("-fx-font-size: 15px");
         score.setLayoutY(50);
         score.setTextFill(Color.WHITE);
         score.setAlignment(Pos.BASELINE_LEFT);
@@ -200,7 +205,8 @@ public class TetrisIHM extends Application {
 
         // Rang
         rang.setTextFill(Color.WHITE);
-        rang.setStyle("-fx-font-size: 15px");
+        rang.setFont(police);
+        //rang.setStyle("-fx-font-size: 15px");
         rang.setMinSize(150, 150);
         rang.setLayoutX(150);
         rang.setLayoutY(200);
