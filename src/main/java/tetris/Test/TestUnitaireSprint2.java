@@ -25,10 +25,31 @@ public class TestUnitaireSprint2 {
 
 
     }
+/**
+     * Test si la piece a bien été rotate selon la formule vers la droite
+     *
+     *//*
+    @Test
+    public void testRotationPieceGauche() {
+        start();
 
+        int[][] coord_PieceEnCours = Jeu.getPieceActuelle().getForme();
+
+        System.out.println("rotation est actionnée !");
+        j.tournerPieceActuelle();
+
+        for(int i = 0; i < 4; i++) {
+            coord_PieceEnCours[i][0] = coord_PieceEnCours[i][1] ;
+            coord_PieceEnCours[i][1] = coord_PieceEnCours[i][0] * -1;
+        }
+        System.out.println("piece rotate !");
+        assertEquals(coord_PieceEnCours,Jeu.getPieceActuelle().getForme());
+
+
+    }
     /**
      * Test si la piece a bien été rotate selon la formule vers la gauche
-     * faire vers la droite quand ce sera implementé
+     *
      *//*
     @Test
     public void testRotationPieceGauche() {
@@ -44,7 +65,7 @@ public class TestUnitaireSprint2 {
             coord_PieceEnCours[i][1] = coord_PieceEnCours[i][0];
         }
         System.out.println("piece rotate !");
-        assertEquals(coord_PieceEnCours, coord_PieceEnCours);
+        assertEquals(coord_PieceEnCours,Jeu.getPieceActuelle().getForme());
     }
 
     /**
@@ -113,7 +134,7 @@ public class TestUnitaireSprint2 {
 
 
 
-
+/*
     /**
      *test qui crée une piece sur un plateau et la fait décendre en bas
      *  assert que la coordonnée de la piece descendu est la bonne.

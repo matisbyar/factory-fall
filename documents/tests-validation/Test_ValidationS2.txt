@@ -13,7 +13,7 @@ Rotation des pièces.
 
 Gestion du rang
 
-*optionnel* Mode 2 joueur
+
 
 
 
@@ -22,11 +22,11 @@ Test pour interface graphique du jeu :
 
 Nous avons une vue jeu qui montre le jeu avec les informations du score, rank, nom joueur.
 
-Nous avons une vue de début de partie qui correspond à la charte graphique de l'image du Discord qui comprend.
-Le nom du jeu, bouton démarrer, bouton joueurs (personnalisé), bouton commandes , bouton Exit
+Nous avons une vue de début de partie qui comprend.
+Le nom du jeu, bouton démarrer, ** bouton joueurs (personnalisé), bouton commandes , bouton Exit ** non ajouté
 
 Nous avons une vue game over qui affiche une vue si la partie est terminée.
-Il a le score fait, le rank et le nom du joueur, il a 2 boutons un pour Exit et un pour rejouer.
+il y a 2 boutons un pour Exit et un pour rejouer.
 
 
 
@@ -73,7 +73,7 @@ Le rank s'incrémente automatiquement quand le score augmente selon un palier.
 
 
 
-
+** non implementé **
 Test pour *optionnel* mode 2 joueur :
 
 Le mode 2 joueurs possède 2 plateaux séparés ou chaque joueur joue sur son propre plateau.
