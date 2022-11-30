@@ -26,6 +26,7 @@ import tetris.vues.VuePlateau;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class TetrisIHM extends Application {
 
@@ -51,6 +52,9 @@ public class TetrisIHM extends Application {
     IJeu jeu;
     Plateau p;
 
+    public static void main(String[] args) {
+        launch(args);
+    }
     private final EventHandler<ActionEvent> quandLeButtonEstClique = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
@@ -181,10 +185,18 @@ public class TetrisIHM extends Application {
      * Applique tous les styles souhaités aux objets JavaFX
      */
     public void styliser() {
+
+        // Scene
+        scene.getStylesheets().add("file:src/main/resources/css/main.css");
+
+
         // BorderPane
-        borderPane.setStyle("-fx-background-color: #1E1E1E");
+        borderPane.getStyleClass().add("borderPane");
         borderPane.setPrefWidth((primaryScreenBounds.getHeight()*0.65));
         borderPane.setPrefHeight(primaryScreenBounds.getHeight()*0.97);
+
+        // VuePlateu
+        vuePlateau.getStyleClass().add("vuePlateau");
 
         // Pseudo
         pseudo.setTextFill(Color.WHITE);
