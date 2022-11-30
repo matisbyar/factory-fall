@@ -206,6 +206,7 @@ public class TetrisIHM extends Application {
         pseudo.setLayoutX(150);
 
         // Score
+        score.getStyleClass().add("score");
         score.setLayoutX(150);
         score.setLayoutY(150);
         score.setFont(police);
@@ -232,6 +233,6 @@ public class TetrisIHM extends Application {
         startJeu.setStyle("-fx-background-color: transparent");
 
         // Pane
-        pane.setStyle("-fx-background-color: #1E1E1E");
+        pane.getStyleClass().add("paneScores");
     }
 }

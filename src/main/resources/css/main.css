@@ -1,8 +1,25 @@
-/* BorderPane */
 
+/* Root correspond au css de la scene */
+.root{
+    -fx-background-color: #1E1E1E;
+}
+
+/* BorderPane */
 .borderPane{
     -fx-background-color: #1E1E1E;
 }
 
-/* GridPane du jeu  */
+/* paneScores ("pane" sur le TetrisIHM) */
+.paneScores{
+    -fx-background-color: #1E1E1E;
+}
 
+/* GridPane du jeu  */
+.vuePlateau{
+    -fx-padding: 10%;
+    -fx-border-style: solid;
+    -fx-border-width: 500%;
+    -fx-border-radius: 5%;
+    -fx-border-color: #e3e3e3;
+    -fx-alignment: center;
+}
