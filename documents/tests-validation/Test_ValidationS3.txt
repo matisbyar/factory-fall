@@ -1,0 +1,192 @@
+
+
+Les tests de validation pour les user story sprint 3 :
+
+
+
+
+
+
+
+
+User story :
+
+
+
+
+Interface graphique du jeu
+
+
+
+
+Base de données et harmonisation
+
+
+
+
+Expérience Utilisateur
+
+
+
+
+Tutoriel
+
+
+
+
+
+
+
+
+Test de validation pour Interface graphique du jeu :
+
+
+
+
+Nous avons maintenant une zone en haut à droite
+
+
+Où la prochaine pièce à apparaître sur le plateau sera présente
+
+
+
+
+
+
+Il y a maintenant le nom custom du jeu présenté au démarrage. (et pendant la partie)
+
+
+
+
+En accord avec les autres équipes un thème commun
+
+
+Est requis et sera en accord au rendu graphique du jeu
+
+
+
+
+Il y aura des modifications graphiques afin que l'utilisateur
+
+
+Se sente plus à l'aise en jouant le jeu, notamment grâce à mes modifications de couleurs
+
+
+
+
+Il y aura une vue de personnalisation de pièce vu que se 
+
+
+Sont des images, on aura le choix entre différentes images à disposition tout en respectant le theme
+
+
+
+
+
+
+Il y aura une vue création de compte joueur qui crée un compte avec un pseudo et un MDP
+
+
+
+
+Et une vue connexion qui permet de se connecter à son compte + (... ??)
+
+
+
+
+
+
+
+
+
+
+Test pour base de données et harmonisation :
+
+
+
+
+
+
+Nous avons une base de données commune aux groupes
+
+
+Qui permet de posséder un compte joueur
+
+
+Cela permet de récupérer les informations de son compte comme le pseudo
+
+
+Et le score maximal attient lors d'une partie
+
+
+
+
+De plus grâce à la vue création joueur et connexion joueur
+
+
+Nous pouvons enregistrer de nouveaux  joueur dans la base de données
+
+
+
+
+
+
+
+
+
+
+
+
+Test pour expérience utilisateur
+
+
+
+
+
+
+Nous voulons que le rendu graphique soit plus "user frendly"
+
+
+
+
+Dons il aura une refonte graphique qui permet aux joueurs de ne pas se sentir frustré ou gêné par ce qui vois
+
+
+De plus un affichage plus instinctif pour des boutons ou des couleurs de fond seront mis en place
+
+
+Avec tout ça en plus de  la personnification des pièces qui devra respecter ce point en plus de précèdent point cité plus haut
+
+
+
+
+Une nouvelle fonctionnalité a été définit qui sera la vie supplémentaire qui permet que lorsque on attient un certain nombre de point cela puisse nous faire recommencer une partie avec les points déjà présents
+
+
+
+
+Avec un affichage graphique du nombre de vie que le joueur possède durant la partie
+
+
+
+
+
+
+
+
+Test pour tutoriel :
+
+
+
+
+**a redéfinir plus précisément**
+
+
+
+
+Nous avons (une vue, sur le jeu,??) qui affiche les touches du fonctionnement du jeu a l’utilisateur afin qu’il comprenne comment le jeu marche afin de voir ca comme un tutoriel.
+
+
+
+
+De plus, une vue de personnalisation des touches sera potentiellement introduit avec la modification des touche et les règles basique du jeu.
