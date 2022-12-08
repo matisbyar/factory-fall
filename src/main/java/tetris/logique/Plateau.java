@@ -208,8 +208,17 @@ public class Plateau implements IPlateau {
         joueur.getScore().setValue(joueur.getScore().getValue()+1);
     }
 
-    public void incrementerScoreJoueurDecentePiece(){
-        joueur.getScore().setValue(joueur.getScore().getValue()+5);
+    public void incrementerScoreHardDrop(){
+        int calcul=0;
+        int ligne=Jeu.ligneActuelle;
+        int cologne= Jeu.colonneActuelle;
+        Piece tampon= Jeu.pieceActuelle;
+        while(placementValide(ligne, cologne, tampon)){
+            ligne++;
+            calcul++;
+        }
+        calcul=22-calcul;
+        joueur.getScore().setValue(joueur.getScore().getValue()+(calcul*2));
     }
 
 
