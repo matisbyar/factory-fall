@@ -121,6 +121,7 @@ public class Jeu implements IJeu {
      */
     public void tomberPieceActuelle() {
         if(p.placerPieceParColonne(ligneActuelle, colonneActuelle, pieceActuelle)) {
+            p.incrementerScoreJoueurDecentePiece();
             nouvellePieceActuelle();
         }
         else {
