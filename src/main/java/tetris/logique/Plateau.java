@@ -204,10 +204,15 @@ public class Plateau implements IPlateau {
         }
     }
 
+    public void incrementerScoreSoftDrop(){
+        joueur.getScore().setValue(joueur.getScore().getValue()+1);
+    }
 
     public void incrementerScoreJoueurDecentePiece(){
         joueur.getScore().setValue(joueur.getScore().getValue()+5);
     }
+
+
 
     /**
      * Incrémente le rang de la partie en fonction des paliers définis par (2^rang)*100
@@ -217,6 +222,7 @@ public class Plateau implements IPlateau {
             rang.setValue(rang.getValue()+1);
         }
     }
+
 
     /**
      * Affiche le plateau mis en forme dans le terminal. Les pièces NULL ne sont pas affichées,
@@ -233,4 +239,5 @@ public class Plateau implements IPlateau {
             System.out.println(plateauString);
         }
     }
+
 }

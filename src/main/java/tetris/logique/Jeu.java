@@ -175,6 +175,7 @@ public class Jeu implements IJeu {
     public void actionBas() {
         System.out.println("Flèche du bas est actionnée !");
         tomberPieceActuelle1Ligne();
+        p.incrementerScoreSoftDrop();
         jouerTour();
     }
 
