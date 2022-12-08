@@ -23,6 +23,7 @@ import tetris.logique.Plateau;
 import tetris.vues.VueGameOver;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.VuePlateau;
+import tetris.vues.VueProchainePiece;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -45,12 +46,14 @@ public class TetrisIHM extends Application {
     // Vues personnelles (créées par l'équipe)
     private VueMenuPrincipal vueMenuPrincipal;
     private VuePlateau vuePlateau;
+    private VueProchainePiece vueProchainePiece;
 
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
     // Objets de la logique du jeu
     IJeu jeu;
     Plateau p;
+    Plateau prochainePiece;
 
     public static void main(String[] args) {
         launch(args);
@@ -76,7 +79,9 @@ public class TetrisIHM extends Application {
         // classes de la logique du jeu
         jeu = new Jeu();
         p = jeu.getPlateau();
+        prochainePiece = jeu.getProchainePiece();
         vuePlateau = new VuePlateau(p);
+        vueProchainePiece = new VueProchainePiece(prochainePiece);
 
         // javaFX
         borderPane = new BorderPane();
@@ -94,6 +99,7 @@ public class TetrisIHM extends Application {
 
         borderPane.setLeft(pane);
         borderPane.setCenter(vuePlateau);
+        borderPane.setRight(vueProchainePiece);
         borderPane.getChildren().add(informationsJoueur);
 
         // "Stylisation" et bindings/listeners
@@ -126,6 +132,7 @@ public class TetrisIHM extends Application {
                     case SPACE -> jeu.actionEspace();
                 }
                 vuePlateau.mettreAJour();
+                vueProchainePiece.mettreAJour();
             }
         });
 
@@ -134,6 +141,7 @@ public class TetrisIHM extends Application {
             jeu.tomberPieceActuelle1Ligne();
             vuePlateau.mettreAJour();
             jeu.jouerTour();
+            vueProchainePiece.mettreAJour();
         });
 
         // Listener sur le score du joueur

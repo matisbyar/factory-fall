@@ -18,6 +18,7 @@ public interface IJeu {
     void actionEchap();
 
     Plateau getPlateau();
+    Plateau getProchainePiece();
     Joueur getJoueur();
 
     void nouvellePieceActuelle();

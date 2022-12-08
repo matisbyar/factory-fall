@@ -12,16 +12,19 @@ public class Jeu implements IJeu {
     private Plateau p;
 
     private ArrayList<Piece> sacProchainesPieces;
+    private Plateau prochainePiece;
     private BooleanProperty jeuEnCours;
 
     public static Timer timer;
     public static Piece pieceActuelle;
     public static int ligneActuelle;
     public static int colonneActuelle;
+    public static Piece pieceSuivante;
 
     public Jeu() {
         j = new Joueur("Luther");
         p = new Plateau(10, 22, j);
+        prochainePiece = new Plateau(4, 2, j);
 
         jeuEnCours = new SimpleBooleanProperty(true);
 
@@ -42,7 +45,6 @@ public class Jeu implements IJeu {
             System.out.println("Game Over");
         } else {
             p.afficherPlateau();
-            remplirSacProchainesPieces();
             timer.setDelay( (int)(Math.pow(0.8-((p.getRang().getValue()-1)*0.007) ,p.getRang().getValue()-1) *1000 ));
             System.out.println(j.getScore().getValue());
             System.out.println(p.getRang().getValue());
@@ -81,11 +83,22 @@ public class Jeu implements IJeu {
         pieceActuelle = recupererProchainePiece();
         ligneActuelle = 1;
         colonneActuelle = p.getLargeur() / 2 - 1;
+        remplirSacProchainesPieces();
+        nouvelleProchainePiece();
         p.incrementerScoreJoueur(p.suppressionLignesRemplies());
         p.incrementerRang();
         if(!p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle)){
             jeuEnCours.setValue(false);
         }
+    }
+
+    /**
+     * Vide la grille de visualisation de la prochaine piece, change la pièce suivante, et l'affiche dans la grille
+     */
+    public void nouvelleProchainePiece() {
+        prochainePiece.remplirTableau();
+        pieceSuivante = sacProchainesPieces.get(0);
+        prochainePiece.placerPiece(1, prochainePiece.getLargeur()/2 -1, pieceSuivante);
     }
 
     /**
@@ -209,6 +222,10 @@ public class Jeu implements IJeu {
     @Override
     public Plateau getPlateau() {
         return p;
+    }
+
+    public Plateau getProchainePiece() {
+        return prochainePiece;
     }
 
     public BooleanProperty jeuEnCoursProperty() {
