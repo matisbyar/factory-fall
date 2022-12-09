@@ -196,4 +196,4 @@ Nous avons un vue  qui affiche les touches du fonctionnement du jeu a l’utilis
 
 
 
-De plus, une vue de personnalisation des touches sera introduit comme expliqué plus haut avec la modification des touches et les règles basique du jeu expliqué du jeu.
+De plus, une vue de personnalisation des touches sera potentiellement introduit avec la modification des touche et les règles basique du jeu expliqué du jeu.
