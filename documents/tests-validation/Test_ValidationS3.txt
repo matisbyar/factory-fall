@@ -42,7 +42,6 @@ Test de validation pour Interface graphique du jeu :
 
 
 
-
 Nous avons maintenant une zone en haut à droite
 
 
@@ -63,6 +62,7 @@ En accord avec les autres équipes un thème commun
 
 Est requis et sera en accord au rendu graphique du jeu
 
+la taille de resolution d'ecran du menu et du jeu est definie et sera la meme pour tous les groupes
 
 
 
@@ -73,7 +73,6 @@ Se sente plus à l'aise en jouant le jeu, notamment grâce à mes modifications 
 
 
 
-
 Il y aura une vue de personnalisation de pièce vu que se 
 
 
@@ -81,19 +80,15 @@ Sont des images, on aura le choix entre différentes images à disposition tout 
 
 
 
-
-
-
 Il y aura une vue création de compte joueur qui crée un compte avec un pseudo et un MDP
 
 
 
-
-Et une vue connexion qui permet de se connecter à son compte + (... ??)
-
+Et une vue connexion qui permet de se connecter à son compte avec la relation bd et l'enregistrement du score 
 
 
 
+un affichage du tableau des meilleurs score
 
 
 
@@ -128,7 +123,11 @@ Nous pouvons enregistrer de nouveaux  joueur dans la base de données
 
 
 
+nous nous pouvons avoir acces au tableau des 15 meilleur joueur ainsi que sa position actuelle
 
+
+
+des recompence de nouveaux skin pour les pieces seront atteint lors de depassement de certain nombre de point
 
 
 
@@ -146,9 +145,6 @@ Test pour expérience utilisateur
 
 Nous voulons que le rendu graphique soit plus "user frendly"
 
-
-
-
 Dons il aura une refonte graphique qui permet aux joueurs de ne pas se sentir frustré ou gêné par ce qui vois
 
 
@@ -156,6 +152,15 @@ De plus un affichage plus instinctif pour des boutons ou des couleurs de fond se
 
 
 Avec tout ça en plus de  la personnification des pièces qui devra respecter ce point en plus de précèdent point cité plus haut
+
+pour repondre a cette tache : la vue menu princiapl est refondu
+
+le fond du game over est recoloré et les boutons sont plus intuitif pour ne pas confondre 
+
+
+
+
+
 
 
 
@@ -169,6 +174,7 @@ Avec un affichage graphique du nombre de vie que le joueur possède durant la pa
 
 
 
+Il aura des sons d'effet et une musique de fond pendant tout le jeu
 
 
 
@@ -179,14 +185,10 @@ Test pour tutoriel :
 
 
 
-**a redéfinir plus précisément**
+
+Nous avons un vue  qui affiche les touches du fonctionnement du jeu a l’utilisateur afin qu’il comprenne comment le jeu marche afin de voir ca comme un tutoriel.
 
 
 
 
-Nous avons (une vue, sur le jeu,??) qui affiche les touches du fonctionnement du jeu a l’utilisateur afin qu’il comprenne comment le jeu marche afin de voir ca comme un tutoriel.
-
-
-
-
-De plus, une vue de personnalisation des touches sera potentiellement introduit avec la modification des touche et les règles basique du jeu.
+De plus, une vue de personnalisation des touches sera potentiellement introduit avec la modification des touche et les règles basique du jeu expliqué du jeu.
