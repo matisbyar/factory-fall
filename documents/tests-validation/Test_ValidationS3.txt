@@ -62,7 +62,7 @@ En accord avec les autres équipes un thème commun
 
 Est requis et sera en accord au rendu graphique du jeu
 
-la taille de resolution d'ecran du menu et du jeu est definie et sera la meme pour tous les groupes
+la taille de resolution d'ecran du menu et du jeu est definie et sera la meme pour tous les groupes 720*1280
 
 
 
@@ -73,10 +73,15 @@ Se sente plus à l'aise en jouant le jeu, notamment grâce à mes modifications 
 
 
 
-Il y aura une vue de personnalisation de pièce vu que se 
+Il y aura une vue de personnalisation de touche  vu que se 
 
 
-Sont des images, on aura le choix entre différentes images à disposition tout en respectant le theme
+Sont des input, on aura le choix de change les touches selon les envie du joueur
+
+dans cette vue personnalisation touche il aura une partie reservé a l'etatblisement des regle du jeu de base 
+ et a l'explication du fonctionnement du jeu
+
+
 
 
 
