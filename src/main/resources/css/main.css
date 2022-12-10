@@ -1,16 +1,22 @@
 
 /* Root correspond au css de la scene */
 .root{
-    -fx-background-color: #1E1E1E;
+    -fx-background-color: pink;
 }
 
-/* BorderPane */
-.borderPane{
-    -fx-background-color: #1E1E1E;
-
+/* BorderPane Left */
+.leftPane{
+    -fx-background-color: black;
 }
 
-/* paneScores ("pane" sur le TetrisIHM) */
-.paneScores{
-    -fx-background-color: #1E1E1E;
+/* BorderPane Center */
+
+.centerPane{
+    -fx-background-color: black;
 }
+
+/* BorderPane Right */
+.rightPane{
+    -fx-background-color: black;
+}
+

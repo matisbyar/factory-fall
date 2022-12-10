@@ -35,8 +35,8 @@ public class VuePlateau extends GridPane {
         for (int colonne = 0; colonne < p.getPlateau().length; colonne++) {
             for (int ligne = 0; ligne < p.getPlateau()[0].length; ligne++) {
                 ImageView imagePiece = new ImageView(vide);
-                imagePiece.setFitHeight((primaryScreenBounds.getHeight()*0.04));
-                imagePiece.setFitWidth((primaryScreenBounds.getHeight()*0.04));
+                imagePiece.setFitHeight((primaryScreenBounds.getHeight()*0.03));
+                imagePiece.setFitWidth((primaryScreenBounds.getHeight()*0.03));
                 String nomPiece = p.getPlateau()[colonne][ligne].getNom();
                 switch (nomPiece) {
                     case "S" -> imagePiece.setImage(imgS);
