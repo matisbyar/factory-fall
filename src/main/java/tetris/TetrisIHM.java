@@ -11,7 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
@@ -25,7 +26,6 @@ import tetris.vues.VueProchainePiece;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class TetrisIHM extends Application {
 
@@ -44,8 +44,6 @@ public class TetrisIHM extends Application {
     private VuePlateau vuePlateau;
     private VueProchainePiece vueProchainePiece;
 
-    Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-
     // Objets de la logique du jeu
     IJeu jeu;
     Plateau p;
@@ -54,6 +52,7 @@ public class TetrisIHM extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
     private final EventHandler<ActionEvent> quandLeButtonEstClique = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
@@ -250,7 +249,5 @@ public class TetrisIHM extends Application {
         startJeu.setStyle("-fx-background-color: transparent");
         startJeu.setPrefWidth(426);
         startJeu.setAlignment(Pos.TOP_RIGHT);
-
-
     }
 }
