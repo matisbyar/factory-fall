@@ -11,9 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
@@ -24,7 +22,7 @@ import tetris.vues.VueGameOver;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.VuePlateau;
 import tetris.vues.VueProchainePiece;
-import javafx.scene.layout.HBox;
+
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.Objects;
@@ -40,13 +38,6 @@ public class TetrisIHM extends Application {
     private Button startJeu;
     Label score, pseudo, rang;
     private final Font police = Font.loadFont("file:src/main/resources/fonts/Bazaroni.ttf", 18);
-
-    private HBox hBoxNomDuJoueur;
-    private HBox hBoxScore;
-    private HBox hBoxRang;
-    private HBox hBoxBouttons;
-
-    private HBox hBoxPieceSuivante;
 
     // Vues personnelles (créées par l'équipe)
     private VueMenuPrincipal vueMenuPrincipal;
@@ -96,24 +87,20 @@ public class TetrisIHM extends Application {
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
 
-        hBoxNomDuJoueur = new HBox(pseudo);
-        hBoxScore = new HBox(score);
-        hBoxRang = new HBox(rang);
-        hBoxBouttons = new HBox(startJeu);
-        hBoxPieceSuivante = new HBox(vueProchainePiece);
-        informationsJoueur = new VBox(hBoxNomDuJoueur, hBoxScore, hBoxRang, hBoxBouttons);
+        informationsJoueur = new VBox(pseudo, score, rang, startJeu);
 
         scene = new Scene(borderPane);
 
         // Affectations et constitution de vues
-
         borderPane.setLeft(informationsJoueur);
         borderPane.setCenter(vuePlateau);
-        borderPane.setRight(hBoxPieceSuivante);
+        borderPane.setRight(vueProchainePiece);
+        borderPane.setPrefWidth(300);
 
-        // "Stylisation" et bindings/listeners
         creerBindings();
         styliser();
+        // "Stylisation" et bindings/listeners
+
 
         // Initialisation du timer (obligatoire après les bindings)
         Jeu.timer = new Timer(1000, descenteAuto);
@@ -209,37 +196,50 @@ public class TetrisIHM extends Application {
 
         // BorderPane
         borderPane.getStyleClass().add("borderPane");
-        borderPane.setPrefWidth((primaryScreenBounds.getHeight()*0.65));
-        borderPane.setPrefHeight(primaryScreenBounds.getHeight()*0.97);
+        borderPane.setPrefWidth(1280);
+        borderPane.setPrefHeight(720);
+        borderPane.getLeft().getStyleClass().add("leftPane");
+        borderPane.getRight().getStyleClass().add("rightPane");
+        borderPane.getCenter().getStyleClass().add("centerPane");
 
         // VuePlateu
         vuePlateau.getStyleClass().add("vuePlateau");
+        vuePlateau.setAlignment(Pos.CENTER);
+        vuePlateau.setMaxWidth(426);
+
+        // VueProchainePiece
+        vueProchainePiece.setPrefWidth(426);
+        vueProchainePiece.setAlignment(Pos.TOP_LEFT);
 
         // Pseudo
         pseudo.setTextFill(Color.WHITE);
         pseudo.setFont(police);
         //pseudo.setStyle("-fx-font-size: 15px");
-        pseudo.setMinSize(150, 150);
+        pseudo.setMinSize(150, 50);
         pseudo.setLayoutX(150);
+        pseudo.setPrefWidth(426);
+        pseudo.setAlignment(Pos.TOP_RIGHT);
 
         // Score
         score.getStyleClass().add("score");
-        score.setLayoutX(150);
-        score.setLayoutY(150);
         score.setFont(police);
         //score.setStyle("-fx-font-size: 15px");
         score.setLayoutY(50);
         score.setTextFill(Color.WHITE);
         score.setAlignment(Pos.BASELINE_LEFT);
-        score.setMinSize(150, 150);
+        score.setMinSize(150, 50);
+        score.setAlignment(Pos.TOP_RIGHT);
+        score.setPrefWidth(426);
 
         // Rang
         rang.setTextFill(Color.WHITE);
         rang.setFont(police);
         //rang.setStyle("-fx-font-size: 15px");
-        rang.setMinSize(150, 150);
+        rang.setMinSize(150, 50);
         rang.setLayoutX(150);
         rang.setLayoutY(200);
+        rang.setAlignment(Pos.TOP_RIGHT);
+        rang.setPrefWidth(426);
 
         // Labels
         informationsJoueur.setLayoutX(20);
@@ -248,6 +248,9 @@ public class TetrisIHM extends Application {
         // StartJeu
         startJeu.setGraphic(new ImageView(new Image("file:src/main/resources/img/start.png")));
         startJeu.setStyle("-fx-background-color: transparent");
+        startJeu.setPrefWidth(426);
+        startJeu.setAlignment(Pos.TOP_RIGHT);
+
 
     }
 }

@@ -12,7 +12,6 @@ public class VueMenuPrincipal extends Stage {
 
     Scene scene;
     BorderPane borderPane;
-
     Background background;
     Button lancerJeu;
 
