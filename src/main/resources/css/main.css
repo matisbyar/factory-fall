@@ -7,14 +7,10 @@
 /* BorderPane */
 .borderPane{
     -fx-background-color: #1E1E1E;
+
 }
 
 /* paneScores ("pane" sur le TetrisIHM) */
 .paneScores{
     -fx-background-color: #1E1E1E;
-}
-
-/* GridPane du jeu  */
-.vuePlateau{
-
 }

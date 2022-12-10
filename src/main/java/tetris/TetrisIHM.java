@@ -41,11 +41,6 @@ public class TetrisIHM extends Application {
     Label score, pseudo, rang;
     private final Font police = Font.loadFont("file:src/main/resources/fonts/Bazaroni.ttf", 18);
 
-    private HBox hBoxNomDuJoueur;
-    private HBox hBoxScore;
-    private HBox hBoxRang;
-    private HBox hBoxBouttons;
-
     private HBox hBoxPieceSuivante;
 
     // Vues personnelles (créées par l'équipe)
@@ -96,20 +91,14 @@ public class TetrisIHM extends Application {
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
 
-        hBoxNomDuJoueur = new HBox(pseudo);
-        hBoxScore = new HBox(score);
-        hBoxRang = new HBox(rang);
-        hBoxBouttons = new HBox(startJeu);
-        hBoxPieceSuivante = new HBox(vueProchainePiece);
-        informationsJoueur = new VBox(hBoxNomDuJoueur, hBoxScore, hBoxRang, hBoxBouttons);
+        informationsJoueur = new VBox(pseudo, score, rang, startJeu);
 
         scene = new Scene(borderPane);
 
         // Affectations et constitution de vues
-
         borderPane.setLeft(informationsJoueur);
         borderPane.setCenter(vuePlateau);
-        borderPane.setRight(hBoxPieceSuivante);
+        borderPane.setRight(vueProchainePiece);
 
         // "Stylisation" et bindings/listeners
         creerBindings();
