@@ -24,7 +24,7 @@ import tetris.vues.VueGameOver;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.VuePlateau;
 import tetris.vues.VueProchainePiece;
-
+import javafx.scene.layout.HBox;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.Objects;
@@ -34,14 +34,19 @@ public class TetrisIHM extends Application {
     // Objets issus de JavaFX pour l'IHM du jeu
     private Scene scene;
     Stage primaryStage;
-    private StackPane pane;
     private BorderPane borderPane;
     private VBox informationsJoueur;
     private ActionListener descenteAuto;
     private Button startJeu;
     Label score, pseudo, rang;
-
     private final Font police = Font.loadFont("file:src/main/resources/fonts/Bazaroni.ttf", 18);
+
+    private HBox hBoxNomDuJoueur;
+    private HBox hBoxScore;
+    private HBox hBoxRang;
+    private HBox hBoxBouttons;
+
+    private HBox hBoxPieceSuivante;
 
     // Vues personnelles (créées par l'équipe)
     private VueMenuPrincipal vueMenuPrincipal;
@@ -63,7 +68,6 @@ public class TetrisIHM extends Application {
         public void handle(ActionEvent event) {
             demarrerPartie();
             vueMenuPrincipal.close();
-
         }
     };
 
@@ -86,21 +90,26 @@ public class TetrisIHM extends Application {
         // javaFX
         borderPane = new BorderPane();
         primaryStage = new Stage();
-        scene = new Scene(borderPane);
-        pane = new StackPane();
+
         startJeu = new Button();
         score = new Label("0.0");
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
 
-        // Affectations et constitution de vues
-        informationsJoueur = new VBox(pseudo, score, rang);
-        pane.getChildren().add(startJeu);
+        hBoxNomDuJoueur = new HBox(pseudo);
+        hBoxScore = new HBox(score);
+        hBoxRang = new HBox(rang);
+        hBoxBouttons = new HBox(startJeu);
+        hBoxPieceSuivante = new HBox(vueProchainePiece);
+        informationsJoueur = new VBox(hBoxNomDuJoueur, hBoxScore, hBoxRang, hBoxBouttons);
 
-        borderPane.setLeft(pane);
+        scene = new Scene(borderPane);
+
+        // Affectations et constitution de vues
+
+        borderPane.setLeft(informationsJoueur);
         borderPane.setCenter(vuePlateau);
-        borderPane.setRight(vueProchainePiece);
-        borderPane.getChildren().add(informationsJoueur);
+        borderPane.setRight(hBoxPieceSuivante);
 
         // "Stylisation" et bindings/listeners
         creerBindings();
@@ -240,7 +249,5 @@ public class TetrisIHM extends Application {
         startJeu.setGraphic(new ImageView(new Image("file:src/main/resources/img/start.png")));
         startJeu.setStyle("-fx-background-color: transparent");
 
-        // Pane
-        pane.getStyleClass().add("paneScores");
     }
 }

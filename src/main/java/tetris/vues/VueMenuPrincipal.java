@@ -17,12 +17,12 @@ public class VueMenuPrincipal extends Stage {
     Button lancerJeu;
 
     public VueMenuPrincipal() {
-        background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, new BackgroundSize(889,500, false, false, false, false)));
+        background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280,720, false, false, false, false)));
         borderPane = new BorderPane();
 
         lancerJeu = new Button();
 
-        scene = new Scene(borderPane, 800,500);
+        scene = new Scene(borderPane, 1280,720);
 
         styliser();
 
