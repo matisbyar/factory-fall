@@ -3,6 +3,7 @@ module tetris {
     requires javafx.fxml;
     requires javafx.base;
     requires java.desktop;
+    requires java.sql;
     //requires junit;
     //requires org.testng;
 
