@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
+import org.w3c.dom.ls.LSOutput;
 import tetris.TetrisIHM;
 import tetris.logique.Plateau;
 
@@ -30,13 +31,22 @@ public class VuePlateau extends GridPane {
     public void mettreAJour() {
         // Effacer le GridPane (effectué à chaque mise à jour)
         this.getChildren().clear();
-
+        System.out.println(primaryScreenBounds.getHeight());
         // Ajoute les pièces dans la grille
         for (int colonne = 0; colonne < p.getPlateau().length; colonne++) {
             for (int ligne = 0; ligne < p.getPlateau()[0].length; ligne++) {
                 ImageView imagePiece = new ImageView(vide);
-                imagePiece.setFitHeight((primaryScreenBounds.getHeight()*0.03));
-                imagePiece.setFitWidth((primaryScreenBounds.getHeight()*0.03));
+
+                if (primaryScreenBounds.getWidth() == 1920){
+                    imagePiece.setFitHeight((primaryScreenBounds.getHeight()*0.03));
+                    imagePiece.setFitWidth((primaryScreenBounds.getHeight()*0.03));
+                }else if(primaryScreenBounds.getWidth() == 1280){
+                    imagePiece.setFitHeight((primaryScreenBounds.getHeight()*0.046));
+                    imagePiece.setFitWidth((primaryScreenBounds.getHeight()*0.046));
+                }else if(primaryScreenBounds.getWidth() == 1366){
+                    imagePiece.setFitHeight((primaryScreenBounds.getHeight()*0.043));
+                    imagePiece.setFitWidth((primaryScreenBounds.getHeight()*0.043));
+                }
                 String nomPiece = p.getPlateau()[colonne][ligne].getNom();
                 switch (nomPiece) {
                     case "S" -> imagePiece.setImage(imgS);

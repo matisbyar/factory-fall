@@ -19,10 +19,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
-import tetris.vues.VueGameOver;
-import tetris.vues.VueMenuPrincipal;
-import tetris.vues.VuePlateau;
-import tetris.vues.VueProchainePiece;
+import tetris.vues.*;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -248,6 +245,8 @@ public class TetrisIHM extends Application {
         startJeu.setGraphic(new ImageView(new Image("file:src/main/resources/img/start.png")));
         startJeu.setStyle("-fx-background-color: transparent");
         startJeu.setPrefWidth(426);
-        startJeu.setAlignment(Pos.TOP_RIGHT);
+
+        // VueControles
+
     }
 }

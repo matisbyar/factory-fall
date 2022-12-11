@@ -1,22 +1,22 @@
 
 /* Root correspond au css de la scene */
 .root{
-    -fx-background-color: pink;
+    -fx-background-color:black ;
 }
 
 /* BorderPane Left */
 .leftPane{
-    -fx-background-color: black;
+    -fx-background-color: transparent;
 }
 
 /* BorderPane Center */
 
 .centerPane{
-    -fx-background-color: black;
+    -fx-background-color: transparent;
 }
 
 /* BorderPane Right */
 .rightPane{
-    -fx-background-color: black;
+    -fx-background-color: transparent;
 }
 
