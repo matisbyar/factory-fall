@@ -252,7 +252,6 @@ public class TetrisIHM extends Application {
         startJeu.setStyle("-fx-background-color: black");
         startJeu.getStyleClass().add("bouttonStart");
 
-
         // Contener Gauche
         contenerGauche.setAlignment(Pos.TOP_RIGHT);
         contenerGauche.setPrefWidth(426);

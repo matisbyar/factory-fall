@@ -1,6 +1,7 @@
 package tetris.vues;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,11 +16,13 @@ public class VueMenuPrincipal extends Stage {
     Background background;
     Button lancerJeu;
 
+    VBox bouttons;
     public VueMenuPrincipal() {
         background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280,720, false, false, false, false)));
         borderPane = new BorderPane();
 
         lancerJeu = new Button();
+        bouttons = new VBox(lancerJeu);
 
         scene = new Scene(borderPane, 1280,720);
 
@@ -36,13 +39,20 @@ public class VueMenuPrincipal extends Stage {
         this.setTitle("Menu Principal");
         this.setResizable(false);
 
+        scene.getStylesheets().add("file:src/main/resources/css/mainMenuPrincipale.css");
+
         // BorderPane
-        borderPane.setCenter(lancerJeu);
+        borderPane.setCenter(bouttons);
         borderPane.setBackground(background);
+
+        // Vbox Boutton
+        bouttons.setAlignment(Pos.CENTER);
 
         // Button
         lancerJeu.setGraphic(new ImageView(new Image("file:src/main/resources/img/start_new_game.png")));
-        lancerJeu.setStyle("-fx-background-color: transparent");
+        lancerJeu.setStyle("-fx-background-color: black");
+        lancerJeu.getStyleClass().add("bouttonLancerJeu");
+
     }
 
     /**
