@@ -227,7 +227,7 @@ public class Plateau implements IPlateau {
      * Incrémente le rang de la partie en fonction des paliers définis par (2^rang)*100
      */
     public  void incrementerRang(){
-        if (joueur.getScore().getValue() >= Math.pow(2,rang.getValue())*100){
+        if (joueur.getScore().getValue() >= Math.pow(2,rang.getValue())*300){
             rang.setValue(rang.getValue()+1);
         }
     }
