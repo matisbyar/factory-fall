@@ -41,6 +41,10 @@ public class TetrisIHM extends Application {
     private VuePlateau vuePlateau;
     private VueProchainePiece vueProchainePiece;
 
+    private VBox contenerDroit;
+
+    private VBox contenerGauche;
+
     // Objets de la logique du jeu
     IJeu jeu;
     Plateau p;
@@ -82,15 +86,17 @@ public class TetrisIHM extends Application {
         score = new Label("0.0");
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
-
-        informationsJoueur = new VBox(pseudo, score, rang, startJeu);
+        contenerDroit = new VBox(vueProchainePiece);
+        informationsJoueur = new VBox(pseudo, score, rang);
+        contenerGauche = new VBox(informationsJoueur, startJeu);
 
         scene = new Scene(borderPane);
 
         // Affectations et constitution de vues
-        borderPane.setLeft(informationsJoueur);
+
+        borderPane.setLeft(contenerGauche);
         borderPane.setCenter(vuePlateau);
-        borderPane.setRight(vueProchainePiece);
+        borderPane.setRight(contenerDroit);
         borderPane.setPrefWidth(300);
 
         creerBindings();
@@ -243,10 +249,12 @@ public class TetrisIHM extends Application {
 
         // StartJeu
         startJeu.setGraphic(new ImageView(new Image("file:src/main/resources/img/start.png")));
-        startJeu.setStyle("-fx-background-color: transparent");
-        startJeu.setPrefWidth(426);
+        startJeu.setStyle("-fx-background-color: black");
+        startJeu.getStyleClass().add("bouttonStart");
 
-        // VueControles
 
+        // Contener Gauche
+        contenerGauche.setAlignment(Pos.TOP_RIGHT);
+        contenerGauche.setPrefWidth(426);
     }
 }

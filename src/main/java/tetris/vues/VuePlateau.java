@@ -31,7 +31,6 @@ public class VuePlateau extends GridPane {
     public void mettreAJour() {
         // Effacer le GridPane (effectué à chaque mise à jour)
         this.getChildren().clear();
-        System.out.println(primaryScreenBounds.getHeight());
         // Ajoute les pièces dans la grille
         for (int colonne = 0; colonne < p.getPlateau().length; colonne++) {
             for (int ligne = 0; ligne < p.getPlateau()[0].length; ligne++) {
