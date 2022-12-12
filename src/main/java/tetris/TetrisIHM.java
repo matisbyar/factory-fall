@@ -41,6 +41,8 @@ public class TetrisIHM extends Application {
     private VuePlateau vuePlateau;
     private VueProchainePiece vueProchainePiece;
 
+    private  VueCreationJoueur vueCreationJoueur;
+
     private VBox contenerDroit;
 
     private VBox contenerGauche;
@@ -50,17 +52,8 @@ public class TetrisIHM extends Application {
     Plateau p;
     Plateau prochainePiece;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
-    private final EventHandler<ActionEvent> quandLeButtonEstClique = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent event) {
-            demarrerPartie();
-            vueMenuPrincipal.close();
-        }
-    };
+    private String nomjoueur="";
 
     @Override
     public void start(Stage primaryStage) {
@@ -69,10 +62,40 @@ public class TetrisIHM extends Application {
         vueMenuPrincipal.show();
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+    private final EventHandler<ActionEvent> quandLeButtonEstClique = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            vueCreationJoueur = new VueCreationJoueur();
+            vueCreationJoueur.setButtonCliqueListener(nouveaujoueur);
+            vueCreationJoueur.show();
+            vueMenuPrincipal.close();
+
+        }
+    };
+
+    private final EventHandler<ActionEvent> nouveaujoueur = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            nomjoueur = vueCreationJoueur.getNomjoueur().getText();
+
+            // + recuperation du speudo du joueur
+            demarrerPartie();
+            vueCreationJoueur.close();
+
+        }
+    };
+
     public void demarrerPartie() {
         // Initialisations des objets nécessaires
         // classes de la logique du jeu
-        jeu = new Jeu();
+        if(nomjoueur==""){
+            jeu = new Jeu();
+        } else {
+            jeu = new Jeu(nomjoueur);
+        }
         p = jeu.getPlateau();
         prochainePiece = jeu.getProchainePiece();
         vuePlateau = new VuePlateau(p);
@@ -256,5 +279,6 @@ public class TetrisIHM extends Application {
         // Contener Gauche
         contenerGauche.setAlignment(Pos.TOP_RIGHT);
         contenerGauche.setPrefWidth(426);
+        // VueControles
     }
 }
