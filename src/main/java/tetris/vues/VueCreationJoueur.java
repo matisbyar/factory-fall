@@ -2,6 +2,7 @@ package tetris.vues;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,7 +10,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
+import javafx.geometry.Insets;
 
 
 import java.awt.*;
@@ -18,28 +19,26 @@ public class VueCreationJoueur extends Stage {
 
     Scene scene;
     BorderPane borderPane;
-
     Background background;
     Button creejoueur;
-
     TextField nomjoueur;
-
-    VBox vbox;
-
+    VBox vboxCentre;
     Label info;
 
-    
+    Insets insets;
 
     public VueCreationJoueur() {
         background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280,720, false, false, false, false)));
         borderPane = new BorderPane();
 
         creejoueur = new Button();
-        vbox    = new VBox(5);
         nomjoueur = new  TextField();
+        vboxCentre = new VBox( nomjoueur, creejoueur);
+
+
+        insets = new Insets(10, 10 ,10, 10);
 
         info = new Label("Entré le nom du joueur:");
-
         scene = new Scene(borderPane, 1280,720);
 
         styliser();
@@ -54,37 +53,33 @@ public class VueCreationJoueur extends Stage {
         // Général
         this.setTitle("Menu Joueur");
         this.setResizable(false);
-
+        scene.getStylesheets().add("file:src/main/resources/css/mainVueCreationJoueur.css");
         // BorderPane
-        borderPane.setCenter(creejoueur);
+        borderPane.setCenter(vboxCentre);
         borderPane.setBackground(background);
-        borderPane.setTop(vbox);
-
 
         // Vbox
-        vbox.setSpacing(1);
-
-
+        vboxCentre.setAlignment(Pos.CENTER);
 
         // optionnel
         nomjoueur.textProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("textfield change de  " + oldValue + " A " + newValue);
         });
-
+        // Set les marges des elements
+        VBox.setMargin(nomjoueur, insets);
+        VBox.setMargin(creejoueur, insets);
 
         //Texte
         nomjoueur.setPromptText("Entrer votre Pseudo");
-        nomjoueur.setPrefColumnCount(10);
-        nomjoueur.setBackground(new Background(
-                new BackgroundImage(new Image("file:src/main/resources/img/J.jpg"),null,null,null,null)));
+        nomjoueur.getStyleClass().add("textFieldNomJoueur");
 
-
-        vbox.getChildren().addAll(new javafx.scene.control.Label("Entre le nom du joueur:"), nomjoueur);
+       // nomjoueur.setBackground(new Background(
+               // new BackgroundImage(new Image("file:src/main/resources/img/J.jpg"),null,null,null,null)));
 
 
         // Button
         creejoueur.setGraphic(new ImageView(new Image("file:src/main/resources/img/start_new_game.png")));
-        creejoueur.setStyle("-fx-background-color: transparent");
+        creejoueur.getStyleClass().add("bouttonCreerJoueur");
     }
 
     /**

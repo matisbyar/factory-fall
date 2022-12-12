@@ -33,10 +33,10 @@ public class Jeu implements IJeu {
         nouvellePieceActuelle();
     }
 
-    public Jeu(String speudo) {
+    public Jeu(String pseudo) {
         this();
-        j = new Joueur(speudo);
-
+        if (!pseudo.equals(""))
+            j = new Joueur(pseudo);
     }
 
     /**

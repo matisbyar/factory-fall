@@ -1,7 +1,7 @@
 
 /* Root correspond au css de la scene */
 .root{
-    -fx-background-color: black ;
+    -fx-background-image: url("../img/imageFondJeu/backgroundJeu1.png") ;
 }
 
 /* BorderPane Left */
