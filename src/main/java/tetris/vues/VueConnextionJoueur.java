@@ -15,28 +15,27 @@ import javafx.geometry.Insets;
 
 import java.awt.*;
 
-public class VueCreationJoueur extends Stage {
+public class VueConnextionJoueur extends Stage {
 
     Scene scene;
     BorderPane borderPane;
     Background background;
     Button creejoueur;
     TextField nomjoueur;
-
     TextField motdepasse;
     VBox vboxCentre;
     Label info;
 
     Insets insets;
 
-    public VueCreationJoueur() {
+    public VueConnextionJoueur() {
         background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280,720, false, false, false, false)));
         borderPane = new BorderPane();
 
         creejoueur = new Button();
         nomjoueur = new  TextField();
         motdepasse = new TextField();
-        vboxCentre = new VBox( nomjoueur,motdepasse, creejoueur);
+        vboxCentre = new VBox( nomjoueur, motdepasse, creejoueur);
 
 
         insets = new Insets(10, 10 ,10, 10);
@@ -64,10 +63,7 @@ public class VueCreationJoueur extends Stage {
         // Vbox
         vboxCentre.setAlignment(Pos.CENTER);
 
-        // optionnel
-        nomjoueur.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("textfield change de  " + oldValue + " A " + newValue);
-        });
+
         // Set les marges des elements
         VBox.setMargin(nomjoueur, insets);
         VBox.setMargin(creejoueur, insets);
@@ -78,6 +74,7 @@ public class VueCreationJoueur extends Stage {
 
         motdepasse.setPromptText("Entrer votre mot de passe");
         motdepasse.getStyleClass().add("textFieldNomJoueur");
+
 
         // nomjoueur.setBackground(new Background(
         // new BackgroundImage(new Image("file:src/main/resources/img/J.jpg"),null,null,null,null)));
@@ -90,15 +87,14 @@ public class VueCreationJoueur extends Stage {
 
     /**
      * Listener interclasses qui permet à TetrisIHM de savoir quand le bouton start a été cliqué
-     * @param nouveaujoueurcree listener passé en paramètre dans la classe TetrisIHM (voir la classe en question)
+     * @param  nouveaujoueurconnecte listener passé en paramètre dans la classe TetrisIHM (voir la classe en question)
      */
-    public void setButtonCliqueListener(EventHandler<ActionEvent>nouveaujoueurcree) {
-        creejoueur.setOnAction(nouveaujoueurcree);   }
+    public void setButtonCliqueListener(EventHandler<ActionEvent> nouveaujoueurconnecte) {
+        creejoueur.setOnAction( nouveaujoueurconnecte);   }
 
     public   TextField getNomjoueur() {
         return nomjoueur;   }
 
     public  TextField getMotdepasse(){
         return motdepasse;}
-
 }
