@@ -3,7 +3,7 @@ package tetris.stockage;
 public class Session {
 
     private static Session instance = null;
-    private String login;
+    private String login = "";
 
     private Session() {}
 

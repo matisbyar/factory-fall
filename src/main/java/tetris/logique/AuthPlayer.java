@@ -19,7 +19,7 @@ public class AuthPlayer extends Joueur {
     public AuthPlayer(String login, String hashedPassword, byte[] salt) {
         this(login);
         this.salt = salt;
-        this.hashedPassword =  hashedPassword;
+        this.hashedPassword = hashedPassword;
     }
 
     public String getLogin() {

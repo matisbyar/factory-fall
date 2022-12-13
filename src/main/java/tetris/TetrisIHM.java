@@ -15,8 +15,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import tetris.logique.AuthPlayer;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
+import tetris.stockage.PlayerManager;
+import tetris.stockage.ScoreManager;
+import tetris.stockage.Security;
+import tetris.stockage.Session;
 import tetris.vues.VueGameOver;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.VuePlateau;
@@ -24,6 +29,8 @@ import tetris.vues.VueProchainePiece;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
 public class TetrisIHM extends Application {
 
@@ -86,9 +93,33 @@ public class TetrisIHM extends Application {
     private final EventHandler<ActionEvent> joueurconnecte = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
-            nomjoueur = vueMenuPrincipal.getNomjoueur().getText();
-            demarrerPartie();
-            vueMenuPrincipal.close();
+            AuthPlayer j = PlayerManager.getInstance().getPlayer(vueMenuPrincipal.getNomjoueur().getText());
+            boolean connexionOK = false;
+
+            if (j != null) {
+                try {
+                    connexionOK = Security.checkPassword(vueMenuPrincipal.getMotDePasse().getText(), j.getSalt(), j.getHashedPassword());
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                } catch (InvalidKeyException e) {
+                    e.printStackTrace();
+                }
+
+                if (!connexionOK) {
+                    //Si le mot de passe est incorrect (mais le login existe dans la BD)
+                    System.out.println("Mot de passe incorrect");
+                }
+            }
+            else {
+                //Si l'identifiant est incorrect (aucun joueur de ce login n'est inscrit dans la BD)
+                System.out.println("Identifiant incorrect");
+            }
+
+            if (connexionOK) {
+                nomjoueur = vueMenuPrincipal.getNomjoueur().getText();
+                demarrerPartie();
+                vueMenuPrincipal.close();
+            }
         }
     };
 
@@ -183,6 +214,7 @@ public class TetrisIHM extends Application {
         jeu.jeuEnCoursProperty().addListener((observableValue, aBoolean, t1) -> {
             if (!jeu.isJeuEnCours()) {
                 VueGameOver vueGameOver = new VueGameOver();
+                //ScoreManager.getInstance().createScore(jeu.getJoueur().getScore().getValue(), Session.getInstance().getLogin());
                 vueGameOver.arreterJeuProperty().addListener((observableValue12, aBoolean12, t112) -> {
                     if (vueGameOver.arreterJeuProperty().getValue()) {
                         System.exit(0);

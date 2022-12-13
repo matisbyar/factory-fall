@@ -125,7 +125,7 @@ public class VueMenuPrincipal extends Stage {
         btConnexion.setOnAction(joueurconnecte);
     }
 
-    public void setButtonCreerJoueurCliqueListener(EventHandler<ActionEvent>nouveaujoueurcree) {
+    public void setButtonCreerJoueurCliqueListener(EventHandler<ActionEvent> nouveaujoueurcree) {
         creejoueur.setOnAction(nouveaujoueurcree);
     }
 
