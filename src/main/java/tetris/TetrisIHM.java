@@ -21,6 +21,7 @@ import tetris.vues.*;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class TetrisIHM extends Application {
 
@@ -39,13 +40,6 @@ public class TetrisIHM extends Application {
     private VuePlateau vuePlateau;
     private VueProchainePiece vueProchainePiece;
 
-    private  VueCreationJoueur vueCreationJoueur;
-
-    private VueConnexionJoueur vueConnexionJoueur;
-
-
-    private  Vuejoueur vuejoueur;
-
     private VBox contenerDroit;
 
     private VBox contenerGauche;
@@ -61,74 +55,48 @@ public class TetrisIHM extends Application {
     @Override
     public void start(Stage primaryStage) {
         vueMenuPrincipal = new VueMenuPrincipal();
-        vueMenuPrincipal.setButtonCliqueListener(quandLeButtonEstClique);
+        vueMenuPrincipal.setButtonJouerCliqueListener(quandLeButtonJouerEstClique);
+        vueMenuPrincipal.setButtonConnecterJoueurCliqueListener(joueurconnecte);
+        vueMenuPrincipal.setButtonCreerJoueurCliqueListener(nouveaujoueurcree);
         vueMenuPrincipal.show();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-    private final EventHandler<ActionEvent> quandLeButtonEstClique = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent event) {
-            vuejoueur = new Vuejoueur();
-            vuejoueur.setButtonCliqueListenercreation(joueurcreation);
-            vuejoueur.setButtonCliqueListenerconnexion(joueurconnexion);
-            vuejoueur.show();
-            vueMenuPrincipal.close();
 
-        }
-    };
 
-    /**
-     * lance la vue creationjoueur apres avoir appuie  sur le bouton de creation
-     */
-    private final EventHandler<ActionEvent> joueurcreation = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent event) {
-            vueCreationJoueur = new VueCreationJoueur();
-            vueCreationJoueur.setButtonCliqueListener(nouveaujoueurcree);
-            vueCreationJoueur.show();
-            vuejoueur.close();
-
-        }
-    };
-
-    /**
-     * lance la vue connexionjoueur apres avoir appuie  sur le bouton de connexion
-     */
-    private final EventHandler<ActionEvent> joueurconnexion = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent event) {
-            vueConnexionJoueur = new VueConnexionJoueur();
-            vueConnexionJoueur.setButtonCliqueListener(nouveaujoueurconnecte);
-            vueConnexionJoueur.show();
-            vuejoueur.close();
-
-        }
-    };
     /**
      * lance la vue demarrer partie apres avoir crée le joueur
      */
     private final EventHandler<ActionEvent> nouveaujoueurcree = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
-            nomjoueur = vueCreationJoueur.getNomjoueur().getText();
+            nomjoueur = vueMenuPrincipal.getNomjoueur().getText();
             demarrerPartie();
-            vueCreationJoueur.close();
-
+            vueMenuPrincipal.close();
         }
     };
 
     /**
      * lance la vue demarrer partie apres avoir connecte le joueur
      */
-    private final EventHandler<ActionEvent> nouveaujoueurconnecte = new EventHandler<>() {
+    private final EventHandler<ActionEvent> joueurconnecte = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
-            nomjoueur = vueConnexionJoueur.getNomjoueur().getText();
+            nomjoueur = vueMenuPrincipal.getNomjoueur().getText();
             demarrerPartie();
-            vueConnexionJoueur.close();
+            vueMenuPrincipal.close();
+
+        }
+    };
+
+    private final EventHandler<ActionEvent> quandLeButtonJouerEstClique = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            nomjoueur = "Anonyme";
+            demarrerPartie();
+            vueMenuPrincipal.close();
 
         }
     };
@@ -136,11 +104,7 @@ public class TetrisIHM extends Application {
     public void demarrerPartie() {
         // Initialisations des objets nécessaires
         // classes de la logique du jeu
-        if(nomjoueur==""){
-            jeu = new Jeu();
-        } else {
-            jeu = new Jeu(nomjoueur);
-        }
+        jeu = new Jeu(nomjoueur);
         p = jeu.getPlateau();
         prochainePiece = jeu.getProchainePiece();
         vuePlateau = new VuePlateau(p);
