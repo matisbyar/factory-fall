@@ -33,6 +33,12 @@ public class Jeu implements IJeu {
         nouvellePieceActuelle();
     }
 
+    public Jeu(String pseudo) {
+        this();
+        if (!pseudo.equals(""))
+            j = new Joueur(pseudo);
+    }
+
     /**
      * Affiche le Plateau si le jeu est toujours en cours et arrête la partie sinon
      */

@@ -41,6 +41,13 @@ public class TetrisIHM extends Application {
     private VuePlateau vuePlateau;
     private VueProchainePiece vueProchainePiece;
 
+    private  VueCreationJoueur vueCreationJoueur;
+
+    private  VueConnextionJoueur vueConnextionJoueur;
+
+
+    private  Vuejoueur vuejoueur;
+
     private VBox contenerDroit;
 
     private VBox contenerGauche;
@@ -50,17 +57,8 @@ public class TetrisIHM extends Application {
     Plateau p;
     Plateau prochainePiece;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
-    private final EventHandler<ActionEvent> quandLeButtonEstClique = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent event) {
-            demarrerPartie();
-            vueMenuPrincipal.close();
-        }
-    };
+    private String nomjoueur="";
 
     @Override
     public void start(Stage primaryStage) {
@@ -69,10 +67,82 @@ public class TetrisIHM extends Application {
         vueMenuPrincipal.show();
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+    private final EventHandler<ActionEvent> quandLeButtonEstClique = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            vuejoueur = new Vuejoueur();
+            vuejoueur.setButtonCliqueListenercreation(joueurcreation);
+            vuejoueur.setButtonCliqueListenerconnextion(joueurconnextion);
+            vuejoueur.show();
+            vueMenuPrincipal.close();
+
+        }
+    };
+
+    /**
+     * lance la vue creationjoueur apres avoir appuie  sur le bouton de creation
+     */
+    private final EventHandler<ActionEvent> joueurcreation = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            vueCreationJoueur = new VueCreationJoueur();
+            vueCreationJoueur.setButtonCliqueListener(nouveaujoueurcree);
+            vueCreationJoueur.show();
+            vuejoueur.close();
+
+        }
+    };
+
+    /**
+     * lance la vue connextionjoueur apres avoir appuie  sur le bouton de connextion
+     */
+    private final EventHandler<ActionEvent> joueurconnextion = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            vueConnextionJoueur = new VueConnextionJoueur();
+            vueConnextionJoueur.setButtonCliqueListener(nouveaujoueurconnecte);
+            vueConnextionJoueur.show();
+            vuejoueur.close();
+
+        }
+    };
+    /**
+     * lance la vue demarrer partie apres avoir crée le joueur
+     */
+    private final EventHandler<ActionEvent> nouveaujoueurcree = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            nomjoueur = vueCreationJoueur.getNomjoueur().getText();
+            demarrerPartie();
+            vueCreationJoueur.close();
+
+        }
+    };
+
+    /**
+     * lance la vue demarrer partie apres avoir connecte le joueur
+     */
+    private final EventHandler<ActionEvent> nouveaujoueurconnecte = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            nomjoueur = vueConnextionJoueur.getNomjoueur().getText();
+            demarrerPartie();
+            vueConnextionJoueur.close();
+
+        }
+    };
+
     public void demarrerPartie() {
         // Initialisations des objets nécessaires
         // classes de la logique du jeu
-        jeu = new Jeu();
+        if(nomjoueur==""){
+            jeu = new Jeu();
+        } else {
+            jeu = new Jeu(nomjoueur);
+        }
         p = jeu.getPlateau();
         prochainePiece = jeu.getProchainePiece();
         vuePlateau = new VuePlateau(p);
@@ -255,5 +325,6 @@ public class TetrisIHM extends Application {
         // Contener Gauche
         contenerGauche.setAlignment(Pos.TOP_RIGHT);
         contenerGauche.setPrefWidth(426);
+        // VueControles
     }
 }
