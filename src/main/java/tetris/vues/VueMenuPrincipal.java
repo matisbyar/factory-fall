@@ -60,7 +60,7 @@ public class VueMenuPrincipal extends Stage {
         personnaliser = new Button();
         compte = new Button();
         bouttons = new VBox(lancerJeu, parametres, personnaliser);
-
+        insets = new Insets(10, 10 ,10, 10);
         sceneMenu = new Scene(borderPaneMenu, 1280,720);
 
         styliserMenu();
@@ -76,6 +76,10 @@ public class VueMenuPrincipal extends Stage {
         // Général
         this.setTitle("Menu Principal");
         this.setResizable(false);
+
+        VBox.setMargin(lancerJeu, insets);
+        VBox.setMargin(parametres, insets);
+        VBox.setMargin(personnaliser, insets);
 
         sceneMenu.getStylesheets().add("file:src/main/resources/css/mainMenuPrincipale.css");
 
