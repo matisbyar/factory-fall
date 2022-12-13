@@ -1,6 +1,8 @@
 package tetris.logique;
 
-import javafx.beans.property.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import tetris.IJeu;
 
 import javax.swing.*;
@@ -22,7 +24,7 @@ public class Jeu implements IJeu {
     public static Piece pieceSuivante;
 
     public Jeu() {
-        j = new Joueur("Luther");
+        j = new Joueur("Anonyme");
         p = new Plateau(10, 22, j);
         prochainePiece = new Plateau(4, 2, j);
 
@@ -42,8 +44,8 @@ public class Jeu implements IJeu {
     /**
      * Affiche le Plateau si le jeu est toujours en cours et arrête la partie sinon
      */
-    public void jouerTour(){
-        if (!jeuEnCours.getValue()){
+    public void jouerTour() {
+        if (!jeuEnCours.getValue()) {
             timer.stop();
             p.afficherPlateau();
             System.out.println(j.getScore().getValue());
@@ -51,7 +53,7 @@ public class Jeu implements IJeu {
             System.out.println("Game Over");
         } else {
             p.afficherPlateau();
-            timer.setDelay( (int)(Math.pow(0.8-((p.getRang().getValue()-1)*0.007) ,p.getRang().getValue()-1) *1000 ));
+            timer.setDelay((int) (Math.pow(0.8 - ((p.getRang().getValue() - 1) * 0.007), p.getRang().getValue() - 1) * 1000));
             System.out.println(j.getScore().getValue());
             System.out.println(p.getRang().getValue());
             System.out.println("_________________________________________\n");
@@ -61,9 +63,9 @@ public class Jeu implements IJeu {
     /**
      * Si le sac des prochaines pièces est vide, le rempli avec une pièce de chaque forme
      */
-    public void remplirSacProchainesPieces(){
+    public void remplirSacProchainesPieces() {
         if (sacProchainesPieces.isEmpty()) {
-            for (int i = 1; i<8; i++) {
+            for (int i = 1; i < 8; i++) {
                 sacProchainesPieces.add(new Piece(Forme.values()[i]));
             }
             Collections.shuffle(sacProchainesPieces);
@@ -72,9 +74,10 @@ public class Jeu implements IJeu {
 
     /**
      * Supprime et retourne la premiere piece de la liste des pieces suivantes.
+     *
      * @return la premiere piece de la liste en attente
      */
-    public Piece recupererProchainePiece(){
+    public Piece recupererProchainePiece() {
         return sacProchainesPieces.remove(0);
     }
 
@@ -93,7 +96,7 @@ public class Jeu implements IJeu {
         nouvelleProchainePiece();
         p.incrementerScoreJoueur(p.suppressionLignesRemplies());
         p.incrementerRang();
-        if(!p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle)){
+        if (!p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle)) {
             jeuEnCours.setValue(false);
         }
     }
@@ -104,7 +107,7 @@ public class Jeu implements IJeu {
     public void nouvelleProchainePiece() {
         prochainePiece.remplirTableau();
         pieceSuivante = sacProchainesPieces.get(0);
-        prochainePiece.placerPiece(1, prochainePiece.getLargeur()/2 -1, pieceSuivante);
+        prochainePiece.placerPiece(1, prochainePiece.getLargeur() / 2 - 1, pieceSuivante);
     }
 
     /**
@@ -116,8 +119,7 @@ public class Jeu implements IJeu {
         p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
         if (p.placerPiece(ligneActuelle, colonne, pieceActuelle)) {
             colonneActuelle = colonne;
-        }
-        else p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
+        } else p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
     }
 
     /**
@@ -126,12 +128,11 @@ public class Jeu implements IJeu {
      * dépasse les limites. On met alors fin au jeu.
      */
     public void tomberPieceActuelle() {
-        if(p.placerPieceParColonne(ligneActuelle, colonneActuelle, pieceActuelle)) {
-           p.incrementerScoreHardDrop();
+        if (p.placerPieceParColonne(ligneActuelle, colonneActuelle, pieceActuelle)) {
+            p.incrementerScoreHardDrop();
 
             nouvellePieceActuelle();
-        }
-        else {
+        } else {
             jeuEnCours.setValue(false);
         }
     }
@@ -143,10 +144,9 @@ public class Jeu implements IJeu {
      */
     public void tomberPieceActuelle1Ligne() {
         p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
-        if (p.placerPiece(ligneActuelle+1, colonneActuelle, pieceActuelle)) {
+        if (p.placerPiece(ligneActuelle + 1, colonneActuelle, pieceActuelle)) {
             ligneActuelle++;
-        }
-        else {
+        } else {
             p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle);
             nouvellePieceActuelle();
         }
