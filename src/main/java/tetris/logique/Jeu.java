@@ -23,8 +23,8 @@ public class Jeu implements IJeu {
     public static int colonneActuelle;
     public static Piece pieceSuivante;
 
-    public Jeu() {
-        j = new Joueur("Anonyme");
+    public Jeu(String pseudo) {
+        j = new Joueur(pseudo);
         p = new Plateau(10, 22, j);
         prochainePiece = new Plateau(4, 2, j);
 
@@ -33,12 +33,6 @@ public class Jeu implements IJeu {
         sacProchainesPieces = new ArrayList<>();
         this.remplirSacProchainesPieces();
         nouvellePieceActuelle();
-    }
-
-    public Jeu(String pseudo) {
-        this();
-        if (!pseudo.equals(""))
-            j = new Joueur(pseudo);
     }
 
     /**
