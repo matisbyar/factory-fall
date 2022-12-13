@@ -5,7 +5,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,7 +14,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
@@ -43,7 +41,7 @@ public class TetrisIHM extends Application {
 
     private  VueCreationJoueur vueCreationJoueur;
 
-    private  VueConnextionJoueur vueConnextionJoueur;
+    private VueConnexionJoueur vueConnexionJoueur;
 
 
     private  Vuejoueur vuejoueur;
@@ -75,7 +73,7 @@ public class TetrisIHM extends Application {
         public void handle(ActionEvent event) {
             vuejoueur = new Vuejoueur();
             vuejoueur.setButtonCliqueListenercreation(joueurcreation);
-            vuejoueur.setButtonCliqueListenerconnextion(joueurconnextion);
+            vuejoueur.setButtonCliqueListenerconnexion(joueurconnexion);
             vuejoueur.show();
             vueMenuPrincipal.close();
 
@@ -97,14 +95,14 @@ public class TetrisIHM extends Application {
     };
 
     /**
-     * lance la vue connextionjoueur apres avoir appuie  sur le bouton de connextion
+     * lance la vue connexionjoueur apres avoir appuie  sur le bouton de connexion
      */
-    private final EventHandler<ActionEvent> joueurconnextion = new EventHandler<>() {
+    private final EventHandler<ActionEvent> joueurconnexion = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
-            vueConnextionJoueur = new VueConnextionJoueur();
-            vueConnextionJoueur.setButtonCliqueListener(nouveaujoueurconnecte);
-            vueConnextionJoueur.show();
+            vueConnexionJoueur = new VueConnexionJoueur();
+            vueConnexionJoueur.setButtonCliqueListener(nouveaujoueurconnecte);
+            vueConnexionJoueur.show();
             vuejoueur.close();
 
         }
@@ -128,9 +126,9 @@ public class TetrisIHM extends Application {
     private final EventHandler<ActionEvent> nouveaujoueurconnecte = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
-            nomjoueur = vueConnextionJoueur.getNomjoueur().getText();
+            nomjoueur = vueConnexionJoueur.getNomjoueur().getText();
             demarrerPartie();
-            vueConnextionJoueur.close();
+            vueConnexionJoueur.close();
 
         }
     };

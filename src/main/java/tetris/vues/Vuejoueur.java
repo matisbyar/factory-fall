@@ -93,7 +93,7 @@ public class Vuejoueur extends Stage {
      * Listener interclasses qui permet à TetrisIHM de savoir quand le bouton start a été cliqué
      * @param joueurconnexion listener passé en paramètre dans la classe TetrisIHM (voir la classe en question)
      */
-    public void setButtonCliqueListenerconnextion(EventHandler<ActionEvent> joueurconnexion) {
+    public void setButtonCliqueListenerconnexion(EventHandler<ActionEvent> joueurconnexion) {
         connextionjoueur.setOnAction(joueurconnexion);   }
 
 

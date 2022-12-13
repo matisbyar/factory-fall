@@ -15,7 +15,7 @@ import javafx.geometry.Insets;
 
 import java.awt.*;
 
-public class VueConnextionJoueur extends Stage {
+public class VueConnexionJoueur extends Stage {
 
     Scene scene;
     BorderPane borderPane;
@@ -28,7 +28,7 @@ public class VueConnextionJoueur extends Stage {
 
     Insets insets;
 
-    public VueConnextionJoueur() {
+    public VueConnexionJoueur() {
         background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280,720, false, false, false, false)));
         borderPane = new BorderPane();
 
