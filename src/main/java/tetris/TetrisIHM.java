@@ -35,7 +35,7 @@ public class TetrisIHM extends Application {
     private ActionListener descenteAuto;
     private Button startJeu;
     Label score, pseudo, rang, prochainePieceLabel;
-    private final Font police = Font.loadFont("file:src/main/resources/fonts/Bazaroni.ttf", 18);
+    private final Font police = Font.loadFont("file:src/main/resources/fonts/arcade.ttf", 32);
 
     // Vues personnelles (créées par l'équipe)
     private VueMenuPrincipal vueMenuPrincipal;
