@@ -17,11 +17,13 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
-import tetris.vues.*;
+import tetris.vues.VueGameOver;
+import tetris.vues.VueMenuPrincipal;
+import tetris.vues.VuePlateau;
+import tetris.vues.VueProchainePiece;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class TetrisIHM extends Application {
 
@@ -32,7 +34,7 @@ public class TetrisIHM extends Application {
     private VBox informationsJoueur;
     private ActionListener descenteAuto;
     private Button startJeu;
-    Label score, pseudo, rang;
+    Label score, pseudo, rang, prochainePieceLabel;
     private final Font police = Font.loadFont("file:src/main/resources/fonts/Bazaroni.ttf", 18);
 
     // Vues personnelles (créées par l'équipe)
@@ -115,21 +117,21 @@ public class TetrisIHM extends Application {
         primaryStage = new Stage();
 
         startJeu = new Button();
-        score = new Label("0.0");
+        score = new Label("score : 0.0");
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
-        contenerDroit = new VBox(vueProchainePiece);
+        prochainePieceLabel = new Label("prochaine :");
+        contenerDroit = new VBox(prochainePieceLabel, vueProchainePiece);
         informationsJoueur = new VBox(pseudo, score, rang);
         contenerGauche = new VBox(informationsJoueur, startJeu);
 
         scene = new Scene(borderPane);
 
         // Affectations et constitution de vues
-
         borderPane.setLeft(contenerGauche);
         borderPane.setCenter(vuePlateau);
         borderPane.setRight(contenerDroit);
-        borderPane.setPrefWidth(300);
+
 
         creerBindings();
         styliser();
@@ -175,7 +177,7 @@ public class TetrisIHM extends Application {
         });
 
         // Listener sur le score du joueur
-        jeu.getJoueur().getScore().addListener((observableValue, number, t1) -> score.setText(jeu.getJoueur().getScore().getValue() + ""));
+        jeu.getJoueur().getScore().addListener((observableValue, number, t1) -> score.setText("score : " + jeu.getJoueur().getScore().getValue() + ""));
 
         // Listener pour actualiser le rang de la partie
         jeu.getRang(jeu.getPlateau()).addListener((observableValue, number, t1) -> rang.setText("rang : " + jeu.getRang(jeu.getPlateau()).getValue()));
@@ -214,7 +216,7 @@ public class TetrisIHM extends Application {
         primaryStage.close();
         startJeu.setDisable(false);
         demarrerPartie();
-        score.setText("0");
+        score.setText("score : 0.0");
         rang.setText("rang : 1");
         pseudo.setText(jeu.getJoueur().getPseudo());
     }
@@ -275,6 +277,15 @@ public class TetrisIHM extends Application {
         rang.setAlignment(Pos.TOP_RIGHT);
         rang.setPrefWidth(426);
 
+        // Label Prochaine pièce
+        prochainePieceLabel.setTextFill(Color.WHITE);
+        prochainePieceLabel.setFont(police);
+        prochainePieceLabel.setMinSize(150, 50);
+        prochainePieceLabel.setLayoutX(150);
+        prochainePieceLabel.setLayoutY(200);
+        prochainePieceLabel.setAlignment(Pos.TOP_LEFT);
+        prochainePieceLabel.setPrefWidth(426);
+
         // Labels
         informationsJoueur.setLayoutX(20);
         informationsJoueur.setLayoutY(20);
@@ -284,9 +295,14 @@ public class TetrisIHM extends Application {
         startJeu.setStyle("-fx-background-color: black");
         startJeu.getStyleClass().add("bouttonStart");
 
-        // Contener Gauche
+        // Container gauche
         contenerGauche.setAlignment(Pos.TOP_RIGHT);
         contenerGauche.setPrefWidth(426);
+
+        // Container droit
+        contenerDroit.setAlignment(Pos.TOP_RIGHT);
+        contenerDroit.setPrefWidth(426);
+
         // VueControles
     }
 }
