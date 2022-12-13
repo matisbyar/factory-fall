@@ -52,7 +52,7 @@ public class TetrisIHM extends Application {
     Plateau prochainePiece;
 
 
-    private String nomjoueur="";
+    private String nomjoueur = "";
 
     @Override
     public void start(Stage primaryStage) {
@@ -89,7 +89,6 @@ public class TetrisIHM extends Application {
             nomjoueur = vueMenuPrincipal.getNomjoueur().getText();
             demarrerPartie();
             vueMenuPrincipal.close();
-
         }
     };
 
@@ -99,7 +98,6 @@ public class TetrisIHM extends Application {
             nomjoueur = "Anonyme";
             demarrerPartie();
             vueMenuPrincipal.close();
-
         }
     };
 
@@ -132,11 +130,9 @@ public class TetrisIHM extends Application {
         borderPane.setCenter(vuePlateau);
         borderPane.setRight(contenerDroit);
 
-
+        // "Stylisation" et bindings/listeners
         creerBindings();
         styliser();
-        // "Stylisation" et bindings/listeners
-
 
         // Initialisation du timer (obligatoire après les bindings)
         Jeu.timer = new Timer(1000, descenteAuto);
