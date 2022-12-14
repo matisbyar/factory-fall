@@ -9,21 +9,30 @@ import tetris.logique.Plateau;
 
 public class VueProchainePiece extends GridPane {
 
+    private String dossierImg = "conteneur";
     private final Image vide = new Image("file:src/main/resources/img/vide.png");
-    private final Image imgS = new Image("file:src/main/resources/img/conteneur/S.png");
-    private final Image imgI = new Image("file:src/main/resources/img/conteneur/I.png");
-    private final Image imgJ = new Image("file:src/main/resources/img/conteneur/J.png");
-    private final Image imgL = new Image("file:src/main/resources/img/conteneur/L.png");
-    private final Image imgO = new Image("file:src/main/resources/img/conteneur/O.png");
-    private final Image imgT = new Image("file:src/main/resources/img/conteneur/T.png");
-    private final Image imgZ = new Image("file:src/main/resources/img/conteneur/Z.png");
+    private final Image imgS;
+    private final Image imgI;
+    private final Image imgJ;
+    private final Image imgL;
+    private final Image imgO;
+    private final Image imgT;
+    private final Image imgZ;
 
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
     Plateau p;
 
-    public VueProchainePiece(Plateau p) {
+    public VueProchainePiece(Plateau p, String dossierImg) {
         this.p = p;
+        this.dossierImg = dossierImg;
+        imgS = new Image("file:src/main/resources/img/" + dossierImg + "/S.jpg");
+        imgI = new Image("file:src/main/resources/img/" + dossierImg + "/I.jpg");
+        imgJ = new Image("file:src/main/resources/img/" + dossierImg + "/J.jpg");
+        imgL = new Image("file:src/main/resources/img/" + dossierImg + "/L.jpg");
+        imgO = new Image("file:src/main/resources/img/" + dossierImg + "/O.jpg");
+        imgT = new Image("file:src/main/resources/img/" + dossierImg + "/T.jpg");
+        imgZ = new Image("file:src/main/resources/img/" + dossierImg + "/Z.jpg");
     }
 
     public void mettreAJour() {

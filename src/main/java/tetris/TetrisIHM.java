@@ -160,8 +160,8 @@ public class TetrisIHM extends Application {
         jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
         prochainePiece = jeu.getProchainePiece();
-        vuePlateau = new VuePlateau(p);
-        vueProchainePiece = new VueProchainePiece(prochainePiece);
+        vuePlateau = new VuePlateau(p, vueMenuPrincipal.getDossierImg());
+        vueProchainePiece = new VueProchainePiece(prochainePiece, vueMenuPrincipal.getDossierImg());
 
         // javaFX
         borderPane = new BorderPane();
@@ -204,7 +204,7 @@ public class TetrisIHM extends Application {
     public void creerBindings() {
         // Listener sur les "inputs" (actions du joueur) lors d'une partie. Ces inputs sont les flèches du clavier
         scene.setOnKeyPressed(keyEvent -> {
-            if (jeu.isJeuEnCours()) {//TODO ici
+            if (jeu.isJeuEnCours()) {
                 if (!jeuEnPause) {
                     switch (keyEvent.getCode()) {
                         case LEFT -> jeu.actionGauche();
