@@ -287,6 +287,7 @@ public class TetrisIHM extends Application {
     private void relancerPartie() {
         primaryStage.close();
         startJeu.setDisable(false);
+        sp.getChildren().clear();
         demarrerPartie();
         score.setText("score : 0.0");
         rang.setText("rang : 1");
