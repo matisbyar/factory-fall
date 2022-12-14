@@ -181,6 +181,7 @@ public class TetrisIHM extends Application {
         borderPane.setCenter(sp);
         borderPane.setRight(contenerDroit);
         vuePlateau.initialiser();
+        vueProchainePiece.initialiser();
 
         // "Stylisation" et bindings/listeners
         creerBindings();
@@ -367,6 +368,9 @@ public class TetrisIHM extends Application {
         // Container droit
         contenerDroit.setAlignment(Pos.TOP_RIGHT);
         contenerDroit.setPrefWidth(426);
+
+        // Vue Prochaine pièce
+        vueProchainePiece.setAlignment(Pos.CENTER_LEFT);
 
         // VueControles
         vueControles.setPrefWidth(426);
