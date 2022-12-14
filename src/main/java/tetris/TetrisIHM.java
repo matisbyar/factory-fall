@@ -23,13 +23,9 @@ import tetris.logique.AuthPlayer;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
 import tetris.stockage.PlayerManager;
-import tetris.stockage.ScoreManager;
 import tetris.stockage.Security;
 import tetris.stockage.Session;
-import tetris.vues.VueGameOver;
-import tetris.vues.VueMenuPrincipal;
-import tetris.vues.VuePlateau;
-import tetris.vues.VueProchainePiece;
+import tetris.vues.*;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -53,6 +49,7 @@ public class TetrisIHM extends Application {
     private VueMenuPrincipal vueMenuPrincipal;
     private VuePlateau vuePlateau;
     private VueProchainePiece vueProchainePiece;
+    private VueControles vueControles;
 
     private VBox contenerDroit;
 
@@ -162,6 +159,7 @@ public class TetrisIHM extends Application {
         prochainePiece = jeu.getProchainePiece();
         vuePlateau = new VuePlateau(p, vueMenuPrincipal.getDossierImg());
         vueProchainePiece = new VueProchainePiece(prochainePiece, vueMenuPrincipal.getDossierImg());
+        vueControles = new VueControles();
 
         // javaFX
         borderPane = new BorderPane();
@@ -172,7 +170,7 @@ public class TetrisIHM extends Application {
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
         prochainePieceLabel = new Label("prochaine :");
-        contenerDroit = new VBox(prochainePieceLabel, vueProchainePiece);
+        contenerDroit = new VBox(prochainePieceLabel, vueProchainePiece, vueControles);
         informationsJoueur = new VBox(pseudo, score, rang);
         contenerGauche = new VBox(informationsJoueur, startJeu);
 
@@ -373,5 +371,7 @@ public class TetrisIHM extends Application {
         contenerDroit.setPrefWidth(426);
 
         // VueControles
+        vueControles.setPrefWidth(426);
+        vueControles.setAlignment(Pos.BOTTOM_LEFT);
     }
 }
