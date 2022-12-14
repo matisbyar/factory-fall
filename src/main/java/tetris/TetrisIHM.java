@@ -221,8 +221,10 @@ public class TetrisIHM extends Application {
                     jeuEnPause = !jeuEnPause;
                     if (jeuEnPause) {
                         Jeu.timer.stop();
+                        imgPause.setVisible(true);
                     } else {
                         Jeu.timer.start();
+                        imgPause.setVisible(false);
                     }
                     ObservableList<Node> childs = this.sp.getChildren();
 
