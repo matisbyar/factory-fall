@@ -158,7 +158,6 @@ public class TetrisIHM extends Application {
         jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
         prochainePiece = jeu.getProchainePiece();
-
         // javaFX
         borderPane = new BorderPane();
         primaryStage = new Stage();
@@ -181,6 +180,7 @@ public class TetrisIHM extends Application {
         // Affectations et constitution de vues
         borderPane.setLeft(contenerGauche);
         sp.getChildren().addAll(imgPause, vuePlateau);
+        imgPause.setVisible(false);
         borderPane.setCenter(sp);
         borderPane.setRight(contenerDroit);
         vuePlateau.initialiser();
@@ -220,8 +220,10 @@ public class TetrisIHM extends Application {
                 if (keyEvent.getCode() == KeyCode.P) {
                     jeuEnPause = !jeuEnPause;
                     if (jeuEnPause) {
+                        imgPause.setVisible(true);
                         Jeu.timer.stop();
                     } else {
+                        imgPause.setVisible(false);
                         Jeu.timer.start();
                     }
                     ObservableList<Node> childs = this.sp.getChildren();
@@ -274,8 +276,8 @@ public class TetrisIHM extends Application {
         // Lance le jeu une fois le bouton startJeu cliqué
         startJeu.setOnAction(actionEvent -> {
             Jeu.timer.start();
-            jeu.jeuEnCoursProperty().setValue(true);
             startJeu.setVisible(false);
+            jeu.jeuEnCoursProperty().setValue(true);
         });
     }
 
