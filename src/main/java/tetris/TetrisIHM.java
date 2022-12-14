@@ -2,9 +2,11 @@ package tetris;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -62,6 +65,9 @@ public class TetrisIHM extends Application {
 
 
     private String nomjoueur = "";
+
+    private StackPane sp = new StackPane();
+    private ImageView imgPause = new ImageView(new Image("file:src/main/resources/img/pause.png"));
 
     @Override
     public void start(Stage primaryStage) {
@@ -173,8 +179,10 @@ public class TetrisIHM extends Application {
 
         // Affectations et constitution de vues
         borderPane.setLeft(contenerGauche);
-        borderPane.setCenter(vuePlateau);
+        sp.getChildren().addAll(imgPause, vuePlateau);
+        borderPane.setCenter(sp);
         borderPane.setRight(contenerDroit);
+        vuePlateau.mettreAJour();
 
         // "Stylisation" et bindings/listeners
         creerBindings();
@@ -213,6 +221,12 @@ public class TetrisIHM extends Application {
                         Jeu.timer.stop();
                     } else {
                         Jeu.timer.start();
+                    }
+                    ObservableList<Node> childs = this.sp.getChildren();
+
+                    if (childs.size() > 1) {
+                        Node topNode = childs.get(childs.size()-1);
+                        topNode.toBack();
                     }
                 }
                 vuePlateau.mettreAJour();
