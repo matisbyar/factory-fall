@@ -157,6 +157,7 @@ public class TetrisIHM extends Application {
         // Initialisations des objets nécessaires
         // classes de la logique du jeu
         jeu = new Jeu(nomjoueur);
+        jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
         prochainePiece = jeu.getProchainePiece();
         vuePlateau = new VuePlateau(p);
@@ -203,7 +204,7 @@ public class TetrisIHM extends Application {
     public void creerBindings() {
         // Listener sur les "inputs" (actions du joueur) lors d'une partie. Ces inputs sont les flèches du clavier
         scene.setOnKeyPressed(keyEvent -> {
-            if (jeu.isJeuEnCours()) {
+            if (jeu.isJeuEnCours()) {//TODO ici
                 if (!jeuEnPause) {
                     switch (keyEvent.getCode()) {
                         case LEFT -> jeu.actionGauche();
@@ -272,6 +273,7 @@ public class TetrisIHM extends Application {
         // Lance le jeu une fois le bouton startJeu cliqué
         startJeu.setOnAction(actionEvent -> {
             Jeu.timer.start();
+            jeu.jeuEnCoursProperty().setValue(true);
             startJeu.setDisable(true);
         });
     }
