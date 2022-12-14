@@ -180,7 +180,7 @@ public class TetrisIHM extends Application {
         sp.getChildren().addAll(imgPause, vuePlateau);
         borderPane.setCenter(sp);
         borderPane.setRight(contenerDroit);
-
+        vuePlateau.initialiser();
 
         // "Stylisation" et bindings/listeners
         creerBindings();

@@ -30,6 +30,23 @@ public class VueGrille extends GridPane {
         imgZ = new Image("file:src/main/resources/img/" + dossierImg + "/Z.jpg");
     }
 
+    public void initialiser() {
+        // Effacer le GridPane (effectué à chaque mise à jour)
+        this.getChildren().clear();
+
+        // Ajoute les pièces vides dans la grille
+        for (int colonne = 0; colonne < p.getPlateau().length; colonne++) {
+            for (int ligne = 0; ligne < p.getPlateau()[0].length; ligne++) {
+                ImageView imagePiece = getClass() == VueProchainePiece.class ? new ImageView() : ligne % 2 == 0 ? new ImageView(vide) : new ImageView(vide_clair);
+
+                imagePiece.setFitHeight((primaryScreenBounds.getHeight() * 0.03));
+                imagePiece.setFitWidth((primaryScreenBounds.getHeight() * 0.03));
+
+                this.add(imagePiece, ligne, colonne);
+            }
+        }
+    }
+
     public void mettreAJour() {
         // Effacer le GridPane (effectué à chaque mise à jour)
         this.getChildren().clear();
