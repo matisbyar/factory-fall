@@ -63,8 +63,8 @@ public class TetrisIHM extends Application {
 
     private String nomjoueur = "";
 
-    private StackPane sp = new StackPane();
-    private ImageView imgPause = new ImageView(new Image("file:src/main/resources/img/pause.png"));
+    private final StackPane sp = new StackPane();
+    private final ImageView imgPause = new ImageView(new Image("file:src/main/resources/img/pause.png"));
 
     @Override
     public void start(Stage primaryStage) {
@@ -116,9 +116,7 @@ public class TetrisIHM extends Application {
             if (j != null) {
                 try {
                     connexionOK = Security.checkPassword(vueMenuPrincipal.getMotDePasse().getText(), j.getSalt(), j.getHashedPassword());
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                } catch (InvalidKeyException e) {
+                } catch (NoSuchAlgorithmException | InvalidKeyException e) {
                     e.printStackTrace();
                 }
 
@@ -157,13 +155,14 @@ public class TetrisIHM extends Application {
         jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
         prochainePiece = jeu.getProchainePiece();
-        vuePlateau = new VuePlateau(p, vueMenuPrincipal.getDossierImg());
-        vueProchainePiece = new VueProchainePiece(prochainePiece, vueMenuPrincipal.getDossierImg());
-        vueControles = new VueControles();
 
         // javaFX
         borderPane = new BorderPane();
         primaryStage = new Stage();
+
+        vuePlateau = new VuePlateau(p, vueMenuPrincipal.getDossierImg());
+        vueProchainePiece = new VueProchainePiece(prochainePiece, vueMenuPrincipal.getDossierImg());
+        vueControles = new VueControles();
 
         startJeu = new Button();
         score = new Label("score : 0.0");
@@ -181,7 +180,7 @@ public class TetrisIHM extends Application {
         sp.getChildren().addAll(imgPause, vuePlateau);
         borderPane.setCenter(sp);
         borderPane.setRight(contenerDroit);
-        vuePlateau.mettreAJour();
+
 
         // "Stylisation" et bindings/listeners
         creerBindings();
@@ -295,7 +294,6 @@ public class TetrisIHM extends Application {
 
         // Scene
         scene.getStylesheets().add("file:src/main/resources/css/main.css");
-
 
         // BorderPane
         borderPane.getStyleClass().add("borderPane");
