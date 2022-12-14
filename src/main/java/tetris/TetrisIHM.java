@@ -194,6 +194,9 @@ public class TetrisIHM extends Application {
         // Initialisation du timer (obligatoire après les bindings)
         Jeu.timer = new Timer(1000, descenteAuto);
 
+        //boutton pause
+        imgPause.setVisible(false);
+
         // Affichage définitif
         primaryStage.setScene(scene);
         primaryStage.show();
