@@ -1,15 +1,16 @@
 package tetris.vues;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
 public class VueMenuPrincipal extends Stage {
 
@@ -60,7 +61,7 @@ public class VueMenuPrincipal extends Stage {
     private int i = 0;
 
     public VueMenuPrincipal() {
-        background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/ImageMenu.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280,720, false, false, false, false)));
+        background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background/classic.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
         borderPaneMenu = new BorderPane();
 
         lancerJeu = new Button();

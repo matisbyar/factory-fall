@@ -381,7 +381,7 @@ public class TetrisIHM extends Application {
 
         // Image Pause
         imgPause.setPreserveRatio(true);
-        imgPause.setFitWidth(100);
+        imgPause.setFitWidth(150);
 
     }
 }
