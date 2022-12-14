@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -35,6 +36,7 @@ import java.security.NoSuchAlgorithmException;
 public class TetrisIHM extends Application {
 
     // Objets issus de JavaFX pour l'IHM du jeu
+    private boolean jeuEnPause = false;
     private Scene scene;
     Stage primaryStage;
     private BorderPane borderPane;
@@ -194,14 +196,24 @@ public class TetrisIHM extends Application {
         // Listener sur les "inputs" (actions du joueur) lors d'une partie. Ces inputs sont les flèches du clavier
         scene.setOnKeyPressed(keyEvent -> {
             if (jeu.isJeuEnCours()) {
-                switch (keyEvent.getCode()) {
-                    case LEFT -> jeu.actionGauche();
-                    case RIGHT -> jeu.actionDroite();
-                    case DOWN -> jeu.actionBas();
-                    case UP -> jeu.actionHaut();
-                    case R -> jeu.actionR();
-                    case ESCAPE -> jeu.actionEchap();
-                    case SPACE -> jeu.actionEspace();
+                if (!jeuEnPause) {
+                    switch (keyEvent.getCode()) {
+                        case LEFT -> jeu.actionGauche();
+                        case RIGHT -> jeu.actionDroite();
+                        case DOWN -> jeu.actionBas();
+                        case UP -> jeu.actionHaut();
+                        case R -> jeu.actionR();
+                        case ESCAPE -> jeu.actionEchap();
+                        case SPACE -> jeu.actionEspace();
+                    }
+                }
+                if (keyEvent.getCode() == KeyCode.P) {
+                    jeuEnPause = !jeuEnPause;
+                    if (jeuEnPause) {
+                        Jeu.timer.stop();
+                    } else {
+                        Jeu.timer.start();
+                    }
                 }
                 vuePlateau.mettreAJour();
                 vueProchainePiece.mettreAJour();
