@@ -60,13 +60,12 @@ public class TetrisIHM extends Application {
     Plateau p;
     Plateau prochainePiece;
 
-
     private String nomjoueur = "";
 
     /**
      * Le StackPane sp permet de superposer les éléments de l'IHM. Ici, il superpose le plateau de jeu et l'icone de pause.
      */
-    private final StackPane sp = new StackPane();
+    private StackPane sp;
     private final ImageView imgPause = new ImageView(new Image("file:src/main/resources/img/pause.png"));
 
     @Override
@@ -176,13 +175,17 @@ public class TetrisIHM extends Application {
         informationsJoueur = new VBox(pseudo, score, rang);
         contenerGauche = new VBox(informationsJoueur, startJeu);
 
+        // Gestion Plateau/Bouton Pause
+        sp = new StackPane(imgPause, vuePlateau);
+
         scene = new Scene(borderPane);
 
         // Affectations et constitution de vues
         borderPane.setLeft(contenerGauche);
-        sp.getChildren().addAll(imgPause, vuePlateau);
         borderPane.setCenter(sp);
         borderPane.setRight(contenerDroit);
+
+        // Initialisation des grilles
         vuePlateau.initialiser();
         vueProchainePiece.initialiser();
 
