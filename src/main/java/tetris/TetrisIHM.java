@@ -60,13 +60,12 @@ public class TetrisIHM extends Application {
     Plateau p;
     Plateau prochainePiece;
 
-
     private String nomjoueur = "";
 
     /**
      * Le StackPane sp permet de superposer les éléments de l'IHM. Ici, il superpose le plateau de jeu et l'icone de pause.
      */
-    private final StackPane sp = new StackPane();
+    private StackPane sp;
     private final ImageView imgPause = new ImageView(new Image("file:src/main/resources/img/pause.png"));
 
     @Override
@@ -158,6 +157,7 @@ public class TetrisIHM extends Application {
         jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
         prochainePiece = jeu.getProchainePiece();
+
         // javaFX
         borderPane = new BorderPane();
         primaryStage = new Stage();
@@ -175,14 +175,17 @@ public class TetrisIHM extends Application {
         informationsJoueur = new VBox(pseudo, score, rang);
         contenerGauche = new VBox(informationsJoueur, startJeu);
 
+        // Gestion Plateau/Bouton Pause
+        sp = new StackPane(imgPause, vuePlateau);
+
         scene = new Scene(borderPane);
 
         // Affectations et constitution de vues
         borderPane.setLeft(contenerGauche);
-        sp.getChildren().addAll(imgPause, vuePlateau);
-        imgPause.setVisible(false);
         borderPane.setCenter(sp);
         borderPane.setRight(contenerDroit);
+
+        // Initialisation des grilles
         vuePlateau.initialiser();
         vueProchainePiece.initialiser();
 
@@ -220,11 +223,9 @@ public class TetrisIHM extends Application {
                 if (keyEvent.getCode() == KeyCode.P) {
                     jeuEnPause = !jeuEnPause;
                     if (jeuEnPause) {
-                        imgPause.setVisible(true);
                         Jeu.timer.stop();
                         imgPause.setVisible(true);
                     } else {
-                        imgPause.setVisible(false);
                         Jeu.timer.start();
                         imgPause.setVisible(false);
                     }
@@ -278,8 +279,8 @@ public class TetrisIHM extends Application {
         // Lance le jeu une fois le bouton startJeu cliqué
         startJeu.setOnAction(actionEvent -> {
             Jeu.timer.start();
-            startJeu.setVisible(false);
             jeu.jeuEnCoursProperty().setValue(true);
+            startJeu.setVisible(false);
         });
     }
 
@@ -289,6 +290,7 @@ public class TetrisIHM extends Application {
     private void relancerPartie() {
         primaryStage.close();
         startJeu.setDisable(false);
+        sp.getChildren().clear();
         demarrerPartie();
         score.setText("score : 0.0");
         rang.setText("rang : 1");
