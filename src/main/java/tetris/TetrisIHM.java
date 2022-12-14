@@ -93,8 +93,7 @@ public class TetrisIHM extends Application {
 
             if (j != null) {
                 System.out.println("Cet identifiant n'est pas disponible");
-            }
-            else {
+            } else {
                 PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomjoueur().getText(), vueMenuPrincipal.getMotDePasse().getText());
 
                 nomjoueur = vueMenuPrincipal.getNomjoueur().getText();
@@ -126,8 +125,7 @@ public class TetrisIHM extends Application {
                     //Si le mot de passe est incorrect (mais le login existe dans la BD)
                     System.out.println("Mot de passe incorrect");
                 }
-            }
-            else {
+            } else {
                 //Si l'identifiant est incorrect (aucun joueur de ce login n'est inscrit dans la BD)
                 System.out.println("Identifiant incorrect");
             }
@@ -157,7 +155,7 @@ public class TetrisIHM extends Application {
         jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
         prochainePiece = jeu.getProchainePiece();
-        imgPause.setVisible(false);
+
         // javaFX
         borderPane = new BorderPane();
         primaryStage = new Stage();
@@ -232,7 +230,7 @@ public class TetrisIHM extends Application {
                     ObservableList<Node> childs = this.sp.getChildren();
 
                     if (childs.size() > 1) {
-                        Node topNode = childs.get(childs.size()-1);
+                        Node topNode = childs.get(childs.size() - 1);
                         topNode.toBack();
                     }
                 }

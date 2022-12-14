@@ -14,8 +14,8 @@ import javafx.stage.Stage;
 
 public class VueMenuPrincipal extends Stage {
 
-    private Scene sceneMenu;
-    private BorderPane borderPaneMenu;
+    private final Scene sceneMenu;
+    private final BorderPane borderPaneMenu;
     private BorderPane borderPaneJoueur;
     private final Background background;
     private final Button lancerJeu;
@@ -30,13 +30,17 @@ public class VueMenuPrincipal extends Stage {
 
     private javafx.geometry.Insets insets;
 
-    /** Elements du menu creation joueur*/
+    /**
+     * Elements du menu creation joueur
+     */
     private Scene sceneCreationJoueur;
     private BorderPane borderPaneCreationJoueur;
     private Button creejoueur = new Button();
     private VBox vbCreationJoueur;
 
-    /** Elements du menu connexion joueur*/
+    /**
+     * Elements du menu connexion joueur
+     */
 
     private Scene sceneConnexionJoueur;
     private BorderPane borderPaneConnexion;
@@ -69,8 +73,8 @@ public class VueMenuPrincipal extends Stage {
         personnaliser = new Button();
         compte = new Button();
         bouttons = new VBox(lancerJeu, parametres, personnaliser);
-        insets = new Insets(10, 10 ,10, 10);
-        sceneMenu = new Scene(borderPaneMenu, 1280,720);
+        insets = new Insets(10, 10, 10, 10);
+        sceneMenu = new Scene(borderPaneMenu, 1280, 720);
 
         styliserMenu();
         creerBindings();
@@ -117,31 +121,35 @@ public class VueMenuPrincipal extends Stage {
         compte.setStyle("-fx-background-color: black");
     }
 
-    /** Fonction qui déclenche le lancement du jeu en Anonyme dans TetrisIHM
+    /**
+     * Fonction qui déclenche le lancement du jeu en Anonyme dans TetrisIHM
      */
     public void setButtonJouerCliqueListener(EventHandler<ActionEvent> quandLeButtonJouerEstClique) {
         lancerJeu.setOnAction(quandLeButtonJouerEstClique);
     }
 
-    /** Fonction qui déclenche le lancement du jeu après la connexion d'un utilisateur dans TetrisIHM
+    /**
+     * Fonction qui déclenche le lancement du jeu après la connexion d'un utilisateur dans TetrisIHM
      */
     public void setButtonConnecterJoueurCliqueListener(EventHandler<ActionEvent> joueurconnecte) {
         btConnexion.setOnAction(joueurconnecte);
     }
 
-    /** Fonction qui déclenche le lancement du jeu après la création d'un nouvel utilisateur dans TetrisIHM
+    /**
+     * Fonction qui déclenche le lancement du jeu après la création d'un nouvel utilisateur dans TetrisIHM
      */
     public void setButtonCreerJoueurCliqueListener(EventHandler<ActionEvent> nouveaujoueurcree) {
         creejoueur.setOnAction(nouveaujoueurcree);
     }
 
-    /** Fonction qui sert de refactoring a la vue ChoixJoueur
+    /**
+     * Fonction qui sert de refactoring a la vue ChoixJoueur
      */
     public void choixJoueur() {
         setTitleJoueur();
         borderPaneJoueur = new BorderPane();
         borderPaneJoueur.setBackground(background);
-        sceneJoueur = new Scene(borderPaneJoueur, 1280,720);
+        sceneJoueur = new Scene(borderPaneJoueur, 1280, 720);
         sceneJoueur.getStylesheets().add("file:src/main/resources/css/mainVueCreationJoueur.css");
         vbJoueur = new VBox(connexion, creationCompte);
         borderPaneJoueur.setCenter(vbJoueur);
@@ -152,14 +160,16 @@ public class VueMenuPrincipal extends Stage {
         this.setScene(sceneJoueur);
     }
 
-    /**Fonction qui permet d'afficher le menu principal (utilisé lors d'un appui sur le bouton retour)
+    /**
+     * Fonction qui permet d'afficher le menu principal (utilisé lors d'un appui sur le bouton retour)
      */
     public void afficherMenuPrincipal() {
         this.setTitle("Menu Principal");
         this.setScene(sceneMenu);
     }
 
-    /**Fonction qui permet d'afficher le menu choix joueur (utilisé lors d'un appui sur le bouton retour de connexion et création de compte)
+    /**
+     * Fonction qui permet d'afficher le menu choix joueur (utilisé lors d'un appui sur le bouton retour de connexion et création de compte)
      */
     public void afficherMenuJoueur() {
         this.setTitle("Menu Joueur");
@@ -183,34 +193,36 @@ public class VueMenuPrincipal extends Stage {
         retourToMenu.setStyle("-fx-background-color: transparent");
     }
 
-    /**Fonction qui sert de refactoring a la vue ConnexionJoueur
+    /**
+     * Fonction qui sert de refactoring a la vue ConnexionJoueur
      */
     public void connexionJoueur() {
         borderPaneConnexion = new BorderPane();
         borderPaneConnexion.setBackground(background);
         creejoueur = new Button();
-        nomJoueur = new  TextField();
+        nomJoueur = new TextField();
         motDePasse = new TextField();
-        vbConnexionJoueur = new VBox( nomJoueur, motDePasse, btConnexion);
+        vbConnexionJoueur = new VBox(nomJoueur, motDePasse, btConnexion);
         borderPaneConnexion.setTop(retourToJoueur);
-        sceneConnexionJoueur = new Scene(borderPaneConnexion, 1280,720);
+        sceneConnexionJoueur = new Scene(borderPaneConnexion, 1280, 720);
         sceneConnexionJoueur.getStylesheets().add("file:src/main/resources/css/mainVueCreationJoueur.css");
         styliserConnexionJoueur();
         this.setScene(sceneConnexionJoueur);
     }
 
-    /**Fonction qui sert de refactoring a la vue CreationJoueur
+    /**
+     * Fonction qui sert de refactoring a la vue CreationJoueur
      */
     public void creationJoueur() {
         setTitleJoueur();
         borderPaneCreationJoueur = new BorderPane();
         borderPaneCreationJoueur.setBackground(background);
         //creejoueur = new Button();
-        nomJoueur = new  TextField();
+        nomJoueur = new TextField();
         motDePasse = new TextField();
-        vbCreationJoueur = new VBox( nomJoueur,motDePasse, creejoueur);
+        vbCreationJoueur = new VBox(nomJoueur, motDePasse, creejoueur);
         borderPaneCreationJoueur.setTop(retourToJoueur);
-        sceneCreationJoueur = new Scene(borderPaneCreationJoueur, 1280,720);
+        sceneCreationJoueur = new Scene(borderPaneCreationJoueur, 1280, 720);
         styliserCreationJoueur();
         this.setScene(sceneCreationJoueur);
     }
@@ -238,7 +250,9 @@ public class VueMenuPrincipal extends Stage {
         retourToJoueur.setGraphic(new ImageView(new Image("file:src/main/resources/img/fleche.png")));
         retourToJoueur.setStyle("-fx-background-color: transparent");
     }
-    /**Fonction pour set le titre de la vue (évite la duplication de code)
+
+    /**
+     * Fonction pour set le titre de la vue (évite la duplication de code)
      */
     public void setTitleJoueur() {
         this.setTitle("Menu Joueur");
@@ -267,19 +281,22 @@ public class VueMenuPrincipal extends Stage {
         retourToJoueur.setStyle("-fx-background-color: transparent");
     }
 
-    /**Getter utile pour la récupération dans TetrisIHM
+    /**
+     * Getter utile pour la récupération dans TetrisIHM
      */
     public TextField getNomjoueur() {
         return nomJoueur;
     }
 
-    /**Getter utile pour la récupération dans TetrisIHM
+    /**
+     * Getter utile pour la récupération dans TetrisIHM
      */
     public TextField getMotDePasse() {
         return motDePasse;
     }
 
-    /**Fonction qui créer tous les bindings in line utile pour l'ensemble des boutons du menu
+    /**
+     * Fonction qui créer tous les bindings in line utile pour l'ensemble des boutons du menu
      */
     public void creerBindings() {
         compte.setOnAction(actionEvent -> choixJoueur());
@@ -287,12 +304,13 @@ public class VueMenuPrincipal extends Stage {
         connexion.setOnAction(actionEvent -> connexionJoueur());
         creationCompte.setOnAction(actionEvent -> creationJoueur());
         retourToJoueur.setOnAction(actionEvent -> afficherMenuJoueur());
-        personnaliser.setOnAction(actionEvent->personnalisation());
-        flecheD.setOnAction(actionEvent->changerImage("+"));
-        flecheG.setOnAction(actionEvent->changerImage("-"));
+        personnaliser.setOnAction(actionEvent -> personnalisation());
+        flecheD.setOnAction(actionEvent -> changerImage("+"));
+        flecheG.setOnAction(actionEvent -> changerImage("-"));
     }
 
-    /**Fonction qui simule une VuePersonnalisation
+    /**
+     * Fonction qui simule une VuePersonnalisation
      */
     public void personnalisation() {
         this.setTitle("Menu Personnalisation");
@@ -309,7 +327,7 @@ public class VueMenuPrincipal extends Stage {
         vbPerso.getChildren().add(hbPerso);
         borderPanePerso.setCenter(vbPerso);
         styliserPerso();
-        scenePerso = new Scene(borderPanePerso, 1280,720);
+        scenePerso = new Scene(borderPanePerso, 1280, 720);
         this.setScene(scenePerso);
     }
 
@@ -328,7 +346,8 @@ public class VueMenuPrincipal extends Stage {
         HBox.setMargin(flecheD, insets);
     }
 
-    /**Fonction qui permet de changer les images dans la "VuePersonnalisation"
+    /**
+     * Fonction qui permet de changer les images dans la "VuePersonnalisation"
      */
     public void changerImage(String etat) {
         switch (etat) {
@@ -356,7 +375,8 @@ public class VueMenuPrincipal extends Stage {
         }
     }
 
-    /** Getter pour TetrisIHM utile pour le constructeur des pièces dans les plateaux
+    /**
+     * Getter pour TetrisIHM utile pour le constructeur des pièces dans les plateaux
      */
     public String getDossierImg() {
         return dossierImg;
@@ -364,6 +384,6 @@ public class VueMenuPrincipal extends Stage {
 
     public void styliser() {
         this.setResizable(false);
-        insets = new Insets(10, 10 ,10, 10);
+        insets = new Insets(10, 10, 10, 10);
     }
 }
