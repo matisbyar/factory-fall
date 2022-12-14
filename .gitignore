@@ -40,3 +40,17 @@ build/
 ### iDEA ###
 .idea/*
 /.idea/
+/.idea/inspectionProfiles/
+/.idea/libraries/
+/.idea/shelf/
+/.idea/.gitignore
+/.idea/compiler.xml
+/.idea/encodings.xml
+/.idea/jarRepositories.xml
+/.idea/jpa-buddy.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/SAÉ.iml
+/.idea/uiDesigner.xml
+/.idea/vcs.xml
+/.idea/workspace.xml

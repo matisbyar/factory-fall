@@ -6,3 +6,17 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+/inspectionProfiles/
+/libraries/
+/shelf/
+/.gitignore
+/compiler.xml
+/encodings.xml
+/jarRepositories.xml
+/jpa-buddy.xml
+/misc.xml
+/modules.xml
+/SAÉ.iml
+/uiDesigner.xml
+/vcs.xml
+/workspace.xml
