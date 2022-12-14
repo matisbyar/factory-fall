@@ -76,19 +76,31 @@ public class TetrisIHM extends Application {
 
 
     /**
-     * lance la vue demarrer partie apres avoir crée le joueur
+     * Vérifie si les données rentrées sont valides.
+     * Lance la vue demarrer partie apres avoir crée le joueur, et l'avoir connécté
      */
     private final EventHandler<ActionEvent> nouveaujoueurcree = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
-            nomjoueur = vueMenuPrincipal.getNomjoueur().getText();
-            demarrerPartie();
-            vueMenuPrincipal.close();
+            AuthPlayer j = PlayerManager.getInstance().getPlayer(vueMenuPrincipal.getNomjoueur().getText());
+
+            if (j != null) {
+                System.out.println("Cet identifiant n'est pas disponible");
+            }
+            else {
+                PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomjoueur().getText(), vueMenuPrincipal.getMotDePasse().getText());
+
+                nomjoueur = vueMenuPrincipal.getNomjoueur().getText();
+                Session.getInstance().connect(nomjoueur);
+                demarrerPartie();
+                vueMenuPrincipal.close();
+            }
         }
     };
 
     /**
-     * lance la vue demarrer partie apres avoir connecte le joueur
+     * Vérifie si les données rentrées sont valides.
+     * Lance la vue demarrer partie apres avoir connecté le joueur.
      */
     private final EventHandler<ActionEvent> joueurconnecte = new EventHandler<>() {
         @Override
@@ -117,6 +129,7 @@ public class TetrisIHM extends Application {
 
             if (connexionOK) {
                 nomjoueur = vueMenuPrincipal.getNomjoueur().getText();
+                Session.getInstance().connect(nomjoueur);
                 demarrerPartie();
                 vueMenuPrincipal.close();
             }
