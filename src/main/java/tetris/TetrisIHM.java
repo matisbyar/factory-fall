@@ -2,6 +2,7 @@ package tetris;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,7 +23,9 @@ import javafx.stage.Stage;
 import tetris.logique.AuthPlayer;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
+import tetris.logique.Score;
 import tetris.stockage.PlayerManager;
+import tetris.stockage.ScoreManager;
 import tetris.stockage.Security;
 import tetris.stockage.Session;
 import tetris.vues.*;
@@ -31,6 +34,8 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TetrisIHM extends Application {
 
@@ -74,12 +79,36 @@ public class TetrisIHM extends Application {
         vueMenuPrincipal.setButtonJouerCliqueListener(quandLeButtonJouerEstClique);
         vueMenuPrincipal.setButtonConnecterJoueurCliqueListener(joueurconnecte);
         vueMenuPrincipal.setButtonCreerJoueurCliqueListener(nouveaujoueurcree);
+        vueMenuPrincipal.setButtonTableauDesScoreListener(tableaudesscore);
         vueMenuPrincipal.show();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
+
+
+    private final EventHandler<ActionEvent> tableaudesscore = new EventHandler<>() {
+
+        @Override
+        public void handle(ActionEvent event) {
+            int i=0;
+            //partie bd a continué apres
+           List<Score> top = ScoreManager.getInstance().getTopScore();
+          // while(!top.isEmpty()){
+          //  Score score =  top.get(i);
+          // }
+            vueMenuPrincipal.tableauScore();
+
+        }
+
+    };
+
+   //public ObservableList<Score> getPersonData() {
+     //   return TopScore;
+    //}
+
+   // private ObservableList<Score> TopScore = FXCollections.observableArrayList();
 
 
     /**

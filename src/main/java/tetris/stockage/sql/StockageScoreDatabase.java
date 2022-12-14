@@ -184,4 +184,32 @@ public class StockageScoreDatabase {
         }
         return scoreList;
     }
+
+
+    public List<Score> GetTopScore(){
+        List<Score> topscore = new ArrayList<>();
+        SQLUtils utils = SQLUtils.getInstance();
+        Connection connection = utils.getConnection();
+        String req =" select score,horodatage,login from Scores where codejeu='TETRIS' order by  score DESC";
+        int i=1;
+        try (
+                PreparedStatement st = connection.prepareStatement(req);
+                ResultSet result = st.executeQuery();
+        ) {  while (result.next() && i<11) {
+            String login = result.getString("login");
+            int scoreValue = result.getInt("score");
+            Timestamp time = result.getTimestamp("horodatage");
+            Score score = new Score(scoreValue,time);
+            score.setLogin(login);
+            topscore.add(score);
+            i++;
+        }
+
+
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return topscore;
+    }
 }

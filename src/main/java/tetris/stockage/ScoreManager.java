@@ -50,4 +50,6 @@ public class ScoreManager {
     public List<Score> getScores() {
         return stockage.getAll();
     }
+
+    public List<Score> getTopScore() { return  stockage.GetTopScore();}
 }

@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -64,6 +65,13 @@ public class VueMenuPrincipal extends Stage {
     private String dossierImg = "conteneur";
     private int i = 0;
 
+
+     private BorderPane borderPanetableau;
+
+     private Button tableau = new Button();
+
+     private VBox vbtableau = new VBox();
+
     public VueMenuPrincipal() {
         background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background/classic.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
         borderPaneMenu = new BorderPane();
@@ -72,9 +80,12 @@ public class VueMenuPrincipal extends Stage {
         parametres = new Button();
         personnaliser = new Button();
         compte = new Button();
+        tableau = new Button();
         bouttons = new VBox(lancerJeu, parametres, personnaliser);
         insets = new Insets(10, 10, 10, 10);
         sceneMenu = new Scene(borderPaneMenu, 1280, 720);
+
+
 
         styliserMenu();
         creerBindings();
@@ -119,6 +130,12 @@ public class VueMenuPrincipal extends Stage {
 
         compte.setGraphic(new ImageView(new Image("file:src/main/resources/img/compte.png")));
         compte.setStyle("-fx-background-color: black");
+
+
+
+        borderPaneMenu.setTop(tableau);
+        tableau.setGraphic(new Label("tableau"));
+        tableau.setStyle("-fx-background-color: black");
     }
 
     /**
@@ -140,6 +157,10 @@ public class VueMenuPrincipal extends Stage {
      */
     public void setButtonCreerJoueurCliqueListener(EventHandler<ActionEvent> nouveaujoueurcree) {
         creejoueur.setOnAction(nouveaujoueurcree);
+    }
+
+    public void setButtonTableauDesScoreListener(EventHandler<ActionEvent> tableaudesscore) {
+        tableau.setOnAction(tableaudesscore);
     }
 
     /**
@@ -305,6 +326,7 @@ public class VueMenuPrincipal extends Stage {
         creationCompte.setOnAction(actionEvent -> creationJoueur());
         retourToJoueur.setOnAction(actionEvent -> afficherMenuJoueur());
         personnaliser.setOnAction(actionEvent -> personnalisation());
+        tableau.setOnAction(actionEvent ->tableauScore());
         flecheD.setOnAction(actionEvent -> changerImage("+"));
         flecheG.setOnAction(actionEvent -> changerImage("-"));
     }
@@ -344,6 +366,37 @@ public class VueMenuPrincipal extends Stage {
         HBox.setMargin(flecheG, insets);
         HBox.setMargin(pieceEnCoursPerso, insets);
         HBox.setMargin(flecheD, insets);
+    }
+
+
+    public void tableauScore() {
+        this.setTitle("Menu tableau");
+        borderPanetableau = new BorderPane();
+        borderPanetableau.setBackground(background);
+        borderPanetableau.setTop(retourToMenu);
+
+        vbtableau = new VBox();
+
+        //  objet tableau a add
+        //vbtableau.getChildren().add(onjet tableau);
+        borderPanetableau.setLeft(vbtableau);
+        styliserTableau();
+
+
+        Scene scenetableau = new Scene(borderPanetableau, 1280, 720);
+        this.setScene(scenetableau);
+    }
+
+    public void styliserTableau() {
+        retourToMenu.setGraphic(new ImageView(new Image("file:src/main/resources/img/fleche.png")));
+        retourToMenu.setStyle("-fx-background-color: transparent");
+
+        vbPerso.setAlignment(Pos.CENTER);
+
+
+       // + tout les config pour l'objet tableau
+
+
     }
 
     /**
@@ -386,4 +439,6 @@ public class VueMenuPrincipal extends Stage {
         this.setResizable(false);
         insets = new Insets(10, 10, 10, 10);
     }
+
+
 }
