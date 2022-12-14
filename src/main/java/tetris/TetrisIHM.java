@@ -157,7 +157,7 @@ public class TetrisIHM extends Application {
         jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
         prochainePiece = jeu.getProchainePiece();
-
+        imgPause.setVisible(false);
         // javaFX
         borderPane = new BorderPane();
         primaryStage = new Stage();
