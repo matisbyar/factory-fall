@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 
 public class VueMenuPrincipal extends Stage {
 
+
+    private ImageView titreMenu;
     private final Scene sceneMenu;
     private final BorderPane borderPaneMenu;
     private BorderPane borderPaneJoueur;
@@ -30,6 +32,7 @@ public class VueMenuPrincipal extends Stage {
     private Scene sceneJoueur;
 
     private javafx.geometry.Insets insets;
+    private javafx.geometry.Insets insets2;
 
     /**
      * Elements du menu creation joueur
@@ -76,13 +79,16 @@ public class VueMenuPrincipal extends Stage {
         background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background/classic.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
         borderPaneMenu = new BorderPane();
 
+        titreMenu = new ImageView(new Image("file:src/main/resources/img/titreMenu.png"));
+
         lancerJeu = new Button();
         parametres = new Button();
         personnaliser = new Button();
         compte = new Button();
         tableau = new Button();
-        bouttons = new VBox(lancerJeu, parametres, personnaliser);
+        bouttons = new VBox(titreMenu, lancerJeu, parametres, personnaliser);
         insets = new Insets(10, 10, 10, 10);
+        insets2 = new Insets(100, 0, 30, 0);
         sceneMenu = new Scene(borderPaneMenu, 1280, 720);
 
 
@@ -105,6 +111,7 @@ public class VueMenuPrincipal extends Stage {
         VBox.setMargin(lancerJeu, insets);
         VBox.setMargin(parametres, insets);
         VBox.setMargin(personnaliser, insets);
+        VBox.setMargin(titreMenu, insets2);
 
         // BorderPane
         borderPaneMenu.setCenter(bouttons);
@@ -112,7 +119,7 @@ public class VueMenuPrincipal extends Stage {
         borderPaneMenu.setBottom(compte);
 
         // Vbox Boutton
-        bouttons.setAlignment(Pos.CENTER);
+        bouttons.setAlignment(Pos.TOP_CENTER);
 
         // Button
         lancerJeu.setGraphic(new ImageView(new Image("file:src/main/resources/img/jouer.png")));
@@ -130,6 +137,7 @@ public class VueMenuPrincipal extends Stage {
 
         compte.setGraphic(new ImageView(new Image("file:src/main/resources/img/compte.png")));
         compte.setStyle("-fx-background-color: black");
+        compte.getStyleClass().add("compte");
 
 
 
@@ -354,8 +362,11 @@ public class VueMenuPrincipal extends Stage {
     }
 
     public void styliserPerso() {
+
         retourToMenu.setGraphic(new ImageView(new Image("file:src/main/resources/img/fleche.png")));
         retourToMenu.setStyle("-fx-background-color: transparent");
+        retourToMenu.getStyleClass().add("retourToMenu");
+
 
         vbPerso.setAlignment(Pos.CENTER);
         hbPerso.setAlignment(Pos.CENTER);
