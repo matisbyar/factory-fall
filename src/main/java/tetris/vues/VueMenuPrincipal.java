@@ -84,6 +84,7 @@ public class VueMenuPrincipal extends Stage {
         // Général
         this.setTitle("Menu Principal");
         styliser();
+        sceneMenu.getStylesheets().add("file:src/main/resources/css/mainMenuPrincipale.css");
 
         VBox.setMargin(lancerJeu, insets);
         VBox.setMargin(parametres, insets);
@@ -133,9 +134,11 @@ public class VueMenuPrincipal extends Stage {
     /** Fonction qui sert de refactoring a la vue ChoixJoueur
      */
     public void choixJoueur() {
+        setTitleJoueur();
         borderPaneJoueur = new BorderPane();
         borderPaneJoueur.setBackground(background);
         sceneJoueur = new Scene(borderPaneJoueur, 1280,720);
+        sceneJoueur.getStylesheets().add("file:src/main/resources/css/mainVueCreationJoueur.css");
         vbJoueur = new VBox(connexion, creationCompte);
         borderPaneJoueur.setCenter(vbJoueur);
         borderPaneJoueur.setTop(retourToMenu);
@@ -148,12 +151,14 @@ public class VueMenuPrincipal extends Stage {
     /**Fonction qui permet d'afficher le menu principal (utilisé lors d'un appui sur le bouton retour)
      */
     public void afficherMenuPrincipal() {
+        this.setTitle("Menu Principal");
         this.setScene(sceneMenu);
     }
 
     /**Fonction qui permet d'afficher le menu choix joueur (utilisé lors d'un appui sur le bouton retour de connexion et création de compte)
      */
     public void afficherMenuJoueur() {
+        this.setTitle("Menu Joueur");
         this.setScene(sceneJoueur);
     }
 
@@ -185,6 +190,7 @@ public class VueMenuPrincipal extends Stage {
         vbConnexionJoueur = new VBox( nomJoueur, motDePasse, btConnexion);
         borderPaneConnexion.setTop(retourToJoueur);
         sceneConnexionJoueur = new Scene(borderPaneConnexion, 1280,720);
+        sceneConnexionJoueur.getStylesheets().add("file:src/main/resources/css/mainVueCreationJoueur.css");
         styliserConnexionJoueur();
         this.setScene(sceneConnexionJoueur);
     }
@@ -207,6 +213,7 @@ public class VueMenuPrincipal extends Stage {
 
     public void styliserCreationJoueur() {
         setTitleJoueur();
+        sceneCreationJoueur.getStylesheets().add("file:src/main/resources/css/mainVueCreationJoueur.css");
 
         // BorderPane
         borderPaneCreationJoueur.setCenter(vbCreationJoueur);
@@ -284,6 +291,7 @@ public class VueMenuPrincipal extends Stage {
     /**Fonction qui simule une VuePersonnalisation
      */
     public void personnalisation() {
+        this.setTitle("Menu Personnalisation");
         borderPanePerso = new BorderPane();
         borderPanePerso.setBackground(background);
         borderPanePerso.setTop(retourToMenu);
@@ -352,10 +360,6 @@ public class VueMenuPrincipal extends Stage {
 
     public void styliser() {
         this.setResizable(false);
-        sceneMenu.getStylesheets().add("file:src/main/resources/css/mainMenuPrincipale.css");
-        sceneConnexionJoueur.getStylesheets().add("file:src/main/resources/css/mainVueCreationJoueur.css");
-        sceneCreationJoueur.getStylesheets().add("file:src/main/resources/css/mainVueCreationJoueur.css");
-        sceneJoueur.getStylesheets().add("file:src/main/resources/css/mainVueCreationJoueur.css");
         insets = new Insets(10, 10 ,10, 10);
     }
 }
