@@ -60,7 +60,7 @@ public class VueMenuPrincipal extends Stage {
     private int i = 0;
 
     public VueMenuPrincipal() {
-        background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280,720, false, false, false, false)));
+        background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/ImageMenu.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280,720, false, false, false, false)));
         borderPaneMenu = new BorderPane();
 
         lancerJeu = new Button();
@@ -105,9 +105,12 @@ public class VueMenuPrincipal extends Stage {
 
         parametres.setGraphic(new ImageView(new Image("file:src/main/resources/img/parametres.png")));
         parametres.setStyle("-fx-background-color: black");
+        parametres.getStyleClass().add("parametre");
 
         personnaliser.setGraphic(new ImageView(new Image("file:src/main/resources/img/personnaliser.png")));
         personnaliser.setStyle("-fx-background-color: black");
+        personnaliser.getStyleClass().add("personnalite");
+
 
         compte.setGraphic(new ImageView(new Image("file:src/main/resources/img/compte.png")));
         compte.setStyle("-fx-background-color: black");
