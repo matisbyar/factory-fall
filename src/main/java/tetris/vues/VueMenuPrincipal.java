@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -55,7 +56,7 @@ public class VueMenuPrincipal extends Stage {
     private Scene sceneConnexionJoueur;
     private BorderPane borderPaneConnexion;
     private TextField nomJoueur;
-    private TextField motDePasse;
+    private PasswordField motDePasse;
     private final Button btConnexion = new Button();
     private VBox vbConnexionJoueur;
     private final Button retourToJoueur = new Button();
@@ -261,7 +262,7 @@ public class VueMenuPrincipal extends Stage {
         borderPaneConnexion.setBackground(background);
         creejoueur = new Button();
         nomJoueur = new TextField();
-        motDePasse = new TextField();
+        motDePasse = new PasswordField();
         vbConnexionJoueur = new VBox(nomJoueur, motDePasse, btConnexion);
         vbRetourJoueur = new VBox(retourToJoueur);
         borderPaneConnexion.setTop(vbRetourJoueur);
@@ -282,7 +283,7 @@ public class VueMenuPrincipal extends Stage {
         borderPaneCreationJoueur.setBackground(background);
         //creejoueur = new Button();
         nomJoueur = new TextField();
-        motDePasse = new TextField();
+        motDePasse = new PasswordField();
         vbCreationJoueur = new VBox(nomJoueur, motDePasse, creejoueur);
         vbRetourJoueur = new VBox(retourToJoueur);
         borderPaneCreationJoueur.setTop(vbRetourJoueur);
@@ -369,7 +370,7 @@ public class VueMenuPrincipal extends Stage {
     /**
      * Getter utile pour la récupération dans TetrisIHM
      */
-    public TextField getMotDePasse() {
+    public PasswordField getMotDePasse() {
         return motDePasse;
     }
 

@@ -117,7 +117,6 @@ public class TetrisIHM extends Application {
         @Override
         public void handle(ActionEvent event) {
             AuthPlayer j = PlayerManager.getInstance().getPlayer(vueMenuPrincipal.getNomjoueur().getText());
-
             if (j != null) {
                 System.out.println("Cet identifiant n'est pas disponible");
             } else {
