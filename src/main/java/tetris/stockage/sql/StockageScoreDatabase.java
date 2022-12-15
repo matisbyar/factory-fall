@@ -1,6 +1,6 @@
 package tetris.stockage.sql;
 
-import tetris.logique.Score; //Si vous avez une classe Score importez la.
+import tetris.logique.Score;
 import tetris.stockage.SQLUtils;
 
 import java.sql.*;
@@ -190,8 +190,8 @@ public class StockageScoreDatabase {
         List<Score> topscore = new ArrayList<>();
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req =" select score,horodatage,login from Scores where codejeu='TETRIS' order by  score DESC";
-        int i=1;
+        String req = "SELECT score, horodatage, login FROM Scores WHERE codejeu='TETRIS' ORDER BY score DESC";
+        int i = 1;
         try (
                 PreparedStatement st = connection.prepareStatement(req);
                 ResultSet result = st.executeQuery();

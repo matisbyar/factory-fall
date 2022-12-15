@@ -2,7 +2,6 @@ package tetris;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -34,7 +33,6 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TetrisIHM extends Application {
@@ -223,7 +221,7 @@ public class TetrisIHM extends Application {
         // Initialisation du timer (obligatoire après les bindings)
         Jeu.timer = new Timer(1000, descenteAuto);
 
-        //boutton pause
+        // Bouton pause
         imgPause.setVisible(false);
 
         // Affichage définitif
