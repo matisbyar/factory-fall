@@ -33,6 +33,7 @@ public class VueMenuPrincipal extends Stage {
 
     private javafx.geometry.Insets insets;
     private javafx.geometry.Insets insets2;
+    private javafx.geometry.Insets insets3;
 
     /**
      * Elements du menu creation joueur
@@ -56,6 +57,9 @@ public class VueMenuPrincipal extends Stage {
     private BorderPane borderPanePerso;
     private Scene scenePerso;
     private final VBox bouttons;
+    private final VBox vbCompte;
+    private  VBox vbRetourMenu;
+    private  VBox vbRetourJoueur;
     private VBox vbPerso = new VBox();
     private HBox hbPerso = new HBox();
     private final Button flecheD = new Button();
@@ -85,10 +89,12 @@ public class VueMenuPrincipal extends Stage {
         parametres = new Button();
         personnaliser = new Button();
         compte = new Button();
+        vbCompte =new VBox(compte);
         tableau = new Button();
         bouttons = new VBox(titreMenu, lancerJeu, parametres, personnaliser);
         insets = new Insets(10, 10, 10, 10);
         insets2 = new Insets(100, 0, 30, 0);
+        insets3 = new Insets(30,0,30,80);
         sceneMenu = new Scene(borderPaneMenu, 1280, 720);
 
 
@@ -112,11 +118,13 @@ public class VueMenuPrincipal extends Stage {
         VBox.setMargin(parametres, insets);
         VBox.setMargin(personnaliser, insets);
         VBox.setMargin(titreMenu, insets2);
+        VBox.setMargin(compte, insets3);
+
 
         // BorderPane
         borderPaneMenu.setCenter(bouttons);
         borderPaneMenu.setBackground(background);
-        borderPaneMenu.setBottom(compte);
+        borderPaneMenu.setBottom(vbCompte);
 
         // Vbox Boutton
         bouttons.setAlignment(Pos.TOP_CENTER);
@@ -135,11 +143,12 @@ public class VueMenuPrincipal extends Stage {
         personnaliser.getStyleClass().add("personnalite");
 
 
+        vbCompte.setAlignment(Pos.CENTER_LEFT);
+        vbCompte.setPrefWidth(200);
+        vbCompte.setPrefHeight(200);
         compte.setGraphic(new ImageView(new Image("file:src/main/resources/img/compte.png")));
         compte.setStyle("-fx-background-color: black");
         compte.getStyleClass().add("compte");
-
-
 
         borderPaneMenu.setTop(tableau);
         tableau.setGraphic(new Label("tableau"));
@@ -181,8 +190,15 @@ public class VueMenuPrincipal extends Stage {
         sceneJoueur = new Scene(borderPaneJoueur, 1280, 720);
         sceneJoueur.getStylesheets().add("file:src/main/resources/css/mainVueCreationJoueur.css");
         vbJoueur = new VBox(connexion, creationCompte);
+
+        vbRetourMenu = new VBox(retourToMenu);
+
         borderPaneJoueur.setCenter(vbJoueur);
-        borderPaneJoueur.setTop(retourToMenu);
+        borderPaneJoueur.setTop(vbRetourMenu);
+
+        insets2 = new Insets(200,0,0,0);
+        insets3 = new Insets(0,50,0,75);
+
         vbJoueur.setAlignment(Pos.CENTER);
         styliserJoueur();
         creerBindings();
@@ -208,16 +224,24 @@ public class VueMenuPrincipal extends Stage {
     public void styliserJoueur() {
         VBox.setMargin(connexion, insets);
         VBox.setMargin(creationCompte, insets);
+        VBox.setMargin(retourToMenu, insets3);
+        VBox.setMargin(connexion, insets2);
+
+
+        vbJoueur.setAlignment(Pos.TOP_CENTER);
 
         connexion.setGraphic(new ImageView(new Image("file:src/main/resources/img/connexion.png")));
         connexion.setStyle("-fx-background-color: black");
         connexion.getStyleClass().add("bouttonConnecterJoueur");
 
-
         creationCompte.setGraphic(new ImageView(new Image("file:src/main/resources/img/creer_compte.png")));
         creationCompte.setStyle("-fx-background-color: black");
         creationCompte.getStyleClass().add("bouttonCreerJoueur");
 
+
+        vbRetourMenu.setAlignment(Pos.BOTTOM_LEFT);
+        vbRetourMenu.setPrefWidth(100);
+        vbRetourMenu.setPrefHeight(100);
         retourToMenu.setGraphic(new ImageView(new Image("file:src/main/resources/img/fleche.png")));
         retourToMenu.setStyle("-fx-background-color: transparent");
     }
@@ -232,7 +256,10 @@ public class VueMenuPrincipal extends Stage {
         nomJoueur = new TextField();
         motDePasse = new TextField();
         vbConnexionJoueur = new VBox(nomJoueur, motDePasse, btConnexion);
-        borderPaneConnexion.setTop(retourToJoueur);
+        vbRetourJoueur = new VBox(retourToJoueur);
+        borderPaneConnexion.setTop(vbRetourJoueur);
+        insets2 = new Insets(200,0,0,0);
+        insets3 = new Insets(0,50,0,75);
         sceneConnexionJoueur = new Scene(borderPaneConnexion, 1280, 720);
         sceneConnexionJoueur.getStylesheets().add("file:src/main/resources/css/mainVueCreationJoueur.css");
         styliserConnexionJoueur();
@@ -250,7 +277,10 @@ public class VueMenuPrincipal extends Stage {
         nomJoueur = new TextField();
         motDePasse = new TextField();
         vbCreationJoueur = new VBox(nomJoueur, motDePasse, creejoueur);
-        borderPaneCreationJoueur.setTop(retourToJoueur);
+        vbRetourJoueur = new VBox(retourToJoueur);
+        borderPaneCreationJoueur.setTop(vbRetourJoueur);
+        insets2 = new Insets(200,0,0,0);
+        insets3 = new Insets(0,50,0,75);
         sceneCreationJoueur = new Scene(borderPaneCreationJoueur, 1280, 720);
         styliserCreationJoueur();
         this.setScene(sceneCreationJoueur);
@@ -264,9 +294,11 @@ public class VueMenuPrincipal extends Stage {
         borderPaneCreationJoueur.setCenter(vbCreationJoueur);
         borderPaneCreationJoueur.setBackground(background);
         // Vbox
-        vbCreationJoueur.setAlignment(Pos.CENTER);
+        vbCreationJoueur.setAlignment(Pos.TOP_CENTER);
         VBox.setMargin(nomJoueur, insets);
         VBox.setMargin(creejoueur, insets);
+        VBox.setMargin(retourToJoueur, insets3);
+        VBox.setMargin(nomJoueur, insets2);
         //Texte
         nomJoueur.setPromptText("Entrer votre Pseudo");
         nomJoueur.getStyleClass().add("textFieldNomJoueur");
@@ -276,6 +308,10 @@ public class VueMenuPrincipal extends Stage {
         creejoueur.setGraphic(new ImageView(new Image("file:src/main/resources/img/creer_compte.png")));
         creejoueur.getStyleClass().add("bouttonCreerJoueur");
 
+
+        vbRetourJoueur.setAlignment(Pos.BOTTOM_LEFT);
+        vbRetourJoueur.setPrefWidth(100);
+        vbRetourJoueur.setPrefHeight(100);
         retourToJoueur.setGraphic(new ImageView(new Image("file:src/main/resources/img/fleche.png")));
         retourToJoueur.setStyle("-fx-background-color: transparent");
     }
@@ -293,10 +329,12 @@ public class VueMenuPrincipal extends Stage {
         borderPaneConnexion.setCenter(vbConnexionJoueur);
         borderPaneConnexion.setBackground(background);
         // Vbox
-        vbConnexionJoueur.setAlignment(Pos.CENTER);
+        vbConnexionJoueur.setAlignment(Pos.TOP_CENTER);
         // Set les marges des elements
         VBox.setMargin(nomJoueur, insets);
         VBox.setMargin(creejoueur, insets);
+        VBox.setMargin(retourToJoueur, insets3);
+        VBox.setMargin(nomJoueur, insets2);
         //Texte
         nomJoueur.setPromptText("Entrer votre Pseudo");
         nomJoueur.getStyleClass().add("textFieldNomJoueur");
@@ -306,6 +344,10 @@ public class VueMenuPrincipal extends Stage {
         btConnexion.setGraphic(new ImageView(new Image("file:src/main/resources/img/connexion.png")));
         btConnexion.getStyleClass().add("bouttonCreerJoueur");
 
+
+        vbRetourJoueur.setAlignment(Pos.BOTTOM_LEFT);
+        vbRetourJoueur.setPrefWidth(100);
+        vbRetourJoueur.setPrefHeight(100);
         retourToJoueur.setGraphic(new ImageView(new Image("file:src/main/resources/img/fleche.png")));
         retourToJoueur.setStyle("-fx-background-color: transparent");
     }
@@ -347,6 +389,7 @@ public class VueMenuPrincipal extends Stage {
         borderPanePerso = new BorderPane();
         borderPanePerso.setBackground(background);
         borderPanePerso.setTop(retourToMenu);
+
         hbPerso = new HBox();
         vbPerso = new VBox();
 
@@ -356,6 +399,7 @@ public class VueMenuPrincipal extends Stage {
         hbPerso.getChildren().addAll(flecheG, pieceEnCoursPerso, flecheD);
         vbPerso.getChildren().add(hbPerso);
         borderPanePerso.setCenter(vbPerso);
+
         styliserPerso();
         scenePerso = new Scene(borderPanePerso, 1280, 720);
         this.setScene(scenePerso);
@@ -365,8 +409,6 @@ public class VueMenuPrincipal extends Stage {
 
         retourToMenu.setGraphic(new ImageView(new Image("file:src/main/resources/img/fleche.png")));
         retourToMenu.setStyle("-fx-background-color: transparent");
-        retourToMenu.getStyleClass().add("retourToMenu");
-
 
         vbPerso.setAlignment(Pos.CENTER);
         hbPerso.setAlignment(Pos.CENTER);
