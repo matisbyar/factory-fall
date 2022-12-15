@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import tetris.logique.Score;
 import tetris.stockage.ScoreManager;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class VueMenuPrincipal extends Stage {
 
-
+    private final Font police = Font.loadFont("file:src/main/resources/fonts/Bazaroni.ttf", 32);
     private ImageView titreMenu;
     private final Scene sceneMenu;
     private final BorderPane borderPaneMenu;
@@ -94,7 +95,9 @@ public class VueMenuPrincipal extends Stage {
         personnaliser = new Button();
         compte = new Button();
         vbCompte = new VBox(compte);
+
         boutonClassement = new Button();
+
         bouttons = new VBox(titreMenu, lancerJeu, parametres, personnaliser, boutonClassement);
         insets = new Insets(10, 10, 10, 10);
         insets2 = new Insets(100, 0, 30, 0);
@@ -120,6 +123,7 @@ public class VueMenuPrincipal extends Stage {
         VBox.setMargin(lancerJeu, insets);
         VBox.setMargin(parametres, insets);
         VBox.setMargin(personnaliser, insets);
+        VBox.setMargin(boutonClassement, insets);
         VBox.setMargin(titreMenu, insets2);
         VBox.setMargin(compte, insets3);
 
@@ -153,8 +157,9 @@ public class VueMenuPrincipal extends Stage {
         compte.setStyle("-fx-background-color: black");
         compte.getStyleClass().add("compte");
 
-        boutonClassement.setGraphic(new Label("Classement"));
+        boutonClassement.setGraphic(new ImageView(new Image("file:src/main/resources/img/classement.png")));
         boutonClassement.setStyle("-fx-background-color: black");
+        boutonClassement.getStyleClass().add("classement");
     }
 
     /**
