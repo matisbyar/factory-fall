@@ -288,7 +288,7 @@ public class TetrisIHM extends Application {
         jeu.jeuEnCoursProperty().addListener((observableValue, aBoolean, t1) -> {
             if (!jeu.isJeuEnCours()) {
                 VueGameOver vueGameOver = new VueGameOver();
-                //ScoreManager.getInstance().createScore(jeu.getJoueur().getScore().getValue(), Session.getInstance().getLogin());
+                ScoreManager.getInstance().createScore(jeu.getJoueur().getScore().getValue(), Session.getInstance().getLogin());
                 vueGameOver.arreterJeuProperty().addListener((observableValue12, aBoolean12, t112) -> {
                     if (vueGameOver.arreterJeuProperty().getValue()) {
                         System.exit(0);
