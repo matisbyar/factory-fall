@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import tetris.TetrisIHM;
 import tetris.logique.Score;
 import tetris.stockage.ScoreManager;
 
@@ -32,6 +33,7 @@ public class VueMenuPrincipal extends Stage {
     private final Button personnaliser;
     private final Button compte;
     private final Button retourToMenu = new Button();
+    private final Button quitter = new Button();
     private final Button connexion = new Button();
     private final Button creationCompte = new Button();
     private VBox vbJoueur;
@@ -99,7 +101,7 @@ public class VueMenuPrincipal extends Stage {
 
         boutonClassement = new Button();
 
-        bouttons = new VBox(titreMenu, lancerJeu, parametres, personnaliser, boutonClassement);
+        bouttons = new VBox(titreMenu, lancerJeu, parametres, personnaliser, boutonClassement, quitter);
         insets = new Insets(10, 10, 10, 10);
         insets2 = new Insets(100, 0, 30, 0);
         insets3 = new Insets(30, 0, 30, 80);
@@ -150,6 +152,9 @@ public class VueMenuPrincipal extends Stage {
         personnaliser.setStyle("-fx-background-color: black");
         personnaliser.getStyleClass().add("personnalite");
 
+        quitter.setText("QUITTER");
+        quitter.setStyle("-fx-background-color: black");
+
 
         vbCompte.setAlignment(Pos.CENTER_LEFT);
         vbCompte.setPrefWidth(200);
@@ -186,6 +191,10 @@ public class VueMenuPrincipal extends Stage {
 
     public void setButtonTableauDesScoreListener(EventHandler<ActionEvent> tableaudesscore) {
         boutonClassement.setOnAction(tableaudesscore);
+    }
+
+    public void setButtonQuitterListener(EventHandler<ActionEvent> quitterAction) {
+        quitter.setOnAction(quitterAction);
     }
 
     /**

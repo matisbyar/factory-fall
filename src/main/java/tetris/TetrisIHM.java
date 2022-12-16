@@ -23,10 +23,7 @@ import tetris.logique.AuthPlayer;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
 import tetris.logique.Score;
-import tetris.stockage.PlayerManager;
-import tetris.stockage.ScoreManager;
-import tetris.stockage.Security;
-import tetris.stockage.Session;
+import tetris.stockage.*;
 import tetris.vues.*;
 
 import javax.swing.*;
@@ -77,8 +74,15 @@ public class TetrisIHM extends Application {
         vueMenuPrincipal.setButtonJouerCliqueListener(quandLeButtonJouerEstClique);
         vueMenuPrincipal.setButtonConnecterJoueurCliqueListener(joueurconnecte);
         vueMenuPrincipal.setButtonCreerJoueurCliqueListener(nouveaujoueurcree);
-        vueMenuPrincipal.setButtonTableauDesScoreListener(tableaudesscore);
+        vueMenuPrincipal.setButtonTableauDesScoreListener(tableauDesScores);
+        vueMenuPrincipal.setButtonQuitterListener(quitter);
         vueMenuPrincipal.show();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        SQLUtils.getInstance().closeConnection();
+        super.stop();
     }
 
     public static void main(String[] args) {
@@ -86,28 +90,12 @@ public class TetrisIHM extends Application {
     }
 
 
-    private final EventHandler<ActionEvent> tableaudesscore = new EventHandler<>() {
-
+    private final EventHandler<ActionEvent> tableauDesScores = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
-            int i=0;
-            //partie bd a continué apres
-           List<Score> top = ScoreManager.getInstance().getTopScore();
-          // while(!top.isEmpty()){
-          //  Score score =  top.get(i);
-          // }
             vueMenuPrincipal.tableauScore();
-
         }
-
     };
-
-   //public ObservableList<Score> getPersonData() {
-     //   return TopScore;
-    //}
-
-   // private ObservableList<Score> TopScore = FXCollections.observableArrayList();
-
 
     /**
      * Vérifie si les données rentrées sont valides.
@@ -171,6 +159,18 @@ public class TetrisIHM extends Application {
             nomjoueur = "Anonyme";
             demarrerPartie();
             vueMenuPrincipal.close();
+        }
+    };
+
+    private final EventHandler<ActionEvent> quitter = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent actionEvent) {
+            try {
+                stop();
+                System.exit(0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     };
 
@@ -290,7 +290,8 @@ public class TetrisIHM extends Application {
                 ScoreManager.getInstance().createScore(jeu.getJoueur().getScore().getValue(), Session.getInstance().getLogin());
                 vueGameOver.arreterJeuProperty().addListener((observableValue12, aBoolean12, t112) -> {
                     if (vueGameOver.arreterJeuProperty().getValue()) {
-                        System.exit(0);
+                        vueGameOver.close();
+                        start(primaryStage);
                     }
                 });
 

@@ -27,6 +27,17 @@ public class SQLUtils {
 
     public Connection getConnection() { return connection; }
 
+    public void closeConnection() {
+        String req = "COMMIT";
+        try (PreparedStatement st = connection.prepareStatement(req); ) {
+            st.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        instance =  null;
+    }
+
     /**
      * Ce main sert juste à tester si votre connection fonctionne correctement.
      * Vous pourrez le supprimer après.
