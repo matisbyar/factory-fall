@@ -47,9 +47,9 @@ public class TetrisIHM extends Application {
     private VueProchainePiece vueProchainePiece;
     private VueControles vueControles;
 
-    private VBox contenerDroit;
+    private VBox conteneurDroit;
 
-    private VBox contenerGauche;
+    private VBox conteneurGauche;
 
     // Objets de la logique du jeu
     IJeu jeu;
@@ -192,9 +192,9 @@ public class TetrisIHM extends Application {
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
         prochainePieceLabel = new Label("prochaine :");
-        contenerDroit = new VBox(prochainePieceLabel, vueProchainePiece, vueControles);
+        conteneurDroit = new VBox(prochainePieceLabel, vueProchainePiece, vueControles);
         informationsJoueur = new VBox(pseudo, score, rang);
-        contenerGauche = new VBox(informationsJoueur, startJeu);
+        conteneurGauche = new VBox(informationsJoueur, startJeu);
 
         // Gestion Plateau/Bouton Pause
         sp = new StackPane(imgPause, vuePlateau);
@@ -202,9 +202,9 @@ public class TetrisIHM extends Application {
         scene = new Scene(borderPane);
 
         // Affectations et constitution de vues
-        borderPane.setLeft(contenerGauche);
+        borderPane.setLeft(conteneurGauche);
         borderPane.setCenter(sp);
-        borderPane.setRight(contenerDroit);
+        borderPane.setRight(conteneurDroit);
 
         // Initialisation des grilles
         vuePlateau.initialiser();
@@ -396,12 +396,12 @@ public class TetrisIHM extends Application {
         startJeu.getStyleClass().add("bouttonStart");
 
         // Container gauche
-        contenerGauche.setAlignment(Pos.TOP_RIGHT);
-        contenerGauche.setPrefWidth(426);
+        conteneurGauche.setAlignment(Pos.TOP_RIGHT);
+        conteneurGauche.setPrefWidth(426);
 
         // Container droit
-        contenerDroit.setAlignment(Pos.TOP_RIGHT);
-        contenerDroit.setPrefWidth(426);
+        conteneurDroit.setAlignment(Pos.TOP_RIGHT);
+        conteneurDroit.setPrefWidth(426);
 
         // Vue Prochaine pièce
         vueProchainePiece.setAlignment(Pos.CENTER_LEFT);

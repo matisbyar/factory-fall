@@ -74,7 +74,7 @@ public class VueMenuPrincipal extends Stage {
     private final Button flecheD = new Button();
     private final Button flecheG = new Button();
     private final Image pieceDefault = new Image("file:src/main/resources/img/default/L.jpg");
-    private final Image pieceConteneur = new Image("file:src/main/resources/img/container/L.jpg");
+    private final Image pieceConteneur = new Image("file:src/main/resources/img/conteneur/L.jpg");
     private final Image pieceBrique = new Image("file:src/main/resources/img/brique/L.jpg");
     private final ImageView pieceEnCoursPerso = new ImageView(pieceConteneur);
 
@@ -498,7 +498,7 @@ public class VueMenuPrincipal extends Stage {
         switch (i) {
             case 0 -> {
                 pieceEnCoursPerso.setImage(pieceConteneur);
-                preferences.setStylePiece("container");
+                preferences.setStylePiece("conteneur");
             }
             case 1 -> {
                 pieceEnCoursPerso.setImage(pieceBrique);

@@ -12,7 +12,7 @@ public class Preferences {
     /**
      * La préférence de l'image des pièces du plateau. Par défaut, "container".
      */
-    private String stylePiece = "container";
+    private String stylePiece = "conteneur";
 
     public static Preferences getInstance() {
         if (INSTANCE == null) INSTANCE = new Preferences();
