@@ -4,7 +4,7 @@ import tetris.logique.Plateau;
 
 public class VueProchainePiece extends VueGrille {
 
-    public VueProchainePiece(Plateau p, String dossierImg) {
-        super(p, dossierImg);
+    public VueProchainePiece(Plateau p) {
+        super(p);
     }
 }

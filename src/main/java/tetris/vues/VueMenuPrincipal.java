@@ -15,6 +15,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
+import tetris.logique.Preferences;
 import tetris.logique.Score;
 import tetris.stockage.ScoreManager;
 
@@ -73,11 +74,12 @@ public class VueMenuPrincipal extends Stage {
     private final Button flecheD = new Button();
     private final Button flecheG = new Button();
     private final Image pieceDefault = new Image("file:src/main/resources/img/default/L.jpg");
-    private final Image pieceConteneur = new Image("file:src/main/resources/img/conteneur/L.jpg");
+    private final Image pieceConteneur = new Image("file:src/main/resources/img/container/L.jpg");
     private final Image pieceBrique = new Image("file:src/main/resources/img/brique/L.jpg");
     private final ImageView pieceEnCoursPerso = new ImageView(pieceConteneur);
 
-    private String dossierImg = "conteneur";
+    //private String dossierImg = "conteneur";
+    Preferences preferences = Preferences.getInstance();
     private int i = 0;
 
     /**
@@ -496,24 +498,17 @@ public class VueMenuPrincipal extends Stage {
         switch (i) {
             case 0 -> {
                 pieceEnCoursPerso.setImage(pieceConteneur);
-                dossierImg = "conteneur";
+                preferences.setStylePiece("container");
             }
             case 1 -> {
                 pieceEnCoursPerso.setImage(pieceBrique);
-                dossierImg = "brique";
+                preferences.setStylePiece("brique");
             }
             case 2 -> {
                 pieceEnCoursPerso.setImage(pieceDefault);
-                dossierImg = "default";
+                preferences.setStylePiece("default");
             }
         }
-    }
-
-    /**
-     * Getter pour TetrisIHM utile pour le constructeur des pièces dans les plateaux
-     */
-    public String getDossierImg() {
-        return dossierImg;
     }
 
     public void styliser() {

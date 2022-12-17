@@ -19,10 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import tetris.logique.AuthPlayer;
-import tetris.logique.Jeu;
-import tetris.logique.Plateau;
-import tetris.logique.Score;
+import tetris.logique.*;
 import tetris.stockage.*;
 import tetris.vues.*;
 
@@ -30,7 +27,6 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 public class TetrisIHM extends Application {
 
@@ -59,6 +55,7 @@ public class TetrisIHM extends Application {
     IJeu jeu;
     Plateau p;
     Plateau prochainePiece;
+    Preferences preferences = Preferences.getInstance(); // Puisqu'il s'agit d'un singleton, il peut être directement instancié avant le constructeur
 
     private String nomjoueur = "";
 
@@ -186,8 +183,8 @@ public class TetrisIHM extends Application {
         borderPane = new BorderPane();
         primaryStage = new Stage();
 
-        vuePlateau = new VuePlateau(p, vueMenuPrincipal.getDossierImg());
-        vueProchainePiece = new VueProchainePiece(prochainePiece, vueMenuPrincipal.getDossierImg());
+        vuePlateau = new VuePlateau(p);
+        vueProchainePiece = new VueProchainePiece(prochainePiece);
         vueControles = new VueControles();
 
         startJeu = new Button();

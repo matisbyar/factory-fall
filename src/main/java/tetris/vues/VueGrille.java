@@ -6,10 +6,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
 import tetris.logique.Plateau;
+import tetris.logique.Preferences;
 
 public class VueGrille extends GridPane {
 
-    String dossierImg = "conteneur";
+    String dossierImg;
     Image vide = new Image("file:src/main/resources/img/vide.png");
     Image vide_clair = new Image("file:src/main/resources/img/vide_clair.png");
     final Image imgS, imgI, imgJ, imgL, imgO, imgT, imgZ;
@@ -18,9 +19,9 @@ public class VueGrille extends GridPane {
 
     Plateau p;
 
-    public VueGrille(Plateau p, String dossierImg) {
+    public VueGrille(Plateau p) {
         this.p = p;
-        this.dossierImg = dossierImg;
+        this.dossierImg = Preferences.getInstance().getStylePiece();
         imgS = new Image("file:src/main/resources/img/" + dossierImg + "/S.jpg");
         imgI = new Image("file:src/main/resources/img/" + dossierImg + "/I.jpg");
         imgJ = new Image("file:src/main/resources/img/" + dossierImg + "/J.jpg");
