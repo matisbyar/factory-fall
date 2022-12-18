@@ -42,7 +42,7 @@ public class VueClassement extends Stage {
 
         vbScores = new VBox(titre, classement);
 
-        List<Score> scores = ScoreManager.getInstance().getScores();
+        List<Score> scores = ScoreManager.getInstance().getTopScore();
 
         retour = new Button();
 
