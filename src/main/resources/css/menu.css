@@ -1,20 +1,14 @@
-.textFieldNomJoueur{
+.textFieldNomJoueur {
     -fx-background-color: black;
     -fx-highlight-text-fill: white;
     -fx-text-fill: white;
     -fx-max-width: 150;
 }
 
-.bouttonCreerJoueur{
+.bouton {
     -fx-border-style: solid;
     -fx-border-radius: 2px;
     -fx-border-color: #e3e3e3;
+    -fx-text-fill: white;
     -fx-background-color: black;
-}
-
-.bouttonConnecterJoueur{
-    -fx-border-style: solid;
-    -fx-border-radius: 2px;
-    -fx-border-color: #e3e3e3;
-    -fx-background-color: grey;
 }

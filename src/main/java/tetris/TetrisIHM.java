@@ -19,7 +19,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import tetris.logique.*;
+import tetris.logique.AuthPlayer;
+import tetris.logique.Jeu;
+import tetris.logique.Plateau;
 import tetris.stockage.*;
 import tetris.vues.*;
 
@@ -55,7 +57,6 @@ public class TetrisIHM extends Application {
     IJeu jeu;
     Plateau p;
     Plateau prochainePiece;
-    Preferences preferences = Preferences.getInstance(); // Puisqu'il s'agit d'un singleton, il peut être directement instancié avant le constructeur
 
     private String nomjoueur = "";
 
@@ -71,7 +72,6 @@ public class TetrisIHM extends Application {
         vueMenuPrincipal.setButtonJouerCliqueListener(quandLeButtonJouerEstClique);
         vueMenuPrincipal.setButtonConnecterJoueurCliqueListener(joueurconnecte);
         vueMenuPrincipal.setButtonCreerJoueurCliqueListener(nouveaujoueurcree);
-        vueMenuPrincipal.setButtonTableauDesScoreListener(tableauDesScores);
         vueMenuPrincipal.setButtonQuitterListener(quitter);
         vueMenuPrincipal.show();
     }
@@ -86,14 +86,6 @@ public class TetrisIHM extends Application {
         launch(args);
     }
 
-
-    private final EventHandler<ActionEvent> tableauDesScores = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent event) {
-            vueMenuPrincipal.tableauScore();
-        }
-    };
-
     /**
      * Vérifie si les données rentrées sont valides.
      * Lance la vue demarrer partie apres avoir crée le joueur, et l'avoir connécté
@@ -101,13 +93,13 @@ public class TetrisIHM extends Application {
     private final EventHandler<ActionEvent> nouveaujoueurcree = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
-            AuthPlayer j = PlayerManager.getInstance().getPlayer(vueMenuPrincipal.getNomjoueur().getText());
+            AuthPlayer j = PlayerManager.getInstance().getPlayer(vueMenuPrincipal.getNomJoueur().getText());
             if (j != null) {
                 System.out.println("Cet identifiant n'est pas disponible");
             } else {
-                PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomjoueur().getText(), vueMenuPrincipal.getMotDePasse().getText());
+                PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomJoueur().getText(), vueMenuPrincipal.getMotDePasse().getText());
 
-                nomjoueur = vueMenuPrincipal.getNomjoueur().getText();
+                nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
                 Session.getInstance().connect(nomjoueur);
                 demarrerPartie();
                 vueMenuPrincipal.close();
@@ -122,7 +114,7 @@ public class TetrisIHM extends Application {
     private final EventHandler<ActionEvent> joueurconnecte = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
-            AuthPlayer j = PlayerManager.getInstance().getPlayer(vueMenuPrincipal.getNomjoueur().getText());
+            AuthPlayer j = PlayerManager.getInstance().getPlayer(vueMenuPrincipal.getNomJoueur().getText());
             boolean connexionOK = false;
 
             if (j != null) {
@@ -142,7 +134,7 @@ public class TetrisIHM extends Application {
             }
 
             if (connexionOK) {
-                nomjoueur = vueMenuPrincipal.getNomjoueur().getText();
+                nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
                 Session.getInstance().connect(nomjoueur);
                 demarrerPartie();
                 vueMenuPrincipal.close();
@@ -159,15 +151,12 @@ public class TetrisIHM extends Application {
         }
     };
 
-    private final EventHandler<ActionEvent> quitter = new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            try {
-                stop();
-                System.exit(0);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    private final EventHandler<ActionEvent> quitter = actionEvent -> {
+        try {
+            stop();
+            System.exit(0);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     };
 

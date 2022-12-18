@@ -1,27 +1,19 @@
-
 /* Root correspond au css de la scene */
-.root{
-    -fx-background-color: black ;
+.root {
+    -fx-background-color: black;
 }
 
 /* BorderPane Left */
-.leftPane{
+.leftPane {
     -fx-background-color: transparent;
 }
 
 /* BorderPane Center */
-
-.centerPane{
+.centerPane {
     -fx-background-color: transparent;
 }
 
 /* BorderPane Right */
-.rightPane{
+.rightPane {
     -fx-background-color: transparent;
-}
-
-.bouttonStart {
-    -fx-border-style: solid;
-    -fx-border-radius: 2px;
-    -fx-border-color: #e3e3e3;
 }
