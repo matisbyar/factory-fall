@@ -10,6 +10,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import tetris.TetrisIHM;
+
+import java.util.Objects;
 
 public class VueGameOver extends Stage {
 
@@ -36,9 +39,9 @@ public class VueGameOver extends Stage {
         retry = new SimpleBooleanProperty();
 
         // Instanciation d'objets graphiques JavaFX
-        retryImgView = new ImageView(new Image("file:src/main/resources/img/retry.png"));
-        exitImgView = new ImageView(new Image("file:src/main/resources/img/exit.png"));
-        gameOver = new ImageView(new Image("file:src/main/resources/img/game_over.png"));
+        retryImgView = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/retry.png"))));
+        exitImgView = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/exit.png"))));
+        gameOver = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/game_over.png"))));
         btExit = new Button();
         btRetry = new Button();
 

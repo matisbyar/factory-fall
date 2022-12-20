@@ -16,7 +16,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import tetris.TetrisIHM;
 import tetris.vues.VueMenuPrincipal;
+
+import java.util.Objects;
 
 public class VueMenuCompte extends Stage {
 
@@ -32,7 +35,7 @@ public class VueMenuCompte extends Stage {
     private final Button boutonConnexion, boutonCreation, retour;
 
     // Affichage
-    private final Font police = Font.loadFont("file:src/main/resources/fonts/Arcade.ttf", 32);
+    private final Font police = Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), 32);
     private final Insets paddingTopLeft = new Insets(30, 0, 30, 80);
 
     public VueMenuCompte(VueMenuPrincipal vueMenuPrincipal) {
@@ -83,7 +86,7 @@ public class VueMenuCompte extends Stage {
         root.setBackground(VueMenuPrincipal.background);
 
         // Scene
-        scene.getStylesheets().add("file:src/main/resources/css/menu.css");
+        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/menu.css")).toString());
 
         // Options (connexion ou création)
         option.setAlignment(Pos.CENTER);
@@ -123,7 +126,7 @@ public class VueMenuCompte extends Stage {
         retour.setAlignment(Pos.BOTTOM_LEFT);
         retour.setPrefHeight(100);
         retour.setPrefWidth(100);
-        retour.setGraphic(new ImageView(new Image("file:src/main/resources/img/fleche.png")));
+        retour.setGraphic(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/fleche.png")))));
         retour.setStyle("-fx-background-color: transparent");
         BorderPane.setMargin(retour, paddingTopLeft);
     }

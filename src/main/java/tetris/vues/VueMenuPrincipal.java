@@ -13,18 +13,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import tetris.TetrisIHM;
 import tetris.logique.Preferences;
 import tetris.vues.menu.VueClassement;
 import tetris.vues.menu.VueMenuCompte;
 import tetris.vues.menu.VueMenuPersonnaliser;
 
+import java.util.Objects;
+
 public class VueMenuPrincipal extends Stage {
 
     private final Scene scene;
-
-    public static Background background = new Background(new BackgroundImage(new Image("file:src/main/resources/img/background/classic.jpg"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
+    //Objects.requireNonNull(TetrisIHM.class.getResourceAsStream())
+    public static Background background = new Background(new BackgroundImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/classic.jpg"))), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
     Preferences preferences = Preferences.getInstance();
-    private final Font police = Font.loadFont("file:src/main/resources/fonts/Arcade.ttf", 32);
+    private final Font police = Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), 32);
 
     private final ImageView logo;
     private final Button start, parametres, personnaliser, compte, classement, quitter;
@@ -34,9 +37,9 @@ public class VueMenuPrincipal extends Stage {
     private final VBox vbCompte;
 
     // Gestion de la personnalisation des pièces
-    private final Image pieceDefault = new Image("file:src/main/resources/img/default/L.jpg");
-    private final Image pieceConteneur = new Image("file:src/main/resources/img/conteneur/L.jpg");
-    private final Image pieceBrique = new Image("file:src/main/resources/img/brique/L.jpg");
+    private final Image pieceDefault = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/default/L.jpg")));
+    private final Image pieceConteneur = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/conteneur/L.jpg")));
+    private final Image pieceBrique = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/brique/L.jpg")));
     private final ImageView pieceEnCoursPerso = new ImageView(pieceConteneur);
     private int i = 0;
 
@@ -51,7 +54,7 @@ public class VueMenuPrincipal extends Stage {
         scene = new Scene(root, 1280, 720);
 
         // Logo
-        logo = new ImageView(new Image("file:src/main/resources/img/titreMenu.png"));
+        logo = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/titreMenu.png"))));
 
         // Boutons
         start = new Button();
@@ -85,7 +88,7 @@ public class VueMenuPrincipal extends Stage {
      */
     public void styliserMenu() {
         // Général
-        scene.getStylesheets().add("file:src/main/resources/css/menu.css");
+        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/menu.css")).toString());
 
         VBox.setMargin(logo, new Insets(100, 0, 30, 0));
         VBox.setMargin(compte, new Insets(30, 0, 30, 80));

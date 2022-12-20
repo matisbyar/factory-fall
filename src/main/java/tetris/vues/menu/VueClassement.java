@@ -12,11 +12,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import tetris.TetrisIHM;
 import tetris.logique.Score;
 import tetris.stockage.ScoreManager;
 import tetris.vues.VueMenuPrincipal;
 
 import java.util.List;
+import java.util.Objects;
 
 public class VueClassement extends Stage {
 
@@ -29,7 +31,7 @@ public class VueClassement extends Stage {
     private final Button retour;
 
     private final Insets paddingTopLeft = new Insets(30, 0, 0, 80);
-    private final Font police = Font.loadFont("file:src/main/resources/fonts/Arcade.ttf", 32);
+    private final Font police = Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), 32);
 
     public VueClassement(VueMenuPrincipal vueMenuPrincipal) {
         // Initialisations
@@ -80,7 +82,7 @@ public class VueClassement extends Stage {
         root.setBackground(VueMenuPrincipal.background);
 
         // Flèche retour
-        retour.setGraphic(new ImageView(new Image("file:src/main/resources/img/fleche.png")));
+        retour.setGraphic(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/fleche.png")))));
         retour.setStyle("-fx-background-color: transparent;");
         BorderPane.setMargin(retour, paddingTopLeft);
 

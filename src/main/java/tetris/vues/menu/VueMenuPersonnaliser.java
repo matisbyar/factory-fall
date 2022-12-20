@@ -10,8 +10,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import tetris.TetrisIHM;
 import tetris.logique.Preferences;
 import tetris.vues.VueMenuPrincipal;
+
+import java.util.Objects;
 
 public class VueMenuPersonnaliser extends Stage {
 
@@ -41,7 +44,7 @@ public class VueMenuPersonnaliser extends Stage {
         flecheDroite = new Button();
         retour = new Button();
 
-        imageStylePiece = new ImageView(new Image("file:src/main/resources/img/" + preferences.getStylePiece() + "/L.jpg"));
+        imageStylePiece = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + preferences.getStylePiece() + "/L.jpg"))));
 
         // Styles et bindings
         styliser();
@@ -60,10 +63,10 @@ public class VueMenuPersonnaliser extends Stage {
 
     public void styliser() {
         root.setBackground(VueMenuPrincipal.background);
-        scene.getStylesheets().add("file:src/main/resources/css/menu.css");
+        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/menu.css")).toString());
 
-        flecheGauche.setGraphic(new ImageView(new Image("file:src/main/resources/img/flechePersonnalisation/flecheG.png")));
-        flecheDroite.setGraphic(new ImageView(new Image("file:src/main/resources/img/flechePersonnalisation/flecheD.png")));
+        flecheGauche.setGraphic(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/flecheG.png")))));
+        flecheDroite.setGraphic(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/flecheD.png")))));
         flecheGauche.setStyle("-fx-background-color: black");
         flecheDroite.setStyle("-fx-background-color: black");
 
@@ -73,7 +76,7 @@ public class VueMenuPersonnaliser extends Stage {
         retour.setAlignment(Pos.BOTTOM_LEFT);
         retour.setPrefHeight(100);
         retour.setPrefWidth(100);
-        retour.setGraphic(new ImageView(new Image("file:src/main/resources/img/fleche.png")));
+        retour.setGraphic(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/fleche.png")))));
         retour.setStyle("-fx-background-color: transparent");
 
         BorderPane.setMargin(retour, paddingTopLeft);
@@ -92,7 +95,7 @@ public class VueMenuPersonnaliser extends Stage {
      */
     public void changerImage(VueMenuPrincipal vueMenuPrincipal, String etat) {
         vueMenuPrincipal.changerImage(etat);
-        imageStylePiece.setImage(new Image("file:src/main/resources/img/" + preferences.getStylePiece() + "/L.jpg"));
+        imageStylePiece.setImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + preferences.getStylePiece() + "/L.jpg"))));
     }
 
     /**

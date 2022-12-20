@@ -29,6 +29,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 public class TetrisIHM extends Application {
 
@@ -41,7 +42,7 @@ public class TetrisIHM extends Application {
     private ActionListener descenteAuto;
     private Button startJeu;
     Label score, pseudo, rang, prochainePieceLabel;
-    private final Font police = Font.loadFont("file:src/main/resources/fonts/arcade.ttf", 32);
+    private final Font police = Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), 32);
 
     // Vues personnelles (créées par l'équipe)
     private VueMenuPrincipal vueMenuPrincipal;
@@ -64,7 +65,7 @@ public class TetrisIHM extends Application {
      * Le StackPane sp permet de superposer les éléments de l'IHM. Ici, il superpose le plateau de jeu et l'icone de pause.
      */
     private StackPane sp;
-    private final ImageView imgPause = new ImageView(new Image("file:src/main/resources/img/pause.png"));
+    private final ImageView imgPause = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/pause.png"))));
 
     @Override
     public void start(Stage primaryStage) {
@@ -317,7 +318,7 @@ public class TetrisIHM extends Application {
     public void styliser() {
 
         // Scene
-        scene.getStylesheets().add("file:src/main/resources/css/main.css");
+        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 
         // BorderPane
         borderPane.getStyleClass().add("borderPane");
@@ -380,7 +381,7 @@ public class TetrisIHM extends Application {
         informationsJoueur.setLayoutY(20);
 
         // StartJeu
-        startJeu.setGraphic(new ImageView(new Image("file:src/main/resources/img/start.png")));
+        startJeu.setGraphic(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/start.png")))));
         startJeu.setStyle("-fx-background-color: black");
         startJeu.getStyleClass().add("bouttonStart");
 
