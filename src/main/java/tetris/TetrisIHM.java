@@ -67,31 +67,11 @@ public class TetrisIHM extends Application {
     private StackPane sp;
     private final ImageView imgPause = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/pause.png"))));
 
-    @Override
-    public void start(Stage primaryStage) {
-        vueMenuPrincipal = new VueMenuPrincipal();
-        vueMenuPrincipal.setButtonJouerCliqueListener(quandLeButtonJouerEstClique);
-        vueMenuPrincipal.setButtonConnecterJoueurCliqueListener(joueurconnecte);
-        vueMenuPrincipal.setButtonCreerJoueurCliqueListener(nouveaujoueurcree);
-        vueMenuPrincipal.setButtonQuitterListener(quitter);
-        vueMenuPrincipal.show();
-    }
-
-    @Override
-    public void stop() throws Exception {
-        SQLUtils.getInstance().closeConnection();
-        super.stop();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     /**
      * Vérifie si les données rentrées sont valides.
      * Lance la vue demarrer partie apres avoir crée le joueur, et l'avoir connécté
      */
-    private final EventHandler<ActionEvent> nouveaujoueurcree = new EventHandler<>() {
+    private final EventHandler<ActionEvent> nouveauJoueurCree = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
             AuthPlayer j = PlayerManager.getInstance().getPlayer(vueMenuPrincipal.getNomJoueur().getText());
@@ -112,7 +92,7 @@ public class TetrisIHM extends Application {
      * Vérifie si les données rentrées sont valides.
      * Lance la vue demarrer partie apres avoir connecté le joueur.
      */
-    private final EventHandler<ActionEvent> joueurconnecte = new EventHandler<>() {
+    private final EventHandler<ActionEvent> joueurConnecte = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
             AuthPlayer j = PlayerManager.getInstance().getPlayer(vueMenuPrincipal.getNomJoueur().getText());
@@ -160,6 +140,26 @@ public class TetrisIHM extends Application {
             e.printStackTrace();
         }
     };
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        vueMenuPrincipal = new VueMenuPrincipal();
+        vueMenuPrincipal.setButtonJouerCliqueListener(quandLeButtonJouerEstClique);
+        vueMenuPrincipal.setButtonConnecterJoueurCliqueListener(joueurConnecte);
+        vueMenuPrincipal.setButtonCreerJoueurCliqueListener(nouveauJoueurCree);
+        vueMenuPrincipal.setButtonQuitterListener(quitter);
+        vueMenuPrincipal.show();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        SQLUtils.getInstance().closeConnection();
+        super.stop();
+    }
 
     public void demarrerPartie() {
         // Initialisations des objets nécessaires
@@ -403,6 +403,5 @@ public class TetrisIHM extends Application {
         // Image Pause
         imgPause.setPreserveRatio(true);
         imgPause.setFitWidth(150);
-
     }
 }
