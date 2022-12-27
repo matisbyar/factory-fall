@@ -15,9 +15,11 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
 import tetris.logique.Preferences;
+import tetris.stockage.Session;
 import tetris.vues.menu.VueClassement;
-import tetris.vues.menu.VueMenuCompte;
-import tetris.vues.menu.VueMenuPersonnaliser;
+import tetris.vues.menu.compte.VueCompteConnecte;
+import tetris.vues.menu.compte.VueCompteDeconnecte;
+import tetris.vues.menu.VuePersonnaliser;
 
 import java.util.Objects;
 
@@ -44,8 +46,9 @@ public class VueMenuPrincipal extends Stage {
     private int i = 0;
 
     // Sous-vues
-    VueMenuCompte vueMenuCompte;
-    VueMenuPersonnaliser vueMenuPersonnaliser;
+    VueCompteDeconnecte vueCompteDeconnecte;
+    VueCompteConnecte vueCompteConnecte;
+    VuePersonnaliser vuePersonnaliser;
     VueClassement vueClassement;
 
 
@@ -76,8 +79,9 @@ public class VueMenuPrincipal extends Stage {
         root.setBackground(background);
         root.setBottom(compte);
 
-        vueMenuCompte = new VueMenuCompte(this);
-        vueMenuPersonnaliser = new VueMenuPersonnaliser(this);
+        vueCompteDeconnecte = new VueCompteDeconnecte(this);
+        vueCompteConnecte = new VueCompteConnecte(this);
+        vuePersonnaliser = new VuePersonnaliser(this);
         vueClassement = new VueClassement(this);
 
         this.setScene(scene);
@@ -170,8 +174,8 @@ public class VueMenuPrincipal extends Stage {
      * Fonction qui créer tous les bindings in line utile pour l'ensemble des boutons du menu
      */
     public void creerBindings() {
-        compte.setOnAction(actionEvent -> this.setScene(vueMenuCompte.getScene()));
-        personnaliser.setOnAction(actionEvent -> this.setScene(vueMenuPersonnaliser.getScene()));
+        compte.setOnAction(actionEvent -> this.setScene(Session.getInstance().isConnected() ? vueCompteConnecte.getScene() : vueCompteDeconnecte.getScene()));
+        personnaliser.setOnAction(actionEvent -> this.setScene(vuePersonnaliser.getScene()));
         classement.setOnAction(actionEvent -> this.setScene(vueClassement.getScene()));
     }
 
@@ -179,14 +183,14 @@ public class VueMenuPrincipal extends Stage {
      * Getter utile pour la récupération dans TetrisIHM
      */
     public TextField getNomJoueur() {
-        return vueMenuCompte.getPseudo();
+        return vueCompteDeconnecte.getPseudo();
     }
 
     /**
      * Getter utile pour la récupération dans TetrisIHM
      */
     public PasswordField getMotDePasse() {
-        return vueMenuCompte.getMotDePasse();
+        return vueCompteDeconnecte.getMotDePasse();
     }
 
     /**
@@ -200,14 +204,14 @@ public class VueMenuPrincipal extends Stage {
      * Fonction qui déclenche le lancement du jeu après la connexion d'un utilisateur dans TetrisIHM
      */
     public void setButtonConnecterJoueurCliqueListener(EventHandler<ActionEvent> joueurConnecte) {
-        vueMenuCompte.setButtonConnecterJoueurCliqueListener(joueurConnecte);
+        vueCompteDeconnecte.setButtonConnecterJoueurCliqueListener(joueurConnecte);
     }
 
     /**
      * Fonction qui déclenche le lancement du jeu après la création d'un nouvel utilisateur dans TetrisIHM
      */
     public void setButtonCreerJoueurCliqueListener(EventHandler<ActionEvent> nouveauJoueurCree) {
-        vueMenuCompte.setButtonCreerJoueurCliqueListener(nouveauJoueurCree);
+        vueCompteDeconnecte.setButtonCreerJoueurCliqueListener(nouveauJoueurCree);
     }
 
     public void setButtonQuitterListener(EventHandler<ActionEvent> quitterAction) {

@@ -117,6 +117,7 @@ public class TetrisIHM extends Application {
             if (connexionOK) {
                 nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
                 Session.getInstance().connect(nomjoueur);
+                // TODO: à changer pour rediriger vers la vue MenuPrincipal ou MenuCompteConnecte, il faut que le jeu se démarre uniquement lorsque le joueur clique sur "Jouer"
                 demarrerPartie();
                 vueMenuPrincipal.close();
             }

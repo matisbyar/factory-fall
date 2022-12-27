@@ -1,4 +1,4 @@
-package tetris.vues.menu;
+package tetris.vues.menu.compte;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,7 +21,7 @@ import tetris.vues.VueMenuPrincipal;
 
 import java.util.Objects;
 
-public class VueMenuCompte extends Stage {
+public class VueCompteDeconnecte extends Stage {
 
     private final BorderPane root;
     private final Scene scene;
@@ -38,7 +38,7 @@ public class VueMenuCompte extends Stage {
     private final Font police = Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), 32);
     private final Insets paddingTopLeft = new Insets(30, 0, 30, 80);
 
-    public VueMenuCompte(VueMenuPrincipal vueMenuPrincipal) {
+    public VueCompteDeconnecte(VueMenuPrincipal vueMenuPrincipal) {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
 

@@ -16,7 +16,7 @@ import tetris.vues.VueMenuPrincipal;
 
 import java.util.Objects;
 
-public class VueMenuPersonnaliser extends Stage {
+public class VuePersonnaliser extends Stage {
 
     private final BorderPane root;
     private final Scene scene;
@@ -32,7 +32,7 @@ public class VueMenuPersonnaliser extends Stage {
 
     Preferences preferences = Preferences.getInstance();
 
-    public VueMenuPersonnaliser(VueMenuPrincipal vueMenuPrincipal) {
+    public VuePersonnaliser(VueMenuPrincipal vueMenuPrincipal) {
         // Instanciation
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
