@@ -16,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -30,6 +31,9 @@ import java.awt.event.ActionListener;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class TetrisIHM extends Application {
 
@@ -153,6 +157,7 @@ public class TetrisIHM extends Application {
         vueMenuPrincipal.setButtonConnecterJoueurCliqueListener(joueurConnecte);
         vueMenuPrincipal.setButtonCreerJoueurCliqueListener(nouveauJoueurCree);
         vueMenuPrincipal.setButtonQuitterListener(quitter);
+        Musique.playMusicMainMenu();
         vueMenuPrincipal.show();
     }
 
@@ -165,6 +170,7 @@ public class TetrisIHM extends Application {
     public void demarrerPartie() {
         // Initialisations des objets nécessaires
         // classes de la logique du jeu
+        Musique.stopMusicMainMenu();
         jeu = new Jeu(nomjoueur);
         jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
@@ -279,6 +285,7 @@ public class TetrisIHM extends Application {
                 vueGameOver.arreterJeuProperty().addListener((observableValue12, aBoolean12, t112) -> {
                     if (vueGameOver.arreterJeuProperty().getValue()) {
                         vueGameOver.close();
+                        primaryStage.close();
                         start(primaryStage);
                     }
                 });
