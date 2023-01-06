@@ -3,6 +3,7 @@ package tetris.vues.menu;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import tetris.logique.Preferences;
 import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
@@ -29,7 +30,7 @@ public class VueRegles extends Stage implements Menu {
     }
 
     public void styliser() {
-        root.setBackground(VueMenuPrincipal.background);
+        root.setBackground(Preferences.getInstance().getBackground());
     }
 
 

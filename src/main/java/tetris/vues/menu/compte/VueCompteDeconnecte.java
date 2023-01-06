@@ -11,9 +11,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
+import tetris.logique.Preferences;
 import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
@@ -32,9 +32,6 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     private final TextField pseudoConnexion, pseudoCreation;
     private final PasswordField motDePasseConnexion, motDePasseCreation, motDePasseCreationConfirmation;
     private final Button boutonConnexion, boutonCreation;
-
-    // Affichage
-    private final Font police = Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), 32);
 
     public VueCompteDeconnecte(VueMenuPrincipal vueMenuPrincipal) {
         root = new BorderPane();
@@ -75,7 +72,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
 
     public void styliser() {
         // Root (BorderPane)
-        root.setBackground(VueMenuPrincipal.background);
+        root.setBackground(Preferences.getInstance().getBackground());
 
         // Scene
         scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/menu.css")).toString());
@@ -85,8 +82,8 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         option.setSpacing(100);
 
         // Titre
-        titreConnexion.setFont(police);
-        titreCreation.setFont(police);
+        titreConnexion.setFont(Preferences.getInstance().getPolice(32));
+        titreCreation.setFont(Preferences.getInstance().getPolice(32));
         titreConnexion.setStyle("-fx-text-fill: white");
         titreCreation.setStyle("-fx-text-fill: white");
 

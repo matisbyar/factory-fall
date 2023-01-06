@@ -10,8 +10,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.text.Font;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
 import tetris.logique.Preferences;
@@ -27,9 +27,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
 
     private final Scene scene;
     //Objects.requireNonNull(TetrisIHM.class.getResourceAsStream())
-    public static Background background = new Background(new BackgroundImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/classic.jpg"))), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
     Preferences preferences = Preferences.getInstance();
-    private final Font police = Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), 32);
 
     private final ImageView logo;
     private final Button start, parametres, personnaliser, compte, classement, quitter;
@@ -76,7 +74,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
 
         // Affectations
         root.setCenter(boutons);
-        root.setBackground(background);
+        root.setBackground(preferences.getBackground());
         root.setBottom(compte);
 
         vueCompteDeconnecte = new VueCompteDeconnecte(this);
@@ -108,27 +106,27 @@ public class VueMenuPrincipal extends Stage implements Menu {
 
         // Boutons
         start.setText("Jouer");
-        start.setFont(police);
+        start.setFont(preferences.getPolice(32));
         start.getStyleClass().add("bouton");
 
         parametres.setText("Paramètres");
-        parametres.setFont(police);
+        parametres.setFont(preferences.getPolice(32));
         parametres.getStyleClass().add("bouton");
 
         personnaliser.setText("Personnaliser");
-        personnaliser.setFont(police);
+        personnaliser.setFont(preferences.getPolice(32));
         personnaliser.getStyleClass().add("bouton");
 
         compte.setText("Compte");
-        compte.setFont(police);
+        compte.setFont(preferences.getPolice(32));
         compte.getStyleClass().add("bouton");
 
         classement.setText("Classement");
-        classement.setFont(police);
+        classement.setFont(preferences.getPolice(32));
         classement.getStyleClass().add("bouton");
 
         quitter.setText("Quitter");
-        quitter.setFont(police);
+        quitter.setFont(preferences.getPolice(32));
         quitter.getStyleClass().add("bouton");
 
         this.setResizable(false);

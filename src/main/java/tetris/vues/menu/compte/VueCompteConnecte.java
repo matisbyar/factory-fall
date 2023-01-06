@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
+import tetris.logique.Preferences;
 import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
@@ -30,7 +31,7 @@ public class VueCompteConnecte extends Stage implements Menu {
 
     protected void styliser() {
         // Root (BorderPane)
-        root.setBackground(VueMenuPrincipal.background);
+        root.setBackground(Preferences.getInstance().getBackground());
 
         // Scene
         scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/menu.css")).toString());

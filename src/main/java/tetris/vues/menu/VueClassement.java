@@ -6,9 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import tetris.TetrisIHM;
+import tetris.logique.Preferences;
 import tetris.logique.Score;
 import tetris.stockage.ScoreManager;
 import tetris.vues.Menu;
@@ -16,7 +15,6 @@ import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
 
 import java.util.List;
-import java.util.Objects;
 
 public class VueClassement extends Stage implements Menu {
 
@@ -26,8 +24,6 @@ public class VueClassement extends Stage implements Menu {
     private final Label titre;
     private final VBox vbScores;
     private final GridPane classement;
-
-    private final Font police = Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), 32);
 
     public VueClassement(VueMenuPrincipal vueMenuPrincipal) {
         // Initialisations
@@ -70,10 +66,10 @@ public class VueClassement extends Stage implements Menu {
 
     public void styliser() {
         // Root (BorderPane)
-        root.setBackground(VueMenuPrincipal.background);
+        root.setBackground(Preferences.getInstance().getBackground());
 
         // Titre
-        titre.setFont(police);
+        titre.setFont(Preferences.getInstance().getPolice(32));
         titre.setStyle("-fx-text-fill: white;");
         titre.setAlignment(Pos.CENTER);
 

@@ -60,7 +60,7 @@ public class VuePersonnaliser extends Stage implements Menu {
     }
 
     public void styliser() {
-        root.setBackground(VueMenuPrincipal.background);
+        root.setBackground(preferences.getBackground());
         scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/menu.css")).toString());
 
         flecheGauche.setGraphic(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/flecheG.png")))));

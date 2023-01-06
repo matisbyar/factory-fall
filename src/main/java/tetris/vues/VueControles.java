@@ -8,9 +8,9 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import tetris.TetrisIHM;
+import tetris.logique.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,6 @@ public class VueControles extends VBox {
     Label titre;
     ImageView flechesDirectionnelles, espace, toucheR, toucheP, haut, echap;
     Label flechesDirectionnellesLabel, espaceLabel, toucheRLabel, touchePLabel, hautLabel, echapLabel;
-    Font police = Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), 30);
-    Font policeSmall = Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), 16);
 
     ArrayList<HBox> hBoxes;
     ArrayList<ImageView> imageViews;
@@ -69,7 +67,7 @@ public class VueControles extends VBox {
 
         // Titre
         titre.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
-        titre.setFont(police);
+        titre.setFont(Preferences.getInstance().getPolice(30));
         titre.setTextAlignment(TextAlignment.LEFT);
 
         // HBoxes
@@ -82,7 +80,7 @@ public class VueControles extends VBox {
             HBox.setHgrow(hBox.getChildren().get(0), Priority.ALWAYS);
 
             hBox.getChildren().get(1).setStyle("-fx-text-fill: #ffffff;");
-            ((Label) hBox.getChildren().get(1)).setFont(policeSmall);
+            ((Label) hBox.getChildren().get(1)).setFont(Preferences.getInstance().getPolice(16));
             ((Label) hBox.getChildren().get(1)).setAlignment(Pos.CENTER_RIGHT);
             ((Label) hBox.getChildren().get(1)).setWrapText(true);
         }
