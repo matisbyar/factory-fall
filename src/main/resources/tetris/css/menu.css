@@ -12,3 +12,21 @@
     -fx-text-fill: white;
     -fx-background-color: black;
 }
+
+.barre-navigation {
+    -fx-alignment: center-left;
+    -fx-padding: 50px;
+}
+
+.bouton-clair {
+    -fx-text-fill: black;
+    -fx-background-color: white;
+    -fx-padding: 0 20px;
+}
+
+.titre {
+    -fx-text-fill: white;
+    -fx-background-color: black;
+    -fx-padding: 0 20px;
+    -fx-alignment: center;
+}
