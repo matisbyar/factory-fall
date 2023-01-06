@@ -1,12 +1,8 @@
 package tetris.vues.menu;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -15,12 +11,14 @@ import javafx.stage.Stage;
 import tetris.TetrisIHM;
 import tetris.logique.Score;
 import tetris.stockage.ScoreManager;
+import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
+import tetris.vues.helpers.BarreNavigation;
 
 import java.util.List;
 import java.util.Objects;
 
-public class VueClassement extends Stage {
+public class VueClassement extends Stage implements Menu {
 
     private final BorderPane root;
     private final Scene scene;
@@ -28,9 +26,7 @@ public class VueClassement extends Stage {
     private final Label titre;
     private final VBox vbScores;
     private final GridPane classement;
-    private final Button retour;
 
-    private final Insets paddingTopLeft = new Insets(30, 0, 0, 80);
     private final Font police = Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), 32);
 
     public VueClassement(VueMenuPrincipal vueMenuPrincipal) {
@@ -46,7 +42,6 @@ public class VueClassement extends Stage {
 
         List<Score> scores = ScoreManager.getInstance().getTopScore();
 
-        retour = new Button();
 
         // Récupération des scores
         for (int i = 1; i < 11; i++) {
@@ -64,27 +59,18 @@ public class VueClassement extends Stage {
 
         // Styles et bindings
         styliser();
-        creerBindings(vueMenuPrincipal);
 
         // Affichage
         root.setCenter(vbScores);
-        root.setTop(retour);
+        root.setTop(new BarreNavigation("Classement", vueMenuPrincipal, this));
 
         this.setScene(scene);
     }
 
-    public void creerBindings(VueMenuPrincipal vueMenuPrincipal) {
-        this.setRetour(vueMenuPrincipal);
-    }
 
     public void styliser() {
         // Root (BorderPane)
         root.setBackground(VueMenuPrincipal.background);
-
-        // Flèche retour
-        retour.setGraphic(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/fleche.png")))));
-        retour.setStyle("-fx-background-color: transparent;");
-        BorderPane.setMargin(retour, paddingTopLeft);
 
         // Titre
         titre.setFont(police);
@@ -103,10 +89,8 @@ public class VueClassement extends Stage {
         vbScores.setAlignment(Pos.CENTER);
     }
 
-    public void setRetour(VueMenuPrincipal vueMenuPrincipal) {
-        retour.setOnAction(e -> {
-            vueMenuPrincipal.afficherMenuPrincipal();
-            this.setScene(scene);
-        });
+    @Override
+    public void afficherScene() {
+        this.setScene(scene);
     }
 }

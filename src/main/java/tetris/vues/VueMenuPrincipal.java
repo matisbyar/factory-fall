@@ -17,13 +17,13 @@ import tetris.TetrisIHM;
 import tetris.logique.Preferences;
 import tetris.stockage.Session;
 import tetris.vues.menu.VueClassement;
+import tetris.vues.menu.VuePersonnaliser;
 import tetris.vues.menu.compte.VueCompteConnecte;
 import tetris.vues.menu.compte.VueCompteDeconnecte;
-import tetris.vues.menu.VuePersonnaliser;
 
 import java.util.Objects;
 
-public class VueMenuPrincipal extends Stage {
+public class VueMenuPrincipal extends Stage implements Menu {
 
     private final Scene scene;
     //Objects.requireNonNull(TetrisIHM.class.getResourceAsStream())
@@ -82,7 +82,7 @@ public class VueMenuPrincipal extends Stage {
         vueCompteDeconnecte = new VueCompteDeconnecte(this);
         vueCompteConnecte = new VueCompteConnecte(this);
         vuePersonnaliser = new VuePersonnaliser(this);
-        vueClassement = new VueClassement(this);
+        //vueClassement = new VueClassement(this);
 
         this.setScene(scene);
     }
@@ -132,13 +132,6 @@ public class VueMenuPrincipal extends Stage {
         quitter.getStyleClass().add("bouton");
 
         this.setResizable(false);
-    }
-
-    /**
-     * Fonction qui permet d'afficher le menu principal (utilisé lors d'un appui sur le bouton retour)
-     */
-    public void afficherMenuPrincipal() {
-        this.setScene(scene);
     }
 
     /**
@@ -216,5 +209,10 @@ public class VueMenuPrincipal extends Stage {
 
     public void setButtonQuitterListener(EventHandler<ActionEvent> quitterAction) {
         quitter.setOnAction(quitterAction);
+    }
+
+    @Override
+    public void afficherScene() {
+        this.setScene(scene);
     }
 }

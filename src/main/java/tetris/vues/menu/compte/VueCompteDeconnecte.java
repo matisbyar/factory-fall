@@ -2,26 +2,25 @@ package tetris.vues.menu.compte;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
+import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
+import tetris.vues.helpers.BarreNavigation;
 
 import java.util.Objects;
 
-public class VueCompteDeconnecte extends Stage {
+public class VueCompteDeconnecte extends Stage implements Menu {
 
     private final BorderPane root;
     private final Scene scene;
@@ -32,11 +31,10 @@ public class VueCompteDeconnecte extends Stage {
     private final Label titreConnexion, titreCreation;
     private final TextField pseudoConnexion, pseudoCreation;
     private final PasswordField motDePasseConnexion, motDePasseCreation, motDePasseCreationConfirmation;
-    private final Button boutonConnexion, boutonCreation, retour;
+    private final Button boutonConnexion, boutonCreation;
 
     // Affichage
     private final Font police = Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), 32);
-    private final Insets paddingTopLeft = new Insets(30, 0, 30, 80);
 
     public VueCompteDeconnecte(VueMenuPrincipal vueMenuPrincipal) {
         root = new BorderPane();
@@ -49,7 +47,6 @@ public class VueCompteDeconnecte extends Stage {
 
         boutonConnexion = new Button();
         boutonCreation = new Button();
-        retour = new Button();
 
         pseudoConnexion = new TextField();
         pseudoCreation = new TextField();
@@ -63,7 +60,7 @@ public class VueCompteDeconnecte extends Stage {
 
         // Styles et bindings
         styliser();
-        creerBindings(vueMenuPrincipal);
+        setDisable();
 
         champsConnexion.getChildren().addAll(titreConnexion, pseudoConnexion, motDePasseConnexion, boutonConnexion);
         champsCreation.getChildren().addAll(titreCreation, pseudoCreation, motDePasseCreation, motDePasseCreationConfirmation, boutonCreation);
@@ -71,14 +68,9 @@ public class VueCompteDeconnecte extends Stage {
         option.getChildren().addAll(champsConnexion, champsCreation);
 
         root.setCenter(option);
-        root.setTop(retour);
+        root.setTop(new BarreNavigation("Compte", vueMenuPrincipal, this));
 
         this.setScene(scene);
-    }
-
-    public void creerBindings(VueMenuPrincipal vueMenuPrincipal) {
-        this.setRetour(vueMenuPrincipal);
-        setDisable();
     }
 
     public void styliser() {
@@ -121,26 +113,8 @@ public class VueCompteDeconnecte extends Stage {
         boutonConnexion.getStyleClass().add("bouton");
         boutonCreation.setText("S'inscrire");
         boutonCreation.getStyleClass().add("bouton");
-
-        // Flèche de retour
-        retour.setAlignment(Pos.BOTTOM_LEFT);
-        retour.setPrefHeight(100);
-        retour.setPrefWidth(100);
-        retour.setGraphic(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/fleche.png")))));
-        retour.setStyle("-fx-background-color: transparent");
-        BorderPane.setMargin(retour, paddingTopLeft);
     }
 
-    /**
-     * Change la scène par celle du menu principal
-     * @param vueMenuPrincipal vue où l'on souhaite retourner
-     */
-    public void setRetour(VueMenuPrincipal vueMenuPrincipal) {
-        retour.setOnAction(e -> {
-            vueMenuPrincipal.afficherMenuPrincipal();
-            this.setScene(scene);
-        });
-    }
 
     /**
      * Empêche l'utilisateur de renseigner des champs de connexion s'il a déjà écrit dans des champs d'inscription, et vice-versa.
@@ -154,7 +128,8 @@ public class VueCompteDeconnecte extends Stage {
 
     /**
      * Empêche l'utilisateur de renseigner des champs de connexion s'il a déjà écrit dans des champs d'inscription
-     * @param pseudoCreation pseudo de l'utilisateur
+     *
+     * @param pseudoCreation     pseudo de l'utilisateur
      * @param motDePasseCreation mot de passe de l'utilisateur
      */
     private void champsCreationLock(TextField pseudoCreation, TextField motDePasseCreation) {
@@ -171,7 +146,8 @@ public class VueCompteDeconnecte extends Stage {
 
     /**
      * Empêche l'utilisateur de renseigner des champs d'inscription s'il a déjà écrit dans des champs de connexion
-     * @param pseudoConnexion pseudo de l'utilisateur
+     *
+     * @param pseudoConnexion     pseudo de l'utilisateur
      * @param motDePasseConnexion mot de passe de l'utilisateur
      */
     private void champsConnexionLock(TextField pseudoConnexion, TextField motDePasseConnexion) {
@@ -204,6 +180,7 @@ public class VueCompteDeconnecte extends Stage {
 
     /**
      * Récupère le pseudo de l'utilisateur
+     *
      * @return pseudo de l'utilisateur
      */
     public TextField getPseudo() {
@@ -212,9 +189,15 @@ public class VueCompteDeconnecte extends Stage {
 
     /**
      * Récupère le mot de passe de l'utilisateur
+     *
      * @return mot de passe de l'utilisateur
      */
     public PasswordField getMotDePasse() {
         return motDePasseConnexion.isDisabled() ? motDePasseCreation : motDePasseConnexion;
+    }
+
+    @Override
+    public void afficherScene() {
+        this.setScene(scene);
     }
 }
