@@ -5,6 +5,8 @@ public class Session {
     private static Session instance = null;
     private String login = "";
 
+    private String departement = "";
+
     private Session() {}
 
     public static Session getInstance() {
@@ -16,6 +18,11 @@ public class Session {
         return login;
     }
 
+
+    public String getDepartement() {
+        return departement;
+    }
+
     public boolean isLoggedIn(String login) {
         return this.login.equals(login);
     }
@@ -24,8 +31,9 @@ public class Session {
         return this.login != null && !this.login.isEmpty();
     }
 
-    public void connect(String login) {
+    public void connect(String login,String departement) {
         this.login = login;
+        this.departement=departement;
     }
 
     public void disconnect() {

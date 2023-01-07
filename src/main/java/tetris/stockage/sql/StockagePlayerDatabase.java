@@ -15,7 +15,7 @@ public class StockagePlayerDatabase {
     public void create(AuthPlayer element) {
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "call creationJoueurTetris(login, mdpHache, selHachage, departement) VALUES (?, ?, ?, ?)";
+        String req = "call creationJoueurTetris(?,?,?,?)";
         try (
                 PreparedStatement st = connection.prepareStatement(req);
         ) {

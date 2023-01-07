@@ -222,12 +222,12 @@ public class StockageScoreDatabase {
         Connection connection = utils.getConnection();
         String req = "SELECT score, horodatage,  Scores.login FROM Scores" +
                 " LEFT OUTER JOIN JOUEURS_TETRIS ON JOUEURS_TETRIS.login=Scores.login" +
-                " WHERE  Scores.login=JOUEURS_TETRIS.login  AND JOUEURS_TETRIS.departement='34' ORDER BY score DESC";
+                " WHERE  Scores.login=JOUEURS_TETRIS.login  AND JOUEURS_TETRIS.departement=? ORDER BY score DESC";
         int i = 1;
         try (
                 PreparedStatement st = connection.prepareStatement(req);
         ) {
-            //st.setString(1, departement);
+            st.setString(1, departement);
             try (
                     ResultSet result = st.executeQuery();) {
                 while (result.next() && i < 11) {
