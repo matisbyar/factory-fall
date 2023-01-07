@@ -63,9 +63,9 @@ public class StockagePlayerDatabase {
         AuthPlayer player = null;
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "SELECT login, mdpHache, selHachage,JOUEURS_TETRIS.departement FROM JOUEURS" +
-                "LEFT OUTER JOIN JOUEURS_TETRIS ON JOUEURS_TETRIS.login=JOUEURS.login" +
-                " WHERE login = ? ";
+        String req = "SELECT JOUEURS.login, mdpHache, selHachage,JOUEURS_TETRIS.departement FROM JOUEURS" +
+                " LEFT OUTER JOIN JOUEURS_TETRIS ON JOUEURS_TETRIS.login=JOUEURS.login" +
+                " WHERE JOUEURS.login = ? ";
         try (
                 PreparedStatement st = connection.prepareStatement(req);
         ) {
@@ -75,7 +75,7 @@ public class StockagePlayerDatabase {
 
                     String password = result.getString("mdpHache");
                     byte[] salt = result.getBytes("selHachage");
-                    String departement = result.getString("JOUEURS_TETRIS.departement");
+                    String departement = result.getString("departement");
                     player = new AuthPlayer(login,departement,password,salt);
 
                 }
@@ -90,7 +90,7 @@ public class StockagePlayerDatabase {
         List<AuthPlayer> playerList = new ArrayList<>();
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "SELECT login, mdpHache, selHachage,JOUEURS_TETRIS.departement FROM JOUEURS " +
+        String req = "SELECT JOUEURS.login, mdpHache, selHachage,JOUEURS_TETRIS.departement FROM JOUEURS " +
                 "  LEFT OUTER JOIN JOUEURS_TETRIS ON JOUEURS_TETRIS.login=JOUEURS.login ";
         try (
                 PreparedStatement st = connection.prepareStatement(req);
