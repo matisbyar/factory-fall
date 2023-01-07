@@ -32,9 +32,8 @@ public class VueCompteConnecte extends Stage implements Menu {
     protected void styliser() {
         // Root (BorderPane)
         root.setBackground(Preferences.getInstance().getBackground());
-
         // Scene
-        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/menu.css")).toString());
+        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
     }
 
     @Override

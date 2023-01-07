@@ -1,5 +1,6 @@
 package tetris.vues.menu;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,7 +28,7 @@ public class VuePersonnaliser extends Stage implements Menu {
 
     private final ImageView imageStylePiece;
 
-    private final Button flecheGauche, flecheDroite;
+    private final Button flecheGauche, flecheDroite, retour;
 
     Preferences preferences = Preferences.getInstance();
 
@@ -41,6 +42,7 @@ public class VuePersonnaliser extends Stage implements Menu {
 
         flecheGauche = new Button();
         flecheDroite = new Button();
+        retour = new Button();
 
         imageStylePiece = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + preferences.getStylePiece() + "/L.jpg"))));
 
@@ -60,16 +62,13 @@ public class VuePersonnaliser extends Stage implements Menu {
     }
 
     public void styliser() {
-        root.setBackground(preferences.getBackground());
-        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/menu.css")).toString());
+        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 
-        flecheGauche.setGraphic(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/flecheG.png")))));
-        flecheDroite.setGraphic(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/flecheD.png")))));
-        flecheGauche.setStyle("-fx-background-color: black");
-        flecheDroite.setStyle("-fx-background-color: black");
+        flecheGauche.getStyleClass().add("flecheG");
+        flecheDroite.getStyleClass().add("flecheD");
 
-        personnalisations.setAlignment(Pos.CENTER);
-        stylePiece.setAlignment(Pos.CENTER);
+        personnalisations.getStyleClass().add("personnalisations");
+        stylePiece.getStyleClass().add("stylePiece");
     }
 
     public void creerBindings(VueMenuPrincipal vueMenuPrincipal) {

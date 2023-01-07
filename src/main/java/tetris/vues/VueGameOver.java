@@ -75,27 +75,26 @@ public class VueGameOver extends Stage {
      * Applique tous les styles souhaités aux objets JavaFX
      */
     public void styliser() {
+        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
+
         // Stage
-        this.setResizable(false);
+        this.setResizable(true);
 
         // BorderPane
-        borderPane.setStyle("-fx-background-color: #1E1E1E");
-        borderPane.setPrefWidth(500);
-        borderPane.setPrefHeight(500);
+        borderPane.getStyleClass().add("borderPane");
 
         // ImageView
-        gameOver.setFitWidth(250);
-        gameOver.setFitHeight(180);
+        gameOver.getStyleClass().add("gameOver");
 
         // Button
+        btRetry.getStyleClass().add("btRetry");
+        btExit.getStyleClass().add("btExit");
         btRetry.setGraphic(retryImgView);
-        btRetry.setStyle("-fx-background-color: transparent");
         btExit.setGraphic(exitImgView);
-        btExit.setStyle("-fx-background-color: transparent");
         btExit.setMinSize(96, 24);
-        btRetry.setMinSize(116, 24);
 
         // VBox
+        vb.getStyleClass().add("vb");
         vb.setLayoutY(125);
         vb.setLayoutX(125);
     }

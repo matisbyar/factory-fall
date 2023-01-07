@@ -75,21 +75,20 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         root.setBackground(Preferences.getInstance().getBackground());
 
         // Scene
-        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/menu.css")).toString());
+        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 
         // Options (connexion ou création)
-        option.setAlignment(Pos.CENTER);
-        option.setSpacing(100);
+        option.getStyleClass().add("option");
 
         // Titre
+        titreConnexion.getStyleClass().add("titreConnexion");
+        titreConnexion.getStyleClass().add("titreCreation");
         titreConnexion.setFont(Preferences.getInstance().getPolice(32));
         titreCreation.setFont(Preferences.getInstance().getPolice(32));
-        titreConnexion.setStyle("-fx-text-fill: white");
-        titreCreation.setStyle("-fx-text-fill: white");
 
         // Box de connexion/création
-        champsConnexion.setSpacing(20);
-        champsCreation.setSpacing(20);
+        champsConnexion.getStyleClass().add("champsConnexion");
+        champsCreation.getStyleClass().add("champsCreation");
 
         // Champs pseudo
         pseudoConnexion.setPromptText("Pseudo");
@@ -100,12 +99,16 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         // Champs mot de passe
         motDePasseConnexion.setPromptText("Mot de passe");
         motDePasseCreation.setPromptText("Mot de passe");
+
         motDePasseCreationConfirmation.setPromptText("Confirmation du mot de passe");
+
         motDePasseConnexion.getStyleClass().add("textFieldNomJoueur");
         motDePasseCreation.getStyleClass().add("textFieldNomJoueur");
+
         motDePasseCreationConfirmation.getStyleClass().add("textFieldNomJoueur");
 
         // Boutons
+
         boutonConnexion.setText("Connexion");
         boutonConnexion.getStyleClass().add("bouton");
         boutonCreation.setText("S'inscrire");
