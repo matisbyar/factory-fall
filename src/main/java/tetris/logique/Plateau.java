@@ -217,7 +217,6 @@ public class Plateau implements IPlateau {
             ligne++;
             calcul++;
         }
-        calcul=22-calcul;
         joueur.getScore().setValue(joueur.getScore().getValue()+(calcul*2));
     }
 
