@@ -15,13 +15,14 @@ public class StockagePlayerDatabase {
     public void create(AuthPlayer element) {
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "INSERT INTO JOUEURS(login, mdpHache, selHachage) VALUES (?, ?, ?)";
+        String req = "call creationJoueurTetris(login, mdpHache, selHachage, departement) VALUES (?, ?, ?, ?)";
         try (
                 PreparedStatement st = connection.prepareStatement(req);
         ) {
             st.setString(1, element.getLogin());
             st.setString(2, element.getHashedPassword());
             st.setBytes(3, element.getSalt());
+            st.setString(4,element.getDepartement());
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,16 +63,21 @@ public class StockagePlayerDatabase {
         AuthPlayer player = null;
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "SELECT * FROM JOUEURS WHERE login = ?";
+        String req = "SELECT login, mdpHache, selHachage,JOUEURS_TETRIS.departement FROM JOUEURS" +
+                "LEFT OUTER JOIN JOUEURS_TETRIS ON JOUEURS_TETRIS.login=JOUEURS.login" +
+                " WHERE login = ? ";
         try (
                 PreparedStatement st = connection.prepareStatement(req);
         ) {
             st.setString(1, login);
             try (ResultSet result = st.executeQuery();) {
                 if (result.next()) {
+
                     String password = result.getString("mdpHache");
                     byte[] salt = result.getBytes("selHachage");
-                    player = new AuthPlayer(login, password, salt);
+                    String departement = result.getString("JOUEURS_TETRIS.departement");
+                    player = new AuthPlayer(login,departement,password,salt);
+
                 }
             }
         } catch (SQLException e) {
@@ -84,7 +90,8 @@ public class StockagePlayerDatabase {
         List<AuthPlayer> playerList = new ArrayList<>();
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "SELECT * FROM JOUEURS";
+        String req = "SELECT login, mdpHache, selHachage,JOUEURS_TETRIS.departement FROM JOUEURS " +
+                "  LEFT OUTER JOIN JOUEURS_TETRIS ON JOUEURS_TETRIS.login=JOUEURS.login ";
         try (
                 PreparedStatement st = connection.prepareStatement(req);
                 ResultSet result = st.executeQuery();
@@ -93,7 +100,8 @@ public class StockagePlayerDatabase {
                 String login = result.getString("login");
                 String password = result.getString("mdpHache");
                 byte[] salt = result.getBytes("selHachage");
-                AuthPlayer player = new AuthPlayer(login, password, salt);
+                String departement = result.getString("JOUEURS_TETRIS.departement");
+                AuthPlayer player = new AuthPlayer(login,departement, password, salt);
                 playerList.add(player);
             }
         } catch (SQLException e) {

@@ -3,6 +3,7 @@ package tetris.stockage;
 import tetris.logique.Score;
 import tetris.stockage.sql.StockageScoreDatabase;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ScoreManager {
@@ -52,4 +53,8 @@ public class ScoreManager {
     }
 
     public List<Score> getTopScore() { return  stockage.GetTopScore();}
+
+    public List<Score> getTopScoreAnonyme()  {return  stockage.GetTopScoreAnonyme();
+    }
+    public  List<Score> getTopScoreParDepartement(String departement) { return  stockage.GetTopScoreParDepartement(departement);}
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class StockageScoreDatabase {
 
-        public void create(Score element) {
+    public void create(Score element) {
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
         String req = "INSERT INTO SCORES(score, horodatage, codeJeu, login) VALUES (?, ?, ?, ?)";
@@ -100,7 +100,7 @@ public class StockageScoreDatabase {
         Score score = null;
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "SELECT * FROM SCORES WHERE login = ? AND codeJeu = ? ORDER BY score DESC LIMIT 1";
+        String req = "SELECT * FROM SCORES WHERE login = ? AND codeJeu = ? AND ROWNUM <= 10 ORDER BY score DESC ";
         try (
                 PreparedStatement st = connection.prepareStatement(req);
         ) {
@@ -124,6 +124,7 @@ public class StockageScoreDatabase {
 
     /**
      * Renvoie l'historique des scores sur votre jeu.
+     *
      * @param login
      * @return
      */
@@ -156,6 +157,7 @@ public class StockageScoreDatabase {
 
     /**
      * Renvoie tous les scores de votre jeu.
+     *
      * @return
      */
     public List<Score> getAll() {
@@ -186,7 +188,7 @@ public class StockageScoreDatabase {
     }
 
 
-    public List<Score> GetTopScore(){
+    public List<Score> GetTopScore() {
         List<Score> topscore = new ArrayList<>();
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
@@ -195,21 +197,91 @@ public class StockageScoreDatabase {
         try (
                 PreparedStatement st = connection.prepareStatement(req);
                 ResultSet result = st.executeQuery();
-        ) {  while (result.next() && i<11) {
-            String login = result.getString("login");
-            int scoreValue = result.getInt("score");
-            Timestamp time = result.getTimestamp("horodatage");
-            Score score = new Score(scoreValue,time);
-            score.setLogin(login);
-            topscore.add(score);
-            i++;
-        }
+        ) {
+            while (result.next() && i < 11) {
+                String login = result.getString("login");
+                int scoreValue = result.getInt("score");
+                Timestamp time = result.getTimestamp("horodatage");
+                Score score = new Score(scoreValue, time);
+                score.setLogin(login);
+                topscore.add(score);
+                i++;
+            }
 
 
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return topscore;
     }
-}
+
+    public List<Score> GetTopScoreParDepartement(String departement) {
+        List<Score> topscore = new ArrayList<>();
+        SQLUtils utils = SQLUtils.getInstance();
+        Connection connection = utils.getConnection();
+        String req = "SELECT score, horodatage,  Scores.login FROM Scores" +
+                " LEFT OUTER JOIN JOUEURS_TETRIS ON JOUEURS_TETRIS.login=Scores.login" +
+                " WHERE  Scores.login=JOUEURS_TETRIS.login  AND JOUEURS_TETRIS.departement='34' ORDER BY score DESC";
+        int i = 1;
+        try (
+                PreparedStatement st = connection.prepareStatement(req);
+        ) {
+            //st.setString(1, departement);
+            try (
+                    ResultSet result = st.executeQuery();) {
+                while (result.next() && i < 11) {
+                    String login = result.getString("login");
+                    int scoreValue = result.getInt("score");
+                    Timestamp time = result.getTimestamp("horodatage");
+                    Score score = new Score(scoreValue, time);
+                    score.setLogin(login);
+                    topscore.add(score);
+                    i++;
+                }
+            }
+
+            return topscore;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return topscore;
+    }
+
+
+
+
+
+    public List<Score> GetTopScoreAnonyme()  {
+        List<Score> topscoreanonyme = new ArrayList<>();
+        SQLUtils utils = SQLUtils.getInstance();
+        Connection connection = utils.getConnection();
+        String req = "SELECT score, horodatage, login FROM Scores WHERE login IS NULL AND codejeu='TETRIS'  ORDER BY score DESC";
+        int i = 1;
+        try (
+                PreparedStatement st = connection.prepareStatement(req);
+        ){
+            try (
+                    ResultSet result = st.executeQuery()) {
+                while (result.next() && i < 11) {
+                    String login = result.getString("login");
+                    int scoreValue = result.getInt("score");
+                    Timestamp time = result.getTimestamp("horodatage");
+                    Score score = new Score(scoreValue, time);
+                    score.setLogin(login);
+                    topscoreanonyme.add(score);
+                    i++;
+                }
+
+
+
+            return topscoreanonyme;
+        } } catch (SQLException e) {
+        e.printStackTrace();
+    }
+        return topscoreanonyme;
+    }
+
+
+    }
+
