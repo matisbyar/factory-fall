@@ -63,7 +63,7 @@ public class BarreNavigation extends BorderPane {
     }
 
     protected void styliser() {
-        this.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/menu.css")).toString());
+        this.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 
         this.getStyleClass().add("barre-navigation");
         retour.getStyleClass().add("bouton-clair");

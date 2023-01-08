@@ -8,6 +8,9 @@ import tetris.IJeu;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
+
+import static tetris.logique.Forme.NULL;
 
 public class Jeu implements IJeu {
     private Joueur j;
@@ -15,18 +18,23 @@ public class Jeu implements IJeu {
 
     private ArrayList<Piece> sacProchainesPieces;
     private Plateau prochainePiece;
+    private Plateau stockage;
     private BooleanProperty jeuEnCours;
-
     public static Timer timer;
     public static Piece pieceActuelle;
     public static int ligneActuelle;
     public static int colonneActuelle;
     public static Piece pieceSuivante;
+    public static Piece pieceSauvegardee;
+    private boolean pieceEchangee;
 
     public Jeu(String pseudo) {
         j = new Joueur(pseudo);
         p = new Plateau(10, 22, j);
         prochainePiece = new Plateau(4, 2, j);
+        stockage = new Plateau(4, 2, j);
+        initialiserStockage();
+        pieceEchangee = false;
 
         jeuEnCours = new SimpleBooleanProperty(true);
 
@@ -90,6 +98,7 @@ public class Jeu implements IJeu {
         nouvelleProchainePiece();
         p.incrementerScoreJoueur(p.suppressionLignesRemplies());
         p.incrementerRang();
+        pieceEchangee=false;
         if (!p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle)) {
             jeuEnCours.setValue(false);
         }
@@ -102,6 +111,40 @@ public class Jeu implements IJeu {
         prochainePiece.remplirTableau();
         pieceSuivante = sacProchainesPieces.get(0);
         prochainePiece.placerPiece(1, prochainePiece.getLargeur() / 2 - 1, pieceSuivante);
+    }
+
+    /**
+     * Initialise l'espace de stockage ainsi que la piece sauvegardée
+     */
+    public void initialiserStockage(){
+        stockage.remplirTableau();
+        pieceSauvegardee = new Piece(NULL);
+    }
+
+    /**
+     * echange la piece actuelle avec la piece contenue dans stockage. Si stockage est vide génère une nouvelle piece et
+     * place la piece actuelle dans le stockage. Ne peut etre appelée qu'une seule jusqu'a se qu'une nouvelle piece soit générée.
+     */
+    public void echangePieceActuelleEtPieceSauvegarde() {
+        if(Objects.equals(pieceSauvegardee.getNom(), " ")){
+            pieceSauvegardee = new Piece(Forme.valueOf(pieceActuelle.getNom()));
+            p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
+            stockage.placerPiece(1, stockage.getLargeur() / 2 - 1, pieceSauvegardee);
+            nouvellePieceActuelle();
+        }
+        else if(!pieceEchangee){
+            stockage.supprimerPieceTotale(1, stockage.getLargeur() / 2 - 1, pieceSauvegardee);
+            p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
+            ligneActuelle = 1;
+            colonneActuelle = p.getLargeur()/2-1;
+            p.placerPiece(ligneActuelle, colonneActuelle, pieceSauvegardee);
+            Piece copie = pieceSauvegardee;
+            pieceSauvegardee = new Piece(Forme.valueOf(pieceActuelle.getNom()));
+            stockage.placerPiece(1, stockage.getLargeur() / 2 - 1, pieceSauvegardee);
+            pieceActuelle = copie;
+            jouerTour();
+        }
+        pieceEchangee=true;
     }
 
     /**
@@ -208,6 +251,13 @@ public class Jeu implements IJeu {
     }
 
     @Override
+    public void actionC() {
+        System.out.println("Touche C est actionnée !");
+        echangePieceActuelleEtPieceSauvegarde();
+        jouerTour();
+    }
+
+    @Override
     public boolean isJeuEnCours() {
         return jeuEnCours.getValue();
     }
@@ -229,6 +279,11 @@ public class Jeu implements IJeu {
 
     public Plateau getProchainePiece() {
         return prochainePiece;
+    }
+
+    @Override
+    public Plateau getStockage(){
+        return stockage;
     }
 
     public BooleanProperty jeuEnCoursProperty() {

@@ -46,7 +46,8 @@ public class TetrisIHM extends Application {
     // Vues personnelles (créées par l'équipe)
     private VueMenuPrincipal vueMenuPrincipal;
     private VuePlateau vuePlateau;
-    private VueProchainePiece vueProchainePiece;
+    private VuePieceExterieur vueProchainePiece;
+    private VuePieceExterieur vuePieceSauvegardee;
     private VueControles vueControles;
 
     private VBox conteneurDroit;
@@ -57,6 +58,8 @@ public class TetrisIHM extends Application {
     IJeu jeu;
     Plateau p;
     Plateau prochainePiece;
+
+    Plateau stockage;
 
     private String nomjoueur = "";
 
@@ -170,13 +173,15 @@ public class TetrisIHM extends Application {
         jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
         prochainePiece = jeu.getProchainePiece();
+        stockage = jeu.getStockage();
 
         // javaFX
         borderPane = new BorderPane();
         primaryStage = new Stage();
 
         vuePlateau = new VuePlateau(p);
-        vueProchainePiece = new VueProchainePiece(prochainePiece);
+        vueProchainePiece = new VuePieceExterieur(prochainePiece);
+        vuePieceSauvegardee = new VuePieceExterieur(stockage);
         vueControles = new VueControles();
 
         startJeu = new Button();
@@ -186,7 +191,8 @@ public class TetrisIHM extends Application {
         prochainePieceLabel = new Label("prochaine :");
         conteneurDroit = new VBox(prochainePieceLabel, vueProchainePiece, vueControles);
         informationsJoueur = new VBox(pseudo, score, rang);
-        conteneurGauche = new VBox(informationsJoueur, startJeu);
+        conteneurGauche = new VBox(informationsJoueur, startJeu, vuePieceSauvegardee);
+        vuePieceSauvegardee.setAlignment(Pos.CENTER_RIGHT);
 
         // Gestion Plateau/Bouton Pause
         sp = new StackPane(imgPause, vuePlateau);
@@ -201,6 +207,7 @@ public class TetrisIHM extends Application {
         // Initialisation des grilles
         vuePlateau.initialiser();
         vueProchainePiece.initialiser();
+        vuePieceSauvegardee.initialiser();
 
         // "Stylisation" et bindings/listeners
         creerBindings();
@@ -234,6 +241,7 @@ public class TetrisIHM extends Application {
                         case R -> jeu.actionR();
                         case ESCAPE -> jeu.actionEchap();
                         case SPACE -> jeu.actionEspace();
+                        case C -> jeu.actionC();
                     }
                 }
                 if (keyEvent.getCode() == KeyCode.P) {
@@ -254,6 +262,7 @@ public class TetrisIHM extends Application {
                 }
                 vuePlateau.mettreAJour();
                 vueProchainePiece.mettreAJour();
+                vuePieceSauvegardee.mettreAJour();
             }
         });
 

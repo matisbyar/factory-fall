@@ -7,6 +7,8 @@ import tetris.logique.Plateau;
 
 public interface IJeu {
 
+    Plateau getStockage();
+
     BooleanProperty jeuEnCoursProperty();
     
     void actionGauche();
@@ -14,8 +16,11 @@ public interface IJeu {
     void actionBas();
     void actionHaut();
     void actionR();
+    void actionC();
+
     void actionEspace();
     void actionEchap();
+
 
     Plateau getPlateau();
     Plateau getProchainePiece();
@@ -26,6 +31,7 @@ public interface IJeu {
     void jouerTour();
 
     void tomberPieceActuelle1Ligne();
+
 
     boolean isJeuEnCours();
 

@@ -89,7 +89,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
      */
     public void styliserMenu() {
         // Général
-        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/menu.css")).toString());
+        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 
         VBox.setMargin(logo, new Insets(100, 0, 30, 0));
         VBox.setMargin(compte, new Insets(30, 0, 30, 80));
