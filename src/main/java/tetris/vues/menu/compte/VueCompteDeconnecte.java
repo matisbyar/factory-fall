@@ -29,7 +29,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     private final VBox champsConnexion, champsCreation;
 
     private final Label titreConnexion, titreCreation;
-    private final TextField pseudoConnexion, pseudoCreation;
+    private final TextField pseudoConnexion, pseudoCreation,departementCreation;
     private final PasswordField motDePasseConnexion, motDePasseCreation, motDePasseCreationConfirmation;
     private final Button boutonConnexion, boutonCreation;
 
@@ -48,6 +48,8 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         pseudoConnexion = new TextField();
         pseudoCreation = new TextField();
 
+        departementCreation = new TextField();
+
         motDePasseConnexion = new PasswordField();
         motDePasseCreation = new PasswordField();
         motDePasseCreationConfirmation = new PasswordField();
@@ -60,7 +62,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         setDisable();
 
         champsConnexion.getChildren().addAll(titreConnexion, pseudoConnexion, motDePasseConnexion, boutonConnexion);
-        champsCreation.getChildren().addAll(titreCreation, pseudoCreation, motDePasseCreation, motDePasseCreationConfirmation, boutonCreation);
+        champsCreation.getChildren().addAll(titreCreation, pseudoCreation,departementCreation, motDePasseCreation, motDePasseCreationConfirmation, boutonCreation);
 
         option.getChildren().addAll(champsConnexion, champsCreation);
 
@@ -96,6 +98,10 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         pseudoConnexion.getStyleClass().add("textFieldNomJoueur");
         pseudoCreation.getStyleClass().add("textFieldNomJoueur");
 
+        //Champs département
+        departementCreation.setPromptText("Numéro de Département");
+        departementCreation.getStyleClass().add("textFieldNomJoueur");
+
         // Champs mot de passe
         motDePasseConnexion.setPromptText("Mot de passe");
         motDePasseCreation.setPromptText("Mot de passe");
@@ -122,8 +128,8 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     public void setDisable() {
         champsConnexionLock(pseudoConnexion, motDePasseConnexion);
         champsConnexionLock(motDePasseConnexion, pseudoConnexion);
-        champsCreationLock(pseudoCreation, motDePasseCreation);
-        champsCreationLock(motDePasseCreation, pseudoCreation);
+        champsCreationLock(pseudoCreation, motDePasseCreation,departementCreation);
+        champsCreationLock(motDePasseCreation, pseudoCreation,departementCreation);
     }
 
     /**
@@ -132,14 +138,15 @@ public class VueCompteDeconnecte extends Stage implements Menu {
      * @param pseudoCreation     pseudo de l'utilisateur
      * @param motDePasseCreation mot de passe de l'utilisateur
      */
-    private void champsCreationLock(TextField pseudoCreation, TextField motDePasseCreation) {
+    private void champsCreationLock(TextField pseudoCreation, TextField motDePasseCreation,TextField departementCreation) {
         pseudoCreation.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
                 pseudoConnexion.setDisable(true);
                 motDePasseConnexion.setDisable(true);
-            } else if (motDePasseCreation.getText().isEmpty() && motDePasseCreationConfirmation.getText().isEmpty()) {
+            } else if (motDePasseCreation.getText().isEmpty() && motDePasseCreationConfirmation.getText().isEmpty() && departementCreation.getText().isEmpty()) {
                 pseudoConnexion.setDisable(false);
                 motDePasseConnexion.setDisable(false);
+
             }
         });
     }
@@ -156,10 +163,12 @@ public class VueCompteDeconnecte extends Stage implements Menu {
                 pseudoCreation.setDisable(true);
                 motDePasseCreation.setDisable(true);
                 motDePasseCreationConfirmation.setDisable(true);
+                departementCreation.setDisable(true);
             } else if (motDePasseConnexion.getText().isEmpty()) {
                 pseudoCreation.setDisable(false);
                 motDePasseCreation.setDisable(false);
                 motDePasseCreationConfirmation.setDisable(false);
+                departementCreation.setDisable(false);
             }
         });
     }
@@ -196,8 +205,19 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         return motDePasseConnexion.isDisabled() ? motDePasseCreation : motDePasseConnexion;
     }
 
+    /**
+     * Récupère le département de l'utilisateur
+     *
+     * @return departement de l'utilisateur
+     */
+    public TextField getDepartement() {
+        System.out.println(departementCreation.getText());
+        return departementCreation;
+    }
+
     @Override
     public void afficherScene() {
         this.setScene(scene);
     }
+
 }

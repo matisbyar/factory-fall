@@ -63,6 +63,8 @@ public class TetrisIHM extends Application {
 
     private String nomjoueur = "";
 
+    private  String departement = "";
+
     /**
      * Le StackPane sp permet de superposer les éléments de l'IHM. Ici, il superpose le plateau de jeu et l'icone de pause.
      */
@@ -80,10 +82,11 @@ public class TetrisIHM extends Application {
             if (j != null) {
                 System.out.println("Cet identifiant n'est pas disponible");
             } else {
-                PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomJoueur().getText(), vueMenuPrincipal.getMotDePasse().getText());
+                PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomJoueur().getText(), vueMenuPrincipal.getMotDePasse().getText(),vueMenuPrincipal.getDepartement().getText());
 
                 nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
-                Session.getInstance().connect(nomjoueur);
+                departement = vueMenuPrincipal.getDepartement().getText();
+                Session.getInstance().connect(nomjoueur,departement);
                 demarrerPartie();
                 vueMenuPrincipal.close();
             }
@@ -118,7 +121,10 @@ public class TetrisIHM extends Application {
 
             if (connexionOK) {
                 nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
-                Session.getInstance().connect(nomjoueur);
+                //departement = j.getDepartement();
+                departement = vueMenuPrincipal.getDepartement().getText();
+                System.out.println("tetris ihm departement :"+departement);
+                Session.getInstance().connect(nomjoueur,departement);
                 // TODO: à changer pour rediriger vers la vue MenuPrincipal ou MenuCompteConnecte, il faut que le jeu se démarre uniquement lorsque le joueur clique sur "Jouer"
                 demarrerPartie();
                 vueMenuPrincipal.close();

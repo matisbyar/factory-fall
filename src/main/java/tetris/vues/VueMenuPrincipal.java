@@ -79,7 +79,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         vueCompteDeconnecte = new VueCompteDeconnecte(this);
         vueCompteConnecte = new VueCompteConnecte(this);
         vuePersonnaliser = new VuePersonnaliser(this);
-        //vueClassement = new VueClassement(this);
+        vueClassement = new VueClassement(this);
 
         this.setScene(scene);
     }
@@ -184,6 +184,16 @@ public class VueMenuPrincipal extends Stage implements Menu {
     }
 
     /**
+     * Getter utile pour la récupération dans TetrisIHM
+     */
+    public TextField getDepartement() {
+        return vueCompteDeconnecte.getDepartement();
+    }
+
+
+
+
+    /**
      * Fonction qui déclenche le lancement du jeu en Anonyme dans TetrisIHM
      */
     public void setButtonJouerCliqueListener(EventHandler<ActionEvent> quandLeButtonJouerEstClique) {
@@ -212,4 +222,5 @@ public class VueMenuPrincipal extends Stage implements Menu {
     public void afficherScene() {
         this.setScene(scene);
     }
+
 }
