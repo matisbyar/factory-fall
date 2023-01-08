@@ -21,7 +21,7 @@ public class DepartementManager {
 
 
     public void updateDepartement(String login,String newdepartement) {
-        //TODO  a faire pour l'update plus tard
+       stockage.update(login,newdepartement);
     }
 
 

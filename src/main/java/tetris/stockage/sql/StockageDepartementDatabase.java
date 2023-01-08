@@ -8,15 +8,15 @@ import java.sql.*;
 public class StockageDepartementDatabase {
 
 
-    public void update(Score element) {
+    public void update(String login,String newdepartement) {
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "UPDATE SCORES SET departement = ? WHERE codeScore = ?";
+        String req = "UPDATE JOUEURS_TETRIS SET departement = ? WHERE login = ?";
         try (
                 PreparedStatement st = connection.prepareStatement(req);
         ) {
-            st.setInt(1, element.getScore());
-            st.setInt(3, element.getId());
+            st.setString(1, login);
+            st.setString(2, newdepartement);
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
