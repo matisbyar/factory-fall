@@ -121,8 +121,7 @@ public class TetrisIHM extends Application {
 
             if (connexionOK) {
                 nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
-                //departement = j.getDepartement();
-                departement = vueMenuPrincipal.getDepartement().getText();
+                departement = DepartementManager.getInstance().getDepartementByLogin(nomjoueur);
                 System.out.println("tetris ihm departement :"+departement);
                 Session.getInstance().connect(nomjoueur,departement);
                 // TODO: à changer pour rediriger vers la vue MenuPrincipal ou MenuCompteConnecte, il faut que le jeu se démarre uniquement lorsque le joueur clique sur "Jouer"

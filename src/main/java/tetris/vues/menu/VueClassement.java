@@ -15,6 +15,7 @@ import tetris.logique.Preferences;
 import tetris.TetrisIHM;
 import tetris.logique.Joueur;
 import tetris.logique.Score;
+import tetris.stockage.DepartementManager;
 import tetris.stockage.ScoreManager;
 import tetris.stockage.Session;
 import tetris.vues.Menu;
@@ -69,7 +70,7 @@ public class VueClassement extends Stage implements Menu {
         //TODO bug ici a fix
         if(Session.getInstance().isConnected()){
 
-          departementScore= ScoreManager.getInstance().getTopScoreParDepartement(Session.getInstance().getDepartement());
+          departementScore= ScoreManager.getInstance().getTopScoreParDepartement(DepartementManager.getInstance().getDepartementByLogin(Session.getInstance().getLogin()));
         }else{
            // cas de base qui ne sera jamais affiché mais nécessaire pour run la classe au debut
              departementScore= ScoreManager.getInstance().getTopScoreParDepartement("34");
