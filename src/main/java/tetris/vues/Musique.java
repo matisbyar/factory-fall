@@ -4,6 +4,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import tetris.TetrisIHM;
+import tetris.singletons.Preferences;
 
 import java.util.Objects;
 
@@ -28,5 +29,7 @@ public class Musique {
 
     public static void btnMute() {
         mainMenuMusicPlayer.setMute(!mainMenuMusicPlayer.isMute());
+        Preferences.getInstance().setMusiqueMute(mainMenuMusicPlayer.isMute());
+        System.out.println(mainMenuMusicPlayer.isMute());
     }
 }

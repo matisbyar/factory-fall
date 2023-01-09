@@ -36,6 +36,8 @@ public class Preferences {
      */
     private final Background inMenu = new Background(new BackgroundImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/industrial-inmenu.png"))), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
 
+    private boolean muted = false;
+
     public static Preferences getInstance() {
         if (INSTANCE == null) INSTANCE = new Preferences();
         return INSTANCE;
@@ -96,5 +98,13 @@ public class Preferences {
 
     public Background getBackground() {
         return new Background(new BackgroundImage(imageBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
+    }
+
+    public void setMusiqueMute(boolean etat) {
+        muted = etat;
+    }
+
+    public boolean getMusiqueMute() {
+        return muted;
     }
 }

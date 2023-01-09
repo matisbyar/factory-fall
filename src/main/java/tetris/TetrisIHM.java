@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -161,7 +162,9 @@ public class TetrisIHM extends Application {
         vueMenuPrincipal.setButtonConnecterJoueurCliqueListener(joueurConnecte);
         vueMenuPrincipal.setButtonCreerJoueurCliqueListener(nouveauJoueurCree);
         vueMenuPrincipal.setButtonQuitterListener(quitter);
-        Musique.playMusicMainMenu();
+        if (!Preferences.getInstance().getMusiqueMute()) {
+            Musique.playMusicMainMenu();
+        }
         vueMenuPrincipal.show();
     }
 
