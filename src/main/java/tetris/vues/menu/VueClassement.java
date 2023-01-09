@@ -19,24 +19,18 @@ import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
 
-import java.awt.*;
 import java.util.List;
 
 public class VueClassement extends Stage implements Menu {
-
-
 
     private final BorderPane root;
     private final Scene scene;
 
     private final Label titre;
-    private final VBox vbScores,boutton;
-    private final GridPane classementtopscore,classementdepartement;
+    private final VBox vbScores, bouton;
+    private final GridPane classementTopScore, classementDepartement;
 
-    private final Button changementdeclassement;
-
-
-    private final Insets paddingTopLeft = new Insets(30, 0, 0, 80);
+    private final Button changementDeClassement;
 
     public VueClassement(VueMenuPrincipal vueMenuPrincipal) {
         // Initialisations
@@ -45,15 +39,15 @@ public class VueClassement extends Stage implements Menu {
 
         titre = new Label("Meilleur Classement Généraux");
 
-        classementtopscore = new GridPane();
+        classementTopScore = new GridPane();
 
-        classementdepartement= new GridPane();
+        classementDepartement = new GridPane();
 
-        changementdeclassement = new Button("vers top anonyme");
+        changementDeClassement = new Button("vers top anonyme");
 
-        vbScores = new VBox(titre,classementtopscore);
+        vbScores = new VBox(titre, classementTopScore);
 
-        boutton= new VBox(changementdeclassement);
+        bouton = new VBox(changementDeClassement);
 
 
         /**
@@ -64,18 +58,16 @@ public class VueClassement extends Stage implements Menu {
         List<Score> departementScore;
         System.out.println(Session.getInstance().isConnected());
         //TODO bug ici a fix
-        if(Session.getInstance().isConnected()){
+        if (Session.getInstance().isConnected()) {
 
-          departementScore= ScoreManager.getInstance().getTopScoreParDepartement(DepartementManager.getInstance().getDepartementByLogin(Session.getInstance().getLogin()));
-        }else{
-           // cas de base qui ne sera jamais affiché mais nécessaire pour run la classe au debut
-             departementScore= ScoreManager.getInstance().getTopScoreParDepartement("34");
+            departementScore = ScoreManager.getInstance().getTopScoreParDepartement(DepartementManager.getInstance().getDepartementByLogin(Session.getInstance().getLogin()));
+        } else {
+            // cas de base qui ne sera jamais affiché mais nécessaire pour run la classe au debut
+            departementScore = ScoreManager.getInstance().getTopScoreParDepartement("34");
         }
 
 
         List<Score> topScoreanonyme = ScoreManager.getInstance().getTopScoreAnonyme();
-
-
 
 
         // Récupération des scores top score
@@ -84,42 +76,39 @@ public class VueClassement extends Stage implements Menu {
             if (topScore.get(i - 1).getLogin() != null) {
                 login = topScore.get(i - 1).getLogin();
             }
-            classementtopscore.add(new Label(String.valueOf(i)), 0, i - 1);
-            classementtopscore.add(new Label(login), 1, i - 1);
-            classementtopscore.add(new Label(String.valueOf(topScore.get(i - 1).getScore())), 2, i - 1);
-            classementtopscore.add(new Label(topScore.get(i - 1).getHorodatage().toString()), 3, i - 1);
+            classementTopScore.add(new Label(String.valueOf(i)), 0, i - 1);
+            classementTopScore.add(new Label(login), 1, i - 1);
+            classementTopScore.add(new Label(String.valueOf(topScore.get(i - 1).getScore())), 2, i - 1);
+            classementTopScore.add(new Label(topScore.get(i - 1).getHorodatage().toString()), 3, i - 1);
         }
 
         // Récupération des scores par departements ou anonyme si le jouer n'est pas connecté
         /*
-        ** important si le joueur est connecté cela prend les departement sinon les top anonyme
+         ** important si le joueur est connecté cela prend les departement sinon les top anonyme
          */
-        if(Session.getInstance().isConnected()){
-            int i=1;
-            while ( i < 11 && departementScore.get(i-1)!=null) {
+        if (Session.getInstance().isConnected()) {
+            int i = 1;
+            while (i < 11 && departementScore.get(i - 1) != null) {
 
-                 String login = departementScore.get(i - 1).getLogin();
+                String login = departementScore.get(i - 1).getLogin();
 
-                classementdepartement.add(new Label(String.valueOf(i)), 0, i - 1);
-                classementdepartement.add(new Label(login), 1, i - 1);
-                classementdepartement.add(new Label(String.valueOf(departementScore.get(i - 1).getScore())), 2, i - 1);
-                classementdepartement.add(new Label(departementScore.get(i - 1).getHorodatage().toString()), 3, i - 1);
+                classementDepartement.add(new Label(String.valueOf(i)), 0, i - 1);
+                classementDepartement.add(new Label(login), 1, i - 1);
+                classementDepartement.add(new Label(String.valueOf(departementScore.get(i - 1).getScore())), 2, i - 1);
+                classementDepartement.add(new Label(departementScore.get(i - 1).getHorodatage().toString()), 3, i - 1);
                 i++;
             }
-        } else{
+        } else {
 
 
             for (int i = 1; i < 11; i++) {
                 String login = "Anonyme";
-                classementdepartement.add(new Label(String.valueOf(i)), 0, i - 1);
-                classementdepartement.add(new Label(login), 1, i - 1);
-                classementdepartement.add(new Label(String.valueOf(topScoreanonyme.get(i - 1).getScore())), 2, i - 1);
-                classementdepartement.add(new Label(topScoreanonyme.get(i - 1).getHorodatage().toString()), 3, i - 1);
+                classementDepartement.add(new Label(String.valueOf(i)), 0, i - 1);
+                classementDepartement.add(new Label(login), 1, i - 1);
+                classementDepartement.add(new Label(String.valueOf(topScoreanonyme.get(i - 1).getScore())), 2, i - 1);
+                classementDepartement.add(new Label(topScoreanonyme.get(i - 1).getHorodatage().toString()), 3, i - 1);
             }
         }
-
-
-
 
 
         // Styles et bindings
@@ -129,8 +118,7 @@ public class VueClassement extends Stage implements Menu {
         // Affichage
         root.setCenter(vbScores);
         root.setTop(new BarreNavigation("Classement", vueMenuPrincipal, this));
-        root.setRight(boutton);
-
+        root.setRight(bouton);
 
 
         this.setScene(scene);
@@ -147,69 +135,68 @@ public class VueClassement extends Stage implements Menu {
         titre.setAlignment(Pos.CENTER);
 
         // Classement
-        classementtopscore.setHgap(20);
-        classementtopscore.setVgap(20);
-        classementtopscore.setAlignment(Pos.CENTER);
+        classementTopScore.setHgap(20);
+        classementTopScore.setVgap(20);
+        classementTopScore.setAlignment(Pos.CENTER);
 
-        classementdepartement.setHgap(20);
-        classementdepartement.setVgap(20);
-        classementdepartement.setAlignment(Pos.CENTER);
+        classementDepartement.setHgap(20);
+        classementDepartement.setVgap(20);
+        classementDepartement.setAlignment(Pos.CENTER);
 
-        for (int i = 0; i < classementtopscore.getChildren().size(); i++) {
-            classementtopscore.getChildren().get(i).setStyle("-fx-text-fill: white");
+        for (int i = 0; i < classementTopScore.getChildren().size(); i++) {
+            classementTopScore.getChildren().get(i).setStyle("-fx-text-fill: white");
         }
 
-        for (int i = 0; i < classementdepartement.getChildren().size(); i++) {
-            classementdepartement.getChildren().get(i).setStyle("-fx-text-fill: white");
+        for (int i = 0; i < classementDepartement.getChildren().size(); i++) {
+            classementDepartement.getChildren().get(i).setStyle("-fx-text-fill: white");
         }
 
         //Button
         //changementdeclassement.setAlignment(Pos.TOP_CENTER); // n'est pas prioritaire par rapport au vbox
 
-       // changementdeclassement.getStyleClass().add("bouton");
-       // changementdeclassement.setStyle("-fx-background-color: black");
-        changementdeclassement.getStyleClass().add("bouton-clair");
-        changementdeclassement.setFont(Ressources.getInstance().getPolice(20));
-        HBox.setMargin(changementdeclassement, new javafx.geometry.Insets(0, 50, 0, 0));
+        // changementdeclassement.getStyleClass().add("bouton");
+        // changementdeclassement.setStyle("-fx-background-color: black");
+        changementDeClassement.getStyleClass().add("bouton-clair");
+        changementDeClassement.setFont(Ressources.getInstance().getPolice(20));
+        HBox.setMargin(changementDeClassement, new javafx.geometry.Insets(0, 50, 0, 0));
         // VBScores
         vbScores.setAlignment(Pos.CENTER);
     }
 
     public void creerBindings() {
-       changementdeclassement.setOnAction(actionEvent -> changedeclassement());
+        changementDeClassement.setOnAction(actionEvent -> changedeclassement());
     }
 
     /**
-    * gere les cas de changement des label du classement en fonction du button et de si on est connecté ou pas
-     *
+     * gere les cas de changement des label du classement en fonction du button et de si on est connecté ou pas
+     * <p>
      * bug connus : si on va voir le classement avant de se connecté et on se connecte et on refa voir le classement les vauvaise vue sont
      * affiché , pour fix il faut allez dans une autre vue(compte ) et revenir
      */
     private void changedeclassement() {
 
-        if(changementdeclassement.getText()=="vers top département" && Session.getInstance().isConnected()){
-            changementdeclassement.setText("vers top joueur");
+        if (changementDeClassement.getText() == "vers top département" && Session.getInstance().isConnected()) {
+            changementDeClassement.setText("vers top joueur");
             titre.setText("Meilleur Classement Dans Votre Département");
             vbScores.getChildren().remove(1);
-            vbScores.getChildren().add(classementdepartement);
+            vbScores.getChildren().add(classementDepartement);
 
-        } else if ( changementdeclassement.getText()=="vers top joueur" && Session.getInstance().isConnected()) {
-            changementdeclassement.setText("vers top département");
+        } else if (changementDeClassement.getText() == "vers top joueur" && Session.getInstance().isConnected()) {
+            changementDeClassement.setText("vers top département");
             titre.setText("Meilleur Classement Généraux");
             vbScores.getChildren().remove(1);
-            vbScores.getChildren().add(classementtopscore);
+            vbScores.getChildren().add(classementTopScore);
 
-        } else if(changementdeclassement.getText()=="vers top anonyme"){
-            changementdeclassement.setText("vers top joueur");
+        } else if (changementDeClassement.getText() == "vers top anonyme") {
+            changementDeClassement.setText("vers top joueur");
             titre.setText("Meilleur Classement par Anonyme");
             vbScores.getChildren().remove(1);
-            vbScores.getChildren().add(classementdepartement);
-        }
-        else{
-            changementdeclassement.setText("vers top anonyme");
+            vbScores.getChildren().add(classementDepartement);
+        } else {
+            changementDeClassement.setText("vers top anonyme");
             titre.setText("Meilleur Classement Généraux");
             vbScores.getChildren().remove(1);
-            vbScores.getChildren().add(classementtopscore);
+            vbScores.getChildren().add(classementTopScore);
         }
     }
 
@@ -217,7 +204,6 @@ public class VueClassement extends Stage implements Menu {
     public void afficherScene() {
         this.setScene(scene);
     }
-
 
 
 }
