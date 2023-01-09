@@ -1,18 +1,19 @@
 package tetris.vues.menu;
 
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
 import tetris.logique.Preferences;
 import tetris.vues.Menu;
+import tetris.vues.Musique;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
 
@@ -28,7 +29,9 @@ public class VuePersonnaliser extends Stage implements Menu {
 
     private final ImageView imageStylePiece;
 
-    private final Button flecheGauche, flecheDroite, retour;
+    private final Image mute;
+
+    private final Button flecheGauche, flecheDroite, retour, muteBtn;
 
     Preferences preferences = Preferences.getInstance();
 
@@ -45,6 +48,11 @@ public class VuePersonnaliser extends Stage implements Menu {
         retour = new Button();
 
         imageStylePiece = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + preferences.getStylePiece() + "/L.jpg"))));
+        mute = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/mute.png")));
+        muteBtn = new Button();
+        muteBtn.setBackground(new Background(new BackgroundImage(mute, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT , BackgroundPosition.CENTER ,BackgroundSize.DEFAULT)));
+        muteBtn.setPrefWidth(64);
+        muteBtn.setPrefHeight(64);
 
         // Styles et bindings
         styliser();
@@ -54,6 +62,8 @@ public class VuePersonnaliser extends Stage implements Menu {
         stylePiece.getChildren().addAll(flecheGauche, imageStylePiece, flecheDroite);
 
         personnalisations.getChildren().add(stylePiece);
+
+        root.setBottom(muteBtn);
 
         root.setCenter(personnalisations);
         root.setTop(new BarreNavigation("Personnaliser", vueMenuPrincipal, this));
@@ -74,6 +84,7 @@ public class VuePersonnaliser extends Stage implements Menu {
     public void creerBindings(VueMenuPrincipal vueMenuPrincipal) {
         flecheGauche.setOnAction(actionEvent -> changerImage(vueMenuPrincipal, "-"));
         flecheDroite.setOnAction(actionEvent -> changerImage(vueMenuPrincipal, "+"));
+        muteBtn.setOnAction(e -> Musique.btnMute());
     }
 
     /**
