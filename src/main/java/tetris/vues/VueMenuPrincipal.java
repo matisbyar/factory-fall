@@ -26,6 +26,7 @@ import java.util.Objects;
 
 public class VueMenuPrincipal extends Stage implements Menu {
 
+    private final BorderPane root;
     private final Scene scene;
     //Objects.requireNonNull(TetrisIHM.class.getResourceAsStream())
     Preferences preferences = Preferences.getInstance();
@@ -46,7 +47,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
 
 
     public VueMenuPrincipal() {
-        BorderPane root = new BorderPane();
+        root = new BorderPane();
         scene = new Scene(root, 1280, 720);
 
         // Logo
@@ -64,7 +65,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
 
         boutons = new VBox(logo, start, regles, personnaliser, classement, quitter);
 
-        styliserMenu();
+        styliser();
         creerBindings();
 
         // Affectations
@@ -84,7 +85,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
     /**
      * Applique tous les styles souhaités aux objets JavaFX
      */
-    public void styliserMenu() {
+    private void styliser() {
         // Général
         scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 
@@ -131,7 +132,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
     /**
      * Fonction qui créer tous les bindings in line utile pour l'ensemble des boutons du menu
      */
-    public void creerBindings() {
+    private void creerBindings() {
         compte.setOnAction(actionEvent -> this.setScene(Session.getInstance().isConnected() ? vueCompteConnecte.getScene() : vueCompteDeconnecte.getScene()));
         regles.setOnAction(actionEvent -> this.setScene(vueRegles.getScene()));
         personnaliser.setOnAction(actionEvent -> this.setScene(vuePersonnaliser.getScene()));
@@ -187,6 +188,6 @@ public class VueMenuPrincipal extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
+        root.setBackground(Preferences.getInstance().getBackground());
     }
-
 }

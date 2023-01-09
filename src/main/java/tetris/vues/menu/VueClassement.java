@@ -203,7 +203,7 @@ public class VueClassement extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
+        root.setBackground(Preferences.getInstance().getBackground());
     }
-
 
 }

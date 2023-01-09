@@ -129,7 +129,6 @@
 /*Vue GameOver*/
 
 .borderPane {
-    -fx-background-color: #1E1E1E;
     -fx-pref-height: 500;
     -fx-pref-width: 500;
 }

@@ -35,7 +35,7 @@ public class VuePersonnaliser extends Stage implements Menu {
     /**
      * Évènements déclenchés par chacune des personnalisations
      */
-    EventHandler<ActionEvent> stylePieceG = new EventHandler<ActionEvent>() {
+    EventHandler<ActionEvent> stylePieceG = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
             Platform.runLater(() -> {
@@ -44,7 +44,7 @@ public class VuePersonnaliser extends Stage implements Menu {
             });
         }
     };
-    EventHandler<ActionEvent> stylePieceD = new EventHandler<ActionEvent>() {
+    EventHandler<ActionEvent> stylePieceD = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
             Platform.runLater(() -> {
@@ -54,21 +54,21 @@ public class VuePersonnaliser extends Stage implements Menu {
         }
     };
 
-    EventHandler<ActionEvent> gauche = new EventHandler<ActionEvent>() {
+    EventHandler<ActionEvent> gauche = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
             Platform.runLater(() -> {
-                // TODO
-                System.out.println("Gauche");
+                preferences.changerFond("-");
+                root.setBackground(preferences.getBackground());
             });
         }
     };
-    EventHandler<ActionEvent> droite = new EventHandler<ActionEvent>() {
+    EventHandler<ActionEvent> droite = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
             Platform.runLater(() -> {
-                // TODO
-                System.out.println("Droite");
+                preferences.changerFond("+");
+                root.setBackground(preferences.getBackground());
             });
         }
     };
@@ -90,8 +90,8 @@ public class VuePersonnaliser extends Stage implements Menu {
 
         personnalisations.getChildren().addAll(
                 new PanelPersonnalisation("Style des pièces", stylePieceG, imageStylePiece, stylePieceD),
-                new PanelPersonnalisation("Image de fond", gauche, new ImageView(), droite),
-                new PanelPersonnalisation("Musique de jeu", gauche, new ImageView(), droite)
+                new PanelPersonnalisation("Image de fond", gauche, new ImageView(), droite)
+                //new PanelPersonnalisation("Musique de jeu", gauche, new ImageView(), droite)
         );
 
         root.setCenter(personnalisations);
@@ -114,5 +114,6 @@ public class VuePersonnaliser extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
+        root.setBackground(Preferences.getInstance().getBackground());
     }
 }

@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import tetris.logique.AuthPlayer;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
+import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
 import tetris.stockage.*;
 import tetris.vues.*;
@@ -356,6 +357,7 @@ public class TetrisIHM extends Application {
         borderPane.getLeft().getStyleClass().add("leftPane");
         borderPane.getRight().getStyleClass().add("rightPane");
         borderPane.getCenter().getStyleClass().add("centerPane");
+        borderPane.setBackground(Preferences.getInstance().getBackground());
 
         // VuePlateu
         vuePlateau.getStyleClass().add("vuePlateau");
@@ -457,5 +459,9 @@ public class TetrisIHM extends Application {
         // Image Pause
         imgPause.setPreserveRatio(true);
         imgPause.setFitWidth(150);
+    }
+
+    public void mettreAJourFond() {
+        borderPane.setBackground(Preferences.getInstance().getBackground());
     }
 }

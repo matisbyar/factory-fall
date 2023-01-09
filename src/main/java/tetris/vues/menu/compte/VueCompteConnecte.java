@@ -87,5 +87,7 @@ public class VueCompteConnecte extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
+        root.setBackground(Preferences.getInstance().getBackground());
     }
+
 }

@@ -25,6 +25,13 @@ public class Preferences {
     private final ImageView imagePiecePreference = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + stylePiece + "/L.jpg"))));
 
     /**
+     * La préférence du fond.
+     */
+    private String background = "industrial";
+    private int backgroundActuel = 0;
+    private Image imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/" + background + ".png")));
+
+    /**
      * Le fond (à l'intérieur des menus)
      */
     private final Background inMenu = new Background(new BackgroundImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/industrial-inmenu.png"))), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
@@ -70,7 +77,24 @@ public class Preferences {
         return imagePiecePreference.getImage();
     }
 
+    public void changerFond(String etat) {
+        switch (etat) {
+            case "+" -> backgroundActuel++;
+            case "-" -> backgroundActuel--;
+        }
+        if (backgroundActuel >= 3) {
+            backgroundActuel = 0;
+        } else if (backgroundActuel < 0) {
+            backgroundActuel = 2;
+        }
+        switch (backgroundActuel) {
+            case 0 -> imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/industrial.png")));
+            case 1 -> imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/classic.jpg")));
+            case 2 -> imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/original.jpg")));
+        }
+    }
+
     public Background getBackground() {
-        return inMenu;
+        return new Background(new BackgroundImage(imageBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
     }
 }
