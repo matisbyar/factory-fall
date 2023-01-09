@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import tetris.TetrisIHM;
+import tetris.stockage.Session;
 
 import java.util.Objects;
 
@@ -46,5 +47,21 @@ public class Ressources {
 
     public ImageView getFlecheDroite() {
         return new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/fleche-droite.png")), 55, 55, true, true));
+    }
+
+    public boolean isLocked(String typePerso) {
+        Preferences preferences = Preferences.getInstance();
+        switch (typePerso) {
+            case "pieces" :
+                if(Session.getInstance().isConnected()) {
+                    return false;
+                } else {
+                    if (preferences.getStylePiece().equals("brique") || preferences.getStylePiece().equals("default")) {
+                        return true;
+                    }
+                }
+            default:
+                return false;
+        }
     }
 }

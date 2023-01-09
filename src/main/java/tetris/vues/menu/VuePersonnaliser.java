@@ -1,18 +1,21 @@
 package tetris.vues.menu;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
 import tetris.singletons.Preferences;
+import tetris.singletons.Ressources;
 import tetris.vues.Menu;
+import tetris.vues.Musique;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
 import tetris.vues.helpers.PanelPersonnalisation;
@@ -26,9 +29,13 @@ public class VuePersonnaliser extends Stage implements Menu {
 
     private final VBox personnalisations;
 
-    private final ImageView imageStylePiece;
+    private final ImageView imageStylePiece, cadenas;
 
-    private final Button flecheGauche, flecheDroite;
+    private final Button flecheGauche, flecheDroite, muteBtn;
+
+    private final Image mute;
+
+    private StackPane locked;
 
     Preferences preferences = Preferences.getInstance();
 
@@ -41,6 +48,7 @@ public class VuePersonnaliser extends Stage implements Menu {
             Platform.runLater(() -> {
                 preferences.changerImage("-");
                 imageStylePiece.setImage(preferences.getImagePiecePreference());
+                switchCadenas("pieces");
             });
         }
     };
@@ -50,6 +58,7 @@ public class VuePersonnaliser extends Stage implements Menu {
             Platform.runLater(() -> {
                 preferences.changerImage("+");
                 imageStylePiece.setImage(preferences.getImagePiecePreference());
+                switchCadenas("pieces");
             });
         }
     };
@@ -84,15 +93,29 @@ public class VuePersonnaliser extends Stage implements Menu {
         flecheDroite = new Button();
 
         imageStylePiece = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + preferences.getStylePiece() + "/L.jpg"))));
+        cadenas = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/cadenas.png"))));
+
+        mute = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/mute.png")));
+        muteBtn = new Button();
+        muteBtn.setOnAction(e -> Musique.btnMute());
+
+        if (Ressources.getInstance().isLocked("pieces")) {
+            locked = new StackPane(imageStylePiece, cadenas);
+        } else {
+            locked = new StackPane(cadenas, imageStylePiece);
+        }
+
 
         // Styles et bindings
         styliser();
 
         personnalisations.getChildren().addAll(
-                new PanelPersonnalisation("Style des pièces", stylePieceG, imageStylePiece, stylePieceD),
-                new PanelPersonnalisation("Image de fond", gauche, new ImageView(), droite)
-                //new PanelPersonnalisation("Musique de jeu", gauche, new ImageView(), droite)
+                new PanelPersonnalisation("Style des pièces", stylePieceG, locked, stylePieceD),
+                new PanelPersonnalisation("Image de fond", gauche, new ImageView(), droite),
+                new PanelPersonnalisation("Musique de jeu", gauche, new ImageView(), droite)
         );
+
+        root.setBottom(muteBtn);
 
         root.setCenter(personnalisations);
         root.setTop(new BarreNavigation("Personnaliser", vueMenuPrincipal, this));
@@ -109,11 +132,32 @@ public class VuePersonnaliser extends Stage implements Menu {
 
         personnalisations.getStyleClass().add("personnalisations");
         personnalisations.setSpacing(30);
+
+        muteBtn.setBackground(new Background(new BackgroundImage(mute, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT , BackgroundPosition.CENTER ,BackgroundSize.DEFAULT)));
+        muteBtn.setPrefWidth(64);
+        muteBtn.setPrefHeight(64);
     }
 
     @Override
     public void afficherScene() {
         this.setScene(scene);
         root.setBackground(Preferences.getInstance().getBackground());
+    }
+
+    public void switchCadenas(String typePerso) {
+        ObservableList<Node> childs = this.locked.getChildren();
+        if (Ressources.getInstance().isLocked(typePerso)) {
+            if (!childs.get(childs.size() - 1).equals(cadenas)) {
+                if (childs.size() > 1) {
+                    Node topNode = childs.get(childs.size() - 1);
+                    topNode.toBack();
+                }
+            }
+        } else if (childs.get(childs.size() - 1).equals(cadenas)){
+            if (childs.size() > 1) {
+                Node topNode = childs.get(childs.size() - 1);
+                topNode.toBack();
+            }
+        }
     }
 }
