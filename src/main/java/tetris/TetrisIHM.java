@@ -2,8 +2,6 @@ package tetris;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -198,7 +196,7 @@ public class TetrisIHM extends Application {
         rang = new Label("rang : 1");
         nbLignes = new Label("Ligne : 0 ");
         prochainePieceLabel = new Label("prochaine :");
-        pieceSauvegardeeLabel = new Label("piece sauvegardee : ");
+        pieceSauvegardeeLabel = new Label("pièce sauvegardée : ");
         conteneurDroit = new VBox(prochainePieceLabel, vueProchainePiece, vueControles);
         informationsJoueur = new VBox(pseudo, score, nbLignes, rang);
         conteneurGauche = new VBox(pieceSauvegardeeLabel, vuePieceSauvegardee, informationsJoueur, startJeu);
