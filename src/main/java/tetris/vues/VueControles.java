@@ -19,8 +19,8 @@ import java.util.Objects;
 public class VueControles extends VBox {
 
     Label titre;
-    ImageView flechesDirectionnelles, espace, toucheR, toucheP, haut, echap;
-    Label flechesDirectionnellesLabel, espaceLabel, toucheRLabel, touchePLabel, hautLabel, echapLabel;
+    ImageView flechesDirectionnelles, espace, toucheR, toucheC, toucheP, haut, echap;
+    Label flechesDirectionnellesLabel, espaceLabel, toucheRLabel, toucheCLabel, touchePLabel, hautLabel, echapLabel;
 
     ArrayList<HBox> hBoxes;
     ArrayList<ImageView> imageViews;
@@ -31,6 +31,7 @@ public class VueControles extends VBox {
         flechesDirectionnelles = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/flechesDirectionnelles.png"))));
         espace = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/espace.png"))));
         toucheR = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/toucheR.png"))));
+        toucheC = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/toucheC.png"))));
         toucheP = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/toucheP.png"))));
         haut = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/haut.png"))));
         echap = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/echap.png"))));
@@ -38,6 +39,7 @@ public class VueControles extends VBox {
         flechesDirectionnellesLabel = new Label("Déplacer la pièce");
         espaceLabel = new Label("Descendre la pièce");
         toucheRLabel = new Label("Rotation anti-horaire");
+        toucheCLabel = new Label("Sauvegarder la pièce");
         touchePLabel = new Label("Pause");
         hautLabel = new Label("Rotation horaire");
         echapLabel = new Label("Quitter le jeu");
@@ -45,19 +47,20 @@ public class VueControles extends VBox {
         HBox flechesDirectionnellesHBox = new HBox(flechesDirectionnelles, flechesDirectionnellesLabel);
         HBox espaceHBox = new HBox(espace, espaceLabel);
         HBox toucheRHBox = new HBox(toucheR, toucheRLabel);
+        HBox toucheCHBox = new HBox(toucheC, toucheCLabel);
         HBox touchePHBox = new HBox(toucheP, touchePLabel);
         HBox hautHBox = new HBox(haut, hautLabel);
         HBox echapHBox = new HBox(echap, echapLabel);
 
         hBoxes = new ArrayList<>();
-        hBoxes.addAll(List.of(flechesDirectionnellesHBox, espaceHBox, touchePHBox, toucheRHBox, hautHBox, echapHBox));
+        hBoxes.addAll(List.of(flechesDirectionnellesHBox, espaceHBox, touchePHBox, toucheRHBox, toucheCHBox, hautHBox, echapHBox));
 
         imageViews = new ArrayList<>();
-        imageViews.addAll(List.of(flechesDirectionnelles, espace, toucheR, toucheP, haut, echap));
+        imageViews.addAll(List.of(flechesDirectionnelles, espace, toucheR, toucheC, toucheP, haut, echap));
 
         styliser();
 
-        this.getChildren().addAll(titre, flechesDirectionnellesHBox, espaceHBox, toucheRHBox, touchePHBox, hautHBox, echapHBox);
+        this.getChildren().addAll(titre, flechesDirectionnellesHBox, espaceHBox, toucheRHBox, toucheCHBox, touchePHBox, hautHBox, echapHBox);
     }
 
     public void styliser() {
