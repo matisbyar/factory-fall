@@ -1,15 +1,11 @@
 package tetris.vues.menu;
 
 import javafx.collections.ObservableList;
-import javafx.event.EventType;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
@@ -35,7 +31,7 @@ public class VuePersonnaliser extends Stage implements Menu {
 
     private final Button flecheGauche, flecheDroite, retour, muteBtn;
 
-    private StackPane locked;
+    private StackPane pieceLocked;
 
     Preferences preferences = Preferences.getInstance();
 
@@ -53,19 +49,20 @@ public class VuePersonnaliser extends Stage implements Menu {
 
         imageStylePiece = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + preferences.getStylePiece() + "/L.jpg"))));
         cadenas = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/cadenas.png"))));
-        locked = new StackPane(cadenas, imageStylePiece);
+        if (preferences.isLocked("pieces")) {
+            pieceLocked = new StackPane(imageStylePiece, cadenas);
+        } else {
+            pieceLocked = new StackPane(cadenas, imageStylePiece);
+        }
         mute = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/mute.png")));
         muteBtn = new Button();
-        muteBtn.setBackground(new Background(new BackgroundImage(mute, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT , BackgroundPosition.CENTER ,BackgroundSize.DEFAULT)));
-        muteBtn.setPrefWidth(64);
-        muteBtn.setPrefHeight(64);
 
         // Styles et bindings
         styliser();
         creerBindings(vueMenuPrincipal);
 
         // Affections
-        stylePiece.getChildren().addAll(flecheGauche, locked, flecheDroite);
+        stylePiece.getChildren().addAll(flecheGauche, pieceLocked, flecheDroite);
 
         personnalisations.getChildren().add(stylePiece);
 
@@ -85,6 +82,10 @@ public class VuePersonnaliser extends Stage implements Menu {
 
         personnalisations.getStyleClass().add("personnalisations");
         stylePiece.getStyleClass().add("stylePiece");
+
+        muteBtn.setBackground(new Background(new BackgroundImage(mute, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT , BackgroundPosition.CENTER ,BackgroundSize.DEFAULT)));
+        muteBtn.setPrefWidth(64);
+        muteBtn.setPrefHeight(64);
     }
 
     public void creerBindings(VueMenuPrincipal vueMenuPrincipal) {
@@ -101,8 +102,8 @@ public class VuePersonnaliser extends Stage implements Menu {
      */
     public void changerImage(VueMenuPrincipal vueMenuPrincipal, String etat) {
         vueMenuPrincipal.changerImage(etat);
-        ObservableList<Node> childs = this.locked.getChildren();
-        if (preferences.getStylePiece().equals("brique") || preferences.getStylePiece().equals("default")) {
+        ObservableList<Node> childs = this.pieceLocked.getChildren();
+        if (preferences.isLocked("pieces")) {
             if (!childs.get(childs.size() - 1).equals(cadenas)) {
                 if (childs.size() > 1) {
                     Node topNode = childs.get(childs.size() - 1);

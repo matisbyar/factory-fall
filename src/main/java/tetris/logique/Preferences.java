@@ -4,7 +4,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import tetris.TetrisIHM;
+import tetris.stockage.Session;
 
+import java.sql.Connection;
 import java.util.Objects;
 
 /**
@@ -28,6 +30,21 @@ public class Preferences {
 
     public String getStylePiece() {
         return stylePiece;
+    }
+
+    public boolean isLocked(String typePerso) {
+        switch (typePerso) {
+            case "pieces" :
+                if(Session.getInstance().isConnected()) {
+                    return false;
+                } else {
+                    if (getStylePiece().equals("brique") || getStylePiece().equals("default")) {
+                        return true;
+                    }
+                }
+            default:
+                return false;
+        }
     }
 
     public void setStylePiece(String stylePiece) {
