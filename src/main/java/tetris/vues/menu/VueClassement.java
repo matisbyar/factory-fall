@@ -87,15 +87,15 @@ public class VueClassement extends Stage implements Menu {
          ** important si le joueur est connecté cela prend les departement sinon les top anonyme
          */
         if (Session.getInstance().isConnected()) {
-            int i = 1;
-            while (i < 11 && departementScore.get(i - 1) != null) {
+            int i = 0;
+            while (i < 11 && i < departementScore.size()-1) {
 
-                String login = departementScore.get(i - 1).getLogin();
+                String login = departementScore.get(i).getLogin();
 
-                classementDepartement.add(new Label(String.valueOf(i)), 0, i - 1);
-                classementDepartement.add(new Label(login), 1, i - 1);
-                classementDepartement.add(new Label(String.valueOf(departementScore.get(i - 1).getScore())), 2, i - 1);
-                classementDepartement.add(new Label(departementScore.get(i - 1).getHorodatage().toString()), 3, i - 1);
+                classementDepartement.add(new Label(String.valueOf(i-1)), 0, i);
+                classementDepartement.add(new Label(login), 1, i);
+                classementDepartement.add(new Label(String.valueOf(departementScore.get(i).getScore())), 2, i);
+                classementDepartement.add(new Label(departementScore.get(i).getHorodatage().toString()), 3, i);
                 i++;
             }
         } else {
