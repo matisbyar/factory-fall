@@ -51,7 +51,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         scene = new Scene(root, 1280, 720);
 
         // Logo
-        logo = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/titreMenu.png"))));
+        logo = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/titre.png"))));
 
         // Boutons
         start = new Button();
@@ -88,6 +88,9 @@ public class VueMenuPrincipal extends Stage implements Menu {
     private void styliser() {
         // Général
         scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
+
+        // Titre
+        logo.setStyle("-fx-padding: 5px; -fx-background-color: black;");
 
         VBox.setMargin(logo, new Insets(100, 0, 30, 0));
         VBox.setMargin(compte, new Insets(30, 0, 30, 80));
