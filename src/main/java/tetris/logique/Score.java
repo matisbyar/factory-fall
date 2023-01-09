@@ -12,12 +12,14 @@ public class Score {
 
     private int id;
     private IntegerProperty score;
+    private IntegerProperty nbLignes;
     private Timestamp horodatage;
     private String login;
     private static String gameCode = "TETRIS"; //CodeJeu: Motron: 'TRON' | Tetris : 'TETRIS' | DonkeyKong : 'DK'
 
     private Score() {
         this.score = new SimpleIntegerProperty(0);
+        this.nbLignes = new SimpleIntegerProperty(0);
         this.horodatage = new Timestamp(System.currentTimeMillis());
         this.login = "";
     }
@@ -25,12 +27,14 @@ public class Score {
     public Score(int score) {
         this();
         this.score = new SimpleIntegerProperty(score);
+        this.nbLignes = new SimpleIntegerProperty(0);
         this.horodatage = new Timestamp(System.currentTimeMillis());
     }
 
     public Score(int score, Timestamp time) {
         this();
         this.score = new SimpleIntegerProperty(score);
+        this.nbLignes = new SimpleIntegerProperty(0);
         this.horodatage = time;
     }
 
@@ -72,5 +76,17 @@ public class Score {
 
     public static String getGameCode() {
         return gameCode;
+    }
+
+    public int getNbLignes() {
+        return nbLignes.get();
+    }
+
+    public IntegerProperty nbLignesProperty() {
+        return nbLignes;
+    }
+
+    public void setNbLignes(int nbLignes) {
+        this.nbLignes.set(nbLignes);
     }
 }

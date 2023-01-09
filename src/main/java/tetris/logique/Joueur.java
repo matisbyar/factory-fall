@@ -28,4 +28,12 @@ public class Joueur {
     public void setScore(IntegerProperty score) {
         this.score.setScore(score.getValue());
     }
+
+    public IntegerProperty getLignesSup(){
+        return score.nbLignesProperty();
+    }
+
+    public void setLignesSup(int score){
+        this.score.setNbLignes(score);
+    }
 }
