@@ -19,10 +19,6 @@ public class Ressources {
     private final Image pieceConteneur = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/conteneur/L.jpg")));
     private final Image pieceBrique = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/brique/L.jpg")));
 
-    // Images des boutons
-    private final ImageView gauche = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/fleche-gauche.png")), 75, 75, true, true));
-    private final ImageView droite = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/fleche-droite.png")), 75, 75, true, true));
-
     public static Ressources getInstance() {
         if (INSTANCE == null) INSTANCE = new Ressources();
         return INSTANCE;
@@ -45,10 +41,10 @@ public class Ressources {
     }
 
     public ImageView getFlecheGauche() {
-        return gauche;
+        return new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/fleche-gauche.png")), 55, 55, true, true));
     }
 
     public ImageView getFlecheDroite() {
-        return droite;
+        return new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/fleche-droite.png")), 55, 55, true, true));
     }
 }

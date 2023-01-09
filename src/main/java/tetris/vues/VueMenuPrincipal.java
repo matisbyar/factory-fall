@@ -75,7 +75,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         vueCompteDeconnecte = new VueCompteDeconnecte(this);
         vueCompteConnecte = new VueCompteConnecte(this);
         vuePersonnaliser = new VuePersonnaliser(this);
-        vueClassement = new VueClassement(this);
+        //vueClassement = new VueClassement(this);
         vueRegles = new VueRegles(this);
 
         this.setScene(scene);

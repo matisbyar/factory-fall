@@ -65,7 +65,7 @@ public class PanelPersonnalisation extends VBox {
         this.setAlignment(Pos.CENTER);
 
         titre.getStyleClass().add("titre-panel-personnalisation");
-        titre.setFont(Ressources.getInstance().getPolice(32));
+        titre.setFont(Ressources.getInstance().getPolice(28));
 
         // Flèches
         gauche.getStyleClass().add("gauche");
@@ -76,8 +76,8 @@ public class PanelPersonnalisation extends VBox {
         droite.setAlignment(Pos.CENTER);
 
         // Élément central
-        ((ImageView) personnalisation.getChildren().get(1)).setFitHeight(75);
-        ((ImageView) personnalisation.getChildren().get(1)).setFitWidth(75);
+        ((ImageView) personnalisation.getChildren().get(1)).setFitHeight(55);
+        ((ImageView) personnalisation.getChildren().get(1)).setFitWidth(55);
 
         // Personnalisation (flèches comprises)
         personnalisation.setAlignment(Pos.CENTER);

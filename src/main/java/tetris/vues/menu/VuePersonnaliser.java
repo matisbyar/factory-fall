@@ -54,6 +54,25 @@ public class VuePersonnaliser extends Stage implements Menu {
         }
     };
 
+    EventHandler<ActionEvent> gauche = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            Platform.runLater(() -> {
+                // TODO
+                System.out.println("Gauche");
+            });
+        }
+    };
+    EventHandler<ActionEvent> droite = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            Platform.runLater(() -> {
+                // TODO
+                System.out.println("Droite");
+            });
+        }
+    };
+
     public VuePersonnaliser(VueMenuPrincipal vueMenuPrincipal) {
         // Instanciation
         root = new BorderPane();
@@ -69,7 +88,11 @@ public class VuePersonnaliser extends Stage implements Menu {
         // Styles et bindings
         styliser();
 
-        personnalisations.getChildren().add(new PanelPersonnalisation("Style des pièces", stylePieceG, imageStylePiece, stylePieceD));
+        personnalisations.getChildren().addAll(
+                new PanelPersonnalisation("Style des pièces", stylePieceG, imageStylePiece, stylePieceD),
+                new PanelPersonnalisation("Image de fond", gauche, new ImageView(), droite),
+                new PanelPersonnalisation("Musique de jeu", gauche, new ImageView(), droite)
+        );
 
         root.setCenter(personnalisations);
         root.setTop(new BarreNavigation("Personnaliser", vueMenuPrincipal, this));
@@ -85,6 +108,7 @@ public class VuePersonnaliser extends Stage implements Menu {
         flecheDroite.getStyleClass().add("flecheD");
 
         personnalisations.getStyleClass().add("personnalisations");
+        personnalisations.setSpacing(30);
     }
 
     @Override

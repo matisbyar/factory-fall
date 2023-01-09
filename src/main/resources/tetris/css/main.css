@@ -67,7 +67,7 @@
 
 .panel-personnalisation {
     -fx-background-color: black;
-    -fx-padding: 10px 20px;
+    -fx-padding: 5px 20px;
     -fx-alignment: center;
     -fx-border-color: white;
     -fx-border-width: 5px;
@@ -79,7 +79,7 @@
 }
 
 .gauche, .droite {
-    -fx-padding: 30px;
+    -fx-padding: 20px;
     -fx-background-color: black;
 }
 
