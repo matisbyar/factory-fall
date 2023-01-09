@@ -133,35 +133,6 @@ public class VueMenuPrincipal extends Stage implements Menu {
     }
 
     /**
-     * Fonction qui permet de changer les images dans la "VuePersonnalisation"
-     */
-    public void changerImage(String etat) {
-        switch (etat) {
-            case "+" -> i++;
-            case "-" -> i--;
-        }
-        if (i >= 3) {
-            i = 0;
-        } else if (i < 0) {
-            i = 2;
-        }
-        switch (i) {
-            case 0 -> {
-                pieceEnCoursPerso.setImage(pieceConteneur);
-                preferences.setStylePiece("conteneur");
-            }
-            case 1 -> {
-                pieceEnCoursPerso.setImage(pieceBrique);
-                preferences.setStylePiece("brique");
-            }
-            case 2 -> {
-                pieceEnCoursPerso.setImage(pieceDefault);
-                preferences.setStylePiece("default");
-            }
-        }
-    }
-
-    /**
      * Fonction qui créer tous les bindings in line utile pour l'ensemble des boutons du menu
      */
     public void creerBindings() {
@@ -190,9 +161,6 @@ public class VueMenuPrincipal extends Stage implements Menu {
     public TextField getDepartement() {
         return vueCompteDeconnecte.getDepartement();
     }
-
-
-
 
     /**
      * Fonction qui déclenche le lancement du jeu en Anonyme dans TetrisIHM

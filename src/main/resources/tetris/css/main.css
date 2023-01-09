@@ -1,8 +1,3 @@
-/* Root correspond au css de la scene */
-.root {
-    -fx-background-image: url("../img/background/industrial.png");
-}
-
 /* BorderPane Left */
 .leftPane {
     -fx-background-color: transparent;
@@ -38,12 +33,12 @@
 
 /*Pour modifier individuellement un bouton utilisez #nomBouton*/
 
-.vBoxBouton{
-    -fx-alignment: center ;
+.vBoxBouton {
+    -fx-alignment: center;
     -fx-spacing: 20px;
 }
 
-.vBoxCompte{
+.vBoxCompte {
     -fx-pref-height: 200px;
     -fx-pref-width: 200px;
 }
@@ -67,79 +62,90 @@
     -fx-padding: 0 20px;
     -fx-alignment: center;
 }
-/* CSS vuePersonnaliser*/
 
-.vbCompte
+/* CSS de Helper PanelPersonnaliser */
 
-/* CSS vuePersonnaliser*/
-
-.flecheG{
-    -fx-padding: 30 50;
-    -fx-background-image: url("../img/flechePersonnalisation/fleche-gauche.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
+.panel-personnalisation {
     -fx-background-color: black;
-}
-.flecheD{
-    -fx-padding: 30 50;
-    -fx-background-image: url("../img/flechePersonnalisation/fleche-droite.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
-    -fx-background-color: black;
-}
-
-.personnalisations{
+    -fx-padding: 10px 20px;
     -fx-alignment: center;
+    -fx-border-color: white;
+    -fx-border-width: 5px;
+    -fx-border-style: solid;
 }
 
-.stylePiece{
+.titre-panel-personnalisation {
+    -fx-text-fill: white;
+}
+
+.gauche, .droite {
+    -fx-padding: 30px;
+    -fx-background-color: black;
+}
+
+/* CSS vuePersonnaliser*/
+
+.vbCompte {
+
+}
+
+/* CSS vuePersonnaliser*/
+
+
+
+.personnalisations {
+    -fx-alignment: center;
+    -fx-padding: 10px 100px;
+}
+
+.stylePiece {
     -fx-alignment: center;
 }
 
 
 /* CSS VueCompteDeconnecté */
 
-.option{
+.option {
     -fx-alignment: center;
     -fx-spacing: 100;
 }
 
-.titreConnexion{
+.titreConnexion {
     -fx-text-fill: white;
 }
 
-.titreCreation{
+.titreCreation {
     -fx-text-fill: white;
 }
 
-.champsConnexion{
+.champsConnexion {
     -fx-spacing: 20;
 }
 
-.champsCreation{
+.champsCreation {
     -fx-spacing: 20;
 }
 
 /*Vue GameOver*/
 
-.borderPane{
+.borderPane {
     -fx-background-color: #1E1E1E;
     -fx-pref-height: 500;
     -fx-pref-width: 500;
 }
 
-.gameOver{
+.gameOver {
     -fx-fit-to-width: 250;
     -fx-fit-to-height: 180;
 }
 
-.btRetry{
+.btRetry {
     -fx-background-color: transparent;
     -fx-min-height: 24;
     -fx-min-width: 116;
 }
 
-.btExit{
+.btExit {
     -fx-background-color: transparent;
     -fx-min-height: 24;
     -fx-min-width: 96;
