@@ -18,6 +18,7 @@ import tetris.singletons.Ressources;
 import tetris.stockage.Session;
 import tetris.vues.menu.VueClassement;
 import tetris.vues.menu.VuePersonnaliser;
+import tetris.vues.menu.VueRegles;
 import tetris.vues.menu.compte.VueCompteConnecte;
 import tetris.vues.menu.compte.VueCompteDeconnecte;
 
@@ -30,24 +31,18 @@ public class VueMenuPrincipal extends Stage implements Menu {
     Preferences preferences = Preferences.getInstance();
 
     private final ImageView logo;
-    private final Button start, parametres, personnaliser, compte, classement, quitter;
+    private final Button start, regles, personnaliser, compte, classement, quitter;
 
     //Elements du menu connexion joueur
     private final VBox boutons;
     private final VBox vbCompte;
-
-    // Gestion de la personnalisation des pièces
-    private final Image pieceDefault = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/default/L.jpg")));
-    private final Image pieceConteneur = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/conteneur/L.jpg")));
-    private final Image pieceBrique = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/brique/L.jpg")));
-    private final ImageView pieceEnCoursPerso = new ImageView(pieceConteneur);
-    private int i = 0;
 
     // Sous-vues
     VueCompteDeconnecte vueCompteDeconnecte;
     VueCompteConnecte vueCompteConnecte;
     VuePersonnaliser vuePersonnaliser;
     VueClassement vueClassement;
+    VueRegles vueRegles;
 
 
     public VueMenuPrincipal() {
@@ -59,7 +54,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
 
         // Boutons
         start = new Button();
-        parametres = new Button();
+        regles = new Button();
         personnaliser = new Button();
         classement = new Button();
         quitter = new Button();
@@ -67,7 +62,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
 
         vbCompte = new VBox(compte);
 
-        boutons = new VBox(logo, start, parametres, personnaliser, classement, quitter);
+        boutons = new VBox(logo, start, regles, personnaliser, classement, quitter);
 
         styliserMenu();
         creerBindings();
@@ -81,6 +76,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         vueCompteConnecte = new VueCompteConnecte(this);
         vuePersonnaliser = new VuePersonnaliser(this);
         vueClassement = new VueClassement(this);
+        vueRegles = new VueRegles(this);
 
         this.setScene(scene);
     }
@@ -109,9 +105,9 @@ public class VueMenuPrincipal extends Stage implements Menu {
         start.setFont(Ressources.getInstance().getPolice(32));
         start.getStyleClass().add("bouton");
 
-        parametres.setText("Paramètres");
-        parametres.setFont(Ressources.getInstance().getPolice(32));
-        parametres.getStyleClass().add("bouton");
+        regles.setText("Règles");
+        regles.setFont(Ressources.getInstance().getPolice(32));
+        regles.getStyleClass().add("bouton");
 
         personnaliser.setText("Personnaliser");
         personnaliser.setFont(Ressources.getInstance().getPolice(32));
@@ -137,6 +133,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
      */
     public void creerBindings() {
         compte.setOnAction(actionEvent -> this.setScene(Session.getInstance().isConnected() ? vueCompteConnecte.getScene() : vueCompteDeconnecte.getScene()));
+        regles.setOnAction(actionEvent -> this.setScene(vueRegles.getScene()));
         personnaliser.setOnAction(actionEvent -> this.setScene(vuePersonnaliser.getScene()));
         classement.setOnAction(actionEvent -> this.setScene(vueClassement.getScene()));
     }
