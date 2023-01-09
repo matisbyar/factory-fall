@@ -138,12 +138,6 @@ public class VuePersonnaliser extends Stage implements Menu {
         muteBtn.setPrefHeight(64);
     }
 
-    @Override
-    public void afficherScene() {
-        this.setScene(scene);
-        root.setBackground(Preferences.getInstance().getBackground());
-    }
-
     public void switchCadenas(String typePerso) {
         ObservableList<Node> childs = this.locked.getChildren();
         if (Ressources.getInstance().isLocked(typePerso)) {
@@ -159,5 +153,15 @@ public class VuePersonnaliser extends Stage implements Menu {
                 topNode.toBack();
             }
         }
+    }
+
+    @Override
+    public void afficherScene() {
+        this.setScene(scene);
+        mettreAJourFond();
+    }
+
+    public void mettreAJourFond() {
+        root.setBackground(Preferences.getInstance().getBackground());
     }
 }

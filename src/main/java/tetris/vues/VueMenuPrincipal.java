@@ -136,10 +136,23 @@ public class VueMenuPrincipal extends Stage implements Menu {
      * Fonction qui créer tous les bindings in line utile pour l'ensemble des boutons du menu
      */
     private void creerBindings() {
-        compte.setOnAction(actionEvent -> this.setScene(Session.getInstance().isConnected() ? vueCompteConnecte.getScene() : vueCompteDeconnecte.getScene()));
-        regles.setOnAction(actionEvent -> this.setScene(vueRegles.getScene()));
-        personnaliser.setOnAction(actionEvent -> this.setScene(vuePersonnaliser.getScene()));
-        classement.setOnAction(actionEvent -> this.setScene(vueClassement.getScene()));
+        compte.setOnAction(actionEvent -> {
+            this.setScene(Session.getInstance().isConnected() ? vueCompteConnecte.getScene() : vueCompteDeconnecte.getScene());
+            vueCompteConnecte.mettreAJourFond();
+            vueCompteDeconnecte.mettreAJourFond();
+        });
+        regles.setOnAction(actionEvent -> {
+            this.setScene(vueRegles.getScene());
+            vueRegles.mettreAJourFond();
+        });
+        personnaliser.setOnAction(actionEvent -> {
+            this.setScene(vuePersonnaliser.getScene());
+            vuePersonnaliser.mettreAJourFond();
+        });
+        classement.setOnAction(actionEvent -> {
+            this.setScene(vueClassement.getScene());
+            vueClassement.mettreAJourFond();
+        });
     }
 
     /**
@@ -191,6 +204,10 @@ public class VueMenuPrincipal extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
+        mettreAJourFond();
+    }
+
+    public void mettreAJourFond() {
         root.setBackground(Preferences.getInstance().getBackground());
     }
 }

@@ -37,7 +37,10 @@ public class VueRegles extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
-        root.setBackground(Preferences.getInstance().getBackground());
+        mettreAJourFond();
     }
 
+    public void mettreAJourFond() {
+        root.setBackground(Preferences.getInstance().getBackground());
+    }
 }

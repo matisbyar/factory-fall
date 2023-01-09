@@ -218,6 +218,10 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
+
+        mettreAJourFond();    }
+
+    public void mettreAJourFond() {
         root.setBackground(Preferences.getInstance().getBackground());
     }
 

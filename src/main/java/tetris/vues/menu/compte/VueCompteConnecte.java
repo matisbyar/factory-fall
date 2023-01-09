@@ -27,6 +27,7 @@ public class VueCompteConnecte extends Stage implements Menu {
     private final GridPane classementtopscorejoueurconnecte;
     private final VBox vbScores;
     private final Label titre;
+
     public VueCompteConnecte(VueMenuPrincipal vueMenuPrincipal) {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
@@ -35,14 +36,14 @@ public class VueCompteConnecte extends Stage implements Menu {
 
         classementtopscorejoueurconnecte = new GridPane();
 
-        vbScores = new VBox(titre,classementtopscorejoueurconnecte);
+        vbScores = new VBox(titre, classementtopscorejoueurconnecte);
 
 
-        if(Session.getInstance().isConnected()) {
+        if (Session.getInstance().isConnected()) {
             List<Score> topScorejoueur = ScoreManager.getInstance().getTopScoreparlogin(Session.getInstance().getLogin());
             int i = 0;
             String login = topScorejoueur.get(i).getLogin();
-            while (i < 11 && i < topScorejoueur.size()-1) {
+            while (i < 11 && i < topScorejoueur.size() - 1) {
 
                 classementtopscorejoueurconnecte.add(new Label(String.valueOf(i)), 0, i);
                 classementtopscorejoueurconnecte.add(new Label(login), 1, i);
@@ -87,7 +88,10 @@ public class VueCompteConnecte extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
-        root.setBackground(Preferences.getInstance().getBackground());
+        mettreAJourFond();
     }
 
+    public void mettreAJourFond() {
+        root.setBackground(Preferences.getInstance().getBackground());
+    }
 }
