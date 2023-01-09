@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -89,8 +88,7 @@ public class TetrisIHM extends Application {
                 nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
                 departement = vueMenuPrincipal.getDepartement().getText();
                 Session.getInstance().connect(nomjoueur,departement);
-                demarrerPartie();
-                vueMenuPrincipal.close();
+                vueMenuPrincipal.afficherScene();
             }
         }
     };
@@ -126,9 +124,7 @@ public class TetrisIHM extends Application {
                 departement = DepartementManager.getInstance().getDepartementByLogin(nomjoueur);
                 System.out.println("tetris ihm departement :"+departement);
                 Session.getInstance().connect(nomjoueur,departement);
-                // TODO: à changer pour rediriger vers la vue MenuPrincipal ou MenuCompteConnecte, il faut que le jeu se démarre uniquement lorsque le joueur clique sur "Jouer"
-                demarrerPartie();
-                vueMenuPrincipal.close();
+                vueMenuPrincipal.afficherScene();
             }
         }
     };
