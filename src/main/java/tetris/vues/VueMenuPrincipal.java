@@ -71,7 +71,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         // Affectations
         root.setCenter(boutons);
         root.setBottom(compte);
-        root.setBackground(new Background(new BackgroundImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/industrial.png"))), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false))));
+        root.setBackground(new Background(new BackgroundImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/industrial-accueil.png"))), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false))));
 
         vueCompteDeconnecte = new VueCompteDeconnecte(this);
         vueCompteConnecte = new VueCompteConnecte(this);

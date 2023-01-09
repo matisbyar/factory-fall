@@ -13,7 +13,7 @@
     -fx-background-color: transparent;
 }
 
-/* CSS de VueMenuPrincipale */
+/* CSS de VueMenuPrincipal */
 
 .textFieldNomJoueur {
     -fx-background-color: black;
@@ -85,14 +85,7 @@
 
 /* CSS vuePersonnaliser*/
 
-.vbCompte {
-
-}
-
 /* CSS vuePersonnaliser*/
-
-
-
 .personnalisations {
     -fx-alignment: center;
     -fx-padding: 10px 100px;
@@ -126,4 +119,11 @@
     -fx-spacing: 20;
 }
 
-/*Vue GameOver*/
+/*Vue Jeu (TetrisIHM)*/
+.panel-partie {
+    -fx-border-color: white;
+    -fx-border-width: 3px;
+    -fx-border-style: solid;
+    -fx-background-color: black;
+    -fx-padding: 10px;
+}

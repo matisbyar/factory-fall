@@ -90,7 +90,7 @@ public class VueControles extends VBox {
 
         // ImageViews
         for (ImageView imageView : imageViews) {
-            imageView.setFitHeight(50.0);
+            imageView.setFitHeight(40.0);
             imageView.setFitWidth(190.0);
             imageView.setPreserveRatio(true);
         }

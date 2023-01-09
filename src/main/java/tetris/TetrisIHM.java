@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -193,18 +194,18 @@ public class TetrisIHM extends Application {
         score = new Label("score : 0.0");
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
-        nbLignes = new Label("Ligne : 0 ");
+        nbLignes = new Label("Lignes : 0 ");
         prochainePieceLabel = new Label("prochaine :");
         pieceSauvegardeeLabel = new Label("pièce sauvegardée : ");
-        conteneurDroit = new VBox(prochainePieceLabel, vueProchainePiece, vueControles);
+        conteneurDroit = new VBox(new VBox(prochainePieceLabel, vueProchainePiece), vueControles);
         informationsJoueur = new VBox(pseudo, score, nbLignes, rang);
-        conteneurGauche = new VBox(pieceSauvegardeeLabel, vuePieceSauvegardee, informationsJoueur, startJeu);
+        conteneurGauche = new VBox(new VBox(pieceSauvegardeeLabel, vuePieceSauvegardee), informationsJoueur, startJeu);
         vuePieceSauvegardee.setAlignment(Pos.CENTER_RIGHT);
 
         // Gestion Plateau/Bouton Pause
         sp = new StackPane(imgPause, vuePlateau);
 
-        scene = new Scene(borderPane);
+        scene = new Scene(borderPane, 1280, 720);
 
         // Affectations et constitution de vues
         borderPane.setLeft(conteneurGauche);
@@ -318,7 +319,7 @@ public class TetrisIHM extends Application {
             startJeu.setVisible(false);
         });
 
-        jeu.getJoueur().getInstanceScore().nbLignesProperty().addListener(e-> nbLignes.setText("Ligne : " + jeu.getJoueur().getInstanceScore().getNbLignes()));
+        jeu.getJoueur().getInstanceScore().nbLignesProperty().addListener(e-> nbLignes.setText("Lignes : " + jeu.getJoueur().getInstanceScore().getNbLignes()));
     }
 
     /**
@@ -344,108 +345,82 @@ public class TetrisIHM extends Application {
 
         // BorderPane
         borderPane.getStyleClass().add("borderPane");
-        borderPane.setPrefWidth(1280);
-        borderPane.setPrefHeight(720);
         borderPane.getLeft().getStyleClass().add("leftPane");
         borderPane.getRight().getStyleClass().add("rightPane");
         borderPane.getCenter().getStyleClass().add("centerPane");
         borderPane.setBackground(Preferences.getInstance().getBackground());
+        borderPane.setPadding(new Insets(10, 10, 10, 10));
 
         // VuePlateu
         vuePlateau.getStyleClass().add("vuePlateau");
         vuePlateau.setAlignment(Pos.CENTER);
-        vuePlateau.setMaxWidth(426);
 
         // VueProchainePiece
-        vueProchainePiece.setPrefWidth(426);
         vueProchainePiece.setAlignment(Pos.TOP_LEFT);
 
         // vuePieceSauvegardee
-        vuePieceSauvegardee.setPrefWidth(426);
         vuePieceSauvegardee.setAlignment(Pos.TOP_RIGHT);
+
+        // informations joueur
+        informationsJoueur.setAlignment(Pos.TOP_RIGHT);
 
         // Pseudo
         pseudo.setTextFill(Color.WHITE);
-        pseudo.setFont(Ressources.getInstance().getPolice(32));
-        //pseudo.setStyle("-fx-font-size: 15px");
-        pseudo.setMinSize(150, 50);
-        pseudo.setLayoutX(150);
-        pseudo.setPrefWidth(426);
+        pseudo.setFont(Ressources.getInstance().getPolice(52));
         pseudo.setAlignment(Pos.TOP_RIGHT);
 
         // Score
         score.getStyleClass().add("score");
-        score.setFont(Ressources.getInstance().getPolice(32));
-        //score.setStyle("-fx-font-size: 15px");
-        score.setLayoutY(50);
+        score.setFont(Ressources.getInstance().getPolice(30));
         score.setTextFill(Color.WHITE);
-        score.setAlignment(Pos.BASELINE_LEFT);
-        score.setMinSize(150, 50);
         score.setAlignment(Pos.TOP_RIGHT);
-        score.setPrefWidth(426);
 
         //nbLignes
-
         nbLignes.getStyleClass().add("nbLignes");
-        nbLignes.setFont(Ressources.getInstance().getPolice(32));
-        //score.setStyle("-fx-font-size: 15px");
-        nbLignes.setLayoutY(50);
+        nbLignes.setFont(Ressources.getInstance().getPolice(30));
         nbLignes.setTextFill(Color.WHITE);
-        nbLignes.setAlignment(Pos.BASELINE_LEFT);
-        nbLignes.setMinSize(150, 50);
         nbLignes.setAlignment(Pos.TOP_RIGHT);
-        nbLignes.setPrefWidth(426);
 
         // Rang
         rang.setTextFill(Color.WHITE);
-        rang.setFont(Ressources.getInstance().getPolice(32));
-        //rang.setStyle("-fx-font-size: 15px");
-        rang.setMinSize(150, 50);
-        rang.setLayoutX(150);
-        rang.setLayoutY(200);
+        rang.setFont(Ressources.getInstance().getPolice(30));
         rang.setAlignment(Pos.TOP_RIGHT);
-        rang.setPrefWidth(426);
 
         // Label Prochaine pièce
         prochainePieceLabel.setTextFill(Color.WHITE);
-        prochainePieceLabel.setFont(Ressources.getInstance().getPolice(32));
-        prochainePieceLabel.setMinSize(150, 50);
-        prochainePieceLabel.setLayoutX(150);
-        prochainePieceLabel.setLayoutY(200);
+        prochainePieceLabel.setFont(Ressources.getInstance().getPolice(25));
         prochainePieceLabel.setAlignment(Pos.TOP_LEFT);
-        prochainePieceLabel.setPrefWidth(426);
 
         //Label Piece sauvegardée
         pieceSauvegardeeLabel.setTextFill(Color.WHITE);
-        pieceSauvegardeeLabel.setFont(Ressources.getInstance().getPolice(32));
-        pieceSauvegardeeLabel.setMinSize(150, 50);
-        pieceSauvegardeeLabel.setLayoutX(150);
-        pieceSauvegardeeLabel.setLayoutY(200);
+        pieceSauvegardeeLabel.setFont(Ressources.getInstance().getPolice(25));
         pieceSauvegardeeLabel.setAlignment(Pos.TOP_RIGHT);
-        pieceSauvegardeeLabel.setPrefWidth(426);
-
-        // Labels
-        informationsJoueur.setLayoutX(20);
-        informationsJoueur.setLayoutY(20);
 
         // StartJeu
-        startJeu.setGraphic(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/start.png")))));
-        startJeu.setStyle("-fx-background-color: black");
+        startJeu.setText("Start");
+        startJeu.setFont(Ressources.getInstance().getPolice(40));
+        startJeu.setStyle("-fx-background-color: black; -fx-text-fill: white");
         startJeu.getStyleClass().add("bouttonStart");
 
         // Container gauche
         conteneurGauche.setAlignment(Pos.TOP_RIGHT);
-        conteneurGauche.setPrefWidth(426);
+        conteneurGauche.setSpacing(10);
 
         // Container droit
         conteneurDroit.setAlignment(Pos.TOP_RIGHT);
-        conteneurDroit.setPrefWidth(426);
+        conteneurDroit.setSpacing(10);
+
+        for (Node node : conteneurGauche.getChildren()) {
+            node.getStyleClass().add("panel-partie");
+        }
+        for (Node node : conteneurDroit.getChildren()) {
+            node.getStyleClass().add("panel-partie");
+        }
 
         // Vue Prochaine pièce
         vueProchainePiece.setAlignment(Pos.CENTER_LEFT);
 
         // VueControles
-        vueControles.setPrefWidth(426);
         vueControles.setAlignment(Pos.BOTTOM_LEFT);
 
         // Image Pause
