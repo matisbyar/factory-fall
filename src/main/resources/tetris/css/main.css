@@ -127,26 +127,3 @@
 }
 
 /*Vue GameOver*/
-
-.borderPane {
-    -fx-pref-height: 500;
-    -fx-pref-width: 500;
-}
-
-.gameOver {
-    -fx-fit-to-width: 250;
-    -fx-fit-to-height: 180;
-}
-
-.btRetry {
-    -fx-background-color: transparent;
-    -fx-min-height: 24;
-    -fx-min-width: 116;
-}
-
-.btExit {
-    -fx-background-color: transparent;
-    -fx-min-height: 24;
-    -fx-min-width: 96;
-}
-

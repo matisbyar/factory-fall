@@ -2,58 +2,55 @@ package tetris.vues;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import tetris.TetrisIHM;
 import tetris.singletons.Preferences;
-
-import java.util.Objects;
+import tetris.singletons.Ressources;
 
 public class VueGameOver extends Stage implements Menu {
 
-    Scene scene;
-    BorderPane root;
-    VBox vb;
-    HBox hbButtons;
+    private final Scene scene;
+    private final BorderPane root;
+    private final VBox vBox;
+    private final HBox actions;
 
-    BooleanProperty arreterJeu;
-    BooleanProperty retry;
+    protected BooleanProperty arreterJeu, retry;
 
-    ImageView retryImgView, exitImgView, gameOver;
-    Button btExit, btRetry;
+    private final Label gameOver, score;
+    private final Button accueil, rejouer;
 
-    public VueGameOver() {
+    public VueGameOver(int scoreJoueur) {
         // Instanciation d'éléments JavaFX
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
-        vb = new VBox();
-        hbButtons = new HBox();
+        vBox = new VBox();
+        actions = new HBox();
 
         // Instanciation d'attributs de la logique du jeu
         arreterJeu = new SimpleBooleanProperty();
         retry = new SimpleBooleanProperty();
 
         // Instanciation d'objets graphiques JavaFX
-        retryImgView = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/retry.png"))));
-        exitImgView = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/exit.png"))));
-        gameOver = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/game_over.png"))));
-        btExit = new Button();
-        btRetry = new Button();
+        gameOver = new Label("Game Over!");
+        score = new Label("Score : " + scoreJoueur);
+        rejouer = new Button("Rejouer");
+        accueil = new Button("Accueil");
 
         arreterJeu.setValue(false);
         retry.setValue(false);
 
         // Ajout dans les vues appropriées les éléments
-        vb.getChildren().add(gameOver);
-        hbButtons.getChildren().addAll(btRetry, btExit);
-        vb.getChildren().add(hbButtons);
-        root.getChildren().add(vb);
+        actions.getChildren().addAll(rejouer, accueil);
+        vBox.getChildren().addAll(gameOver, score, actions);
+        root.setCenter(vBox);
 
         // Styles définitifs
         styliser();
@@ -75,36 +72,37 @@ public class VueGameOver extends Stage implements Menu {
     /**
      * Applique tous les styles souhaités aux objets JavaFX
      */
-    public void styliser() {
-        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
-
+    private void styliser() {
         mettreAJourFond();
 
-        // Stage
-        this.setResizable(true);
+        this.setResizable(false);
 
-        // ImageView
-        gameOver.getStyleClass().add("gameOver");
+        vBox.setAlignment(Pos.CENTER);
 
-        // Button
-        btRetry.getStyleClass().add("btRetry");
-        btExit.getStyleClass().add("btExit");
-        btRetry.setGraphic(retryImgView);
-        btExit.setGraphic(exitImgView);
-        btExit.setMinSize(96, 24);
+        actions.setPadding(new Insets(200, 0, 0, 0));
+        actions.setAlignment(Pos.CENTER);
+        actions.setSpacing(20);
 
-        // VBox
-        vb.getStyleClass().add("vb");
-        vb.setLayoutY(125);
-        vb.setLayoutX(125);
+        gameOver.setFont(Ressources.getInstance().getPolice(100));
+        score.setFont(Ressources.getInstance().getPolice(40));
+
+        gameOver.setStyle("-fx-text-fill: #ffffff; -fx-background-color: #000000; -fx-padding: 15px 30px");
+        score.setStyle("-fx-border-color: #ffffff; -fx-border-width: 2px; -fx-text-fill: #ffffff; -fx-background-color: #000000; -fx-padding: 10px");
+        score.setTranslateY(-15);
+
+        for (Node action : actions.getChildren()) {
+            ((Button) action).setStyle("-fx-border-color: #000000; -fx-border-width: 2px; -fx-text-fill: #000000; -fx-background-color: #ffffff; -fx-padding: 10px");
+            ((Button) action).setFont(Ressources.getInstance().getPolice(50));
+            ((Button) action).setPadding(new Insets(10, 10, 10, 10));
+        }
     }
 
     /**
      * Créé tous les listeners/bindings afin que la partie se déroule correctement.
      */
-    public void creerBindings() {
-        btExit.setOnAction(actionEvent -> arreterJeu());
-        btRetry.setOnAction(actionEvent -> relancerPartie());
+    private void creerBindings() {
+        accueil.setOnAction(actionEvent -> arreterJeu());
+        rejouer.setOnAction(actionEvent -> relancerPartie());
     }
 
     public BooleanProperty arreterJeuProperty() {
