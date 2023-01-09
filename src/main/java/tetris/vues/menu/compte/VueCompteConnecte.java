@@ -40,14 +40,14 @@ public class VueCompteConnecte extends Stage implements Menu {
 
         if(Session.getInstance().isConnected()) {
             List<Score> topScorejoueur = ScoreManager.getInstance().getTopScoreparlogin(Session.getInstance().getLogin());
-            int i = 1;
+            int i = 0;
             String login = topScorejoueur.get(i).getLogin();
-            while (i < 11 && topScorejoueur.get(i - 1) != null) {
+            while (i < 11 && i < topScorejoueur.size()-1) {
 
-                classementtopscorejoueurconnecte.add(new Label(String.valueOf(i)), 0, i - 1);
-                classementtopscorejoueurconnecte.add(new Label(login), 1, i - 1);
-                classementtopscorejoueurconnecte.add(new Label(String.valueOf(topScorejoueur.get(i - 1).getScore())), 2, i - 1);
-                classementtopscorejoueurconnecte.add(new Label(topScorejoueur.get(i - 1).getHorodatage().toString()), 3, i - 1);
+                classementtopscorejoueurconnecte.add(new Label(String.valueOf(i)), 0, i);
+                classementtopscorejoueurconnecte.add(new Label(login), 1, i);
+                classementtopscorejoueurconnecte.add(new Label(String.valueOf(topScorejoueur.get(i).getScore())), 2, i);
+                classementtopscorejoueurconnecte.add(new Label(topScorejoueur.get(i).getHorodatage().toString()), 3, i);
                 i++;
             }
         }
