@@ -71,29 +71,30 @@ public class StockageScoreDatabase {
         }
     }
 
-    public Score getById(int id) {
-        Score score = null;
+    public List<Score> getTopScoreparlogin(String login) {
+        List<Score> scoresList = new ArrayList<>();
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "SELECT * FROM SCORES WHERE codeScore = ?";
+        String req = "SELECT score,horodatage FROM SCORES WHERE  codeJeu = 'TETRIS' AND login=? ORDER BY score DESC ";
         try (
                 PreparedStatement st = connection.prepareStatement(req);
         ) {
-            st.setInt(1, id);
+            st.setString(1, login);
             try (ResultSet result = st.executeQuery();) {
-                if (result.next()) {
-                    int scoreValue = result.getInt("score");
-                    Timestamp time = result.getTimestamp("horodatage");
-                    String login = result.getString("login");
-                    score = new Score(scoreValue, time);
-                    score.setId(id);
-                    score.setLogin(login);
+                while (result.next()) {
+                    {
+                        int scoreValue = result.getInt("score");
+                        Timestamp time = result.getTimestamp("horodatage");
+                        Score score = new Score(scoreValue, time);
+                        score.setLogin(login);
+                        scoresList.add(score);
+                    }
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return score;
+        return scoresList;
     }
 
     public Score getHighScore(String login) {

@@ -25,9 +25,9 @@ public class ScoreManager {
     }
 
     public void updateScore(int id, int score) {
-        Score s = stockage.getById(id);
-        s.setScore(score);
-        stockage.update(s);
+       // Score s = stockage.getById(id);
+       //s.setScore(score);
+        // stockage.update(s);
     }
 
     public void deleteScoreById(int id) {
@@ -40,9 +40,7 @@ public class ScoreManager {
 
     public Score getHighScoreByLogin(String login) { return stockage.getHighScore(login); }
 
-    public Score getScoreById(int id) {
-        return stockage.getById(id);
-    }
+    public List<Score> getTopScoreparlogin(String login) {return stockage.getTopScoreparlogin(login);}
 
     public List<Score> getScoresHistoryByLogin(String login) {
         return stockage.getByLogin(login);
