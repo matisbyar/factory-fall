@@ -3,6 +3,7 @@ package tetris.vues.helpers;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -44,7 +45,7 @@ public class PanelPersonnalisation extends VBox {
      * @param actionDroite Action déclenchée par la flèche droite
      * @param personnalisationApercu Image d'apercu de la personnalisation
      */
-    public PanelPersonnalisation(String titre, EventHandler<ActionEvent> actionGauche, ImageView personnalisationApercu, EventHandler<ActionEvent> actionDroite) {
+    public PanelPersonnalisation(String titre, EventHandler<ActionEvent> actionGauche, Node personnalisationApercu, EventHandler<ActionEvent> actionDroite) {
         this.titre = new Label(titre);
         this.gauche = new Button();
         this.droite = new Button();
@@ -76,8 +77,8 @@ public class PanelPersonnalisation extends VBox {
         droite.setAlignment(Pos.CENTER);
 
         // Élément central
-        ((ImageView) personnalisation.getChildren().get(1)).setFitHeight(55);
-        ((ImageView) personnalisation.getChildren().get(1)).setFitWidth(55);
+        //((ImageView) personnalisation.getChildren().get(1)).setFitHeight(55);
+        //((ImageView) personnalisation.getChildren().get(1)).setFitWidth(55);
 
         // Personnalisation (flèches comprises)
         personnalisation.setAlignment(Pos.CENTER);

@@ -8,6 +8,7 @@ import javafx.stage.Screen;
 import tetris.TetrisIHM;
 import tetris.logique.Plateau;
 import tetris.singletons.Preferences;
+import tetris.singletons.Ressources;
 
 import java.util.Objects;
 
@@ -25,7 +26,7 @@ public class VueGrille extends GridPane {
     public VueGrille(Plateau p) {
         this.p = p;
         this.dossierImg = Preferences.getInstance().getStylePiece();
-        if (Preferences.getInstance().isLocked("pieces")) {
+        if (Ressources.getInstance().isLocked("pieces")) {
             dossierImg = "conteneur";
         }
         imgS = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + dossierImg + "/S.jpg")));
