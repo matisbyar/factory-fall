@@ -1,8 +1,10 @@
 package tetris.vues.menu;
 
+import javafx.collections.ObservableList;
 import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -27,11 +29,13 @@ public class VuePersonnaliser extends Stage implements Menu {
     private final VBox personnalisations;
     private final HBox stylePiece;
 
-    private final ImageView imageStylePiece;
+    private final ImageView imageStylePiece, cadenas;
 
     private final Image mute;
 
     private final Button flecheGauche, flecheDroite, retour, muteBtn;
+
+    private StackPane locked;
 
     Preferences preferences = Preferences.getInstance();
 
@@ -48,6 +52,8 @@ public class VuePersonnaliser extends Stage implements Menu {
         retour = new Button();
 
         imageStylePiece = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + preferences.getStylePiece() + "/L.jpg"))));
+        cadenas = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/cadenas.png"))));
+        locked = new StackPane(cadenas, imageStylePiece);
         mute = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/mute.png")));
         muteBtn = new Button();
         muteBtn.setBackground(new Background(new BackgroundImage(mute, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT , BackgroundPosition.CENTER ,BackgroundSize.DEFAULT)));
@@ -59,7 +65,7 @@ public class VuePersonnaliser extends Stage implements Menu {
         creerBindings(vueMenuPrincipal);
 
         // Affections
-        stylePiece.getChildren().addAll(flecheGauche, imageStylePiece, flecheDroite);
+        stylePiece.getChildren().addAll(flecheGauche, locked, flecheDroite);
 
         personnalisations.getChildren().add(stylePiece);
 
@@ -95,6 +101,20 @@ public class VuePersonnaliser extends Stage implements Menu {
      */
     public void changerImage(VueMenuPrincipal vueMenuPrincipal, String etat) {
         vueMenuPrincipal.changerImage(etat);
+        ObservableList<Node> childs = this.locked.getChildren();
+        if (preferences.getStylePiece().equals("brique") || preferences.getStylePiece().equals("default")) {
+            if (!childs.get(childs.size() - 1).equals(cadenas)) {
+                if (childs.size() > 1) {
+                    Node topNode = childs.get(childs.size() - 1);
+                    topNode.toBack();
+                }
+            }
+        } else if (childs.get(childs.size() - 1).equals(cadenas)){
+            if (childs.size() > 1) {
+                Node topNode = childs.get(childs.size() - 1);
+                topNode.toBack();
+            }
+        }
         imageStylePiece.setImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + preferences.getStylePiece() + "/L.jpg"))));
     }
 
