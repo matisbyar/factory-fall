@@ -2,6 +2,8 @@ package tetris;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -193,7 +195,7 @@ public class TetrisIHM extends Application {
         score = new Label("score : 0.0");
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
-        nbLignes = new Label("Nombre de ligne : 0 ");
+        nbLignes = new Label("Ligne : 0 ");
         prochainePieceLabel = new Label("prochaine :");
         pieceSauvegardeeLabel = new Label("piece sauvegardee : ");
         conteneurDroit = new VBox(prochainePieceLabel, vueProchainePiece, vueControles);
@@ -317,6 +319,13 @@ public class TetrisIHM extends Application {
             jeu.jeuEnCoursProperty().setValue(true);
             startJeu.setVisible(false);
         });
+
+        jeu.getJoueur().getInstanceScore().nbLignesProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                nbLignes.setText("Ligne : " + jeu.getJoueur().getInstanceScore().getNbLignes());
+            }
+        });
     }
 
     /**
@@ -380,6 +389,18 @@ public class TetrisIHM extends Application {
         score.setMinSize(150, 50);
         score.setAlignment(Pos.TOP_RIGHT);
         score.setPrefWidth(426);
+
+        //nbLignes
+
+        nbLignes.getStyleClass().add("nbLignes");
+        nbLignes.setFont(Preferences.getInstance().getPolice(32));
+        //score.setStyle("-fx-font-size: 15px");
+        nbLignes.setLayoutY(50);
+        nbLignes.setTextFill(Color.WHITE);
+        nbLignes.setAlignment(Pos.BASELINE_LEFT);
+        nbLignes.setMinSize(150, 50);
+        nbLignes.setAlignment(Pos.TOP_RIGHT);
+        nbLignes.setPrefWidth(426);
 
         // Rang
         rang.setTextFill(Color.WHITE);

@@ -36,4 +36,6 @@ public class Joueur {
     public void setLignesSup(int score){
         this.score.setNbLignes(score);
     }
+
+    public Score getInstanceScore() {return score;}
 }
