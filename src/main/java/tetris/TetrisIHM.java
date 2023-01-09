@@ -321,12 +321,7 @@ public class TetrisIHM extends Application {
             startJeu.setVisible(false);
         });
 
-        jeu.getJoueur().getInstanceScore().nbLignesProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                nbLignes.setText("Ligne : " + jeu.getJoueur().getInstanceScore().getNbLignes());
-            }
-        });
+        jeu.getJoueur().getInstanceScore().nbLignesProperty().addListener(e-> nbLignes.setText("Ligne : " + jeu.getJoueur().getInstanceScore().getNbLignes()));
     }
 
     /**

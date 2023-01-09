@@ -25,4 +25,8 @@ public class Musique {
     public static void stopMusicMainMenu() {
         mainMenuMusicPlayer.stop();
     }
+
+    public static void btnMute() {
+        mainMenuMusicPlayer.setMute(!mainMenuMusicPlayer.isMute());
+    }
 }
