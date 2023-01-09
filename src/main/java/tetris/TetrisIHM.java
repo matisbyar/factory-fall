@@ -41,7 +41,7 @@ public class TetrisIHM extends Application {
     private VBox informationsJoueur;
     private ActionListener descenteAuto;
     private Button startJeu;
-    Label score, pseudo, rang, prochainePieceLabel;
+    Label score, pseudo, rang, nbLignes, prochainePieceLabel, pieceSauvegardeeLabel;
 
     // Vues personnelles (créées par l'équipe)
     private VueMenuPrincipal vueMenuPrincipal;
@@ -193,10 +193,12 @@ public class TetrisIHM extends Application {
         score = new Label("score : 0.0");
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
+        nbLignes = new Label("Nombre de ligne : 0 ");
         prochainePieceLabel = new Label("prochaine :");
+        pieceSauvegardeeLabel = new Label("piece sauvegardee : ");
         conteneurDroit = new VBox(prochainePieceLabel, vueProchainePiece, vueControles);
-        informationsJoueur = new VBox(pseudo, score, rang);
-        conteneurGauche = new VBox(informationsJoueur, startJeu, vuePieceSauvegardee);
+        informationsJoueur = new VBox(pseudo, score, nbLignes, rang);
+        conteneurGauche = new VBox(pieceSauvegardeeLabel, vuePieceSauvegardee, informationsJoueur, startJeu);
         vuePieceSauvegardee.setAlignment(Pos.CENTER_RIGHT);
 
         // Gestion Plateau/Bouton Pause
@@ -285,6 +287,7 @@ public class TetrisIHM extends Application {
         // Listener pour actualiser le rang de la partie
         jeu.getRang(jeu.getPlateau()).addListener((observableValue, number, t1) -> rang.setText("rang : " + jeu.getRang(jeu.getPlateau()).getValue()));
 
+
         // Listener pour agir en cas de fin de jeu
         // Gère les cas : Rejouer et Réessayer
         jeu.jeuEnCoursProperty().addListener((observableValue, aBoolean, t1) -> {
@@ -354,6 +357,10 @@ public class TetrisIHM extends Application {
         vueProchainePiece.setPrefWidth(426);
         vueProchainePiece.setAlignment(Pos.TOP_LEFT);
 
+        // vuePieceSauvegardee
+        vuePieceSauvegardee.setPrefWidth(426);
+        vuePieceSauvegardee.setAlignment(Pos.TOP_RIGHT);
+
         // Pseudo
         pseudo.setTextFill(Color.WHITE);
         pseudo.setFont(Preferences.getInstance().getPolice(32));
@@ -392,6 +399,15 @@ public class TetrisIHM extends Application {
         prochainePieceLabel.setLayoutY(200);
         prochainePieceLabel.setAlignment(Pos.TOP_LEFT);
         prochainePieceLabel.setPrefWidth(426);
+
+        //Label Piece sauvegardée
+        pieceSauvegardeeLabel.setTextFill(Color.WHITE);
+        pieceSauvegardeeLabel.setFont(Preferences.getInstance().getPolice(32));
+        pieceSauvegardeeLabel.setMinSize(150, 50);
+        pieceSauvegardeeLabel.setLayoutX(150);
+        pieceSauvegardeeLabel.setLayoutY(200);
+        pieceSauvegardeeLabel.setAlignment(Pos.TOP_RIGHT);
+        pieceSauvegardeeLabel.setPrefWidth(426);
 
         // Labels
         informationsJoueur.setLayoutX(20);

@@ -150,6 +150,7 @@ public class Plateau implements IPlateau {
                 lignesSupprimees++;
             }
         }
+        joueur.setLignesSup(joueur.getLignesSup().getValue() + lignesSupprimees);
         return lignesSupprimees;
     }
 
