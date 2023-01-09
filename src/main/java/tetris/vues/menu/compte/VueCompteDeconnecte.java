@@ -2,7 +2,6 @@ package tetris.vues.menu.compte;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
-import tetris.logique.Preferences;
+import tetris.singletons.Preferences;
+import tetris.singletons.Ressources;
 import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
@@ -85,8 +85,8 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         // Titre
         titreConnexion.getStyleClass().add("titreConnexion");
         titreConnexion.getStyleClass().add("titreCreation");
-        titreConnexion.setFont(Preferences.getInstance().getPolice(32));
-        titreCreation.setFont(Preferences.getInstance().getPolice(32));
+        titreConnexion.setFont(Ressources.getInstance().getPolice(32));
+        titreCreation.setFont(Ressources.getInstance().getPolice(32));
 
         // Box de connexion/création
         champsConnexion.getStyleClass().add("champsConnexion");

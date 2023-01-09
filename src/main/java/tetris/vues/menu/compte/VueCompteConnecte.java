@@ -8,15 +8,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
-import tetris.logique.Preferences;
 import tetris.logique.Score;
+import tetris.singletons.Preferences;
+import tetris.singletons.Ressources;
 import tetris.stockage.ScoreManager;
 import tetris.stockage.Session;
 import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -65,7 +65,7 @@ public class VueCompteConnecte extends Stage implements Menu {
 
     protected void styliser() {
         //Titre
-        titre.setFont(Preferences.getInstance().getPolice(32));
+        titre.setFont(Ressources.getInstance().getPolice(32));
         titre.setStyle("-fx-text-fill: white;");
         titre.setAlignment(Pos.CENTER);
         //Classement

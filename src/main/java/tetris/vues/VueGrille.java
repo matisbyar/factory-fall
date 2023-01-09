@@ -7,7 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
 import tetris.TetrisIHM;
 import tetris.logique.Plateau;
-import tetris.logique.Preferences;
+import tetris.singletons.Preferences;
 
 import java.util.Objects;
 

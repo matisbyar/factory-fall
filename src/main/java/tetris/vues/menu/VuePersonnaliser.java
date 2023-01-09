@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
-import tetris.logique.Preferences;
+import tetris.singletons.Preferences;
 import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;

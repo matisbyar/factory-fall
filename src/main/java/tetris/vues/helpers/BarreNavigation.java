@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import tetris.TetrisIHM;
-import tetris.logique.Preferences;
+import tetris.singletons.Ressources;
 import tetris.vues.Menu;
 
 import java.util.Objects;
@@ -28,7 +28,7 @@ public class BarreNavigation extends BorderPane {
      */
     private final Button retour;
     /**
-     * aligneur est un bouton qui a les mêmes propriétés que retour mais qui ne fait rien, il est là dans le seul but de pouvoir centrer correctement le titre
+     * Aligneur est un bouton qui possède les mêmes propriétés que retour, qui n'a pas d'action. Il est là dans le seul but de pouvoir centrer correctement le titre
      */
     private final Button aligneur;
 
@@ -57,9 +57,7 @@ public class BarreNavigation extends BorderPane {
         this.setCenter(titre);
         this.setLeft(retour);
         this.setRight(aligneur);
-        aligneur.setVisible(false);
 
-        //this.getChildren().addAll(retour, titre, retour2);
     }
 
     protected void styliser() {
@@ -70,13 +68,14 @@ public class BarreNavigation extends BorderPane {
         aligneur.getStyleClass().add("bouton-clair");
         titre.getStyleClass().add("titre");
 
-        titre.setFont(Preferences.getInstance().getPolice(70));
-        retour.setFont(Preferences.getInstance().getPolice(50));
-        aligneur.setFont(Preferences.getInstance().getPolice(50));
+        titre.setFont(Ressources.getInstance().getPolice(70));
+        retour.setFont(Ressources.getInstance().getPolice(50));
+        aligneur.setFont(Ressources.getInstance().getPolice(50));
 
         HBox.setMargin(retour, new javafx.geometry.Insets(0, 50, 0, 0));
         HBox.setMargin(aligneur, new javafx.geometry.Insets(0, 50, 0, 0));
 
+        aligneur.setVisible(false);
     }
 
     /**

@@ -10,7 +10,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import tetris.TetrisIHM;
-import tetris.logique.Preferences;
+import tetris.singletons.Ressources;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +67,7 @@ public class VueControles extends VBox {
 
         // Titre
         titre.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
-        titre.setFont(Preferences.getInstance().getPolice(30));
+        titre.setFont(Ressources.getInstance().getPolice(30));
         titre.setTextAlignment(TextAlignment.LEFT);
 
         // HBoxes
@@ -80,7 +80,7 @@ public class VueControles extends VBox {
             HBox.setHgrow(hBox.getChildren().get(0), Priority.ALWAYS);
 
             hBox.getChildren().get(1).setStyle("-fx-text-fill: #ffffff;");
-            ((Label) hBox.getChildren().get(1)).setFont(Preferences.getInstance().getPolice(16));
+            ((Label) hBox.getChildren().get(1)).setFont(Ressources.getInstance().getPolice(16));
             ((Label) hBox.getChildren().get(1)).setAlignment(Pos.CENTER_RIGHT);
             ((Label) hBox.getChildren().get(1)).setWrapText(true);
         }

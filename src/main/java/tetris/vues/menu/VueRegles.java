@@ -3,7 +3,7 @@ package tetris.vues.menu;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import tetris.logique.Preferences;
+import tetris.singletons.Preferences;
 import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;

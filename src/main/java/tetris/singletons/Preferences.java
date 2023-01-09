@@ -2,7 +2,6 @@ package tetris.logique;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import tetris.TetrisIHM;
 
 import java.util.Objects;
@@ -38,7 +37,5 @@ public class Preferences {
         return new Background(new BackgroundImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/industrial-inmenu.png"))), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
     }
 
-    public Font getPolice(int taille) {
-        return Font.loadFont(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("fonts/arcade.ttf")), taille);
-    }
+
 }

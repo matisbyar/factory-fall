@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 import tetris.logique.AuthPlayer;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
-import tetris.logique.Preferences;
+import tetris.singletons.Ressources;
 import tetris.stockage.*;
 import tetris.vues.*;
 
@@ -372,7 +372,7 @@ public class TetrisIHM extends Application {
 
         // Pseudo
         pseudo.setTextFill(Color.WHITE);
-        pseudo.setFont(Preferences.getInstance().getPolice(32));
+        pseudo.setFont(Ressources.getInstance().getPolice(32));
         //pseudo.setStyle("-fx-font-size: 15px");
         pseudo.setMinSize(150, 50);
         pseudo.setLayoutX(150);
@@ -381,7 +381,7 @@ public class TetrisIHM extends Application {
 
         // Score
         score.getStyleClass().add("score");
-        score.setFont(Preferences.getInstance().getPolice(32));
+        score.setFont(Ressources.getInstance().getPolice(32));
         //score.setStyle("-fx-font-size: 15px");
         score.setLayoutY(50);
         score.setTextFill(Color.WHITE);
@@ -393,7 +393,7 @@ public class TetrisIHM extends Application {
         //nbLignes
 
         nbLignes.getStyleClass().add("nbLignes");
-        nbLignes.setFont(Preferences.getInstance().getPolice(32));
+        nbLignes.setFont(Ressources.getInstance().getPolice(32));
         //score.setStyle("-fx-font-size: 15px");
         nbLignes.setLayoutY(50);
         nbLignes.setTextFill(Color.WHITE);
@@ -404,7 +404,7 @@ public class TetrisIHM extends Application {
 
         // Rang
         rang.setTextFill(Color.WHITE);
-        rang.setFont(Preferences.getInstance().getPolice(32));
+        rang.setFont(Ressources.getInstance().getPolice(32));
         //rang.setStyle("-fx-font-size: 15px");
         rang.setMinSize(150, 50);
         rang.setLayoutX(150);
@@ -414,7 +414,7 @@ public class TetrisIHM extends Application {
 
         // Label Prochaine pièce
         prochainePieceLabel.setTextFill(Color.WHITE);
-        prochainePieceLabel.setFont(Preferences.getInstance().getPolice(32));
+        prochainePieceLabel.setFont(Ressources.getInstance().getPolice(32));
         prochainePieceLabel.setMinSize(150, 50);
         prochainePieceLabel.setLayoutX(150);
         prochainePieceLabel.setLayoutY(200);
@@ -423,7 +423,7 @@ public class TetrisIHM extends Application {
 
         //Label Piece sauvegardée
         pieceSauvegardeeLabel.setTextFill(Color.WHITE);
-        pieceSauvegardeeLabel.setFont(Preferences.getInstance().getPolice(32));
+        pieceSauvegardeeLabel.setFont(Ressources.getInstance().getPolice(32));
         pieceSauvegardeeLabel.setMinSize(150, 50);
         pieceSauvegardeeLabel.setLayoutX(150);
         pieceSauvegardeeLabel.setLayoutY(200);

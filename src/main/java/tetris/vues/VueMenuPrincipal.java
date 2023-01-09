@@ -13,7 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
-import tetris.logique.Preferences;
+import tetris.singletons.Preferences;
+import tetris.singletons.Ressources;
 import tetris.stockage.Session;
 import tetris.vues.menu.VueClassement;
 import tetris.vues.menu.VuePersonnaliser;
@@ -105,27 +106,27 @@ public class VueMenuPrincipal extends Stage implements Menu {
 
         // Boutons
         start.setText("Jouer");
-        start.setFont(preferences.getPolice(32));
+        start.setFont(Ressources.getInstance().getPolice(32));
         start.getStyleClass().add("bouton");
 
         parametres.setText("Paramètres");
-        parametres.setFont(preferences.getPolice(32));
+        parametres.setFont(Ressources.getInstance().getPolice(32));
         parametres.getStyleClass().add("bouton");
 
         personnaliser.setText("Personnaliser");
-        personnaliser.setFont(preferences.getPolice(32));
+        personnaliser.setFont(Ressources.getInstance().getPolice(32));
         personnaliser.getStyleClass().add("bouton");
 
         compte.setText("Compte");
-        compte.setFont(preferences.getPolice(32));
+        compte.setFont(Ressources.getInstance().getPolice(32));
         compte.getStyleClass().add("bouton");
 
         classement.setText("Classement");
-        classement.setFont(preferences.getPolice(32));
+        classement.setFont(Ressources.getInstance().getPolice(32));
         classement.getStyleClass().add("bouton");
 
         quitter.setText("Quitter");
-        quitter.setFont(preferences.getPolice(32));
+        quitter.setFont(Ressources.getInstance().getPolice(32));
         quitter.getStyleClass().add("bouton");
 
         this.setResizable(false);

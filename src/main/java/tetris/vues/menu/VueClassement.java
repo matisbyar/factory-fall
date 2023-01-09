@@ -2,19 +2,16 @@ package tetris.vues.menu;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import tetris.logique.Preferences;
-import tetris.TetrisIHM;
-import tetris.logique.Joueur;
 import tetris.logique.Score;
+import tetris.singletons.Preferences;
+import tetris.singletons.Ressources;
 import tetris.stockage.DepartementManager;
 import tetris.stockage.ScoreManager;
 import tetris.stockage.Session;
@@ -24,7 +21,6 @@ import tetris.vues.helpers.BarreNavigation;
 
 import java.awt.*;
 import java.util.List;
-import java.util.Objects;
 
 public class VueClassement extends Stage implements Menu {
 
@@ -146,7 +142,7 @@ public class VueClassement extends Stage implements Menu {
         root.setBackground(Preferences.getInstance().getBackground());
 
         // Titre
-        titre.setFont(Preferences.getInstance().getPolice(32));
+        titre.setFont(Ressources.getInstance().getPolice(32));
         titre.setStyle("-fx-text-fill: white;");
         titre.setAlignment(Pos.CENTER);
 
@@ -173,7 +169,7 @@ public class VueClassement extends Stage implements Menu {
        // changementdeclassement.getStyleClass().add("bouton");
        // changementdeclassement.setStyle("-fx-background-color: black");
         changementdeclassement.getStyleClass().add("bouton-clair");
-        changementdeclassement.setFont(Preferences.getInstance().getPolice(20));
+        changementdeclassement.setFont(Ressources.getInstance().getPolice(20));
         HBox.setMargin(changementdeclassement, new javafx.geometry.Insets(0, 50, 0, 0));
         // VBScores
         vbScores.setAlignment(Pos.CENTER);
