@@ -11,13 +11,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
+import tetris.singletons.Preferences;
 
 import java.util.Objects;
 
-public class VueGameOver extends Stage {
+public class VueGameOver extends Stage implements Menu {
 
     Scene scene;
-    BorderPane borderPane;
+    BorderPane root;
     VBox vb;
     HBox hbButtons;
 
@@ -29,8 +30,8 @@ public class VueGameOver extends Stage {
 
     public VueGameOver() {
         // Instanciation d'éléments JavaFX
-        borderPane = new BorderPane();
-        scene = new Scene(borderPane);
+        root = new BorderPane();
+        scene = new Scene(root, 1280, 720);
         vb = new VBox();
         hbButtons = new HBox();
 
@@ -52,7 +53,7 @@ public class VueGameOver extends Stage {
         vb.getChildren().add(gameOver);
         hbButtons.getChildren().addAll(btRetry, btExit);
         vb.getChildren().add(hbButtons);
-        borderPane.getChildren().add(vb);
+        root.getChildren().add(vb);
 
         // Styles définitifs
         styliser();
@@ -77,11 +78,10 @@ public class VueGameOver extends Stage {
     public void styliser() {
         scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 
+        mettreAJourFond();
+
         // Stage
         this.setResizable(true);
-
-        // BorderPane
-        borderPane.getStyleClass().add("borderPane");
 
         // ImageView
         gameOver.getStyleClass().add("gameOver");
@@ -113,5 +113,15 @@ public class VueGameOver extends Stage {
 
     public BooleanProperty retryProperty() {
         return retry;
+    }
+
+    @Override
+    public void afficherScene() {
+        this.setScene(scene);
+        mettreAJourFond();
+    }
+
+    private void mettreAJourFond() {
+        root.setBackground(Preferences.getInstance().getBackground());
     }
 }

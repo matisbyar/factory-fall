@@ -132,7 +132,7 @@ public class TetrisIHM extends Application {
     private final EventHandler<ActionEvent> quandLeButtonJouerEstClique = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
-            nomjoueur = "Anonyme";
+            if (!Session.getInstance().isConnected()) nomjoueur = "Anonyme";
             demarrerPartie();
             vueMenuPrincipal.close();
         }
@@ -298,7 +298,7 @@ public class TetrisIHM extends Application {
                     if (vueGameOver.arreterJeuProperty().getValue()) {
                         vueGameOver.close();
                         primaryStage.close();
-                        start(primaryStage);
+                        vueMenuPrincipal.show();
                     }
                 });
 
