@@ -98,15 +98,16 @@
     -fx-background-color: black;
     -fx-color: rgb(20, 20, 20);
 }
-.combo-box .scroll-bar: vertical *.increment-button,
-.combo-box .scroll-bar: vertical *.decrement-button {
+
+.combo-box .scroll-bar:vertical *.increment-button,
+.combo-box .scroll-bar:vertical *.decrement-button {
     -fx-background-color: null;
     -fx-background-radius: 0;
     -fx-padding: 0;
 }
 
-.combo-box .scroll-bar: vertical *.increment-arrow,
-.combo-box .scroll-bar: vertical *.decrement-arrow {
+.combo-box .scroll-bar:vertical *.increment-arrow,
+.combo-box .scroll-bar:vertical *.decrement-arrow {
     -fx-background-color: null;
     -fx-background-radius: 0;
     -fx-shape: null;
