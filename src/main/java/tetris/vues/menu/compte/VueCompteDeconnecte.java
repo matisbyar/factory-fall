@@ -131,8 +131,11 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     public void setDisable() {
         champsConnexionLock(pseudoConnexion, motDePasseConnexion);
         champsConnexionLock(motDePasseConnexion, pseudoConnexion);
-        champsCreationLock(pseudoCreation, motDePasseCreation,departementCreation);
-        champsCreationLock(motDePasseCreation, pseudoCreation,departementCreation);
+        champsCreationLock(pseudoCreation, motDePasseCreation,motDePasseCreationConfirmation);
+        champsCreationLock(motDePasseCreation, pseudoCreation,motDePasseCreationConfirmation);
+        champsCreationLock(motDePasseCreationConfirmation, pseudoCreation,motDePasseCreation);
+        champsCreationLockdepartement(departementCreation);
+
     }
 
     /**
@@ -140,20 +143,31 @@ public class VueCompteDeconnecte extends Stage implements Menu {
      *
      * @param pseudoCreation     pseudo de l'utilisateur
      * @param motDePasseCreation mot de passe de l'utilisateur
-     * @param departementCreation le département de l'utilisateur
+     * @param motDePasseCreationConfirmation le département de l'utilisateur
      */
-    private void champsCreationLock(TextField pseudoCreation, TextField motDePasseCreation,BoiteCombinee departementCreation) {
+    private void champsCreationLock(TextField pseudoCreation, TextField motDePasseCreation ,TextField  motDePasseCreationConfirmation) {
         pseudoCreation.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
-                System.out.println();
                 pseudoConnexion.setDisable(true);
                 motDePasseConnexion.setDisable(true);
-            } else if (motDePasseCreation.getText().isEmpty() && motDePasseCreationConfirmation.getText().isEmpty() && departementCreation.estVide()) {
+            } else if (motDePasseCreation.getText().isEmpty() && motDePasseCreationConfirmation.getText().isEmpty()) {
                 pseudoConnexion.setDisable(false);
                 motDePasseConnexion.setDisable(false);
 
             }
         });
+    }
+
+    private void champsCreationLockdepartement(BoiteCombinee departementCreationtest) {
+        //new Departement("XXX", "Pas de département")
+        if (departementCreationtest.getValue() == departementCreation.getItems().get(0) || departementCreation.estVide()) {
+                 pseudoConnexion.setDisable(true);
+                 motDePasseConnexion.setDisable(true);
+
+             } else {
+                 pseudoConnexion.setDisable(false);
+                 motDePasseConnexion.setDisable(false);
+             }
     }
 
     /**

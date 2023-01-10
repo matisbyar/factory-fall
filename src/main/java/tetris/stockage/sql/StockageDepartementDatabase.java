@@ -49,6 +49,7 @@ public class StockageDepartementDatabase {
 
     public List<Departement> getAll() {
         List<Departement> listeDepartement = new ArrayList<>();
+        listeDepartement.add(new Departement("XX","Pas de département"));
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
         String req = "SELECT numDepartement, nomDepartement FROM DEPARTEMENTS";
