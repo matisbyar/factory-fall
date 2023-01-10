@@ -159,15 +159,17 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     }
 
     private void champsCreationLockdepartement(BoiteCombinee departementCreationtest) {
-        //new Departement("XXX", "Pas de département")
-        if (departementCreationtest.getValue() == departementCreation.getItems().get(0) || departementCreation.estVide()) {
-                 pseudoConnexion.setDisable(true);
-                 motDePasseConnexion.setDisable(true);
+        departementCreationtest.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != departementCreation.getItems().get(0) || departementCreation.estVide()) {
+                pseudoConnexion.setDisable(true);
+                motDePasseConnexion.setDisable(true);
 
-             } else {
-                 pseudoConnexion.setDisable(false);
-                 motDePasseConnexion.setDisable(false);
-             }
+            } else {
+                pseudoConnexion.setDisable(false);
+                motDePasseConnexion.setDisable(false);
+            }
+        });
+
     }
 
     /**
@@ -230,6 +232,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
      * @return departement de l'utilisateur
      */
     public Departement getDepartement() {
+        System.out.println();
         return (Departement)departementCreation.getValue();
     }
 
