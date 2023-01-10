@@ -15,6 +15,8 @@ import tetris.TetrisIHM;
 import tetris.logique.Departement;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
+import tetris.stockage.DepartementManager;
+import tetris.stockage.sql.StockageDepartementDatabase;
 import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
@@ -52,7 +54,8 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         pseudoConnexion = new TextField();
         pseudoCreation = new TextField();
 
-        departementCreation = new BoiteCombinee(Arrays.asList(new Departement("01", "Ain"), new Departement("02", "Aisne"), new Departement("30", "Gard"), new Departement("34", "Herault"), new Departement("42", "Loire"), new Departement("69", "Rhone")), "Departement", 3);
+        departementCreation = new BoiteCombinee(DepartementManager.getInstance().getAll(), "Departement", 10);
+
 
         motDePasseConnexion = new PasswordField();
         motDePasseCreation = new PasswordField();

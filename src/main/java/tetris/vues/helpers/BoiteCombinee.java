@@ -41,7 +41,7 @@ public class BoiteCombinee extends ComboBox {
      * @return Vrai si un des choix proposés a été sélectionné. Faux sinon
      */
     public boolean estVide() {
-        return this.getItems().contains(this.getValue());
+        return !this.getItems().contains(this.getValue());
     }
 
 }

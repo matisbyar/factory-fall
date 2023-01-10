@@ -1,6 +1,7 @@
 package tetris.stockage;
 
 
+import tetris.logique.Departement;
 import tetris.logique.Score;
 import tetris.stockage.sql.StockageDepartementDatabase;
 import java.sql.SQLException;
@@ -19,12 +20,14 @@ public class DepartementManager {
     }
 
 
-
     public void updateDepartement(String login,String newdepartement) {
        stockage.update(login,newdepartement);
     }
 
-
     public String getDepartementByLogin(String login) { return stockage.getDepartementByLogin(login); }
+
+    public List<Departement> getAll() {
+        return stockage.getAll();
+    }
 
 }
