@@ -3,6 +3,7 @@ package tetris.logique;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import tetris.IJeu;
 
 import javax.swing.*;
@@ -27,6 +28,7 @@ public class Jeu implements IJeu {
     public static Piece pieceSuivante;
     public static Piece pieceSauvegardee;
     private boolean pieceEchangee;
+    private IntegerProperty nbVies;
 
     public Jeu(String pseudo) {
         j = new Joueur(pseudo);
@@ -36,11 +38,22 @@ public class Jeu implements IJeu {
         initialiserStockage();
         pieceEchangee = false;
 
+        nbVies = new SimpleIntegerProperty(3);
         jeuEnCours = new SimpleBooleanProperty(true);
 
         sacProchainesPieces = new ArrayList<>();
         this.remplirSacProchainesPieces();
         nouvellePieceActuelle();
+    }
+
+    /**
+     * Constructeur qui gère un nombre de vies custom
+     */
+    public Jeu(String pseudo, int nbVies) {
+        super();
+        if (nbVies>1) {
+            this.nbVies = new SimpleIntegerProperty(nbVies);
+        }
     }
 
     /**
@@ -59,6 +72,14 @@ public class Jeu implements IJeu {
             System.out.println(j.getScore().getValue());
             System.out.println(p.getRang().getValue());
             System.out.println("_________________________________________\n");
+        }
+    }
+
+    public void perdreUneVie() {
+        if(nbVies.get() <= 1) jeuEnCours.setValue(false);
+        else {
+            nbVies.setValue(nbVies.get() - 1);
+            p.remplirTableau();
         }
     }
 
@@ -100,7 +121,7 @@ public class Jeu implements IJeu {
         p.incrementerRang();
         pieceEchangee=false;
         if (!p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle)) {
-            jeuEnCours.setValue(false);
+            perdreUneVie();
         }
     }
 
@@ -170,7 +191,7 @@ public class Jeu implements IJeu {
 
             nouvellePieceActuelle();
         } else {
-            jeuEnCours.setValue(false);
+            perdreUneVie();
         }
     }
 
