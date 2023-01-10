@@ -35,7 +35,7 @@ public class VuePersonnaliser extends Stage implements Menu {
 
     private final Image mute;
 
-    private StackPane locked;
+    private final StackPane locked;
 
     Preferences preferences = Preferences.getInstance();
 
@@ -133,7 +133,7 @@ public class VuePersonnaliser extends Stage implements Menu {
         personnalisations.getStyleClass().add("personnalisations");
         personnalisations.setSpacing(30);
 
-        muteBtn.setBackground(new Background(new BackgroundImage(mute, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT , BackgroundPosition.CENTER ,BackgroundSize.DEFAULT)));
+        muteBtn.setBackground(new Background(new BackgroundImage(mute, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         muteBtn.setPrefWidth(64);
         muteBtn.setPrefHeight(64);
     }
@@ -147,7 +147,7 @@ public class VuePersonnaliser extends Stage implements Menu {
                     topNode.toBack();
                 }
             }
-        } else if (childs.get(childs.size() - 1).equals(cadenas)){
+        } else if (childs.get(childs.size() - 1).equals(cadenas)) {
             if (childs.size() > 1) {
                 Node topNode = childs.get(childs.size() - 1);
                 topNode.toBack();

@@ -51,17 +51,15 @@ public class Ressources {
 
     public boolean isLocked(String typePerso) {
         Preferences preferences = Preferences.getInstance();
-        switch (typePerso) {
-            case "pieces" :
-                if(Session.getInstance().isConnected()) {
-                    return false;
-                } else {
-                    if (preferences.getStylePiece().equals("brique") || preferences.getStylePiece().equals("default")) {
-                        return true;
-                    }
-                }
-            default:
+        if (typePerso.equals("pieces")) {
+            if (Session.getInstance().isConnected()) {
                 return false;
+            } else {
+                if (preferences.getStylePiece().equals("brique") || preferences.getStylePiece().equals("default")) {
+                    return true;
+                }
+            }
         }
+        return false;
     }
 }

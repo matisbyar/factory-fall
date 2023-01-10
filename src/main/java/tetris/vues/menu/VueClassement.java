@@ -88,11 +88,11 @@ public class VueClassement extends Stage implements Menu {
          */
         if (Session.getInstance().isConnected()) {
             int i = 0;
-            while (i < 11 && i < departementScore.size()-1) {
+            while (i < 11 && i < departementScore.size() - 1) {
 
                 String login = departementScore.get(i).getLogin();
 
-                classementDepartement.add(new Label(String.valueOf(i-1)), 0, i);
+                classementDepartement.add(new Label(String.valueOf(i - 1)), 0, i);
                 classementDepartement.add(new Label(login), 1, i);
                 classementDepartement.add(new Label(String.valueOf(departementScore.get(i).getScore())), 2, i);
                 classementDepartement.add(new Label(departementScore.get(i).getHorodatage().toString()), 3, i);

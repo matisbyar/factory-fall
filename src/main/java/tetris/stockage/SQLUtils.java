@@ -25,17 +25,19 @@ public class SQLUtils {
         return instance;
     }
 
-    public Connection getConnection() { return connection; }
+    public Connection getConnection() {
+        return connection;
+    }
 
     public void closeConnection() {
         String req = "COMMIT";
-        try (PreparedStatement st = connection.prepareStatement(req); ) {
+        try (PreparedStatement st = connection.prepareStatement(req)) {
             st.executeUpdate();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        instance =  null;
+        instance = null;
     }
 
     /**
@@ -49,8 +51,8 @@ public class SQLUtils {
 
         try (
                 Statement st = connection.createStatement();
-                ResultSet rs = st.executeQuery("SELECT * FROM SCORES");
-                ) {
+                ResultSet rs = st.executeQuery("SELECT * FROM SCORES")
+        ) {
             while (rs.next()) {
                 System.out.println(rs.getInt("codeScore"));
             }

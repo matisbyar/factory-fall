@@ -2,8 +2,8 @@ package tetris.logique;
 
 public class Departement {
 
-    private String numDepartement;
-    private String nomDepartement;
+    private final String numDepartement;
+    private final String nomDepartement;
 
     public Departement(String numDepartement, String nomDepartement) {
         this.numDepartement = numDepartement;
@@ -11,11 +11,11 @@ public class Departement {
     }
 
     public String getNomDepartement() {
-        return this.nomDepartement==null ? this.nomDepartement : "Département non renseigné";
+        return this.nomDepartement == null ? this.nomDepartement : "Département non renseigné";
     }
 
     public String getNumDepartement() {
-        return this.numDepartement==null ? this.numDepartement : "Département non renseigné";
+        return this.numDepartement == null ? this.numDepartement : "Département non renseigné";
     }
 
     @Override

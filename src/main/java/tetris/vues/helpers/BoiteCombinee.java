@@ -13,7 +13,7 @@ import java.util.Objects;
 public class BoiteCombinee extends ComboBox {
 
     /**
-     * @param choix La liste des choix que propose la boîte
+     * @param choix    La liste des choix que propose la boîte
      * @param nomBoite Le nom qui apparait dans la cellule de la boîte (la seule visible quand elle n'est pas ouverte)
      */
     public BoiteCombinee(List choix, String nomBoite) {

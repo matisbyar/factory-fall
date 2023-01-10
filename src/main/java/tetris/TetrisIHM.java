@@ -65,7 +65,7 @@ public class TetrisIHM extends Application {
 
     private String nomjoueur = "";
 
-    private  String departement = "";
+    private String departement = "";
 
     /**
      * Le StackPane sp permet de superposer les éléments de l'IHM. Ici, il superpose le plateau de jeu et l'icone de pause.
@@ -84,11 +84,11 @@ public class TetrisIHM extends Application {
             if (j != null) {
                 System.out.println("Cet identifiant n'est pas disponible");
             } else {
-                PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomJoueur().getText(), vueMenuPrincipal.getMotDePasse().getText(),vueMenuPrincipal.getDepartement());
+                PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomJoueur().getText(), vueMenuPrincipal.getMotDePasse().getText(), vueMenuPrincipal.getDepartement());
 
                 nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
                 departement = vueMenuPrincipal.getDepartement().getNomDepartement();
-                Session.getInstance().connect(nomjoueur,departement);
+                Session.getInstance().connect(nomjoueur, departement);
                 vueMenuPrincipal.afficherScene();
             }
         }
@@ -123,8 +123,8 @@ public class TetrisIHM extends Application {
             if (connexionOK) {
                 nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
                 departement = DepartementManager.getInstance().getDepartementByLogin(nomjoueur);
-                System.out.println("tetris ihm departement :"+departement);
-                Session.getInstance().connect(nomjoueur,departement);
+                System.out.println("tetris ihm departement :" + departement);
+                Session.getInstance().connect(nomjoueur, departement);
                 vueMenuPrincipal.afficherScene();
             }
         }
@@ -319,7 +319,7 @@ public class TetrisIHM extends Application {
             startJeu.setVisible(false);
         });
 
-        jeu.getJoueur().getInstanceScore().nbLignesProperty().addListener(e-> nbLignes.setText("Lignes : " + jeu.getJoueur().getInstanceScore().getNbLignes()));
+        jeu.getJoueur().getInstanceScore().nbLignesProperty().addListener(e -> nbLignes.setText("Lignes : " + jeu.getJoueur().getInstanceScore().getNbLignes()));
     }
 
     /**

@@ -3,18 +3,18 @@ package tetris.stockage;
 import tetris.logique.Score;
 import tetris.stockage.sql.StockageScoreDatabase;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ScoreManager {
 
     private static ScoreManager instance = null;
-    private StockageScoreDatabase stockage = new StockageScoreDatabase();
+    private final StockageScoreDatabase stockage = new StockageScoreDatabase();
 
-    private ScoreManager() {}
+    private ScoreManager() {
+    }
 
     public static ScoreManager getInstance() {
-        if (instance ==null) instance = new ScoreManager();
+        if (instance == null) instance = new ScoreManager();
         return instance;
     }
 
@@ -25,8 +25,8 @@ public class ScoreManager {
     }
 
     public void updateScore(int id, int score) {
-       // Score s = stockage.getById(id);
-       //s.setScore(score);
+        // Score s = stockage.getById(id);
+        //s.setScore(score);
         // stockage.update(s);
     }
 
@@ -38,9 +38,13 @@ public class ScoreManager {
         stockage.deleteByLogin(login);
     }
 
-    public Score getHighScoreByLogin(String login) { return stockage.getHighScore(login); }
+    public Score getHighScoreByLogin(String login) {
+        return stockage.getHighScore(login);
+    }
 
-    public List<Score> getTopScoreparlogin(String login) {return stockage.getTopScoreparlogin(login);}
+    public List<Score> getTopScoreparlogin(String login) {
+        return stockage.getTopScoreparlogin(login);
+    }
 
     public List<Score> getScoresHistoryByLogin(String login) {
         return stockage.getByLogin(login);
@@ -50,9 +54,15 @@ public class ScoreManager {
         return stockage.getAll();
     }
 
-    public List<Score> getTopScore() { return  stockage.GetTopScore();}
-
-    public List<Score> getTopScoreAnonyme()  {return  stockage.GetTopScoreAnonyme();
+    public List<Score> getTopScore() {
+        return stockage.GetTopScore();
     }
-    public  List<Score> getTopScoreParDepartement(String departement) { return  stockage.GetTopScoreParDepartement(departement);}
+
+    public List<Score> getTopScoreAnonyme() {
+        return stockage.GetTopScoreAnonyme();
+    }
+
+    public List<Score> getTopScoreParDepartement(String departement) {
+        return stockage.GetTopScoreParDepartement(departement);
+    }
 }

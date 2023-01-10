@@ -1,12 +1,10 @@
 package tetris.logique;
 
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 
 public class Joueur {
     private String pseudo;
-    private Score score;
+    private final Score score;
 
     public Joueur(String pseudo) {
         this.pseudo = pseudo;
@@ -29,13 +27,15 @@ public class Joueur {
         this.score.setScore(score.getValue());
     }
 
-    public IntegerProperty getLignesSup(){
+    public IntegerProperty getLignesSup() {
         return score.nbLignesProperty();
     }
 
-    public void setLignesSup(int score){
+    public void setLignesSup(int score) {
         this.score.setNbLignes(score);
     }
 
-    public Score getInstanceScore() {return score;}
+    public Score getInstanceScore() {
+        return score;
+    }
 }

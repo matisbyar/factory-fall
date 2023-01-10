@@ -7,7 +7,8 @@ public class Session {
 
     private String departement = "";
 
-    private Session() {}
+    private Session() {
+    }
 
     public static Session getInstance() {
         if (instance == null) instance = new Session();
@@ -31,9 +32,9 @@ public class Session {
         return this.login != null && !this.login.isEmpty();
     }
 
-    public void connect(String login,String departement) {
+    public void connect(String login, String departement) {
         this.login = login;
-        this.departement=departement;
+        this.departement = departement;
     }
 
     public void disconnect() {

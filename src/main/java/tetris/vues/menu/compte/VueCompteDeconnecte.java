@@ -16,13 +16,11 @@ import tetris.logique.Departement;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
 import tetris.stockage.DepartementManager;
-import tetris.stockage.sql.StockageDepartementDatabase;
 import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
 import tetris.vues.helpers.BoiteCombinee;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class VueCompteDeconnecte extends Stage implements Menu {
@@ -131,9 +129,9 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     public void setDisable() {
         champsConnexionLock(pseudoConnexion, motDePasseConnexion);
         champsConnexionLock(motDePasseConnexion, pseudoConnexion);
-        champsCreationLock(pseudoCreation, motDePasseCreation,motDePasseCreationConfirmation);
-        champsCreationLock(motDePasseCreation, pseudoCreation,motDePasseCreationConfirmation);
-        champsCreationLock(motDePasseCreationConfirmation, pseudoCreation,motDePasseCreation);
+        champsCreationLock(pseudoCreation, motDePasseCreation, motDePasseCreationConfirmation);
+        champsCreationLock(motDePasseCreation, pseudoCreation, motDePasseCreationConfirmation);
+        champsCreationLock(motDePasseCreationConfirmation, pseudoCreation, motDePasseCreation);
         champsCreationLockdepartement(departementCreation);
 
     }
@@ -141,11 +139,11 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     /**
      * Empêche l'utilisateur de renseigner des champs de connexion s'il a déjà écrit dans des champs d'inscription
      *
-     * @param pseudoCreation     pseudo de l'utilisateur
-     * @param motDePasseCreation mot de passe de l'utilisateur
+     * @param pseudoCreation                 pseudo de l'utilisateur
+     * @param motDePasseCreation             mot de passe de l'utilisateur
      * @param motDePasseCreationConfirmation le département de l'utilisateur
      */
-    private void champsCreationLock(TextField pseudoCreation, TextField motDePasseCreation ,TextField  motDePasseCreationConfirmation) {
+    private void champsCreationLock(TextField pseudoCreation, TextField motDePasseCreation, TextField motDePasseCreationConfirmation) {
         pseudoCreation.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
                 pseudoConnexion.setDisable(true);
@@ -233,14 +231,15 @@ public class VueCompteDeconnecte extends Stage implements Menu {
      */
     public Departement getDepartement() {
         System.out.println();
-        return (Departement)departementCreation.getValue();
+        return (Departement) departementCreation.getValue();
     }
 
     @Override
     public void afficherScene() {
         this.setScene(scene);
 
-        mettreAJourFond();    }
+        mettreAJourFond();
+    }
 
     public void mettreAJourFond() {
         root.setBackground(Preferences.getInstance().getBackground());

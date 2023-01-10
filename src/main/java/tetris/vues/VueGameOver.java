@@ -91,7 +91,7 @@ public class VueGameOver extends Stage implements Menu {
         score.setTranslateY(-15);
 
         for (Node action : actions.getChildren()) {
-            ((Button) action).setStyle("-fx-border-color: #000000; -fx-border-width: 2px; -fx-text-fill: #000000; -fx-background-color: #ffffff; -fx-padding: 10px");
+            action.setStyle("-fx-border-color: #000000; -fx-border-width: 2px; -fx-text-fill: #000000; -fx-background-color: #ffffff; -fx-padding: 10px");
             ((Button) action).setFont(Ressources.getInstance().getPolice(50));
             ((Button) action).setPadding(new Insets(10, 10, 10, 10));
         }
