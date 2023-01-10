@@ -25,6 +25,6 @@ public class DepartementManager {
     }
 
 
-    public  String getDepartementByLogin(String login) { return stockage.getDepartementByLogin(login); }
+    public String getDepartementByLogin(String login) { return stockage.getDepartementByLogin(login); }
 
 }

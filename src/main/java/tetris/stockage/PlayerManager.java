@@ -1,6 +1,7 @@
 package tetris.stockage;
 
 import tetris.logique.AuthPlayer;
+import tetris.logique.Departement;
 import tetris.stockage.Security;
 import tetris.stockage.sql.StockagePlayerDatabase;
 
@@ -18,7 +19,7 @@ public class PlayerManager {
         return instance;
     }
 
-    public void createPlayer(String login, String password, String departement) {
+    public void createPlayer(String login, String password, Departement departement) {
         AuthPlayer p = new AuthPlayer(login,departement);
         byte[] salt = Security.getSalt(); //Génération d'un sel de hachage 
         p.setSalt(salt); //Application du sel au nouveau joueur.

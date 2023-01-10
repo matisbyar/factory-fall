@@ -84,10 +84,10 @@ public class TetrisIHM extends Application {
             if (j != null) {
                 System.out.println("Cet identifiant n'est pas disponible");
             } else {
-                PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomJoueur().getText(), vueMenuPrincipal.getMotDePasse().getText(),vueMenuPrincipal.getDepartement().getText());
+                PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomJoueur().getText(), vueMenuPrincipal.getMotDePasse().getText(),vueMenuPrincipal.getDepartement());
 
                 nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
-                departement = vueMenuPrincipal.getDepartement().getText();
+                departement = vueMenuPrincipal.getDepartement().getNomDepartement();
                 Session.getInstance().connect(nomjoueur,departement);
                 vueMenuPrincipal.afficherScene();
             }

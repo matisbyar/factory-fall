@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
+import tetris.logique.Departement;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
 import tetris.stockage.Session;
@@ -175,7 +176,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
     /**
      * Getter utile pour la récupération dans TetrisIHM
      */
-    public TextField getDepartement() {
+    public Departement getDepartement() {
         return vueCompteDeconnecte.getDepartement();
     }
 
