@@ -10,7 +10,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
 import tetris.logique.Departement;
@@ -37,7 +39,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
 
     //Elements du menu connexion joueur
     private final VBox boutons;
-    private final VBox vbCompte;
+    private final HBox actions;
 
     // Sous-vues
     VueCompteDeconnecte vueCompteDeconnecte;
@@ -62,17 +64,17 @@ public class VueMenuPrincipal extends Stage implements Menu {
         quitter = new Button();
         compte = new Button();
 
-        vbCompte = new VBox(compte);
+        actions = new HBox(compte, quitter);
 
-        boutons = new VBox(logo, start, regles, personnaliser, classement, quitter);
+        boutons = new VBox(logo, start, regles, classement, personnaliser);
 
         styliser();
         creerBindings();
 
         // Affectations
         root.setCenter(boutons);
-        root.setBottom(compte);
-        root.setBackground(new Background(new BackgroundImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/industrial-accueil.png"))), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false))));
+        root.setBottom(actions);
+        root.setBackground(Preferences.getInstance().getBackground());
 
         vueCompteDeconnecte = new VueCompteDeconnecte(this);
         vueCompteConnecte = new VueCompteConnecte(this);
@@ -104,9 +106,9 @@ public class VueMenuPrincipal extends Stage implements Menu {
         boutons.setSpacing(20);
 
         // VBox Compte
-        vbCompte.setAlignment(Pos.CENTER_LEFT);
-        vbCompte.setPrefWidth(200);
-        vbCompte.setPrefHeight(200);
+        actions.setAlignment(Pos.CENTER);
+        actions.setSpacing(300);
+        actions.setPadding(new Insets(0, 0, 30, 0));
 
         // Boutons
         start.setText("Jouer");
@@ -121,17 +123,18 @@ public class VueMenuPrincipal extends Stage implements Menu {
         personnaliser.setFont(Ressources.getInstance().getPolice(32));
         personnaliser.getStyleClass().add("bouton");
 
-        compte.setText("Compte");
-        compte.setFont(Ressources.getInstance().getPolice(32));
-        compte.getStyleClass().add("bouton");
 
         classement.setText("Classement");
         classement.setFont(Ressources.getInstance().getPolice(32));
         classement.getStyleClass().add("bouton");
 
+        compte.setText("Compte");
+        compte.setFont(Ressources.getInstance().getPolice(45));
+        compte.getStyleClass().add("bouton-clair");
+
         quitter.setText("Quitter");
-        quitter.setFont(Ressources.getInstance().getPolice(32));
-        quitter.getStyleClass().add("bouton");
+        quitter.setFont(Ressources.getInstance().getPolice(45));
+        quitter.getStyleClass().add("bouton-clair");
 
         this.setResizable(false);
     }
