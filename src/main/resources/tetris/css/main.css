@@ -63,6 +63,52 @@
     -fx-alignment: center;
 }
 
+/* CSS de Helper BoiteCombinee */
+
+.boite-combinee {
+    -fx-background-color: black;
+    -fx-background-radius: 2px;
+}
+
+.boite-combinee:disabled {
+    -fx-opacity: .4;
+}
+
+.boite-combinee .list-cell{
+    -fx-background-color: black;
+    -fx-text-fill: silver;
+}
+
+.combo-box-popup .list-view{
+    -fx-background-color: black;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover{
+    -fx-background-color: rgb(20, 20, 20);
+}
+.combo-box-popup .list-view .list-cell:filled:hover
+{
+    -fx-background-color: rgb(20, 20, 20);
+    -fx-text-fill: white;
+}
+.combo-box .scroll-bar {
+    -fx-background-color: black;
+    -fx-color: rgb(20, 20, 20);
+}
+.combo-box .scroll-bar: vertical *.increment-button,
+.combo-box .scroll-bar: vertical *.decrement-button {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.combo-box .scroll-bar: vertical *.increment-arrow,
+.combo-box .scroll-bar: vertical *.decrement-arrow {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-shape: null;
+}
+
 /* CSS de Helper PanelPersonnaliser */
 
 .panel-personnalisation {
@@ -82,8 +128,6 @@
     -fx-padding: 20px;
     -fx-background-color: black;
 }
-
-/* CSS vuePersonnaliser*/
 
 /* CSS vuePersonnaliser*/
 .personnalisations {
