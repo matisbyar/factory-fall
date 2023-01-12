@@ -12,11 +12,11 @@ public class AuthPlayer extends Joueur {
     private String hashedPassword;
     private byte[] salt;
 
-    private Departement departemtent;
+    private Departement departement;
 
     public AuthPlayer(String login, Departement departement) {
         super(login);
-        this.departemtent = departement;
+       this.departement = departement;
     }
 
     public AuthPlayer(String login, Departement departement, String hashedPassword, byte[] salt) {
@@ -40,11 +40,11 @@ public class AuthPlayer extends Joueur {
 
 
     public Departement getDepartement() {
-        return departemtent;
+        return departement;
     }
 
     public void setDepartement(Departement departement) {
-        this.departemtent = departement;
+        this.departement = departement;
     }
 
     /**

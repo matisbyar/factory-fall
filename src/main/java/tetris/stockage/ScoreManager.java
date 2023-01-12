@@ -42,9 +42,7 @@ public class ScoreManager {
         return stockage.getHighScore(login);
     }
 
-    public List<Score> getTopScoreparlogin(String login) {
-        return stockage.getTopScoreparlogin(login);
-    }
+    public List<Score> getTopScoreParLogin(String login) {return stockage.getTopScoreParLogin(login);}
 
     public List<Score> getScoresHistoryByLogin(String login) {
         return stockage.getByLogin(login);
@@ -54,9 +52,7 @@ public class ScoreManager {
         return stockage.getAll();
     }
 
-    public List<Score> getTopScore() {
-        return stockage.GetTopScore();
-    }
+    public List<Score> getTopScore() { return  stockage.getTopScore();}
 
     public List<Score> getTopScoreAnonyme() {
         return stockage.GetTopScoreAnonyme();

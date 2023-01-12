@@ -40,7 +40,7 @@ public class VueCompteConnecte extends Stage implements Menu {
 
 
         if (Session.getInstance().isConnected()) {
-            List<Score> topScorejoueur = ScoreManager.getInstance().getTopScoreparlogin(Session.getInstance().getLogin());
+            List<Score> topScorejoueur = ScoreManager.getInstance().getTopScoreParLogin(Session.getInstance().getLogin());
             int i = 0;
             String login = topScorejoueur.get(i).getLogin();
             while (i < 11 && i < topScorejoueur.size() - 1) {

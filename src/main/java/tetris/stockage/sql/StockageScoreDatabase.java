@@ -71,7 +71,7 @@ public class StockageScoreDatabase {
         }
     }
 
-    public List<Score> getTopScoreparlogin(String login) {
+    public List<Score> getTopScoreParLogin(String login) {
         List<Score> scoresList = new ArrayList<>();
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
@@ -189,7 +189,7 @@ public class StockageScoreDatabase {
     }
 
 
-    public List<Score> GetTopScore() {
+    public List<Score> getTopScore() {
         List<Score> topscore = new ArrayList<>();
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();

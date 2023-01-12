@@ -38,7 +38,7 @@ public class Jeu implements IJeu {
         initialiserStockage();
         pieceEchangee = false;
 
-        nbVies = new SimpleIntegerProperty(3);
+        nbVies = new SimpleIntegerProperty(1);
         jeuEnCours = new SimpleBooleanProperty(true);
 
         sacProchainesPieces = new ArrayList<>();
@@ -50,7 +50,7 @@ public class Jeu implements IJeu {
      * Constructeur qui gère un nombre de vies custom
      */
     public Jeu(String pseudo, int nbVies) {
-        super();
+        this(pseudo);
         if (nbVies>1) {
             this.nbVies = new SimpleIntegerProperty(nbVies);
         }
