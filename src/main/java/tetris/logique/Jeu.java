@@ -14,13 +14,13 @@ import java.util.Objects;
 import static tetris.logique.Forme.NULL;
 
 public class Jeu implements IJeu {
-    private Joueur j;
-    private Plateau p;
+    private final Joueur j;
+    private final Plateau p;
 
-    private ArrayList<Piece> sacProchainesPieces;
-    private Plateau prochainePiece;
-    private Plateau stockage;
-    private BooleanProperty jeuEnCours;
+    private final ArrayList<Piece> sacProchainesPieces;
+    private final Plateau prochainePiece;
+    private final Plateau stockage;
+    private final BooleanProperty jeuEnCours;
     public static Timer timer;
     public static Piece pieceActuelle;
     public static int ligneActuelle;
@@ -119,7 +119,7 @@ public class Jeu implements IJeu {
         nouvelleProchainePiece();
         p.incrementerScoreJoueur(p.suppressionLignesRemplies());
         p.incrementerRang();
-        pieceEchangee=false;
+        pieceEchangee = false;
         if (!p.placerPiece(ligneActuelle, colonneActuelle, pieceActuelle)) {
             perdreUneVie();
         }
@@ -137,7 +137,7 @@ public class Jeu implements IJeu {
     /**
      * Initialise l'espace de stockage ainsi que la piece sauvegardée
      */
-    public void initialiserStockage(){
+    public void initialiserStockage() {
         stockage.remplirTableau();
         pieceSauvegardee = new Piece(NULL);
     }
@@ -147,17 +147,16 @@ public class Jeu implements IJeu {
      * place la piece actuelle dans le stockage. Ne peut etre appelée qu'une seule jusqu'a se qu'une nouvelle piece soit générée.
      */
     public void echangePieceActuelleEtPieceSauvegarde() {
-        if(Objects.equals(pieceSauvegardee.getNom(), " ")){
+        if (Objects.equals(pieceSauvegardee.getNom(), " ")) {
             pieceSauvegardee = new Piece(Forme.valueOf(pieceActuelle.getNom()));
             p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
             stockage.placerPiece(1, stockage.getLargeur() / 2 - 1, pieceSauvegardee);
             nouvellePieceActuelle();
-        }
-        else if(!pieceEchangee){
+        } else if (!pieceEchangee) {
             stockage.supprimerPieceTotale(1, stockage.getLargeur() / 2 - 1, pieceSauvegardee);
             p.supprimerPieceTotale(ligneActuelle, colonneActuelle, pieceActuelle);
             ligneActuelle = 1;
-            colonneActuelle = p.getLargeur()/2-1;
+            colonneActuelle = p.getLargeur() / 2 - 1;
             p.placerPiece(ligneActuelle, colonneActuelle, pieceSauvegardee);
             Piece copie = pieceSauvegardee;
             pieceSauvegardee = new Piece(Forme.valueOf(pieceActuelle.getNom()));
@@ -165,7 +164,7 @@ public class Jeu implements IJeu {
             pieceActuelle = copie;
             jouerTour();
         }
-        pieceEchangee=true;
+        pieceEchangee = true;
     }
 
     /**
@@ -303,7 +302,7 @@ public class Jeu implements IJeu {
     }
 
     @Override
-    public Plateau getStockage(){
+    public Plateau getStockage() {
         return stockage;
     }
 

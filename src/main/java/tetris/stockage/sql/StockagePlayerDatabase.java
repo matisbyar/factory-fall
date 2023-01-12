@@ -1,6 +1,6 @@
 package tetris.stockage.sql;
 
-import tetris.logique.AuthPlayer; //Votre classe de joueur (j'ai personnellement séparé les joueurs anonymes (non-connectés) des joueurs connectés mais àa vous de choisir pour vos jeux.)
+import tetris.logique.AuthPlayer;
 import tetris.logique.Departement;
 import tetris.stockage.SQLUtils;
 
@@ -18,12 +18,12 @@ public class StockagePlayerDatabase {
         Connection connection = utils.getConnection();
         String req = "call creationJoueurTetris(?,?,?,?)";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, element.getLogin());
             st.setString(2, element.getHashedPassword());
             st.setBytes(3, element.getSalt());
-            st.setString(4,element.getDepartement().getNumDepartement());
+            st.setString(4, element.getDepartement().getNumDepartement());
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -35,7 +35,7 @@ public class StockagePlayerDatabase {
         Connection connection = utils.getConnection();
         String req = "UPDATE JOUEURS SET mdpHache = ?, selHachage = ? WHERE login = ?";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(3, element.getLogin());
             st.setString(1, element.getHashedPassword());
@@ -51,7 +51,7 @@ public class StockagePlayerDatabase {
         Connection connection = utils.getConnection();
         String req = "DELETE FROM JOUEURS WHERE login = ?";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, login);
             st.executeUpdate();
@@ -69,17 +69,17 @@ public class StockagePlayerDatabase {
                 " LEFT OUTER JOIN DEPARTEMENTS ON DEPARTEMENTS.numDepartement=JOUEURS_TETRIS.departement" +
                 " WHERE JOUEURS.login = ? ";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, login);
-            try (ResultSet result = st.executeQuery();) {
+            try (ResultSet result = st.executeQuery()) {
                 if (result.next()) {
 
                     String password = result.getString("mdpHache");
                     byte[] salt = result.getBytes("selHachage");
                     String numDepartement = result.getString("departement");
                     String nomDepartement = result.getString("nomDepartement");
-                    player = new AuthPlayer(login,new Departement(numDepartement, nomDepartement),password,salt);
+                    player = new AuthPlayer(login, new Departement(numDepartement, nomDepartement), password, salt);
 
                 }
             }
@@ -98,7 +98,7 @@ public class StockagePlayerDatabase {
                 " LEFT OUTER JOIN DEPARTEMENTS ON DEPARTEMENTS.numDepartement=JOUEURS_TETRIS.departement";
         try (
                 PreparedStatement st = connection.prepareStatement(req);
-                ResultSet result = st.executeQuery();
+                ResultSet result = st.executeQuery()
         ) {
             while (result.next()) {
                 String login = result.getString("login");
@@ -106,7 +106,7 @@ public class StockagePlayerDatabase {
                 byte[] salt = result.getBytes("selHachage");
                 String numDepartement = result.getString("JOUEURS_TETRIS.departement");
                 String nomDepartement = result.getString("nomDepartement");
-                AuthPlayer player = new AuthPlayer(login,new Departement(numDepartement, nomDepartement),password,salt);
+                AuthPlayer player = new AuthPlayer(login, new Departement(numDepartement, nomDepartement), password, salt);
 
                 playerList.add(player);
             }
@@ -115,7 +115,6 @@ public class StockagePlayerDatabase {
         }
         return playerList;
     }
-
 
 
 }

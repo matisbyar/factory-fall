@@ -9,18 +9,18 @@ import tetris.IPiece;
 public class Piece implements IPiece {
 
     private String nom;
-    private int[][] coords;
+    private final int[][] coords;
 
     public Piece(Forme forme) {
         int[][][] casesDefaut = {
-                {{0,0},{0,0},{0,0},{0,0}}, //NULL
+                {{0, 0}, {0, 0}, {0, 0}, {0, 0}}, //NULL
                 {{0, -1}, {0, 0}, {0, 1}, {0, 2}}, //I
                 {{0, 0}, {1, 0}, {0, 1}, {1, 1}}, //O
                 {{0, -1}, {0, 0}, {0, 1}, {1, 0}}, //T
                 {{0, -1}, {0, 0}, {1, 0}, {1, 1}}, //S
                 {{1, -1}, {1, 0}, {0, 0}, {0, 1}}, //Z
                 {{1, -1}, {0, -1}, {0, 0}, {0, 1}}, //J
-                {{0, -1}, {0,0}, {0, 1}, {1,1}} //L
+                {{0, -1}, {0, 0}, {0, 1}, {1, 1}} //L
         };
 
         this.nom = forme.getNom();
@@ -42,9 +42,10 @@ public class Piece implements IPiece {
     /**
      * Créé une nouvelle pièce, y inscrit des positions de cases tournées par rapport à this. Si la pièce est O,
      * on la retourne tout de suite
-     * @return la nouvelle pièce
+     *
      * @param sens : de type char, indique la transformation à appliquer sur this selon le
      *             sens dans lequel on veut tourner
+     * @return la nouvelle pièce
      */
     public Piece creerPieceTournee(char sens) {
         if (this.getNom().equals("O")) return this;
@@ -55,8 +56,7 @@ public class Piece implements IPiece {
                     nouvellePiece.coords[i][0] = this.coords[i][1] * -1;
                     nouvellePiece.coords[i][1] = this.coords[i][0];
                 }
-            }
-            else if (sens == 'g') {
+            } else if (sens == 'g') {
                 for (int i = 0; i < 4; i++) {
                     nouvellePiece.coords[i][0] = this.coords[i][1];
                     nouvellePiece.coords[i][1] = this.coords[i][0] * -1;

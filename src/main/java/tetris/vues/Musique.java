@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Musique {
     private static Media mainMenuMusic;
     private static MediaPlayer mainMenuMusicPlayer;
+
     public static void playMusicMainMenu() {
         mainMenuMusic = new Media(Objects.requireNonNull(TetrisIHM.class.getResource("music/Factory_Fall_Main_Theme_20221229_205142.mp3")).toString());
         mainMenuMusicPlayer = new MediaPlayer(mainMenuMusic);

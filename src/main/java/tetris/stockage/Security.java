@@ -15,7 +15,7 @@ import java.security.SecureRandom;
  */
 public class Security {
 
-    private static String pepper = "vpoLfbyP5KQ22vQ5z2KfJw";
+    private static final String pepper = "vpoLfbyP5KQ22vQ5z2KfJw";
 
     public static byte[] getSalt() {
         SecureRandom random = new SecureRandom();
@@ -59,7 +59,7 @@ public class Security {
 
         return hexString.toString();
     }
-    
+
     public static boolean checkPassword(String password, byte[] salt, String hash) throws NoSuchAlgorithmException, InvalidKeyException {
         return toHexString(getSHA(password, salt)).equals(hash);
     }

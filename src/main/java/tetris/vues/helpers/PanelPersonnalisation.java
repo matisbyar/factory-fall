@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import tetris.TetrisIHM;
@@ -40,9 +39,10 @@ public class PanelPersonnalisation extends VBox {
 
     /**
      * Constructeur d'un panel de personnalisation
-     * @param titre Titre du panel (ex. "Style des pièces")
-     * @param actionGauche Action déclenchée par la flèche gauche
-     * @param actionDroite Action déclenchée par la flèche droite
+     *
+     * @param titre                  Titre du panel (ex. "Style des pièces")
+     * @param actionGauche           Action déclenchée par la flèche gauche
+     * @param actionDroite           Action déclenchée par la flèche droite
      * @param personnalisationApercu Image d'apercu de la personnalisation
      */
     public PanelPersonnalisation(String titre, EventHandler<ActionEvent> actionGauche, Node personnalisationApercu, EventHandler<ActionEvent> actionDroite) {

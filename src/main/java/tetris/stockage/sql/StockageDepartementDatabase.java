@@ -1,23 +1,24 @@
 package tetris.stockage.sql;
 
-import tetris.logique.AuthPlayer;
 import tetris.logique.Departement;
-import tetris.logique.Score;
 import tetris.stockage.SQLUtils;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StockageDepartementDatabase {
 
 
-    public void update(String login,String newdepartement) {
+    public void update(String login, String newdepartement) {
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
         String req = "UPDATE JOUEURS_TETRIS SET departement = ? WHERE login = ?";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, login);
             st.setString(2, newdepartement);
@@ -27,16 +28,16 @@ public class StockageDepartementDatabase {
         }
     }
 
-    public String getDepartementByLogin(String login){
+    public String getDepartementByLogin(String login) {
         String departementlogin = null;
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
         String req = "SELECT departement FROM JOUEURS_TETRIS WHERE login = ?";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, login);
-            try (ResultSet result = st.executeQuery();) {
+            try (ResultSet result = st.executeQuery()) {
                 if (result.next()) {
                     departementlogin = result.getString("departement");
                 }
@@ -49,13 +50,13 @@ public class StockageDepartementDatabase {
 
     public List<Departement> getAll() {
         List<Departement> listeDepartement = new ArrayList<>();
-        listeDepartement.add(new Departement("XX","Pas de département"));
+        listeDepartement.add(new Departement("XX", "Pas de département"));
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
         String req = "SELECT numDepartement, nomDepartement FROM DEPARTEMENTS";
         try (
                 PreparedStatement st = connection.prepareStatement(req);
-                ResultSet result = st.executeQuery();
+                ResultSet result = st.executeQuery()
         ) {
             while (result.next()) {
                 String numDepartement = result.getString("numDepartement");

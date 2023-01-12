@@ -10,20 +10,28 @@ public interface IJeu {
     Plateau getStockage();
 
     BooleanProperty jeuEnCoursProperty();
-    
+
     void actionGauche();
+
     void actionDroite();
+
     void actionBas();
+
     void actionHaut();
+
     void actionR();
+
     void actionC();
 
     void actionEspace();
+
     void actionEchap();
 
 
     Plateau getPlateau();
+
     Plateau getProchainePiece();
+
     Joueur getJoueur();
 
     void nouvellePieceActuelle();

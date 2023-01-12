@@ -14,13 +14,13 @@ public class AuthPlayer extends Joueur {
 
     private Departement departemtent;
 
-    public AuthPlayer(String login,Departement departement) {
+    public AuthPlayer(String login, Departement departement) {
         super(login);
-       this.departemtent=departement;
+        this.departemtent = departement;
     }
 
-    public AuthPlayer(String login,Departement departement, String hashedPassword, byte[] salt) {
-        this(login,departement);
+    public AuthPlayer(String login, Departement departement, String hashedPassword, byte[] salt) {
+        this(login, departement);
         this.salt = salt;
         this.hashedPassword = hashedPassword;
 
@@ -46,8 +46,10 @@ public class AuthPlayer extends Joueur {
     public void setDepartement(Departement departement) {
         this.departemtent = departement;
     }
+
     /**
      * Hash the password in params with the salt attribute and put the newly hashedPassword in the attribute.
+     *
      * @param password - A clear password
      */
     public void setPassword(String password) {

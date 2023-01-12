@@ -14,11 +14,11 @@ public class StockageScoreDatabase {
         Connection connection = utils.getConnection();
         String req = "INSERT INTO SCORES(score, horodatage, codeJeu, login) VALUES (?, ?, ?, ?)";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setInt(1, element.getScore());
             st.setTimestamp(2, element.getHorodatage());
-            st.setString(3, element.getGameCode());
+            st.setString(3, Score.getGameCode());
             if (!element.getLogin().isEmpty()) st.setString(4, element.getLogin());
             else st.setNull(4, Types.VARCHAR);
             st.executeUpdate();
@@ -32,7 +32,7 @@ public class StockageScoreDatabase {
         Connection connection = utils.getConnection();
         String req = "UPDATE SCORES SET score = ? WHERE codeScore = ?";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setInt(1, element.getScore());
             st.setInt(3, element.getId());
@@ -47,7 +47,7 @@ public class StockageScoreDatabase {
         Connection connection = utils.getConnection();
         String req = "DELETE FROM SCORES WHERE login = ? AND codeJeu = ?";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, login);
             st.setString(2, Score.getGameCode());
@@ -62,7 +62,7 @@ public class StockageScoreDatabase {
         Connection connection = utils.getConnection();
         String req = "DELETE FROM SCORES WHERE codeScore = ?";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setInt(1, id);
             st.executeUpdate();
@@ -77,10 +77,10 @@ public class StockageScoreDatabase {
         Connection connection = utils.getConnection();
         String req = "SELECT score,horodatage FROM SCORES WHERE  codeJeu = 'TETRIS' AND login=? ORDER BY score DESC ";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, login);
-            try (ResultSet result = st.executeQuery();) {
+            try (ResultSet result = st.executeQuery()) {
                 while (result.next()) {
                     {
                         int scoreValue = result.getInt("score");
@@ -103,11 +103,11 @@ public class StockageScoreDatabase {
         Connection connection = utils.getConnection();
         String req = "SELECT * FROM SCORES WHERE login = ? AND codeJeu = ? AND ROWNUM <= 10 ORDER BY score DESC ";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, login);
             st.setString(2, Score.getGameCode());
-            try (ResultSet result = st.executeQuery();) {
+            try (ResultSet result = st.executeQuery()) {
                 if (result.next()) {
                     int scoreValue = result.getInt("score");
                     Timestamp time = result.getTimestamp("horodatage");
@@ -135,11 +135,11 @@ public class StockageScoreDatabase {
         Connection connection = utils.getConnection();
         String req = "SELECT * FROM SCORES WHERE login = ? AND codeJeu = ?";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, login);
             st.setString(2, Score.getGameCode());
-            try (ResultSet result = st.executeQuery();) {
+            try (ResultSet result = st.executeQuery()) {
                 while (result.next()) {
                     int id = result.getInt("codeScore");
                     int scoreValue = result.getInt("score");
@@ -167,10 +167,10 @@ public class StockageScoreDatabase {
         Connection connection = utils.getConnection();
         String req = "SELECT * FROM SCORES WHERE codeJeu = ?";
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, Score.getGameCode());
-            try (ResultSet result = st.executeQuery();) {
+            try (ResultSet result = st.executeQuery()) {
                 while (result.next()) {
                     int id = result.getInt("codeScore");
                     int scoreValue = result.getInt("score");
@@ -197,7 +197,7 @@ public class StockageScoreDatabase {
         int i = 1;
         try (
                 PreparedStatement st = connection.prepareStatement(req);
-                ResultSet result = st.executeQuery();
+                ResultSet result = st.executeQuery()
         ) {
             while (result.next() && i < 11) {
                 String login = result.getString("login");
@@ -226,11 +226,11 @@ public class StockageScoreDatabase {
                 " WHERE  Scores.login=JOUEURS_TETRIS.login  AND JOUEURS_TETRIS.departement=? ORDER BY score DESC";
         int i = 1;
         try (
-                PreparedStatement st = connection.prepareStatement(req);
+                PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, departement);
             try (
-                    ResultSet result = st.executeQuery();) {
+                    ResultSet result = st.executeQuery()) {
                 while (result.next() && i < 11) {
                     String login = result.getString("login");
                     int scoreValue = result.getInt("score");
@@ -250,18 +250,15 @@ public class StockageScoreDatabase {
     }
 
 
-
-
-
-    public List<Score> GetTopScoreAnonyme()  {
+    public List<Score> GetTopScoreAnonyme() {
         List<Score> topscoreanonyme = new ArrayList<>();
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
         String req = "SELECT score, horodatage, login FROM Scores WHERE login IS NULL AND codejeu='TETRIS'  ORDER BY score DESC";
         int i = 1;
         try (
-                PreparedStatement st = connection.prepareStatement(req);
-        ){
+                PreparedStatement st = connection.prepareStatement(req)
+        ) {
             try (
                     ResultSet result = st.executeQuery()) {
                 while (result.next() && i < 11) {
@@ -275,14 +272,14 @@ public class StockageScoreDatabase {
                 }
 
 
-
-            return topscoreanonyme;
-        } } catch (SQLException e) {
-        e.printStackTrace();
-    }
+                return topscoreanonyme;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return topscoreanonyme;
     }
 
 
-    }
+}
 

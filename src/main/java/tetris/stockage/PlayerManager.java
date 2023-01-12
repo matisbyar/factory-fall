@@ -2,7 +2,6 @@ package tetris.stockage;
 
 import tetris.logique.AuthPlayer;
 import tetris.logique.Departement;
-import tetris.stockage.Security;
 import tetris.stockage.sql.StockagePlayerDatabase;
 
 import java.util.List;
@@ -10,9 +9,10 @@ import java.util.List;
 public class PlayerManager {
 
     private static PlayerManager instance = null;
-    private StockagePlayerDatabase stockage = new StockagePlayerDatabase();
+    private final StockagePlayerDatabase stockage = new StockagePlayerDatabase();
 
-    private PlayerManager() {}
+    private PlayerManager() {
+    }
 
     public static PlayerManager getInstance() {
         if (instance == null) instance = new PlayerManager();
@@ -20,7 +20,7 @@ public class PlayerManager {
     }
 
     public void createPlayer(String login, String password, Departement departement) {
-        AuthPlayer p = new AuthPlayer(login,departement);
+        AuthPlayer p = new AuthPlayer(login, departement);
         byte[] salt = Security.getSalt(); //Génération d'un sel de hachage 
         p.setSalt(salt); //Application du sel au nouveau joueur.
         p.setPassword(password); //Hachage du mot de passe avec le sel.
@@ -43,5 +43,7 @@ public class PlayerManager {
         return stockage.getByLogin(login);
     }
 
-    public List<AuthPlayer> getPlayers() { return stockage.getAll(); }
+    public List<AuthPlayer> getPlayers() {
+        return stockage.getAll();
+    }
 }
