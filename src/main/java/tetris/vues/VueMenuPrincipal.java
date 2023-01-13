@@ -158,7 +158,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         });
         classement.setOnAction(actionEvent -> {
             this.setScene(vueClassement.getScene());
-            vueClassement.mettreAJourFond();
+            vueClassement.mettreAJour();
         });
     }
 

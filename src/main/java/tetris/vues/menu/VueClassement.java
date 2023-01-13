@@ -49,67 +49,7 @@ public class VueClassement extends Stage implements Menu {
 
         bouton = new VBox(changementDeClassement);
 
-
-        /**
-         * recuperation de tous les scores different
-         */
-        List<Score> topScore = ScoreManager.getInstance().getTopScore();
-
-        List<Score> departementScore;
-        System.out.println(Session.getInstance().isConnected());
-        //TODO bug ici a fix
-        if (Session.getInstance().isConnected()) {
-
-            departementScore = ScoreManager.getInstance().getTopScoreParDepartement(DepartementManager.getInstance().getDepartementByLogin(Session.getInstance().getLogin()));
-        } else {
-            // cas de base qui ne sera jamais affiché mais nécessaire pour run la classe au debut
-            departementScore = ScoreManager.getInstance().getTopScoreParDepartement("34");
-        }
-
-
-        List<Score> topScoreanonyme = ScoreManager.getInstance().getTopScoreAnonyme();
-
-
-        // Récupération des scores top score
-        for (int i = 1; i < 11; i++) {
-            String login = "Anonyme";
-            if (topScore.get(i - 1).getLogin() != null) {
-                login = topScore.get(i - 1).getLogin();
-            }
-            classementTopScore.add(new Label(String.valueOf(i)), 0, i - 1);
-            classementTopScore.add(new Label(login), 1, i - 1);
-            classementTopScore.add(new Label(String.valueOf(topScore.get(i - 1).getScore())), 2, i - 1);
-            classementTopScore.add(new Label(topScore.get(i - 1).getHorodatage().toString()), 3, i - 1);
-        }
-
-        // Récupération des scores par departements ou anonyme si le jouer n'est pas connecté
-        /*
-         ** important si le joueur est connecté cela prend les departement sinon les top anonyme
-         */
-        if (Session.getInstance().isConnected()) {
-            int i = 0;
-            while (i < 11 && i < departementScore.size() - 1) {
-
-                String login = departementScore.get(i).getLogin();
-
-                classementDepartement.add(new Label(String.valueOf(i - 1)), 0, i);
-                classementDepartement.add(new Label(login), 1, i);
-                classementDepartement.add(new Label(String.valueOf(departementScore.get(i).getScore())), 2, i);
-                classementDepartement.add(new Label(departementScore.get(i).getHorodatage().toString()), 3, i);
-                i++;
-            }
-        } else {
-
-
-            for (int i = 1; i < 11; i++) {
-                String login = "Anonyme";
-                classementDepartement.add(new Label(String.valueOf(i)), 0, i - 1);
-                classementDepartement.add(new Label(login), 1, i - 1);
-                classementDepartement.add(new Label(String.valueOf(topScoreanonyme.get(i - 1).getScore())), 2, i - 1);
-                classementDepartement.add(new Label(topScoreanonyme.get(i - 1).getHorodatage().toString()), 3, i - 1);
-            }
-        }
-
+        recupererClassements();
 
         // Styles et bindings
         styliser();
@@ -164,7 +104,7 @@ public class VueClassement extends Stage implements Menu {
     }
 
     public void creerBindings() {
-        changementDeClassement.setOnAction(actionEvent -> changedeclassement());
+        changementDeClassement.setOnAction(actionEvent -> changementDeClassement());
     }
 
     /**
@@ -173,7 +113,7 @@ public class VueClassement extends Stage implements Menu {
      * bug connus : si on va voir le classement avant de se connecté et on se connecte et on refa voir le classement les vauvaise vue sont
      * affiché , pour fix il faut allez dans une autre vue(compte ) et revenir
      */
-    private void changedeclassement() {
+    private void changementDeClassement() {
 
         if (changementDeClassement.getText() == "vers top département" && Session.getInstance().isConnected()) {
             changementDeClassement.setText("vers top joueur");
@@ -200,14 +140,73 @@ public class VueClassement extends Stage implements Menu {
         }
     }
 
+    /**
+     * Récupère tous les classements en un seul appel
+     */
+    private void recupererClassements() {
+        recupererClassementGeneral();
+        recupererClassementFiltres();
+    }
+
+    /**
+     * Récupère le classement général
+     */
+    private void recupererClassementGeneral() {
+        List<Score> topScore = ScoreManager.getInstance().getTopScores();
+
+        // Récupération des scores top score
+        for (int i = 1; i < 11; i++) {
+            String login = "Anonyme";
+            if (topScore.get(i - 1).getLogin() != null) {
+                login = topScore.get(i - 1).getLogin();
+            }
+            listToGridPane(topScore, i, login, classementTopScore);
+        }
+    }
+
+    /**
+     * Récupère le classement depuis la base de données.
+     * Si le joueur est connecté, on récupère le classement de son département.
+     * Sinon, on récupère le classement des scores enregistrés en anonyme.
+     */
+    private void recupererClassementFiltres() {
+        boolean estConnecte = Session.getInstance().isConnected();
+        List<Score> topScores = estConnecte ? ScoreManager.getInstance().getTopScoresParDepartement(DepartementManager.getInstance().getDepartementByLogin(Session.getInstance().getLogin())) : ScoreManager.getInstance().getTopScoresAnonyme();
+        for (int i = 1; i < 11; i++) {
+            String login = estConnecte ? Session.getInstance().getLogin() : "Anonyme";
+            listToGridPane(topScores, i, login, classementDepartement);
+        }
+    }
+
+    /**
+     * À partir de plusieurs paramètres, on transforme une liste de scores en un GridPane.
+     *
+     * @param scores   Liste de scores
+     * @param indice   Ligne du GridPane
+     * @param login    Login du joueur (anonyme si non connecté)
+     * @param gridPane GridPane à remplir
+     */
+    private void listToGridPane(List<Score> scores, int indice, String login, GridPane gridPane) {
+        gridPane.add(new Label(String.valueOf(indice)), 0, indice - 1);
+        gridPane.add(new Label(login), 1, indice - 1);
+        gridPane.add(new Label(String.valueOf(scores.get(indice - 1).getScore())), 2, indice - 1);
+        gridPane.add(new Label(scores.get(indice - 1).getHorodatage().toString()), 3, indice - 1);
+    }
+
+    private void rafraichirClassements() {
+        classementTopScore.getChildren().clear();
+        classementDepartement.getChildren().clear();
+        recupererClassements();
+    }
+
     @Override
     public void afficherScene() {
         this.setScene(scene);
-        mettreAJourFond();
+        mettreAJour();
     }
 
-    public void mettreAJourFond() {
+    public void mettreAJour() {
         root.setBackground(Preferences.getInstance().getBackground());
+        rafraichirClassements();
     }
-
 }
