@@ -124,7 +124,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         personnaliser.getStyleClass().add("bouton");
 
 
-        classement.setText("Classement");
+        classement.setText("Classements");
         classement.setFont(Ressources.getInstance().getPolice(32));
         classement.getStyleClass().add("bouton");
 
@@ -144,21 +144,21 @@ public class VueMenuPrincipal extends Stage implements Menu {
      */
     private void creerBindings() {
         compte.setOnAction(actionEvent -> {
-            this.setScene(Session.getInstance().isConnected() ? vueCompteConnecte.getScene() : vueCompteDeconnecte.getScene());
             vueCompteConnecte.mettreAJourFond();
             vueCompteDeconnecte.mettreAJourFond();
+            this.setScene(Session.getInstance().isConnected() ? vueCompteConnecte.getScene() : vueCompteDeconnecte.getScene());
         });
         regles.setOnAction(actionEvent -> {
-            this.setScene(vueRegles.getScene());
             vueRegles.mettreAJourFond();
+            this.setScene(vueRegles.getScene());
         });
         personnaliser.setOnAction(actionEvent -> {
-            this.setScene(vuePersonnaliser.getScene());
             vuePersonnaliser.mettreAJourFond();
+            this.setScene(vuePersonnaliser.getScene());
         });
         classement.setOnAction(actionEvent -> {
-            this.setScene(vueClassement.getScene());
             vueClassement.mettreAJour();
+            this.setScene(vueClassement.getScene());
         });
     }
 

@@ -1,9 +1,11 @@
 package tetris.vues.menu;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -19,6 +21,7 @@ import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class VueClassement extends Stage implements Menu {
@@ -26,28 +29,30 @@ public class VueClassement extends Stage implements Menu {
     private final BorderPane root;
     private final Scene scene;
 
-    private final Label titre;
-    private final VBox vbScores, bouton;
-    private final GridPane classementTopScore, classementDepartement;
+    private final VBox vbScores;
+    private final HBox boutons;
+    private final GridPane classementTopScore, classementFiltre;
 
-    private final Button changementDeClassement;
+    private final ToggleButton afficherTopScore, afficherFiltre;
 
     public VueClassement(VueMenuPrincipal vueMenuPrincipal) {
         // Initialisations
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
 
-        titre = new Label("Meilleur Classement Généraux");
-
         classementTopScore = new GridPane();
+        classementFiltre = new GridPane();
 
-        classementDepartement = new GridPane();
+        ToggleGroup group = new ToggleGroup();
+        afficherFiltre = new ToggleButton("Top Scores");
+        afficherTopScore = new ToggleButton(Session.getInstance().isConnected() ? "Top Département" : "Top Anonymes");
+        afficherTopScore.setSelected(true);
+        afficherFiltre.setToggleGroup(group);
+        afficherTopScore.setToggleGroup(group);
 
-        changementDeClassement = new Button("vers top anonyme");
+        boutons = new HBox(afficherTopScore, afficherFiltre);
 
-        vbScores = new VBox(titre, classementTopScore);
-
-        bouton = new VBox(changementDeClassement);
+        vbScores = new VBox(boutons, classementTopScore);
 
         recupererClassements();
 
@@ -57,9 +62,7 @@ public class VueClassement extends Stage implements Menu {
 
         // Affichage
         root.setCenter(vbScores);
-        root.setTop(new BarreNavigation("Classement", vueMenuPrincipal, this));
-        root.setRight(bouton);
-
+        root.setTop(new BarreNavigation("Classements", vueMenuPrincipal, this));
 
         this.setScene(scene);
     }
@@ -69,74 +72,54 @@ public class VueClassement extends Stage implements Menu {
         // Root (BorderPane)
         root.setBackground(Preferences.getInstance().getBackground());
 
-        // Titre
-        titre.setFont(Ressources.getInstance().getPolice(32));
-        titre.setStyle("-fx-text-fill: white;");
-        titre.setAlignment(Pos.CENTER);
-
         // Classement
         classementTopScore.setHgap(20);
         classementTopScore.setVgap(20);
         classementTopScore.setAlignment(Pos.CENTER);
+        classementTopScore.setStyle("--fx-border-color: white; -fx-border-width: 3px; -fx-border-style: solid; -fx-background-color: black; -fx-padding: 10px;");
 
-        classementDepartement.setHgap(20);
-        classementDepartement.setVgap(20);
-        classementDepartement.setAlignment(Pos.CENTER);
+        classementFiltre.setHgap(20);
+        classementFiltre.setVgap(20);
+        classementFiltre.setAlignment(Pos.CENTER);
+        classementFiltre.setStyle("--fx-border-color: white; -fx-border-width: 3px; -fx-border-style: solid; -fx-background-color: black; -fx-padding: 10px;");
 
         for (int i = 0; i < classementTopScore.getChildren().size(); i++) {
-            classementTopScore.getChildren().get(i).setStyle("-fx-text-fill: white");
+            ((Label) classementTopScore.getChildren().get(i)).setFont(Ressources.getInstance().getPolice(20));
+            classementTopScore.getChildren().get(i).setStyle("-fx-text-fill: white;");
+
+            ((Label) classementFiltre.getChildren().get(i)).setFont(Ressources.getInstance().getPolice(20));
+            classementFiltre.getChildren().get(i).setStyle("-fx-text-fill: white;");
         }
 
-        for (int i = 0; i < classementDepartement.getChildren().size(); i++) {
-            classementDepartement.getChildren().get(i).setStyle("-fx-text-fill: white");
-        }
+        afficherTopScore.getStyleClass().add("bouton-clair");
+        afficherTopScore.setFont(Ressources.getInstance().getPolice(20));
 
-        //Button
-        //changementdeclassement.setAlignment(Pos.TOP_CENTER); // n'est pas prioritaire par rapport au vbox
+        boutons.setAlignment(Pos.CENTER);
 
-        // changementdeclassement.getStyleClass().add("bouton");
-        // changementdeclassement.setStyle("-fx-background-color: black");
-        changementDeClassement.getStyleClass().add("bouton-clair");
-        changementDeClassement.setFont(Ressources.getInstance().getPolice(20));
-        HBox.setMargin(changementDeClassement, new javafx.geometry.Insets(0, 50, 0, 0));
+        afficherFiltre.getStyleClass().add("bouton-clair");
+        afficherFiltre.setFont(Ressources.getInstance().getPolice(20));
+
+        boutons.setPadding(new Insets(0, 0, 50, 0));
+
         // VBScores
         vbScores.setAlignment(Pos.CENTER);
     }
 
     public void creerBindings() {
-        changementDeClassement.setOnAction(actionEvent -> changementDeClassement());
+        afficherTopScore.setOnAction(actionEvent -> changementDeClassement());
+        afficherFiltre.setOnAction(actionEvent -> changementDeClassement());
     }
 
     /**
-     * gere les cas de changement des label du classement en fonction du button et de si on est connecté ou pas
-     * <p>
-     * bug connus : si on va voir le classement avant de se connecté et on se connecte et on refa voir le classement les vauvaise vue sont
-     * affiché , pour fix il faut allez dans une autre vue(compte ) et revenir
+     * Gère l'action de changement de classement
      */
     private void changementDeClassement() {
-
-        if (changementDeClassement.getText() == "vers top département" && Session.getInstance().isConnected()) {
-            changementDeClassement.setText("vers top joueur");
-            titre.setText("Meilleur Classement Dans Votre Département");
-            vbScores.getChildren().remove(1);
-            vbScores.getChildren().add(classementDepartement);
-
-        } else if (changementDeClassement.getText() == "vers top joueur" && Session.getInstance().isConnected()) {
-            changementDeClassement.setText("vers top département");
-            titre.setText("Meilleur Classement Généraux");
-            vbScores.getChildren().remove(1);
+        if (afficherTopScore.isSelected() && !vbScores.getChildren().contains(classementTopScore)) {
+            vbScores.getChildren().remove(classementFiltre);
             vbScores.getChildren().add(classementTopScore);
-
-        } else if (changementDeClassement.getText() == "vers top anonyme") {
-            changementDeClassement.setText("vers top joueur");
-            titre.setText("Meilleur Classement par Anonyme");
-            vbScores.getChildren().remove(1);
-            vbScores.getChildren().add(classementDepartement);
-        } else {
-            changementDeClassement.setText("vers top anonyme");
-            titre.setText("Meilleur Classement Généraux");
-            vbScores.getChildren().remove(1);
-            vbScores.getChildren().add(classementTopScore);
+        } else if (afficherFiltre.isSelected() && !vbScores.getChildren().contains(classementFiltre)) {
+            vbScores.getChildren().remove(classementTopScore);
+            vbScores.getChildren().add(classementFiltre);
         }
     }
 
@@ -174,7 +157,7 @@ public class VueClassement extends Stage implements Menu {
         List<Score> topScores = estConnecte ? ScoreManager.getInstance().getTopScoresParDepartement(DepartementManager.getInstance().getDepartementByLogin(Session.getInstance().getLogin())) : ScoreManager.getInstance().getTopScoresAnonyme();
         for (int i = 1; i < 11; i++) {
             String login = estConnecte ? Session.getInstance().getLogin() : "Anonyme";
-            listToGridPane(topScores, i, login, classementDepartement);
+            listToGridPane(topScores, i, login, classementFiltre);
         }
     }
 
@@ -190,23 +173,25 @@ public class VueClassement extends Stage implements Menu {
         gridPane.add(new Label(String.valueOf(indice)), 0, indice - 1);
         gridPane.add(new Label(login), 1, indice - 1);
         gridPane.add(new Label(String.valueOf(scores.get(indice - 1).getScore())), 2, indice - 1);
-        gridPane.add(new Label(scores.get(indice - 1).getHorodatage().toString()), 3, indice - 1);
+        gridPane.add(new Label(new SimpleDateFormat("dd/MM/yyyy").format(scores.get(indice - 1).getHorodatage())), 3, indice - 1);
+        gridPane.add(new Label(new SimpleDateFormat("HH:mm").format(scores.get(indice - 1).getHorodatage())), 4, indice - 1);
     }
 
     private void rafraichirClassements() {
         classementTopScore.getChildren().clear();
-        classementDepartement.getChildren().clear();
+        classementFiltre.getChildren().clear();
         recupererClassements();
     }
 
     @Override
     public void afficherScene() {
-        this.setScene(scene);
         mettreAJour();
+        this.setScene(scene);
     }
 
     public void mettreAJour() {
         root.setBackground(Preferences.getInstance().getBackground());
         rafraichirClassements();
+
     }
 }
