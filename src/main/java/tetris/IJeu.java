@@ -44,4 +44,6 @@ public interface IJeu {
     boolean isJeuEnCours();
 
     IntegerProperty getRang(Plateau plateauChoisi);
+
+    IntegerProperty getNbVies();
 }

@@ -309,4 +309,6 @@ public class Jeu implements IJeu {
     public BooleanProperty jeuEnCoursProperty() {
         return jeuEnCours;
     }
+
+    public IntegerProperty getNbVies() { return nbVies;}
 }
