@@ -28,7 +28,7 @@ public class PanelPersonnalisation extends VBox {
     private final Label titre;
 
     /**
-     * Boîte contenant les flèches et l'apercu de la personnalisation sus-nommée
+     * Boîte contenant les flèches et l'apercu de la personnalisation susnommés
      */
     private final HBox personnalisation;
 
