@@ -29,7 +29,7 @@ public class VuePersonnaliser extends Stage implements Menu {
 
     private final VBox personnalisations;
 
-    private final ImageView imageStylePiece, cadenas;
+    private final ImageView imageStylePiece, cadenas, speaker;
 
     private final Button flecheGauche, flecheDroite, muteBtn;
 
@@ -63,7 +63,7 @@ public class VuePersonnaliser extends Stage implements Menu {
         }
     };
 
-    EventHandler<ActionEvent> gauche = new EventHandler<>() {
+    EventHandler<ActionEvent> backgroundG = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
             Platform.runLater(() -> {
@@ -72,12 +72,29 @@ public class VuePersonnaliser extends Stage implements Menu {
             });
         }
     };
-    EventHandler<ActionEvent> droite = new EventHandler<>() {
+    EventHandler<ActionEvent> backgroundD = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
             Platform.runLater(() -> {
                 preferences.changerFond("+");
                 root.setBackground(preferences.getBackground());
+            });
+        }
+    };
+
+    EventHandler<ActionEvent> musiqueG = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            Platform.runLater(() -> {
+
+            });
+        }
+    };
+    EventHandler<ActionEvent> musiqueD = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            Platform.runLater(() -> {
+
             });
         }
     };
@@ -94,6 +111,7 @@ public class VuePersonnaliser extends Stage implements Menu {
 
         imageStylePiece = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + preferences.getStylePiece() + "/L.jpg"))));
         cadenas = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/cadenas.png"))));
+        speaker = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/speaker.png")), 45, 45, true, true));
 
         mute = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/mute.png")));
         muteBtn = new Button();
@@ -111,8 +129,8 @@ public class VuePersonnaliser extends Stage implements Menu {
 
         personnalisations.getChildren().addAll(
                 new PanelPersonnalisation("Style des pièces", stylePieceG, locked, stylePieceD),
-                new PanelPersonnalisation("Image de fond", gauche, new ImageView(), droite),
-                new PanelPersonnalisation("Musique de jeu", gauche, new ImageView(), droite)
+                new PanelPersonnalisation("Image de fond", backgroundG, new ImageView(), backgroundD),
+                new PanelPersonnalisation("Musique de jeu", musiqueG, speaker, musiqueD)
         );
 
         root.setBottom(muteBtn);

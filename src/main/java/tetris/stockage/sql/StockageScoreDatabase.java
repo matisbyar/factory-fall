@@ -189,32 +189,30 @@ public class StockageScoreDatabase {
     }
 
 
-    public List<Score> getTopScore() {
-        List<Score> topscore = new ArrayList<>();
+    public List<Score> getTopScores() {
+        List<Score> topScores = new ArrayList<>();
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
         String req = "SELECT score, horodatage, login FROM Scores WHERE codejeu='TETRIS' ORDER BY score DESC";
-        int i = 1;
+
         try (
                 PreparedStatement st = connection.prepareStatement(req);
                 ResultSet result = st.executeQuery()
         ) {
+            int i = 1;
             while (result.next() && i < 11) {
                 String login = result.getString("login");
                 int scoreValue = result.getInt("score");
                 Timestamp time = result.getTimestamp("horodatage");
                 Score score = new Score(scoreValue, time);
                 score.setLogin(login);
-                topscore.add(score);
+                topScores.add(score);
                 i++;
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return topscore;
+        return topScores;
     }
 
     public List<Score> GetTopScoreParDepartement(String departement) {

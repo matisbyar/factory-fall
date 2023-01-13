@@ -52,13 +52,16 @@ public class ScoreManager {
         return stockage.getAll();
     }
 
+    public List<Score> getTopScores() {
+        return stockage.getTopScores();
+    }
     public List<Score> getTopScore() { return  stockage.getTopScore();}
 
-    public List<Score> getTopScoreAnonyme() {
+    public List<Score> getTopScoresAnonyme() {
         return stockage.GetTopScoreAnonyme();
     }
 
-    public List<Score> getTopScoreParDepartement(String departement) {
+    public List<Score> getTopScoresParDepartement(String departement) {
         return stockage.GetTopScoreParDepartement(departement);
     }
 }
