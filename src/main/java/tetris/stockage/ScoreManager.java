@@ -55,7 +55,7 @@ public class ScoreManager {
     public List<Score> getTopScores() {
         return stockage.getTopScores();
     }
-    public List<Score> getTopScore() { return  stockage.getTopScore();}
+    public List<Score> getTopScore() { return  stockage.getTopScores();}
 
     public List<Score> getTopScoresAnonyme() {
         return stockage.GetTopScoreAnonyme();

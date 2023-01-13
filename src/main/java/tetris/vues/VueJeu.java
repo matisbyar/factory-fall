@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -42,7 +43,8 @@ public class VueJeu extends Stage {
     private VBox informationsJoueur;
     private ActionListener descenteAuto;
     private Button startJeu;
-    Label score, pseudo, rang, nbLignes, prochainePieceLabel, pieceSauvegardeeLabel;
+    private HBox nbVies;
+    Label score, pseudo, rang, nbLignes, vies, prochainePieceLabel, pieceSauvegardeeLabel;
 
     // Vues personnelles (créées par l'équipe)
     private VueMenuPrincipal vueMenuPrincipal;
@@ -174,10 +176,17 @@ public class VueJeu extends Stage {
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
         nbLignes = new Label("Lignes : 0 ");
+        vies = new Label("Vies : ");
+        nbVies = new HBox();
+        if (jeu.getNbVies().get() != 1) {
+            for (int i=0; i<jeu.getNbVies().get(); i++) {
+                nbVies.getChildren().add(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/heart.png")))));
+            }
+        }
         prochainePieceLabel = new Label("prochaine :");
         pieceSauvegardeeLabel = new Label("pièce sauvegardée : ");
         conteneurDroit = new VBox(new VBox(prochainePieceLabel, vueProchainePiece), vueControles);
-        informationsJoueur = new VBox(pseudo, score, nbLignes, rang);
+        informationsJoueur = new VBox(pseudo, score, nbLignes, rang, nbVies);
         conteneurGauche = new VBox(new VBox(pieceSauvegardeeLabel, vuePieceSauvegardee), informationsJoueur, startJeu);
         vuePieceSauvegardee.setAlignment(Pos.CENTER_RIGHT);
 
@@ -266,6 +275,9 @@ public class VueJeu extends Stage {
 
         // Listener pour actualiser le rang de la partie
         jeu.getRang(jeu.getPlateau()).addListener((observableValue, number, t1) -> rang.setText("rang : " + jeu.getRang(jeu.getPlateau()).getValue()));
+
+        // Listener le nombre de vies restantes
+        jeu.getNbVies().addListener((observableValue, number, t1) -> nbVies.getChildren().remove(nbVies.getChildren().size()-1));
 
 
         // Listener pour agir en cas de fin de jeu
@@ -364,6 +376,12 @@ public class VueJeu extends Stage {
         rang.setTextFill(Color.WHITE);
         rang.setFont(Ressources.getInstance().getPolice(30));
         rang.setAlignment(Pos.TOP_RIGHT);
+
+        // Vies
+        vies.setTextFill(Color.WHITE);
+        vies.setFont(Ressources.getInstance().getPolice(30));
+        vies.setAlignment(Pos.TOP_RIGHT);
+        nbVies.setAlignment(Pos.TOP_RIGHT);
 
         // Label Prochaine pièce
         prochainePieceLabel.setTextFill(Color.WHITE);

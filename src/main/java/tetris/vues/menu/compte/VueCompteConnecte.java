@@ -87,7 +87,7 @@ public class VueCompteConnecte extends Stage implements Menu {
 
     protected void recupererClassement() {
         if (Session.getInstance().isConnected()) {
-            List<Score> scores = ScoreManager.getInstance().getTopScoreparlogin(Session.getInstance().getLogin());
+            List<Score> scores = ScoreManager.getInstance().getTopScoreParLogin(Session.getInstance().getLogin());
             if (scores.isEmpty()) {
                 classement.add(new Label("Aucun score enregistré"), 0, 0);
             } else {
