@@ -219,9 +219,9 @@ public class StockageScoreDatabase {
         List<Score> topscore = new ArrayList<>();
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "SELECT score, horodatage,  Scores.login FROM Scores" +
-                " LEFT OUTER JOIN JOUEURS_TETRIS ON JOUEURS_TETRIS.login=Scores.login" +
-                " WHERE  Scores.login=JOUEURS_TETRIS.login  AND JOUEURS_TETRIS.departement=? ORDER BY score DESC";
+        String req = "SELECT score, horodatage, Scores.login FROM Scores" +
+                " LEFT OUTER JOIN joueurs ON joueurs.login=Scores.login" +
+                " WHERE  Scores.login=joueurs.login  AND joueurs.numDepartement=? AND codejeu='TETRIS' ORDER BY score DESC";
         int i = 1;
         try (
                 PreparedStatement st = connection.prepareStatement(req)

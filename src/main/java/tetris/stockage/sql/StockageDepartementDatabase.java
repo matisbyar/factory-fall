@@ -32,14 +32,14 @@ public class StockageDepartementDatabase {
         String departementlogin = null;
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "SELECT departement FROM JOUEURS_TETRIS WHERE login = ?";
+        String req = "SELECT numDepartement FROM JOUEURS WHERE login = ?";
         try (
                 PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, login);
             try (ResultSet result = st.executeQuery()) {
                 if (result.next()) {
-                    departementlogin = result.getString("departement");
+                    departementlogin = result.getString("numDepartement");
                 }
             }
         } catch (SQLException e) {

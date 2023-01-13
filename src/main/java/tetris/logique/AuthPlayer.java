@@ -12,17 +12,20 @@ public class AuthPlayer extends Joueur {
     private String hashedPassword;
     private byte[] salt;
 
-    private Departement departement;
+    private String numdepartement;
 
-    public AuthPlayer(String login, Departement departement) {
+
+
+    public AuthPlayer(String login) {
         super(login);
-       this.departement = departement;
+
     }
 
-    public AuthPlayer(String login, Departement departement, String hashedPassword, byte[] salt) {
-        this(login, departement);
+    public AuthPlayer(String login,String numdepartement, String hashedPassword, byte[] salt) {
+        this(login);
         this.salt = salt;
         this.hashedPassword = hashedPassword;
+        this.numdepartement= numdepartement;
 
     }
 
@@ -39,12 +42,12 @@ public class AuthPlayer extends Joueur {
     }
 
 
-    public Departement getDepartement() {
-        return departement;
+    public String getDepartement() {
+        return numdepartement;
     }
 
-    public void setDepartement(Departement departement) {
-        this.departement = departement;
+    public void setDepartement( String departement) {
+        this.numdepartement = departement;
     }
 
     /**
