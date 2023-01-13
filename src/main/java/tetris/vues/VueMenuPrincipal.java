@@ -74,7 +74,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         // Affectations
         root.setCenter(boutons);
         root.setBottom(actions);
-        root.setBackground(Preferences.getInstance().getBackground());
+        root.setBackground(Preferences.getInstance().getBackgroundMenu());
 
         vueCompteDeconnecte = new VueCompteDeconnecte(this);
         vueCompteConnecte = new VueCompteConnecte(this);
@@ -211,10 +211,5 @@ public class VueMenuPrincipal extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
-        mettreAJourFond();
-    }
-
-    public void mettreAJourFond() {
-        root.setBackground(Preferences.getInstance().getBackground());
     }
 }
