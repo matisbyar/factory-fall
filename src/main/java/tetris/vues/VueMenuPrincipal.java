@@ -144,7 +144,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
      */
     private void creerBindings() {
         compte.setOnAction(actionEvent -> {
-            vueCompteConnecte.mettreAJourFond();
+            vueCompteConnecte.mettreAJour();
             vueCompteDeconnecte.mettreAJourFond();
             this.setScene(Session.getInstance().isConnected() ? vueCompteConnecte.getScene() : vueCompteDeconnecte.getScene());
         });

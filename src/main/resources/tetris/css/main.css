@@ -115,7 +115,7 @@
 
 /* CSS de Helper PanelPersonnaliser */
 
-.panel-personnalisation {
+.panel-personnalisation, .panel-classement {
     -fx-background-color: black;
     -fx-padding: 5px 20px;
     -fx-alignment: center;
@@ -134,7 +134,7 @@
 }
 
 /* CSS vuePersonnaliser*/
-.personnalisations {
+.personnalisations, .classement {
     -fx-alignment: center;
     -fx-padding: 10px 100px;
 }
