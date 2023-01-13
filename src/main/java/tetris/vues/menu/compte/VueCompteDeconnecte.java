@@ -229,9 +229,11 @@ public class VueCompteDeconnecte extends Stage implements Menu {
      *
      * @return departement de l'utilisateur
      */
-    public Departement getDepartement() {
-        System.out.println();
-        return (Departement) departementCreation.getValue();
+    public String getDepartement() {
+        System.out.println(departementCreation.getValue().toString());
+        String departement[] = departementCreation.getValue().toString().split(" ");
+        System.out.println(departement[0]);
+        return  departement[0];
     }
 
     @Override

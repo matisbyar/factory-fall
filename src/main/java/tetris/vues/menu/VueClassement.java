@@ -136,14 +136,22 @@ public class VueClassement extends Stage implements Menu {
      */
     private void recupererClassementGeneral() {
         List<Score> topScore = ScoreManager.getInstance().getTopScores();
-
-        // Récupération des scores top score
-        for (int i = 1; i < 11; i++) {
-            String login = "Anonyme";
-            if (topScore.get(i - 1).getLogin() != null) {
-                login = topScore.get(i - 1).getLogin();
+        if (topScore.isEmpty()) {
+            classementTopScore.add(new Label("Aucun score enregistré"), 0, 0);
+        } else {
+            classementTopScore.add(new Label("#"), 0, 0);
+            classementTopScore.add(new Label("Login"), 1, 0);
+            classementTopScore.add(new Label("Score"), 2, 0);
+            classementTopScore.add(new Label("Date"), 3, 0);
+            classementTopScore.add(new Label("Heure"), 4, 0);
+            // Récupération des scores top score
+            for (int i = 1; i < 11; i++) {
+                String login = "Anonyme";
+                if (topScore.get(i - 1).getLogin() != null) {
+                    login = topScore.get(i - 1).getLogin();
+                }
+                listToGridPane(topScore, i, login, classementTopScore);
             }
-            listToGridPane(topScore, i, login, classementTopScore);
         }
     }
 
@@ -154,10 +162,30 @@ public class VueClassement extends Stage implements Menu {
      */
     private void recupererClassementFiltres() {
         boolean estConnecte = Session.getInstance().isConnected();
-        List<Score> topScores = estConnecte ? ScoreManager.getInstance().getTopScoresParDepartement(DepartementManager.getInstance().getDepartementByLogin(Session.getInstance().getLogin())) : ScoreManager.getInstance().getTopScoresAnonyme();
-        for (int i = 1; i < 11; i++) {
-            String login = estConnecte ? Session.getInstance().getLogin() : "Anonyme";
-            listToGridPane(topScores, i, login, classementFiltre);
+        if (estConnecte){
+            System.out.println("connecté dep= " +  Session.getInstance().getDepartement());
+        }
+        List<Score> topScores = estConnecte ? ScoreManager.getInstance().getTopScoresParDepartement(Session.getInstance().getDepartement()) : ScoreManager.getInstance().getTopScoresAnonyme();
+        if (topScores.isEmpty()) {
+            classementFiltre.add(new Label("Aucun score enregistré"), 0, 0);
+        } else {
+            classementFiltre.add(new Label("#"), 0, 0);
+            classementFiltre.add(new Label("Login"), 1, 0);
+            classementFiltre.add(new Label("Score"), 2, 0);
+            classementFiltre.add(new Label("Date"), 3, 0);
+            classementFiltre.add(new Label("Heure"), 4, 0);
+
+
+
+            // TODO attention si il a moins de 10 score dans la bd ->  rique de probleme , break moche mais pas trouvé d'autre solution pour le moment
+            for(int j = 1; j<11;j++){
+                if( j==topScores.size()+1){
+                    break;
+                }
+                String login = estConnecte ? topScores.get(j-1).getLogin() : "Anonyme";
+                listToGridPane(topScores, j, login, classementFiltre);
+
+            }
         }
     }
 
@@ -170,11 +198,11 @@ public class VueClassement extends Stage implements Menu {
      * @param gridPane GridPane à remplir
      */
     private void listToGridPane(List<Score> scores, int indice, String login, GridPane gridPane) {
-        gridPane.add(new Label(String.valueOf(indice)), 0, indice - 1);
-        gridPane.add(new Label(login), 1, indice - 1);
-        gridPane.add(new Label(String.valueOf(scores.get(indice - 1).getScore())), 2, indice - 1);
-        gridPane.add(new Label(new SimpleDateFormat("dd/MM/yyyy").format(scores.get(indice - 1).getHorodatage())), 3, indice - 1);
-        gridPane.add(new Label(new SimpleDateFormat("HH:mm").format(scores.get(indice - 1).getHorodatage())), 4, indice - 1);
+        gridPane.add(new Label(String.valueOf(indice)), 0, indice );
+        gridPane.add(new Label(login), 1, indice );
+        gridPane.add(new Label(String.valueOf(scores.get(indice - 1).getScore())), 2, indice );
+        gridPane.add(new Label(new SimpleDateFormat("dd/MM/yyyy").format(scores.get(indice - 1).getHorodatage())), 3, indice );
+        gridPane.add(new Label(new SimpleDateFormat("HH:mm").format(scores.get(indice - 1).getHorodatage())), 4, indice );
     }
 
     private void rafraichirClassements() {

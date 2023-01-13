@@ -88,7 +88,7 @@ public class VueJeu extends Stage {
                 PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomJoueur().getText(), vueMenuPrincipal.getMotDePasse().getText(), vueMenuPrincipal.getDepartement());
 
                 nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
-                departement = vueMenuPrincipal.getDepartement().getNomDepartement();
+                departement = vueMenuPrincipal.getDepartement();
                 Session.getInstance().connect(nomjoueur, departement);
                 vueMenuPrincipal.afficherScene();
             }
@@ -123,7 +123,7 @@ public class VueJeu extends Stage {
 
             if (connexionOK) {
                 nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
-                departement = DepartementManager.getInstance().getDepartementByLogin(nomjoueur);
+                departement = j.getDepartement();
                 System.out.println("tetris ihm departement :" + departement);
                 Session.getInstance().connect(nomjoueur, departement);
                 vueMenuPrincipal.afficherScene();

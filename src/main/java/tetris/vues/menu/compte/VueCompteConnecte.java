@@ -97,7 +97,7 @@ public class VueCompteConnecte extends Stage implements Menu {
                 classement.add(new Label("Date"), 3, 0);
                 classement.add(new Label("Heure"), 4, 0);
                 for (int indice = 1; indice < 11 && indice <= scores.size(); indice++) {
-                    classement.add(new Label(String.valueOf(indice - 1)), 0, indice);
+                    classement.add(new Label(String.valueOf(indice)), 0, indice);
                     classement.add(new Label(Session.getInstance().getLogin()), 1, indice);
                     classement.add(new Label(String.valueOf(scores.get(indice - 1).getScore())), 2, indice);
                     classement.add(new Label(new SimpleDateFormat("dd/MM/yyyy").format(scores.get(indice - 1).getHorodatage())), 3, indice);

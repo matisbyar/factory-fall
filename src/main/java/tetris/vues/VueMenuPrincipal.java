@@ -179,7 +179,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
     /**
      * Getter utile pour la récupération dans TetrisIHM
      */
-    public Departement getDepartement() {
+    public String getDepartement() {
         return vueCompteDeconnecte.getDepartement();
     }
 
