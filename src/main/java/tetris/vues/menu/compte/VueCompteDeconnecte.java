@@ -159,7 +159,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         ((VBox) champs.getChildren().get(1)).setSpacing(30);
         ((VBox) champs.getChildren().get(1)).setAlignment(Pos.CENTER);
         for (Node enfant : ((VBox) champs.getChildren().get(1)).getChildren()) {
-            enfant.getStyleClass().add("champs-compte-deconnecte");
+            enfant.getStyleClass().add("champ");
             if (enfant instanceof TextField) {
                 ((TextField) enfant).setAlignment(Pos.CENTER);
                 ((TextField) enfant).setPrefWidth(champsCreation.getPrefWidth() * 0.75);
@@ -286,7 +286,6 @@ public class VueCompteDeconnecte extends Stage implements Menu {
      * @return departement de l'utilisateur
      */
     public String getDepartement() {
-        System.out.println(departementCreation.getValue().toString().split(" ")[0]);
         return departementCreation.getValue().toString().split(" ")[0];
     }
 
