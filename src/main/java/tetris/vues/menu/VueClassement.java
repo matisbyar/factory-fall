@@ -2,6 +2,7 @@ package tetris.vues.menu;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -142,11 +143,21 @@ public class VueClassement extends Stage implements Menu {
             erreur.setFont(Ressources.getInstance().getPolice(25));
             classementTopScore.add(erreur, 0, 0);
         } else {
-            classementTopScore.add(new Label("#"), 0, 0);
-            classementTopScore.add(new Label("Login"), 1, 0);
-            classementTopScore.add(new Label("Score"), 2, 0);
-            classementTopScore.add(new Label("Date"), 3, 0);
-            classementTopScore.add(new Label("Heure"), 4, 0);
+            Label loginLabel = new Label("Login");
+            Label num = new Label("#");
+            Label score = new Label("Score");
+            Label date = new Label("Date");
+            Label heure = new Label("Heure");
+            loginLabel.setFont(Ressources.getInstance().getPolice(25));
+            score.setFont(Ressources.getInstance().getPolice(25));
+            date.setFont(Ressources.getInstance().getPolice(25));
+            num.setFont(Ressources.getInstance().getPolice(25));
+            heure.setFont(Ressources.getInstance().getPolice(25));
+            classementTopScore.add(num, 0, 0);
+            classementTopScore.add(loginLabel, 1, 0);
+            classementTopScore.add(score, 2, 0);
+            classementTopScore.add(date, 3, 0);
+            classementTopScore.add(heure, 4, 0);
             // Récupération des scores top score
             for (int i = 1; i < 11; i++) {
                 String login = "Anonyme";
@@ -171,11 +182,26 @@ public class VueClassement extends Stage implements Menu {
             erreur.setFont(Ressources.getInstance().getPolice(25));
             classementFiltre.add(erreur, 0, 0);
         } else {
-            classementFiltre.add(new Label("#"), 0, 0);
-            classementFiltre.add(new Label("Login"), 1, 0);
-            classementFiltre.add(new Label("Score"), 2, 0);
-            classementFiltre.add(new Label("Date"), 3, 0);
-            classementFiltre.add(new Label("Heure"), 4, 0);
+            Label loginLabel = new Label("Login");
+            Label num = new Label("#");
+            Label score = new Label("Score");
+            Label date = new Label("Date");
+            Label heure = new Label("Heure");
+            loginLabel.setFont(Ressources.getInstance().getPolice(25));
+            score.setFont(Ressources.getInstance().getPolice(25));
+            date.setFont(Ressources.getInstance().getPolice(25));
+            num.setFont(Ressources.getInstance().getPolice(25));
+            heure.setFont(Ressources.getInstance().getPolice(25));
+            classementTopScore.add(num, 0, 0);
+            classementTopScore.add(loginLabel, 1, 0);
+            classementTopScore.add(score, 2, 0);
+            classementTopScore.add(date, 3, 0);
+            classementTopScore.add(heure, 4, 0);
+            classementFiltre.add(num, 0, 0);
+            classementFiltre.add(loginLabel, 1, 0);
+            classementFiltre.add(score, 2, 0);
+            classementFiltre.add(date, 3, 0);
+            classementFiltre.add(heure, 4, 0);
             for (int j = 1; j < 11 && j <= topScores.size() - 1; j++) {
                 String login = estConnecte ? topScores.get(j - 1).getLogin() : "Anonyme";
                 listToGridPane(topScores, j, login, classementFiltre);
@@ -192,11 +218,21 @@ public class VueClassement extends Stage implements Menu {
      * @param gridPane GridPane à remplir
      */
     private void listToGridPane(List<Score> scores, int indice, String login, GridPane gridPane) {
-        gridPane.add(new Label(String.valueOf(indice)), 0, indice);
-        gridPane.add(new Label(login), 1, indice);
-        gridPane.add(new Label(String.valueOf(scores.get(indice - 1).getScore())), 2, indice);
-        gridPane.add(new Label(new SimpleDateFormat("dd/MM/yyyy").format(scores.get(indice - 1).getHorodatage())), 3, indice);
-        gridPane.add(new Label(new SimpleDateFormat("HH:mm").format(scores.get(indice - 1).getHorodatage())), 4, indice);
+        Label num = new Label(String.valueOf(indice));
+        Label loginLabel = new Label(login);
+        Label score = new Label(String.valueOf(scores.get(indice - 1).getScore()));
+        Label date = new Label(new SimpleDateFormat("dd/MM/yyyy").format(scores.get(indice - 1).getHorodatage()));
+        Label heure = new Label(new SimpleDateFormat("HH:mm").format(scores.get(indice - 1).getHorodatage()));
+        loginLabel.setFont(Ressources.getInstance().getPolice(20));
+        score.setFont(Ressources.getInstance().getPolice(20));
+        date.setFont(Ressources.getInstance().getPolice(20));
+        num.setFont(Ressources.getInstance().getPolice(20));
+        heure.setFont(Ressources.getInstance().getPolice(20));
+        gridPane.add(num, 0, indice);
+        gridPane.add(loginLabel, 1, indice);
+        gridPane.add(score, 2, indice);
+        gridPane.add(date, 3, indice);
+        gridPane.add(heure, 4, indice);
     }
 
     private void rafraichirClassements() {
