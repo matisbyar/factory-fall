@@ -186,7 +186,7 @@ public class VueJeu extends Stage {
         score = new Label("score : 0.0");
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
-        nbLignes = new Label("Lignes : 0 ");
+        nbLignes = new Label("Lignes : 0");
         vies = new Label("Vies : ");
         nbVies = new HBox();
         if (jeu.getNbVies().get() != 1) {
