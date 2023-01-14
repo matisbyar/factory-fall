@@ -303,10 +303,14 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     public void afficherScene() {
         this.setScene(scene);
 
-        mettreAJourFond();
+        mettreAJour();
     }
 
-    public void mettreAJourFond() {
+    public void mettreAJour() {
+        this.setScene(scene);
+        pseudoCreation.clear();
+        motDePasseCreation.clear();
+        motDePasseCreationConfirmation.clear();
         root.setBackground(Preferences.getInstance().getBackground());
     }
 

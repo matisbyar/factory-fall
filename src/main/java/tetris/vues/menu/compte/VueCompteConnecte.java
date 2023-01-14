@@ -3,6 +3,7 @@ package tetris.vues.menu.compte;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -30,6 +31,10 @@ public class VueCompteConnecte extends Stage implements Menu {
     private final VBox container, vbScores;
     private final Label titre;
 
+    VueModificationCompte vueModificationCompte = new VueModificationCompte(this);
+    Button modifier = new Button("Modifier le compte");
+    VueMenuPrincipal vueMenuPrincipal;
+
     public VueCompteConnecte(VueMenuPrincipal vueMenuPrincipal) {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
@@ -38,18 +43,20 @@ public class VueCompteConnecte extends Stage implements Menu {
 
         classement = new GridPane();
 
-        vbScores = new VBox(titre, classement);
+        vbScores = new VBox(titre, classement, modifier);
         container = new VBox(vbScores);
+
+        this.vueMenuPrincipal = vueMenuPrincipal;
 
         recupererClassement();
 
         // Styles et bindings
         styliser();
+        creerBindings();
 
         // Affichage
         root.setTop(new BarreNavigation("Compte", vueMenuPrincipal, this));
         root.setCenter(container);
-
 
         this.setScene(scene);
     }
@@ -85,6 +92,13 @@ public class VueCompteConnecte extends Stage implements Menu {
         vbScores.setAlignment(Pos.TOP_CENTER);
     }
 
+    public void creerBindings() {
+        modifier.setOnAction(event -> {
+            vueModificationCompte.mettreAJour();
+            vueMenuPrincipal.setScene(vueModificationCompte.getScene());
+        });
+    }
+
     protected void recupererClassement() {
         if (Session.getInstance().isConnected()) {
             List<Score> scores = ScoreManager.getInstance().getTopScoreParLogin(Session.getInstance().getLogin());
@@ -109,6 +123,7 @@ public class VueCompteConnecte extends Stage implements Menu {
 
     @Override
     public void afficherScene() {
+        vueMenuPrincipal.afficherScene();
         this.setScene(scene);
         mettreAJour();
     }
