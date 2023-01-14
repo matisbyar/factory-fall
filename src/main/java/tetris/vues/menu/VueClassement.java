@@ -6,11 +6,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import tetris.IJeu;
+import tetris.TetrisIHM;
 import tetris.logique.Score;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
@@ -22,6 +25,7 @@ import tetris.vues.helpers.BarreNavigation;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Objects;
 
 public class VueClassement extends Stage implements Menu {
 
@@ -70,24 +74,21 @@ public class VueClassement extends Stage implements Menu {
     public void styliser() {
         // Root (BorderPane)
         root.setBackground(Preferences.getInstance().getBackground());
+        scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 
         // Classement
-        classementTopScore.setHgap(20);
-        classementTopScore.setVgap(20);
-        classementTopScore.setAlignment(Pos.CENTER);
-        classementTopScore.setStyle("--fx-border-color: white; -fx-border-width: 3px; -fx-border-style: solid; -fx-background-color: black; -fx-padding: 10px;");
+        classementTopScore.getStyleClass().add("classement");
 
-        classementFiltre.setHgap(20);
-        classementFiltre.setVgap(20);
-        classementFiltre.setAlignment(Pos.CENTER);
-        classementFiltre.setStyle("--fx-border-color: white; -fx-border-width: 3px; -fx-border-style: solid; -fx-background-color: black; -fx-padding: 10px;");
 
-        for (int i = 0; i < classementTopScore.getChildren().size(); i++) {
+        classementFiltre.getStyleClass().add("classement");
+
+        for (int i = 0; i < classementTopScore.getChildren().size() - classementTopScore.getColumnCount(); i++) {
             ((Label) classementTopScore.getChildren().get(i)).setFont(Ressources.getInstance().getPolice(20));
-            classementTopScore.getChildren().get(i).setStyle("-fx-text-fill: white;");
+            classementTopScore.getChildren().get(i).getStyleClass().remove(0);
+            classementTopScore.getChildren().get(i).getStyleClass().add("textClassement");
         }
-        for (int i = 0; i < classementFiltre.getChildren().size(); i++) {
-            ((Label) classementFiltre.getChildren().get(i)).setFont(Ressources.getInstance().getPolice(20));
+
+        for (int i = 0; i < classementFiltre.getChildren().size() - classementTopScore.getColumnCount(); i++) {
             classementFiltre.getChildren().get(i).setStyle("-fx-text-fill: white;");
         }
 
@@ -137,7 +138,9 @@ public class VueClassement extends Stage implements Menu {
     private void recupererClassementGeneral() {
         List<Score> topScore = ScoreManager.getInstance().getTopScores();
         if (topScore.isEmpty()) {
-            classementTopScore.add(new Label("Aucun score enregistré"), 0, 0);
+            Label erreur = new Label("Aucun score enregistré");
+            erreur.setFont(Ressources.getInstance().getPolice(25));
+            classementTopScore.add(erreur, 0, 0);
         } else {
             classementTopScore.add(new Label("#"), 0, 0);
             classementTopScore.add(new Label("Login"), 1, 0);
@@ -164,7 +167,9 @@ public class VueClassement extends Stage implements Menu {
         boolean estConnecte = Session.getInstance().isConnected();
         List<Score> topScores = estConnecte ? ScoreManager.getInstance().getTopScoresParDepartement(Session.getInstance().getDepartement()) : ScoreManager.getInstance().getTopScoresAnonyme();
         if (topScores.isEmpty()) {
-            classementFiltre.add(new Label("Aucun score enregistré"), 0, 0);
+            Label erreur = new Label("Aucun score enregistré");
+            erreur.setFont(Ressources.getInstance().getPolice(25));
+            classementFiltre.add(erreur, 0, 0);
         } else {
             classementFiltre.add(new Label("#"), 0, 0);
             classementFiltre.add(new Label("Login"), 1, 0);

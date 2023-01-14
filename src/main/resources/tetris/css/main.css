@@ -186,3 +186,21 @@
 .panel-compte-deconnecte, .panel-modification-compte {
     -fx-padding: 5px 20px;
 }
+
+
+.classement{
+    -fx-hgap: 20;
+    -fx-vgap: 20;
+    -fx-alignment: center;
+    -fx-background-color: black;
+    -fx-border-style: solid;
+    -fx-border-color: white;
+    -fx-border-width: 3px;
+    -fx-padding: 10px;
+    -fx-text-fill: white;
+    -fx-max-width: 800;
+}
+
+.label{
+    -fx-text-fill: white;
+}
