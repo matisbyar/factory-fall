@@ -32,7 +32,6 @@ public class VueMenuPrincipal extends Stage implements Menu {
     private final BorderPane root;
     private final Scene scene;
     //Objects.requireNonNull(TetrisIHM.class.getResourceAsStream())
-    Preferences preferences = Preferences.getInstance();
 
     private final ImageView logo;
     private final Button start, regles, personnaliser, compte, classement, quitter;
@@ -69,9 +68,6 @@ public class VueMenuPrincipal extends Stage implements Menu {
 
         boutons = new VBox(logo, start, regles, classement, personnaliser);
 
-        styliser();
-        creerBindings();
-
         // Affectations
         root.setCenter(boutons);
         root.setBottom(actions);
@@ -83,6 +79,9 @@ public class VueMenuPrincipal extends Stage implements Menu {
         vueClassement = new VueClassement(this);
         vueRegles = new VueRegles(this);
         vueSelectionJeu = new VueSelectionJeu(this);
+
+        styliser();
+        creerBindings();
 
         this.setScene(scene);
     }
@@ -151,7 +150,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         });
         compte.setOnAction(actionEvent -> {
             vueCompteConnecte.mettreAJour();
-            vueCompteDeconnecte.mettreAJourFond();
+            vueCompteDeconnecte.mettreAJour();
             this.setScene(Session.getInstance().isConnected() ? vueCompteConnecte.getScene() : vueCompteDeconnecte.getScene());
         });
         regles.setOnAction(actionEvent -> {

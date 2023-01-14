@@ -3,10 +3,9 @@ package tetris.vues.menu.compte;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
 import tetris.logique.Score;
@@ -27,29 +26,58 @@ public class VueCompteConnecte extends Stage implements Menu {
     private final BorderPane root;
     private final Scene scene;
     private final GridPane classement;
-    private final VBox container, vbScores;
-    private final Label titre;
+    private final VBox  vbScores;
+    private final HBox information,actions;
+    private  final Button modifiéprofil,déconnecté;
+    private final Label nomjoueur,departementjoueur;
+
+    VueModificationCompte vueModificationCompte = new VueModificationCompte(this);
+    Button modifier = new Button("Modifier le compte");
+    VueMenuPrincipal vueMenuPrincipal;
 
     public VueCompteConnecte(VueMenuPrincipal vueMenuPrincipal) {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
 
-        titre = new Label("Vos Meilleurs Scores");
+        nomjoueur = new Label("nom joueur");
+
+        modifiéprofil = new Button();
+        déconnecté = new Button();
+
+        departementjoueur = new Label("departement");
+
+        if (Session.getInstance().isConnected()) {
+       nomjoueur.setText(Session.getInstance().getLogin());
+       departementjoueur.setText(Session.getInstance().getDepartement());
+        }
 
         classement = new GridPane();
 
-        vbScores = new VBox(titre, classement);
-        container = new VBox(vbScores);
+        information = new HBox(nomjoueur,departementjoueur);
+        actions   =   new HBox(modifier,déconnecté);
+
+
+
+
+        vbScores = new VBox(information, classement, actions);
+
+
+        this.vueMenuPrincipal = vueMenuPrincipal;
+
+
+
+
+
 
         recupererClassement();
 
         // Styles et bindings
         styliser();
+        creerBindings();
 
         // Affichage
         root.setTop(new BarreNavigation("Compte", vueMenuPrincipal, this));
-        root.setCenter(container);
-
+        root.setCenter(vbScores);
 
         this.setScene(scene);
     }
@@ -58,15 +86,42 @@ public class VueCompteConnecte extends Stage implements Menu {
         // Root (BorderPane)
         root.setBackground(Preferences.getInstance().getBackground());
 
-        //Titre
-        titre.setFont(Ressources.getInstance().getPolice(32));
-        titre.setStyle("-fx-text-fill: white;");
-        titre.setAlignment(Pos.TOP_CENTER);
+        //nomjoueur
+        nomjoueur.setFont(Ressources.getInstance().getPolice(45));
+        nomjoueur.setStyle("-fx-text-fill: white;");
+        nomjoueur.setAlignment(Pos.BOTTOM_CENTER);
+
+
+        //departementjoueur
+        departementjoueur.setFont(Ressources.getInstance().getPolice(30));
+        departementjoueur.setStyle("-fx-text-fill: white;");
+        departementjoueur.setAlignment(Pos.CENTER);
+
+
+
+        // Hbox des boutons
+        actions.setAlignment(Pos.CENTER);
+        actions.setSpacing(50);
+        actions.setPadding(new Insets(10, 10, 10, 10));
+
+        //boutton
+        modifier.setText("Modifié votre profil");
+        modifier.setFont(Ressources.getInstance().getPolice(20));
+        modifier.getStyleClass().add("bouton");
+        modifier.setPrefWidth(500);
+
+        déconnecté.setText("Déconnection");
+        déconnecté.setFont(Ressources.getInstance().getPolice(20));
+        déconnecté.getStyleClass().add("bouton");
+        déconnecté.setPrefWidth(200);
+
 
         //Classement
         classement.setHgap(20);
         classement.setVgap(20);
         classement.setAlignment(Pos.TOP_CENTER);
+        classement.setGridLinesVisible(true);
+
 
         for (int i = 0; i < classement.getChildren().size(); i++) {
             classement.getChildren().get(i).setStyle("-fx-text-fill: white");
@@ -75,40 +130,78 @@ public class VueCompteConnecte extends Stage implements Menu {
         // Scene
         scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 
-        // Panel classement (VBox contenant classement)
-        container.getStyleClass().add("classement");
-        container.setAlignment(Pos.TOP_CENTER);
-        container.setPadding(new Insets(20));
+
 
         // Classement (VBox)
-        vbScores.getStyleClass().add("panel-classement");
+        vbScores.getStyleClass().add("classement");
         vbScores.setAlignment(Pos.TOP_CENTER);
+        vbScores.setPadding(new Insets(30));
+
+
+
+
+        //information HBox
+        information.setAlignment(Pos.BOTTOM_LEFT);
+        information.setSpacing(20);
+        information.setPadding(new Insets(0, 0, 10, 50));
+
     }
 
+    public void creerBindings() {
+        modifier.setOnAction(event -> {
+            vueModificationCompte.mettreAJour();
+            vueMenuPrincipal.setScene(vueModificationCompte.getScene());
+        });
+        déconnecté.setOnAction(event->{
+            Session.getInstance().disconnect();
+            System.out.println("joueur bien deco");
+
+        });
+    }
+
+    /**
+     * Récupère le classement depuis la base de données.
+     */
     protected void recupererClassement() {
         if (Session.getInstance().isConnected()) {
             List<Score> scores = ScoreManager.getInstance().getTopScoreParLogin(Session.getInstance().getLogin());
             if (scores.isEmpty()) {
-                classement.add(new Label("Aucun score enregistré"), 0, 0);
+                Label erreur = new Label("Aucun score enregistré");
+                erreur.setFont(Ressources.getInstance().getPolice(25));
+                classement.add(erreur, 0, 0);
+
             } else {
-                classement.add(new Label("#"), 0, 0);
-                classement.add(new Label("Login"), 1, 0);
-                classement.add(new Label("Score"), 2, 0);
-                classement.add(new Label("Date"), 3, 0);
-                classement.add(new Label("Heure"), 4, 0);
+
+                Label score = new Label("Score");
+                Label date = new Label("Date");
+                Label heure = new Label("Heure");
+
+                score.setFont(Ressources.getInstance().getPolice(25));
+                date.setFont(Ressources.getInstance().getPolice(25));
+
+                heure.setFont(Ressources.getInstance().getPolice(25));
+                classement.add(score, 0, 0);
+                classement.add(date, 1, 0);
+                classement.add(heure, 2, 0);
                 for (int indice = 1; indice < 11 && indice <= scores.size(); indice++) {
-                    classement.add(new Label(String.valueOf(indice)), 0, indice);
-                    classement.add(new Label(Session.getInstance().getLogin()), 1, indice);
-                    classement.add(new Label(String.valueOf(scores.get(indice - 1).getScore())), 2, indice);
-                    classement.add(new Label(new SimpleDateFormat("dd/MM/yyyy").format(scores.get(indice - 1).getHorodatage())), 3, indice);
-                    classement.add(new Label(new SimpleDateFormat("HH:mm").format(scores.get(indice - 1).getHorodatage())), 4, indice);
-                }
+
+                    Label Score = new Label(String.valueOf(scores.get(indice - 1).getScore()));
+                    Label Date = new Label(new SimpleDateFormat("dd/MM/yyyy").format(scores.get(indice - 1).getHorodatage()));
+                    Label Heure = new Label(new SimpleDateFormat("HH:mm").format(scores.get(indice - 1).getHorodatage()));
+
+                    Score.setFont(Ressources.getInstance().getPolice(20));
+                    Date.setFont(Ressources.getInstance().getPolice(20));
+                    Heure.setFont(Ressources.getInstance().getPolice(20));
+                    classement.add(Score, 0, indice);
+                    classement.add(Date, 1, indice);
+                    classement.add(Heure, 2, indice); }
             }
         }
     }
 
     @Override
     public void afficherScene() {
+        vueMenuPrincipal.afficherScene();
         this.setScene(scene);
         mettreAJour();
     }
@@ -117,5 +210,7 @@ public class VueCompteConnecte extends Stage implements Menu {
         root.setBackground(Preferences.getInstance().getBackground());
         classement.getChildren().clear();
         recupererClassement();
+        nomjoueur.setText(Session.getInstance().getLogin());
+        departementjoueur.setText(Session.getInstance().getDepartement());
     }
 }

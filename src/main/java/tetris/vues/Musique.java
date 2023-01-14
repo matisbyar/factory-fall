@@ -10,27 +10,48 @@ import java.util.Objects;
 
 public class Musique {
     private static Media mainMenuMusic;
-    private static MediaPlayer mainMenuMusicPlayer;
+    private static Media gameMusic;
+    private static MediaPlayer musicPlayer;
 
     public static void playMusicMainMenu() {
-        mainMenuMusic = new Media(Objects.requireNonNull(TetrisIHM.class.getResource("music/Factory_Fall_Main_Theme_20221229_205142.mp3")).toString());
-        mainMenuMusicPlayer = new MediaPlayer(mainMenuMusic);
-        mainMenuMusicPlayer.setAutoPlay(true);
-        mainMenuMusicPlayer.volumeProperty().setValue(0.1);
-        mainMenuMusicPlayer.setOnEndOfMedia(new Runnable() {
-            public void run() {
-                mainMenuMusicPlayer.seek(Duration.ZERO);
-            }
-        });
+        if (!Preferences.getInstance().getMusiqueMute()) {
+            mainMenuMusic = new Media(Objects.requireNonNull(String.valueOf(TetrisIHM.class.getResource("music/MainMenuMusic.mp3"))));
+            musicPlayer = new MediaPlayer(mainMenuMusic);
+            musicPlayer.setAutoPlay(true);
+            musicPlayer.volumeProperty().setValue(0.1);
+            musicPlayer.setOnEndOfMedia(new Runnable() {
+                public void run() {
+                    musicPlayer.seek(Duration.ZERO);
+                }
+            });
+        }
     }
 
     public static void stopMusicMainMenu() {
-        mainMenuMusicPlayer.stop();
+        musicPlayer.stop();
     }
 
     public static void btnMute() {
-        mainMenuMusicPlayer.setMute(!mainMenuMusicPlayer.isMute());
-        Preferences.getInstance().setMusiqueMute(mainMenuMusicPlayer.isMute());
-        System.out.println(mainMenuMusicPlayer.isMute());
+        musicPlayer.setMute(!musicPlayer.isMute());
+        Preferences.getInstance().setMusiqueMute(musicPlayer.isMute());
+        System.out.println(musicPlayer.isMute());
+    }
+
+    public static void playMusicGame() {
+        if (!Preferences.getInstance().getMusiqueMute()) {
+            gameMusic = new Media(Objects.requireNonNull(String.valueOf(TetrisIHM.class.getResource("music/GameMusic.mp3"))));
+            musicPlayer = new MediaPlayer(gameMusic);
+            musicPlayer.setAutoPlay(true);
+            musicPlayer.volumeProperty().setValue(0.1);
+            musicPlayer.setOnEndOfMedia(new Runnable() {
+                public void run() {
+                    musicPlayer.seek(Duration.ZERO);
+                }
+            });
+        }
+    }
+
+    public static void stopMusicGame() {
+        if (musicPlayer != null) musicPlayer.stop();
     }
 }

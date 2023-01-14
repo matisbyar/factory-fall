@@ -1,5 +1,7 @@
 package tetris.stockage;
 
+import java.util.Objects;
+
 public class Session {
 
     private static Session instance = null;
@@ -29,7 +31,7 @@ public class Session {
     }
 
     public boolean isConnected() {
-        return this.login != null && !this.login.isEmpty();
+        return !Objects.equals(this.login, "Anonyme") && !this.login.isEmpty();
     }
 
     public void connect(String login, String departement) {
@@ -38,6 +40,6 @@ public class Session {
     }
 
     public void disconnect() {
-        this.login = null;
+        this.login = "Anonyme";
     }
 }

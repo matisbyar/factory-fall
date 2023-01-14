@@ -60,6 +60,8 @@ public class VueGameOver extends Stage implements Menu {
     }
 
     public void arreterJeu() {
+        Musique.stopMusicGame();
+        Musique.playMusicMainMenu();
         arreterJeu.setValue(true);
         close();
     }

@@ -32,6 +32,7 @@ import tetris.stockage.Security;
 import tetris.stockage.Session;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -169,6 +170,7 @@ public class VueJeu extends Stage {
         // Initialisations des objets nécessaires
         // classes de la logique du jeu
         Musique.stopMusicMainMenu();
+        Musique.playMusicGame();
         jeu = new Jeu(nomjoueur, nbViesInitial);
         jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
@@ -188,7 +190,7 @@ public class VueJeu extends Stage {
         score = new Label("score : 0.0");
         pseudo = new Label(jeu.getJoueur().getPseudo());
         rang = new Label("rang : 1");
-        nbLignes = new Label("Lignes : 0 ");
+        nbLignes = new Label("Lignes : 0");
         vies = new Label("Vies : ");
         nbVies = new HBox();
         if (jeu.getNbVies().get() != 1) {
@@ -298,7 +300,7 @@ public class VueJeu extends Stage {
         jeu.jeuEnCoursProperty().addListener((observableValue, aBoolean, t1) -> {
             if (!jeu.isJeuEnCours()) {
                 VueGameOver vueGameOver = new VueGameOver(jeu.getJoueur().getScore().getValue());
-                ScoreManager.getInstance().createScore(jeu.getJoueur().getScore().getValue(), Session.getInstance().getLogin());
+                ScoreManager.getInstance().createScore(jeu.getJoueur().getScore().getValue(), jeu.getJoueur().getLignesSup().getValue(), Session.getInstance().getLogin());
                 vueGameOver.arreterJeuProperty().addListener((observableValue12, aBoolean12, t112) -> {
                     if (vueGameOver.arreterJeuProperty().getValue()) {
                         vueGameOver.close();

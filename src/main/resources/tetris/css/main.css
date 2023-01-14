@@ -38,6 +38,15 @@
     -fx-background-color: rgb(15, 15, 15);
 }
 
+.bouton-rouge {
+    -fx-text-fill: #c2251e;
+    -fx-background-color: black;
+    -fx-border-color: #c2251e;
+    -fx-border-width: 2px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+}
+
 /*Pour modifier individuellement un bouton utilisez #nomBouton*/
 
 .vBoxBouton {
@@ -154,20 +163,16 @@
     -fx-spacing: 100;
 }
 
-.titre-compte-deconnecte {
+.titre-compte-deconnecte, .titre {
     -fx-text-fill: white;
 }
 
-.champsConnexion {
-    -fx-spacing: 20;
-}
-
-.champsCreation {
+.champ {
     -fx-spacing: 20;
 }
 
 /*Vue Jeu (TetrisIHM)*/
-.panel-partie, .panel-compte-deconnecte {
+.panel-partie, .panel-compte-deconnecte, .panel-modification-compte {
     -fx-border-color: white;
     -fx-border-width: 3px;
     -fx-border-style: solid;
@@ -178,6 +183,24 @@
     -fx-padding: 10px;
 }
 
-.panel-compte-deconnecte {
+.panel-compte-deconnecte, .panel-modification-compte {
     -fx-padding: 5px 20px;
+}
+
+
+.classement{
+    -fx-hgap: 20;
+    -fx-vgap: 20;
+    -fx-alignment: center;
+    -fx-background-color: black;
+    -fx-border-style: solid;
+    -fx-border-color: white;
+    -fx-border-width: 3px;
+    -fx-padding: 10px;
+    -fx-text-fill: white;
+    -fx-max-width: 800;
+}
+
+.label{
+    -fx-text-fill: white;
 }
