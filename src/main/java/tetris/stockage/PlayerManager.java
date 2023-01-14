@@ -27,7 +27,7 @@ public class PlayerManager {
         stockage.create(p);
     }
 
-    public void updatePlayer(String login, String Departement, String password) {
+    public void updatePlayer(String login, String departement, String password) {
         AuthPlayer p = stockage.getByLogin(login);
         byte[] salt = Security.getSalt();
         p.setSalt(salt);
