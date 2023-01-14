@@ -311,6 +311,8 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         pseudoCreation.clear();
         motDePasseCreation.clear();
         motDePasseCreationConfirmation.clear();
+        pseudoConnexion.clear();
+        motDePasseConnexion.clear();
         root.setBackground(Preferences.getInstance().getBackground());
     }
 
