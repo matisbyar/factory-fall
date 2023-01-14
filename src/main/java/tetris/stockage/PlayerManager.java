@@ -1,7 +1,6 @@
 package tetris.stockage;
 
 import tetris.logique.AuthPlayer;
-import tetris.logique.Departement;
 import tetris.stockage.sql.StockagePlayerDatabase;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class PlayerManager {
         stockage.create(p);
     }
 
-    public void updatePlayer(String login, String password) {
+    public void updatePlayer(String login, String Departement, String password) {
         AuthPlayer p = stockage.getByLogin(login);
         byte[] salt = Security.getSalt();
         p.setSalt(salt);
