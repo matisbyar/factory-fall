@@ -15,7 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
-import tetris.logique.Departement;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
 import tetris.stockage.Session;
@@ -182,6 +181,14 @@ public class VueMenuPrincipal extends Stage implements Menu {
     public String getDepartement() {
         return vueCompteDeconnecte.getDepartement();
     }
+
+    /**
+     * Getter utile pour la récupération dans TetrisIHM
+     */
+    public PasswordField getMotDePasseConfirmation() {
+        return vueCompteDeconnecte.getMotDePasseConfirmation();
+    }
+
 
     /**
      * Fonction qui déclenche le lancement du jeu en Anonyme dans TetrisIHM

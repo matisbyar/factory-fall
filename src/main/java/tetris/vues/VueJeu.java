@@ -85,8 +85,17 @@ public class VueJeu extends Stage {
         @Override
         public void handle(ActionEvent event) {
             AuthPlayer j = PlayerManager.getInstance().getPlayer(vueMenuPrincipal.getNomJoueur().getText());
+            String departement = vueMenuPrincipal.getDepartement();
+            String motDePasse = vueMenuPrincipal.getMotDePasse().getText();
+            String motDePasseConfirmation = vueMenuPrincipal.getMotDePasseConfirmation().getText();
             if (j != null) {
-                System.out.println("Cet identifiant n'est pas disponible");
+                vueMenuPrincipal.vueCompteDeconnecte.afficherErreurConnexion("Ce pseudo est déjà utilisé");
+            } else if (departement.equals("Département")) {
+                vueMenuPrincipal.vueCompteDeconnecte.afficherErreurCreation("Veuillez choisir un département");
+            } else if (motDePasse.equals("")) {
+                vueMenuPrincipal.vueCompteDeconnecte.afficherErreurCreation("Veuillez entrer un mot de passe");
+            } else if (!motDePasse.equals(motDePasseConfirmation)) {
+                vueMenuPrincipal.vueCompteDeconnecte.afficherErreurCreation("Les mots de passe ne correspondent pas");
             } else {
                 PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomJoueur().getText(), vueMenuPrincipal.getMotDePasse().getText(), vueMenuPrincipal.getDepartement());
 
@@ -117,11 +126,11 @@ public class VueJeu extends Stage {
 
                 if (!connexionOK) {
                     //Si le mot de passe est incorrect (mais le login existe dans la BD)
-                    System.out.println("Mot de passe incorrect");
+                    vueMenuPrincipal.vueCompteDeconnecte.afficherErreurConnexion("L'identifiant ou le mot de passe est incorrect");
                 }
             } else {
                 //Si l'identifiant est incorrect (aucun joueur de ce login n'est inscrit dans la BD)
-                System.out.println("Identifiant incorrect");
+                vueMenuPrincipal.vueCompteDeconnecte.afficherErreurConnexion("L'identifiant ou le mot de passe est incorrect");
             }
 
             if (connexionOK) {

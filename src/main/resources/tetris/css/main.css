@@ -15,23 +15,27 @@
 
 /* CSS de VueMenuPrincipal */
 
-.textFieldNomJoueur {
-    -fx-background-color: black;
-    -fx-highlight-text-fill: white;
-    -fx-text-fill: white;
-    -fx-max-width: 150;
+.champs-compte-deconnecte {
+    -fx-background-color: white;
+    -fx-highlight-text-fill: gray;
+    -fx-text-fill: gray;
+    -fx-border-width: 0px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
 }
 
 .bouton {
     -fx-border-style: solid;
-    -fx-border-radius: 2px;
-    -fx-border-color: #e3e3e3;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-border-color: white;
     -fx-text-fill: white;
     -fx-background-color: black;
-    /*font family*/
+    -fx-border-width: 2px;
 }
+
 .bouton:hover {
-    -fx-background-color: rgb(15,15,15);
+    -fx-background-color: rgb(15, 15, 15);
 }
 
 /*Pour modifier individuellement un bouton utilisez #nomBouton*/
@@ -57,6 +61,10 @@
     -fx-text-fill: black;
     -fx-background-color: white;
     -fx-padding: 0 20px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
 }
 
 .titre {
@@ -69,34 +77,31 @@
 /* CSS de Helper BoiteCombinee */
 
 .boite-combinee {
-    -fx-background-color: black;
-    -fx-background-radius: 2px;
+    -fx-background-color: white;
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
 }
 
 .boite-combinee:disabled {
     -fx-opacity: .4;
 }
 
-.boite-combinee .list-cell{
-    -fx-background-color: black;
-    -fx-text-fill: silver;
+.boite-combinee .list-cell {
+    -fx-background-color: white;
+    -fx-text-fill: gray;
 }
 
-.combo-box-popup .list-view{
-    -fx-background-color: black;
+.combo-box-popup .list-view {
+    -fx-background-color: white;
 }
 
-.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover{
-    -fx-background-color: rgb(20, 20, 20);
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-text-fill: black;
 }
-.combo-box-popup .list-view .list-cell:filled:hover
-{
-    -fx-background-color: rgb(20, 20, 20);
-    -fx-text-fill: white;
-}
+
 .combo-box .scroll-bar {
-    -fx-background-color: black;
-    -fx-color: rgb(20, 20, 20);
+    -fx-background-color: white;
+    -fx-color: gray;
 }
 
 .combo-box .scroll-bar:vertical *.increment-button,
@@ -114,7 +119,6 @@
 }
 
 /* CSS de Helper PanelPersonnaliser */
-
 .panel-personnalisation, .panel-classement {
     -fx-background-color: black;
     -fx-padding: 5px 20px;
@@ -134,7 +138,7 @@
 }
 
 /* CSS vuePersonnaliser*/
-.personnalisations, .classement {
+.personnalisations, .classement, .option {
     -fx-alignment: center;
     -fx-padding: 10px 100px;
 }
@@ -145,17 +149,12 @@
 
 
 /* CSS VueCompteDeconnecté */
-
 .option {
     -fx-alignment: center;
     -fx-spacing: 100;
 }
 
-.titreConnexion {
-    -fx-text-fill: white;
-}
-
-.titreCreation {
+.titre-compte-deconnecte {
     -fx-text-fill: white;
 }
 
@@ -168,10 +167,17 @@
 }
 
 /*Vue Jeu (TetrisIHM)*/
-.panel-partie {
+.panel-partie, .panel-compte-deconnecte {
     -fx-border-color: white;
     -fx-border-width: 3px;
     -fx-border-style: solid;
     -fx-background-color: black;
+}
+
+.panel-partie {
     -fx-padding: 10px;
+}
+
+.panel-compte-deconnecte {
+    -fx-padding: 5px 20px;
 }

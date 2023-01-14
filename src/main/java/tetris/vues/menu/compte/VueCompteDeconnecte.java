@@ -2,6 +2,9 @@ package tetris.vues.menu.compte;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,7 +33,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     private final HBox option;
     private final VBox champsConnexion, champsCreation;
 
-    private final Label titreConnexion, titreCreation;
+    private final Label titreConnexion, titreCreation, erreurConnexion, erreurCreation;
     private final TextField pseudoConnexion, pseudoCreation;
     private final BoiteCombinee departementCreation;
     private final PasswordField motDePasseConnexion, motDePasseCreation, motDePasseCreationConfirmation;
@@ -51,24 +54,25 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         pseudoConnexion = new TextField();
         pseudoCreation = new TextField();
 
-        departementCreation = new BoiteCombinee(DepartementManager.getInstance().getAll(), "Departement", 10);
-
+        departementCreation = new BoiteCombinee(DepartementManager.getInstance().getAll(), "Département", 10);
 
         motDePasseConnexion = new PasswordField();
         motDePasseCreation = new PasswordField();
         motDePasseCreationConfirmation = new PasswordField();
 
-        titreConnexion = new Label("Connexion");
-        titreCreation = new Label("Inscription");
+        titreConnexion = new Label("Se connecter");
+        titreCreation = new Label("S'inscrire");
+        erreurConnexion = new Label("L'identifiant ou le mot de passe est incorrect");
+        erreurCreation = new Label();
+
+        champsConnexion.getChildren().addAll(titreConnexion, new VBox(pseudoConnexion, motDePasseConnexion), new VBox(erreurConnexion, boutonConnexion));
+        champsCreation.getChildren().addAll(titreCreation, new VBox(pseudoCreation, departementCreation, motDePasseCreation, motDePasseCreationConfirmation), new VBox(erreurCreation, boutonCreation));
+
+        option.getChildren().addAll(champsConnexion, champsCreation);
 
         // Styles et bindings
         styliser();
         setDisable();
-
-        champsConnexion.getChildren().addAll(titreConnexion, pseudoConnexion, motDePasseConnexion, boutonConnexion);
-        champsCreation.getChildren().addAll(titreCreation, pseudoCreation, departementCreation, motDePasseCreation, motDePasseCreationConfirmation, boutonCreation);
-
-        option.getChildren().addAll(champsConnexion, champsCreation);
 
         root.setCenter(option);
         root.setTop(new BarreNavigation("Compte", vueMenuPrincipal, this));
@@ -85,40 +89,81 @@ public class VueCompteDeconnecte extends Stage implements Menu {
 
         // Options (connexion ou création)
         option.getStyleClass().add("option");
-
-        // Titre
-        titreConnexion.getStyleClass().add("titreConnexion");
-        titreConnexion.getStyleClass().add("titreCreation");
-        titreConnexion.setFont(Ressources.getInstance().getPolice(32));
-        titreCreation.setFont(Ressources.getInstance().getPolice(32));
+        option.setPadding(new Insets(30, 30, 70, 30));
 
         // Box de connexion/création
-        champsConnexion.getStyleClass().add("champsConnexion");
-        champsCreation.getStyleClass().add("champsCreation");
+        champsConnexion.getStyleClass().add("panel-compte-deconnecte");
+        champsCreation.getStyleClass().add("panel-compte-deconnecte");
+        champsConnexion.setPrefWidth(scene.getWidth() * 0.4);
+        champsCreation.setPrefWidth(scene.getWidth() * 0.4);
+        champsConnexion.setSpacing(30);
+        champsCreation.setSpacing(30);
+
+        // Titre
+        titreConnexion.getStyleClass().add("titre-compte-deconnecte");
+        titreCreation.getStyleClass().add("titre-compte-deconnecte");
+        titreConnexion.setFont(Ressources.getInstance().getPolice(32));
+        titreCreation.setFont(Ressources.getInstance().getPolice(32));
+        titreConnexion.setAlignment(Pos.CENTER);
+        titreCreation.setAlignment(Pos.CENTER);
+        titreConnexion.setPrefWidth(champsConnexion.getPrefWidth());
+        titreCreation.setPrefWidth(champsCreation.getPrefWidth());
+        titreConnexion.setPadding(new Insets(10, 0, 20, 0));
+        titreCreation.setPadding(new Insets(10, 0, 20, 0));
 
         // Champs pseudo
         pseudoConnexion.setPromptText("Pseudo");
         pseudoCreation.setPromptText("Pseudo");
-        pseudoConnexion.getStyleClass().add("textFieldNomJoueur");
-        pseudoCreation.getStyleClass().add("textFieldNomJoueur");
 
         // Champs mot de passe
         motDePasseConnexion.setPromptText("Mot de passe");
         motDePasseCreation.setPromptText("Mot de passe");
-
         motDePasseCreationConfirmation.setPromptText("Confirmation du mot de passe");
 
-        motDePasseConnexion.getStyleClass().add("textFieldNomJoueur");
-        motDePasseCreation.getStyleClass().add("textFieldNomJoueur");
-
-        motDePasseCreationConfirmation.getStyleClass().add("textFieldNomJoueur");
-
         // Boutons
-
         boutonConnexion.setText("Connexion");
         boutonConnexion.getStyleClass().add("bouton");
         boutonCreation.setText("S'inscrire");
         boutonCreation.getStyleClass().add("bouton");
+        boutonConnexion.setAlignment(Pos.CENTER);
+        boutonCreation.setAlignment(Pos.CENTER);
+        boutonConnexion.setPrefWidth(champsConnexion.getPrefWidth());
+        boutonCreation.setPrefWidth(champsCreation.getPrefWidth());
+        boutonConnexion.setFont(Ressources.getInstance().getPolice(20));
+        boutonCreation.setFont(Ressources.getInstance().getPolice(20));
+
+        styliserChamps(champsConnexion);
+        styliserChamps(champsCreation);
+        champsConnexion.setMinHeight(champsConnexion.getPrefHeight());
+        champsCreation.setMinHeight(champsCreation.getPrefHeight());
+
+        ((VBox) champsConnexion.getChildren().get(2)).getChildren().get(0).setVisible(false);
+        ((VBox) champsCreation.getChildren().get(2)).getChildren().get(0).setVisible(false);
+        ((VBox) champsConnexion.getChildren().get(2)).getChildren().get(0).setStyle("-fx-text-fill: red");
+        ((VBox) champsCreation.getChildren().get(2)).getChildren().get(0).setStyle("-fx-text-fill: red");
+        ((Label) ((VBox) champsCreation.getChildren().get(2)).getChildren().get(0)).setFont(Ressources.getInstance().getPolice(16));
+        ((Label) ((VBox) champsCreation.getChildren().get(2)).getChildren().get(0)).setAlignment(Pos.CENTER);
+    }
+
+    /**
+     * Pré-requis : l'enfant n°1 de la VBox champs doit contenir une VBox avec les TextField
+     *
+     * @param champs VBox
+     */
+    private void styliserChamps(VBox champs) {
+        ((VBox) champs.getChildren().get(1)).setSpacing(30);
+        ((VBox) champs.getChildren().get(1)).setAlignment(Pos.CENTER);
+        for (Node enfant : ((VBox) champs.getChildren().get(1)).getChildren()) {
+            enfant.getStyleClass().add("champs-compte-deconnecte");
+            if (enfant instanceof TextField) {
+                ((TextField) enfant).setAlignment(Pos.CENTER);
+                ((TextField) enfant).setPrefWidth(champsCreation.getPrefWidth() * 0.75);
+                ((TextField) enfant).setFont(Ressources.getInstance().getPolice(20));
+            } else if (enfant instanceof BoiteCombinee) {
+                ((BoiteCombinee) enfant).setPrefWidth(champsCreation.getPrefWidth() * 0.75);
+
+            }
+        }
     }
 
 
@@ -147,10 +192,11 @@ public class VueCompteDeconnecte extends Stage implements Menu {
             if (newValue != null && !newValue.isEmpty()) {
                 pseudoConnexion.setDisable(true);
                 motDePasseConnexion.setDisable(true);
+                boutonConnexion.setDisable(true);
             } else if (motDePasseCreation.getText().isEmpty() && motDePasseCreationConfirmation.getText().isEmpty()) {
                 pseudoConnexion.setDisable(false);
                 motDePasseConnexion.setDisable(false);
-
+                boutonConnexion.setDisable(false);
             }
         });
     }
@@ -182,11 +228,13 @@ public class VueCompteDeconnecte extends Stage implements Menu {
                 departementCreation.setDisable(true);
                 motDePasseCreation.setDisable(true);
                 motDePasseCreationConfirmation.setDisable(true);
+                boutonCreation.setDisable(true);
             } else if (motDePasseConnexion.getText().isEmpty()) {
                 pseudoCreation.setDisable(false);
                 departementCreation.setDisable(false);
                 motDePasseCreation.setDisable(false);
                 motDePasseCreationConfirmation.setDisable(false);
+                boutonCreation.setDisable(false);
             }
         });
     }
@@ -223,13 +271,28 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         return motDePasseConnexion.isDisabled() ? motDePasseCreation : motDePasseConnexion;
     }
 
+    public PasswordField getMotDePasseConfirmation() {
+        return motDePasseCreationConfirmation;
+    }
+
     /**
      * Récupère le département de l'utilisateur
      *
      * @return departement de l'utilisateur
      */
     public String getDepartement() {
+        System.out.println(departementCreation.getValue().toString().split(" ")[0]);
         return departementCreation.getValue().toString().split(" ")[0];
+    }
+
+    public void afficherErreurConnexion(String message) {
+        ((Label) ((VBox) champsConnexion.getChildren().get(2)).getChildren().get(0)).setText(message);
+        ((VBox) champsConnexion.getChildren().get(2)).getChildren().get(0).setVisible(true);
+    }
+
+    public void afficherErreurCreation(String message) {
+        ((Label) ((VBox) champsCreation.getChildren().get(2)).getChildren().get(0)).setText(message);
+        ((VBox) champsCreation.getChildren().get(2)).getChildren().get(0).setVisible(true);
     }
 
     @Override
