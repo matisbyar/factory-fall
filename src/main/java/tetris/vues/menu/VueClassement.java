@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import tetris.logique.Score;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
-import tetris.stockage.DepartementManager;
 import tetris.stockage.ScoreManager;
 import tetris.stockage.Session;
 import tetris.vues.Menu;
@@ -162,9 +161,6 @@ public class VueClassement extends Stage implements Menu {
      */
     private void recupererClassementFiltres() {
         boolean estConnecte = Session.getInstance().isConnected();
-        if (estConnecte){
-            System.out.println("connecté dep= " +  Session.getInstance().getDepartement());
-        }
         List<Score> topScores = estConnecte ? ScoreManager.getInstance().getTopScoresParDepartement(Session.getInstance().getDepartement()) : ScoreManager.getInstance().getTopScoresAnonyme();
         if (topScores.isEmpty()) {
             classementFiltre.add(new Label("Aucun score enregistré"), 0, 0);
@@ -174,17 +170,9 @@ public class VueClassement extends Stage implements Menu {
             classementFiltre.add(new Label("Score"), 2, 0);
             classementFiltre.add(new Label("Date"), 3, 0);
             classementFiltre.add(new Label("Heure"), 4, 0);
-
-
-
-            // TODO attention si il a moins de 10 score dans la bd ->  rique de probleme , break moche mais pas trouvé d'autre solution pour le moment
-            for(int j = 1; j<11;j++){
-                if( j==topScores.size()+1){
-                    break;
-                }
-                String login = estConnecte ? topScores.get(j-1).getLogin() : "Anonyme";
+            for (int j = 1; j < 11 && j <= topScores.size() - 1; j++) {
+                String login = estConnecte ? topScores.get(j - 1).getLogin() : "Anonyme";
                 listToGridPane(topScores, j, login, classementFiltre);
-
             }
         }
     }
@@ -198,11 +186,11 @@ public class VueClassement extends Stage implements Menu {
      * @param gridPane GridPane à remplir
      */
     private void listToGridPane(List<Score> scores, int indice, String login, GridPane gridPane) {
-        gridPane.add(new Label(String.valueOf(indice)), 0, indice );
-        gridPane.add(new Label(login), 1, indice );
-        gridPane.add(new Label(String.valueOf(scores.get(indice - 1).getScore())), 2, indice );
-        gridPane.add(new Label(new SimpleDateFormat("dd/MM/yyyy").format(scores.get(indice - 1).getHorodatage())), 3, indice );
-        gridPane.add(new Label(new SimpleDateFormat("HH:mm").format(scores.get(indice - 1).getHorodatage())), 4, indice );
+        gridPane.add(new Label(String.valueOf(indice)), 0, indice);
+        gridPane.add(new Label(login), 1, indice);
+        gridPane.add(new Label(String.valueOf(scores.get(indice - 1).getScore())), 2, indice);
+        gridPane.add(new Label(new SimpleDateFormat("dd/MM/yyyy").format(scores.get(indice - 1).getHorodatage())), 3, indice);
+        gridPane.add(new Label(new SimpleDateFormat("HH:mm").format(scores.get(indice - 1).getHorodatage())), 4, indice);
     }
 
     private void rafraichirClassements() {
