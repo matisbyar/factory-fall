@@ -12,7 +12,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
-import tetris.logique.Departement;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
 import tetris.stockage.DepartementManager;
@@ -230,10 +229,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
      * @return departement de l'utilisateur
      */
     public String getDepartement() {
-        System.out.println(departementCreation.getValue().toString());
-        String departement[] = departementCreation.getValue().toString().split(" ");
-        System.out.println(departement[0]);
-        return  departement[0];
+        return departementCreation.getValue().toString().split(" ")[0];
     }
 
     @Override
