@@ -137,12 +137,17 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         champsConnexion.setMinHeight(champsConnexion.getPrefHeight());
         champsCreation.setMinHeight(champsCreation.getPrefHeight());
 
-        ((VBox) champsConnexion.getChildren().get(2)).getChildren().get(0).setVisible(false);
-        ((VBox) champsCreation.getChildren().get(2)).getChildren().get(0).setVisible(false);
-        ((VBox) champsConnexion.getChildren().get(2)).getChildren().get(0).setStyle("-fx-text-fill: red");
-        ((VBox) champsCreation.getChildren().get(2)).getChildren().get(0).setStyle("-fx-text-fill: red");
-        ((Label) ((VBox) champsCreation.getChildren().get(2)).getChildren().get(0)).setFont(Ressources.getInstance().getPolice(16));
-        ((Label) ((VBox) champsCreation.getChildren().get(2)).getChildren().get(0)).setAlignment(Pos.CENTER);
+        erreurConnexion.setVisible(false);
+        erreurCreation.setVisible(false);
+        erreurCreation.setStyle("-fx-text-fill: red");
+        erreurConnexion.setStyle("-fx-text-fill: red");
+        erreurConnexion.setFont(Ressources.getInstance().getPolice(16));
+        erreurConnexion.setAlignment(Pos.CENTER);
+        erreurCreation.setFont(Ressources.getInstance().getPolice(16));
+        erreurCreation.setAlignment(Pos.CENTER);
+
+        ((VBox) champsConnexion.getChildren().get(2)).setAlignment(Pos.CENTER);
+        ((VBox) champsCreation.getChildren().get(2)).setAlignment(Pos.CENTER);
     }
 
     /**
