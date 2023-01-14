@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import tetris.TetrisIHM;
+import tetris.logique.Score;
 import tetris.stockage.ScoreManager;
 import tetris.stockage.Session;
 
@@ -53,25 +54,28 @@ public class Ressources {
 
     public boolean isLocked(String typePerso) {
             Preferences preferences = Preferences.getInstance();
-            Session joueur = Session.getInstance();
+        Session joueur = Session.getInstance();
+        Score bestScore = ScoreManager.getInstance().getHighScoreByLogin(joueur.getLogin());
             switch (typePerso) {
                 case "pieces" :
                     if(joueur.isConnected()) {
-                        if(ScoreManager.getInstance().getHighScoreByLogin(joueur.getLogin()).getScore() >= 40000){
-                            return false;
-                        }
-                        else if(ScoreManager.getInstance().getHighScoreByLogin(joueur.getLogin()).getScore() >= 20000){
-                            if (preferences.getStylePiece().equals("default")){
-                                return true;
-                            }
-                            if (preferences.getStylePiece().equals("brique")){
+                        try {
+                            if (bestScore.getScore() >= 40000) {
                                 return false;
+                            } else if (bestScore.getScore() >= 20000) {
+                                if (preferences.getStylePiece().equals("default")) {
+                                    return true;
+                                }
+                                if (preferences.getStylePiece().equals("brique")) {
+                                    return false;
+                                }
+                            } else {
+                                if (preferences.getStylePiece().equals("brique") || preferences.getStylePiece().equals("default")) {
+                                    return true;
+                                }
                             }
-                        }
-                        else {
-                            if (preferences.getStylePiece().equals("brique") || preferences.getStylePiece().equals("default")) {
-                                return true;
-                            }
+                        } catch (NullPointerException e) {
+                            return true;
                         }
                     } else {
                         if (preferences.getStylePiece().equals("brique") || preferences.getStylePiece().equals("default")) {
