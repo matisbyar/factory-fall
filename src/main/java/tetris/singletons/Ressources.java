@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import tetris.TetrisIHM;
+import tetris.stockage.ScoreManager;
 import tetris.stockage.Session;
 
 import java.util.Objects;
@@ -49,17 +50,36 @@ public class Ressources {
         return new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/fleche-droite.png")), 55, 55, true, true));
     }
 
+
     public boolean isLocked(String typePerso) {
-        Preferences preferences = Preferences.getInstance();
-        if (typePerso.equals("pieces")) {
-            if (Session.getInstance().isConnected()) {
-                return false;
-            } else {
-                if (preferences.getStylePiece().equals("brique") || preferences.getStylePiece().equals("default")) {
-                    return true;
-                }
+            Preferences preferences = Preferences.getInstance();
+            Session joueur = Session.getInstance();
+            switch (typePerso) {
+                case "pieces" :
+                    if(joueur.isConnected()) {
+                        if(ScoreManager.getInstance().getHighScoreByLogin(joueur.getLogin()).getScore() >= 40000){
+                            return false;
+                        }
+                        else if(ScoreManager.getInstance().getHighScoreByLogin(joueur.getLogin()).getScore() >= 20000){
+                            if (preferences.getStylePiece().equals("default")){
+                                return true;
+                            }
+                            if (preferences.getStylePiece().equals("brique")){
+                                return false;
+                            }
+                        }
+                        else {
+                            if (preferences.getStylePiece().equals("brique") || preferences.getStylePiece().equals("default")) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        if (preferences.getStylePiece().equals("brique") || preferences.getStylePiece().equals("default")) {
+                            return true;
+                        }
+                    }
+                default:
+                    return false;
             }
         }
-        return false;
-    }
 }
