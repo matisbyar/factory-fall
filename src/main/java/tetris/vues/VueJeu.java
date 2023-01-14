@@ -32,6 +32,7 @@ import tetris.stockage.Security;
 import tetris.stockage.Session;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -167,6 +168,7 @@ public class VueJeu extends Stage {
         // Initialisations des objets nécessaires
         // classes de la logique du jeu
         Musique.stopMusicMainMenu();
+        Musique.playMusicGame();
         jeu = new Jeu(nomjoueur);
         jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
