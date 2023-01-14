@@ -18,8 +18,8 @@ public class ScoreManager {
         return instance;
     }
 
-    public void createScore(int score, String login) {
-        Score s = new Score(score);
+    public void createScore(int score, int nbLignes, String login) {
+        Score s = new Score(score, nbLignes);
         s.setLogin(login);
         stockage.create(s);
     }

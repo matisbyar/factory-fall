@@ -12,15 +12,16 @@ public class StockageScoreDatabase {
     public void create(Score element) {
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "INSERT INTO SCORES(score, horodatage, codeJeu, login) VALUES (?, ?, ?, ?)";
+        String req = "call creationScoreTETRIS(?, ?, ?, ?, ?)";
         try (
                 PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setInt(1, element.getScore());
             st.setTimestamp(2, element.getHorodatage());
             st.setString(3, Score.getGameCode());
-            if (!element.getLogin().isEmpty()) st.setString(4, element.getLogin());
-            else st.setNull(4, Types.VARCHAR);
+            st.setInt(4, element.getNbLignes());
+            if (!element.getLogin().isEmpty()) st.setString(5, element.getLogin());
+            else st.setNull(5, Types.VARCHAR);
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

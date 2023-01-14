@@ -24,10 +24,10 @@ public class Score {
         this.login = "";
     }
 
-    public Score(int score) {
+    public Score(int score, int nbLignes) {
         this();
         this.score = new SimpleIntegerProperty(score);
-        this.nbLignes = new SimpleIntegerProperty(0);
+        this.nbLignes = new SimpleIntegerProperty(nbLignes);
         this.horodatage = new Timestamp(System.currentTimeMillis());
     }
 

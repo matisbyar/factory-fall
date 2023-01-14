@@ -298,7 +298,7 @@ public class VueJeu extends Stage {
         jeu.jeuEnCoursProperty().addListener((observableValue, aBoolean, t1) -> {
             if (!jeu.isJeuEnCours()) {
                 VueGameOver vueGameOver = new VueGameOver(jeu.getJoueur().getScore().getValue());
-                ScoreManager.getInstance().createScore(jeu.getJoueur().getScore().getValue(), Session.getInstance().getLogin());
+                ScoreManager.getInstance().createScore(jeu.getJoueur().getScore().getValue(), jeu.getJoueur().getLignesSup().getValue(), Session.getInstance().getLogin());
                 vueGameOver.arreterJeuProperty().addListener((observableValue12, aBoolean12, t112) -> {
                     if (vueGameOver.arreterJeuProperty().getValue()) {
                         vueGameOver.close();
