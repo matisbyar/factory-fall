@@ -234,22 +234,4 @@ public class Plateau implements IPlateau {
             rang.setValue(rang.getValue() + 1);
         }
     }
-
-
-    /**
-     * Affiche le plateau mis en forme dans le terminal. Les pièces NULL ne sont pas affichées,
-     * les autres sont représentées par leur nom.
-     */
-    public void afficherPlateau() {
-        for (int ligne = 0; ligne < this.hauteur; ++ligne) {
-            StringBuilder plateauString = new StringBuilder("| ");
-
-            for (int colonne = 0; colonne < this.largeur; ++colonne) {
-                plateauString.append(this.getPieceNom(ligne, colonne).concat(" | "));
-            }
-
-            System.out.println(plateauString);
-        }
-    }
-
 }

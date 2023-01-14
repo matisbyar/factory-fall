@@ -51,7 +51,7 @@ public class Jeu implements IJeu {
      */
     public Jeu(String pseudo, int nbVies) {
         this(pseudo);
-        if (nbVies>1) {
+        if (nbVies > 1) {
             this.nbVies = new SimpleIntegerProperty(nbVies);
         }
     }
@@ -62,21 +62,13 @@ public class Jeu implements IJeu {
     public void jouerTour() {
         if (!jeuEnCours.getValue()) {
             timer.stop();
-            p.afficherPlateau();
-            System.out.println(j.getScore().getValue());
-            System.out.println(p.getRang().getValue());
-            System.out.println("Game Over");
         } else {
-            p.afficherPlateau();
             timer.setDelay((int) (Math.pow(0.8 - ((p.getRang().getValue() - 1) * 0.007), p.getRang().getValue() - 1) * 1000));
-            System.out.println(j.getScore().getValue());
-            System.out.println(p.getRang().getValue());
-            System.out.println("_________________________________________\n");
         }
     }
 
     public void perdreUneVie() {
-        if(nbVies.get() <= 1) jeuEnCours.setValue(false);
+        if (nbVies.get() <= 1) jeuEnCours.setValue(false);
         else {
             nbVies.setValue(nbVies.get() - 1);
             p.remplirTableau();
@@ -223,21 +215,18 @@ public class Jeu implements IJeu {
 
     @Override
     public void actionGauche() {
-        System.out.println("Flèche de gauche est actionnée !");
         deplacerPieceActuelle(colonneActuelle - 1);
         jouerTour();
     }
 
     @Override
     public void actionDroite() {
-        System.out.println("Flèche de droite est actionnée !");
         deplacerPieceActuelle(colonneActuelle + 1);
         jouerTour();
     }
 
     @Override
     public void actionBas() {
-        System.out.println("Flèche du bas est actionnée !");
         tomberPieceActuelle1Ligne();
         p.incrementerScoreSoftDrop();
         jouerTour();
@@ -245,21 +234,18 @@ public class Jeu implements IJeu {
 
     @Override
     public void actionEspace() {
-        System.out.println("Barre Espace est actionnée !");
         tomberPieceActuelle();
         jouerTour();
     }
 
     @Override
     public void actionHaut() {
-        System.out.println("Flèche du haut est actionnée !");
         tournerPieceActuelle('d');
         jouerTour();
     }
 
     @Override
     public void actionR() {
-        System.out.println("Touche R est actionnée !");
         tournerPieceActuelle('g');
         jouerTour();
     }
@@ -272,7 +258,6 @@ public class Jeu implements IJeu {
 
     @Override
     public void actionC() {
-        System.out.println("Touche C est actionnée !");
         echangePieceActuelleEtPieceSauvegarde();
         jouerTour();
     }
@@ -310,5 +295,7 @@ public class Jeu implements IJeu {
         return jeuEnCours;
     }
 
-    public IntegerProperty getNbVies() { return nbVies;}
+    public IntegerProperty getNbVies() {
+        return nbVies;
+    }
 }

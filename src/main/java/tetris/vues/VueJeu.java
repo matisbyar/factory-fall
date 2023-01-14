@@ -26,7 +26,10 @@ import tetris.logique.Jeu;
 import tetris.logique.Plateau;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
-import tetris.stockage.*;
+import tetris.stockage.PlayerManager;
+import tetris.stockage.ScoreManager;
+import tetris.stockage.Security;
+import tetris.stockage.Session;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -124,7 +127,6 @@ public class VueJeu extends Stage {
             if (connexionOK) {
                 nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
                 departement = j.getDepartement();
-                System.out.println("tetris ihm departement :" + departement);
                 Session.getInstance().connect(nomjoueur, departement);
                 vueMenuPrincipal.afficherScene();
             }
