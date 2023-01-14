@@ -85,7 +85,8 @@ public class VueClassement extends Stage implements Menu {
         for (int i = 0; i < classementTopScore.getChildren().size(); i++) {
             ((Label) classementTopScore.getChildren().get(i)).setFont(Ressources.getInstance().getPolice(20));
             classementTopScore.getChildren().get(i).setStyle("-fx-text-fill: white;");
-
+        }
+        for (int i = 0; i < classementFiltre.getChildren().size(); i++) {
             ((Label) classementFiltre.getChildren().get(i)).setFont(Ressources.getInstance().getPolice(20));
             classementFiltre.getChildren().get(i).setStyle("-fx-text-fill: white;");
         }
