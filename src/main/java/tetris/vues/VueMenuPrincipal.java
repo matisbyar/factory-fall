@@ -21,6 +21,7 @@ import tetris.stockage.Session;
 import tetris.vues.menu.VueClassement;
 import tetris.vues.menu.VuePersonnaliser;
 import tetris.vues.menu.VueRegles;
+import tetris.vues.menu.VueSelectionJeu;
 import tetris.vues.menu.compte.VueCompteConnecte;
 import tetris.vues.menu.compte.VueCompteDeconnecte;
 
@@ -46,6 +47,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
     VuePersonnaliser vuePersonnaliser;
     VueClassement vueClassement;
     VueRegles vueRegles;
+    VueSelectionJeu vueSelectionJeu;
 
 
     public VueMenuPrincipal() {
@@ -80,6 +82,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         vuePersonnaliser = new VuePersonnaliser(this);
         vueClassement = new VueClassement(this);
         vueRegles = new VueRegles(this);
+        vueSelectionJeu = new VueSelectionJeu(this);
 
         this.setScene(scene);
     }
@@ -142,6 +145,10 @@ public class VueMenuPrincipal extends Stage implements Menu {
      * Fonction qui créer tous les bindings in line utile pour l'ensemble des boutons du menu
      */
     private void creerBindings() {
+        start.setOnAction(actionEvent -> {
+            vueSelectionJeu.mettreAJourFond();
+            this.setScene(vueSelectionJeu.getScene());
+        });
         compte.setOnAction(actionEvent -> {
             vueCompteConnecte.mettreAJour();
             vueCompteDeconnecte.mettreAJourFond();
@@ -187,14 +194,6 @@ public class VueMenuPrincipal extends Stage implements Menu {
      */
     public PasswordField getMotDePasseConfirmation() {
         return vueCompteDeconnecte.getMotDePasseConfirmation();
-    }
-
-
-    /**
-     * Fonction qui déclenche le lancement du jeu en Anonyme dans TetrisIHM
-     */
-    public void setButtonJouerCliqueListener(EventHandler<ActionEvent> quandLeButtonJouerEstClique) {
-        start.setOnAction(quandLeButtonJouerEstClique);
     }
 
     /**

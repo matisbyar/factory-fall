@@ -64,12 +64,10 @@ public class VueJeu extends Stage {
     IJeu jeu;
     Plateau p;
     Plateau prochainePiece;
-
     Plateau stockage;
-
     private String nomjoueur = "";
-
     private String departement = "";
+    private int nbViesInitial;
 
     /**
      * Le StackPane sp permet de superposer les éléments de l'IHM. Ici, il superpose le plateau de jeu et l'icone de pause.
@@ -142,18 +140,9 @@ public class VueJeu extends Stage {
         }
     };
 
-    private final EventHandler<ActionEvent> quandLeButtonJouerEstClique = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent event) {
-            if (!Session.getInstance().isConnected()) nomjoueur = "Anonyme";
-            demarrerPartie();
-            vueMenuPrincipal.close();
-        }
-    };
 
     public VueJeu(EventHandler<ActionEvent> actionQuitter) {
         vueMenuPrincipal = new VueMenuPrincipal();
-        vueMenuPrincipal.setButtonJouerCliqueListener(quandLeButtonJouerEstClique);
         vueMenuPrincipal.setButtonConnecterJoueurCliqueListener(joueurConnecte);
         vueMenuPrincipal.setButtonCreerJoueurCliqueListener(nouveauJoueurCree);
         vueMenuPrincipal.setButtonQuitterListener(actionQuitter);
@@ -162,12 +151,25 @@ public class VueJeu extends Stage {
         }
         vueMenuPrincipal.show();
     }
+    public VueJeu(String modeDeJeu) {
+        if (!Session.getInstance().isConnected()) nomjoueur = "Anonyme";
+        switch (modeDeJeu) {
+            case "NORMAL" -> {
+                nbViesInitial = 1;
+                demarrerPartie();
+            }
+            case "AVENTURE" -> {
+                nbViesInitial = 3;
+                demarrerPartie();
+            }
+        }
+    }
 
     public void demarrerPartie() {
         // Initialisations des objets nécessaires
         // classes de la logique du jeu
         Musique.stopMusicMainMenu();
-        jeu = new Jeu(nomjoueur);
+        jeu = new Jeu(nomjoueur, nbViesInitial);
         jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
         prochainePiece = jeu.getProchainePiece();
