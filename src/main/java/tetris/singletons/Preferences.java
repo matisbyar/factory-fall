@@ -106,7 +106,7 @@ public class Preferences {
             case 1 ->
                     imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/classic.png")));
             case 2 ->
-                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/original.jpg")));
+                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/3.png")));
         }
     }
 
