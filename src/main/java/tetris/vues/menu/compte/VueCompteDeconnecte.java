@@ -324,7 +324,6 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     }
 
     public void mettreAJour() {
-        this.setScene(scene);
         pseudoCreation.clear();
         motDePasseCreation.clear();
         motDePasseCreationConfirmation.clear();
