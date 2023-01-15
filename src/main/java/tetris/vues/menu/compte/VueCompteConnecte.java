@@ -185,8 +185,7 @@ public class VueCompteConnecte extends Stage implements Menu {
 
     @Override
     public void afficherScene() {
-        VueMenuPrincipal.getInstance().afficherScene();
-        this.setScene(scene);
+        VueMenuPrincipal.getInstance().setScene(scene);
         mettreAJour();
     }
 

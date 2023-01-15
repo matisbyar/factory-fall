@@ -268,8 +268,8 @@ public class VueClassement extends Stage implements Menu {
 
     @Override
     public void afficherScene() {
+        VueMenuPrincipal.getInstance().setScene(scene);
         mettreAJour();
-        this.setScene(scene);
     }
 
     public void mettreAJour() {

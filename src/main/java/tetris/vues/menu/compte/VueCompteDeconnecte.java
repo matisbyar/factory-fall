@@ -319,7 +319,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
 
     @Override
     public void afficherScene() {
-        this.setScene(scene);
+        VueMenuPrincipal.getInstance().setScene(scene);
         mettreAJour();
     }
 
