@@ -34,7 +34,6 @@ public class Musique {
     public static void btnMute() {
         musicPlayer.setMute(!musicPlayer.isMute());
         Preferences.getInstance().setMusiqueMute(musicPlayer.isMute());
-        System.out.println(musicPlayer.isMute());
     }
 
     public static void playMusicGame() {
