@@ -27,7 +27,7 @@ public class Preferences {
     /**
      * La préférence du fond.
      */
-    private String background = "industrial";
+    private String background = "1";
     private int backgroundActuel = 0;
     private Image imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/" + background + ".png")));
 
@@ -102,11 +102,11 @@ public class Preferences {
         }
         switch (backgroundActuel) {
             case 0 ->
-                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/industrial.png")));
+                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/1.png")));
             case 1 ->
-                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/classic.png")));
-            case 2 ->
                     imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/3.png")));
+            case 2 ->
+                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/2.png")));
         }
     }
 
