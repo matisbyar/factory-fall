@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import tetris.stockage.SQLUtils;
-import tetris.vues.VueJeu;
+import tetris.vues.VueMenuPrincipal;
 
 public class TetrisIHM extends Application {
 
@@ -24,7 +24,7 @@ public class TetrisIHM extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        new VueJeu(quitter);
+        new VueMenuPrincipal(quitter);
     }
 
     @Override

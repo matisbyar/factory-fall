@@ -15,8 +15,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
+import tetris.logique.AuthPlayer;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
+import tetris.stockage.PlayerManager;
+import tetris.stockage.Security;
 import tetris.stockage.Session;
 import tetris.vues.menu.VueClassement;
 import tetris.vues.menu.VuePersonnaliser;
@@ -25,6 +28,8 @@ import tetris.vues.menu.VueSelectionJeu;
 import tetris.vues.menu.compte.VueCompteConnecte;
 import tetris.vues.menu.compte.VueCompteDeconnecte;
 
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class VueMenuPrincipal extends Stage implements Menu {
@@ -49,7 +54,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
     VueSelectionJeu vueSelectionJeu;
 
 
-    public VueMenuPrincipal() {
+    public VueMenuPrincipal(EventHandler<ActionEvent> actionQuitter) {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
 
@@ -80,10 +85,17 @@ public class VueMenuPrincipal extends Stage implements Menu {
         vueRegles = new VueRegles(this);
         vueSelectionJeu = new VueSelectionJeu(this);
 
+        setButtonConnecterJoueurCliqueListener(joueurConnecte);
+        setButtonCreerJoueurCliqueListener(nouveauJoueurCree);
+        setButtonQuitterListener(actionQuitter);
+
+        if (!Preferences.getInstance().getMusiqueMute()) Musique.playMusicMainMenu();
+
         styliser();
         creerBindings();
 
         this.setScene(scene);
+        this.show();
     }
 
     /**
@@ -140,6 +152,8 @@ public class VueMenuPrincipal extends Stage implements Menu {
         this.setResizable(false);
     }
 
+
+
     /**
      * Fonction qui créer tous les bindings in line utile pour l'ensemble des boutons du menu
      */
@@ -166,6 +180,72 @@ public class VueMenuPrincipal extends Stage implements Menu {
             this.setScene(vueClassement.getScene());
         });
     }
+
+    /**
+     * Vérifie si les données rentrées sont valides.
+     * Lance la vue demarrer partie apres avoir crée le joueur, et l'avoir connécté
+     */
+    private final EventHandler<ActionEvent> nouveauJoueurCree = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            AuthPlayer j = PlayerManager.getInstance().getPlayer(getNomJoueur().getText());
+            String departement = getDepartement();
+            String motDePasse = getMotDePasse().getText();
+            String motDePasseConfirmation = getMotDePasseConfirmation().getText();
+            if (j != null) {
+                vueCompteDeconnecte.afficherErreurConnexion("Ce pseudo est déjà utilisé");
+            } else if (departement.equals("Département")) {
+                vueCompteDeconnecte.afficherErreurCreation("Veuillez choisir un département");
+            } else if (motDePasse.equals("")) {
+                vueCompteDeconnecte.afficherErreurCreation("Veuillez entrer un mot de passe");
+            } else if (!motDePasse.equals(motDePasseConfirmation)) {
+                vueCompteDeconnecte.afficherErreurCreation("Les mots de passe ne correspondent pas");
+            } else {
+                PlayerManager.getInstance().createPlayer(getNomJoueur().getText(), getMotDePasse().getText(), getDepartement());
+
+                String nomjoueur = getNomJoueur().getText();
+                departement = getDepartement();
+                Session.getInstance().connect(nomjoueur, departement);
+                afficherScene();
+            }
+        }
+    };
+
+    /**
+     * Vérifie si les données rentrées sont valides.
+     * Lance la vue demarrer partie apres avoir connecté le joueur.
+     */
+    private final EventHandler<ActionEvent> joueurConnecte = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            AuthPlayer j = PlayerManager.getInstance().getPlayer(getNomJoueur().getText());
+            boolean connexionOK = false;
+
+            if (j != null) {
+                try {
+                    connexionOK = Security.checkPassword(getMotDePasse().getText(), j.getSalt(), j.getHashedPassword());
+                } catch (NoSuchAlgorithmException | InvalidKeyException e) {
+                    e.printStackTrace();
+                }
+
+                if (!connexionOK) {
+                    //Si le mot de passe est incorrect (mais le login existe dans la BD)
+                    vueCompteDeconnecte.afficherErreurConnexion("L'identifiant ou le mot de passe est incorrect");
+                }
+            } else {
+                //Si l'identifiant est incorrect (aucun joueur de ce login n'est inscrit dans la BD)
+                vueCompteDeconnecte.afficherErreurConnexion("L'identifiant ou le mot de passe est incorrect");
+            }
+
+            if (connexionOK) {
+                String nomjoueur = getNomJoueur().getText();
+                String departement = j.getDepartement();
+                Session.getInstance().connect(nomjoueur, departement);
+                afficherScene();
+            }
+        }
+    };
+
 
     /**
      * Getter utile pour la récupération dans TetrisIHM

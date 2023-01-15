@@ -55,13 +55,13 @@ public class VueSelectionJeu extends Stage implements Menu {
         modeNormal.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                vueJeu = new VueJeu("NORMAL");
+                vueJeu = new VueJeu("NORMAL", vueMenuPrincipal);
             }
         });
         modeAventure.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                vueJeu = new VueJeu("AVENTURE");
+                vueJeu = new VueJeu("AVENTURE", vueMenuPrincipal);
             }
         });
     }

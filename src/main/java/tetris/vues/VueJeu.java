@@ -42,13 +42,15 @@ public class VueJeu extends Stage {
     // Objets issus de JavaFX pour l'IHM du jeu
     private boolean jeuEnPause = false;
     private Scene scene;
-    Stage primaryStage;
+    private Stage primaryStage;
     private BorderPane borderPane;
     private VBox informationsJoueur;
     private ActionListener descenteAuto;
     private Button startJeu;
     private HBox nbVies;
-    Label score, pseudo, rang, nbLignes, vies, prochainePieceLabel, pieceSauvegardeeLabel;
+    private Label score, pseudo, rang, nbLignes, vies, prochainePieceLabel, pieceSauvegardeeLabel;
+    private VBox conteneurDroit;
+    private VBox conteneurGauche;
 
     // Vues personnelles (créées par l'équipe)
     private VueMenuPrincipal vueMenuPrincipal;
@@ -57,17 +59,12 @@ public class VueJeu extends Stage {
     private VuePieceExterieur vuePieceSauvegardee;
     private VueControles vueControles;
 
-    private VBox conteneurDroit;
-
-    private VBox conteneurGauche;
-
     // Objets de la logique du jeu
-    IJeu jeu;
-    Plateau p;
-    Plateau prochainePiece;
-    Plateau stockage;
+    private IJeu jeu;
+    private Plateau p;
+    private Plateau prochainePiece;
+    private Plateau stockage;
     private String nomjoueur = "";
-    private String departement = "";
     private int nbViesInitial;
 
     /**
@@ -76,84 +73,10 @@ public class VueJeu extends Stage {
     private StackPane sp;
     private final ImageView imgPause = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/pause.png"))));
 
-    /**
-     * Vérifie si les données rentrées sont valides.
-     * Lance la vue demarrer partie apres avoir crée le joueur, et l'avoir connécté
-     */
-    private final EventHandler<ActionEvent> nouveauJoueurCree = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent event) {
-            AuthPlayer j = PlayerManager.getInstance().getPlayer(vueMenuPrincipal.getNomJoueur().getText());
-            String departement = vueMenuPrincipal.getDepartement();
-            String motDePasse = vueMenuPrincipal.getMotDePasse().getText();
-            String motDePasseConfirmation = vueMenuPrincipal.getMotDePasseConfirmation().getText();
-            if (j != null) {
-                vueMenuPrincipal.vueCompteDeconnecte.afficherErreurConnexion("Ce pseudo est déjà utilisé");
-            } else if (departement.equals("Département")) {
-                vueMenuPrincipal.vueCompteDeconnecte.afficherErreurCreation("Veuillez choisir un département");
-            } else if (motDePasse.equals("")) {
-                vueMenuPrincipal.vueCompteDeconnecte.afficherErreurCreation("Veuillez entrer un mot de passe");
-            } else if (!motDePasse.equals(motDePasseConfirmation)) {
-                vueMenuPrincipal.vueCompteDeconnecte.afficherErreurCreation("Les mots de passe ne correspondent pas");
-            } else {
-                PlayerManager.getInstance().createPlayer(vueMenuPrincipal.getNomJoueur().getText(), vueMenuPrincipal.getMotDePasse().getText(), vueMenuPrincipal.getDepartement());
+    public VueJeu(String modeDeJeu, VueMenuPrincipal vueMenuPrincipal) {
+        this.vueMenuPrincipal = vueMenuPrincipal;
+        nomjoueur = Session.getInstance().isConnected() ? Session.getInstance().getLogin() : "Anonyme";
 
-                nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
-                departement = vueMenuPrincipal.getDepartement();
-                Session.getInstance().connect(nomjoueur, departement);
-                vueMenuPrincipal.afficherScene();
-            }
-        }
-    };
-
-    /**
-     * Vérifie si les données rentrées sont valides.
-     * Lance la vue demarrer partie apres avoir connecté le joueur.
-     */
-    private final EventHandler<ActionEvent> joueurConnecte = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent event) {
-            AuthPlayer j = PlayerManager.getInstance().getPlayer(vueMenuPrincipal.getNomJoueur().getText());
-            boolean connexionOK = false;
-
-            if (j != null) {
-                try {
-                    connexionOK = Security.checkPassword(vueMenuPrincipal.getMotDePasse().getText(), j.getSalt(), j.getHashedPassword());
-                } catch (NoSuchAlgorithmException | InvalidKeyException e) {
-                    e.printStackTrace();
-                }
-
-                if (!connexionOK) {
-                    //Si le mot de passe est incorrect (mais le login existe dans la BD)
-                    vueMenuPrincipal.vueCompteDeconnecte.afficherErreurConnexion("L'identifiant ou le mot de passe est incorrect");
-                }
-            } else {
-                //Si l'identifiant est incorrect (aucun joueur de ce login n'est inscrit dans la BD)
-                vueMenuPrincipal.vueCompteDeconnecte.afficherErreurConnexion("L'identifiant ou le mot de passe est incorrect");
-            }
-
-            if (connexionOK) {
-                nomjoueur = vueMenuPrincipal.getNomJoueur().getText();
-                departement = j.getDepartement();
-                Session.getInstance().connect(nomjoueur, departement);
-                vueMenuPrincipal.afficherScene();
-            }
-        }
-    };
-
-
-    public VueJeu(EventHandler<ActionEvent> actionQuitter) {
-        vueMenuPrincipal = new VueMenuPrincipal();
-        vueMenuPrincipal.setButtonConnecterJoueurCliqueListener(joueurConnecte);
-        vueMenuPrincipal.setButtonCreerJoueurCliqueListener(nouveauJoueurCree);
-        vueMenuPrincipal.setButtonQuitterListener(actionQuitter);
-        if (!Preferences.getInstance().getMusiqueMute()) {
-            Musique.playMusicMainMenu();
-        }
-        vueMenuPrincipal.show();
-    }
-    public VueJeu(String modeDeJeu) {
-        if (!Session.getInstance().isConnected()) nomjoueur = "Anonyme";
         switch (modeDeJeu) {
             case "NORMAL" -> {
                 nbViesInitial = 1;
