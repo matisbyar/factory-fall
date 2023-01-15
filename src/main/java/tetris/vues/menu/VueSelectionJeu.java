@@ -43,7 +43,7 @@ public class VueSelectionJeu extends Stage implements Menu {
         creerBindings();
         styliser();
 
-        root.setTop(new BarreNavigation("Mode de Jeu", VueMenuPrincipal.getInstance(), this));
+        root.setTop(new BarreNavigation("Mode de Jeu", VueMenuPrincipal.getInstance().getSceneMenuPrincipal()));
         this.setScene(scene);
     }
 

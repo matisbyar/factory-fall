@@ -1,5 +1,6 @@
 package tetris.vues.helpers;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -7,6 +8,7 @@ import javafx.scene.layout.HBox;
 import tetris.TetrisIHM;
 import tetris.parametres.Ressources;
 import tetris.vues.Menu;
+import tetris.vues.VueMenuPrincipal;
 
 import java.util.Objects;
 
@@ -35,21 +37,19 @@ public class BarreNavigation extends BorderPane {
     /**
      * Permet l'échange de Scenes entre les pages du menu.
      */
-    private final Menu vuePrecedente, vueActuelle;
+    private final Scene vuePrecedente;
 
     /**
      * Constructeur de la barre de navigation.
      *
      * @param titreVue      Le titre de la page sur laquelle on se trouve.
      * @param vuePrecedente La vue précédente, qui sera affichée lorsque l'on cliquera sur le bouton retour.
-     * @param vueActuelle   La vue actuelle (celle sur laquelle le bouton retour se trouve).
      */
-    public BarreNavigation(String titreVue, Menu vuePrecedente, Menu vueActuelle) {
+    public BarreNavigation(String titreVue, Scene vuePrecedente) {
         this.titre = new Label(titreVue);
         this.retour = new Button("Retour");
         this.aligneur = new Button("Retour");
         this.vuePrecedente = vuePrecedente;
-        this.vueActuelle = vueActuelle;
 
         styliser();
         retour();
@@ -84,8 +84,7 @@ public class BarreNavigation extends BorderPane {
      */
     private void retour() {
         retour.setOnAction(event -> {
-            vuePrecedente.afficherScene();
-            vueActuelle.afficherScene();
+            VueMenuPrincipal.getInstance().setScene(vuePrecedente);
         });
     }
 }

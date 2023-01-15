@@ -135,7 +135,7 @@ public class VuePersonnaliser extends Stage implements Menu {
         root.setBottom(muteBtn);
 
         root.setCenter(personnalisations);
-        root.setTop(new BarreNavigation("Personnaliser", VueMenuPrincipal.getInstance(), this));
+        root.setTop(new BarreNavigation("Personnaliser", VueMenuPrincipal.getInstance().getSceneMenuPrincipal()));
 
         this.setScene(scene);
     }

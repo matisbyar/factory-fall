@@ -81,7 +81,7 @@ public class VueRegles extends Stage implements Menu {
 
 
         // Affichage
-        root.setTop(new BarreNavigation("Règles", VueMenuPrincipal.getInstance(), this));
+        root.setTop(new BarreNavigation("Règles", VueMenuPrincipal.getInstance().getSceneMenuPrincipal()));
         this.setScene(scene);
     }
 

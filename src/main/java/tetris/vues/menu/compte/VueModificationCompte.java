@@ -29,6 +29,7 @@ import tetris.stockage.PlayerManager;
 import tetris.stockage.Security;
 import tetris.stockage.Session;
 import tetris.vues.Menu;
+import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
 import tetris.vues.helpers.BoiteCombinee;
 
@@ -49,7 +50,7 @@ public class VueModificationCompte extends Stage implements Menu {
     private final PasswordField champMotDePasse, champMotDePasseConfirmation, champMotDePasseModification;
     private final BoiteCombinee champDepartement;
 
-    public VueModificationCompte(Menu vuePrecedente) {
+    public VueModificationCompte() {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
 
@@ -82,7 +83,7 @@ public class VueModificationCompte extends Stage implements Menu {
         styliser();
         creerBindings();
 
-        root.setTop(new BarreNavigation("Modification", vuePrecedente, this));
+        root.setTop(new BarreNavigation("Modification", VueMenuPrincipal.getInstance().getSceneMenuPrincipal()));
         root.setCenter(pane);
 
         this.setScene(scene);

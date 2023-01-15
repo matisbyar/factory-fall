@@ -80,7 +80,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         creerBindings();
 
         root.setCenter(option);
-        root.setTop(new BarreNavigation("Compte", VueMenuPrincipal.getInstance(), this));
+        root.setTop(new BarreNavigation("Compte", VueMenuPrincipal.getInstance().getSceneMenuPrincipal()));
 
         this.setScene(scene);
     }

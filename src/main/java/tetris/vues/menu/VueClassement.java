@@ -62,7 +62,7 @@ public class VueClassement extends Stage implements Menu {
 
         // Affichage
         root.setCenter(vbScores);
-        root.setTop(new BarreNavigation("Classements", VueMenuPrincipal.getInstance(), this));
+        root.setTop(new BarreNavigation("Classements", VueMenuPrincipal.getInstance().getSceneMenuPrincipal()));
 
         this.setScene(scene);
     }

@@ -34,7 +34,7 @@ public class VueCompteConnecte extends Stage implements Menu {
     private final Button modifier, deconnecter;
     private final Label pseudo, departement;
 
-    VueModificationCompte vueModificationCompte = new VueModificationCompte(this);
+    VueModificationCompte vueModificationCompte = new VueModificationCompte();
 
     public VueCompteConnecte() {
         root = new BorderPane();
@@ -68,7 +68,7 @@ public class VueCompteConnecte extends Stage implements Menu {
         creerBindings();
 
         // Affichage
-        root.setTop(new BarreNavigation("Compte", VueMenuPrincipal.getInstance(), this));
+        root.setTop(new BarreNavigation("Compte", VueMenuPrincipal.getInstance().getSceneMenuPrincipal()));
         root.setCenter(container);
 
         this.setScene(scene);
