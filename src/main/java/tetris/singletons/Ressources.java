@@ -18,9 +18,9 @@ public class Ressources {
     private static Ressources INSTANCE = null;
 
     // Pièces affichées dans MenuPersonnalisation
-    private final Image pieceDefault = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/default/L.jpg")));
-    private final Image pieceConteneur = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/conteneur/L.jpg")));
-    private final Image pieceBrique = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/brique/L.jpg")));
+    private final Image pieceDefault = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/default/L.jpg")));
+    private final Image pieceConteneur = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/conteneur/L.jpg")));
+    private final Image pieceBrique = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/brique/L.jpg")));
 
     public static Ressources getInstance() {
         if (INSTANCE == null) INSTANCE = new Ressources();
@@ -44,11 +44,11 @@ public class Ressources {
     }
 
     public ImageView getFlecheGauche() {
-        return new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/fleche-gauche.png")), 55, 55, true, true));
+        return new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/fleches/fleche-gauche.png")), 55, 55, true, true));
     }
 
     public ImageView getFlecheDroite() {
-        return new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/flechePersonnalisation/fleche-droite.png")), 55, 55, true, true));
+        return new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/fleches/fleche-droite.png")), 55, 55, true, true));
     }
 
 

@@ -92,7 +92,7 @@ public class VueClassement extends Stage implements Menu {
 
         boutons.setAlignment(Pos.CENTER);
 
-        afficherFiltre.getStyleClass().add("bouton-clair");
+        afficherFiltre.getStyleClass().add("bouton-clair-not-selected");
         afficherFiltre.setFont(Ressources.getInstance().getPolice(20));
 
         boutons.setPadding(new Insets(0, 0, 50, 0));
@@ -112,37 +112,37 @@ public class VueClassement extends Stage implements Menu {
     private void changementDeClassement() {
         boolean connecter = Session.getInstance().isConnected();
         if (afficherTopScore.isSelected() && !vbScores.getChildren().contains(classementTopScore) && !connecter) {
-            afficherTopScore.getStyleClass().remove("bouton-clair");
+            afficherTopScore.getStyleClass().remove("bouton-clair-not-selected");
             afficherFiltre.getStyleClass().remove("bouton-clair-select");
 
             afficherTopScore.getStyleClass().add("bouton-clair-select");
-            afficherFiltre.getStyleClass().add("bouton-clair");
+            afficherFiltre.getStyleClass().add("bouton-clair-not-selected");
 
             vbScores.getChildren().remove(classementFiltre);
             vbScores.getChildren().add(classementTopScore);
         } else if (afficherFiltre.isSelected() && !vbScores.getChildren().contains(classementFiltre) && !connecter) {
             afficherTopScore.getStyleClass().remove("bouton-clair-select");
-            afficherFiltre.getStyleClass().remove("bouton-clair");
+            afficherFiltre.getStyleClass().remove("bouton-clair-not-selected");
 
-            afficherTopScore.getStyleClass().add("bouton-clair");
+            afficherTopScore.getStyleClass().add("bouton-clair-not-selected");
             afficherFiltre.getStyleClass().add("bouton-clair-select");
 
             vbScores.getChildren().remove(classementTopScore);
             vbScores.getChildren().add(classementFiltre);
         } else if (afficherTopScore.isSelected() && !vbScores.getChildren().contains(classementTopScore) && connecter) {
-            afficherTopScore.getStyleClass().remove("bouton-clair");
+            afficherTopScore.getStyleClass().remove("bouton-clair-not-selected");
             afficherFiltre.getStyleClass().remove("bouton-clair-select");
 
             afficherTopScore.getStyleClass().add("bouton-clair-select");
-            afficherFiltre.getStyleClass().add("bouton-clair");
+            afficherFiltre.getStyleClass().add("bouton-clair-not-selected");
 
             vbScores.getChildren().remove(classementFiltre);
             vbScores.getChildren().add(classementTopScore);
         } else if (afficherFiltre.isSelected() && !vbScores.getChildren().contains(classementFiltre) && connecter) {
             afficherTopScore.getStyleClass().remove("bouton-clair-select");
-            afficherFiltre.getStyleClass().remove("bouton-clair");
+            afficherFiltre.getStyleClass().remove("bouton-clair-not-selected");
 
-            afficherTopScore.getStyleClass().add("bouton-clair");
+            afficherTopScore.getStyleClass().add("bouton-clair-not-selected");
             afficherFiltre.getStyleClass().add("bouton-clair-select");
 
             vbScores.getChildren().remove(classementTopScore);

@@ -61,7 +61,7 @@ public class VueJeu extends Stage implements Menu {
      * Le StackPane sp permet de superposer les éléments de l'IHM. Ici, il superpose le plateau de jeu et l'icone de pause.
      */
     private StackPane sp;
-    private final ImageView imgPause = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/pause.png"))));
+    private final ImageView imgPause = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/pause.png"))));
 
     public VueJeu(String modeDeJeu) {
         nomjoueur = Session.getInstance().isConnected() ? Session.getInstance().getLogin() : "Anonyme";
@@ -108,7 +108,7 @@ public class VueJeu extends Stage implements Menu {
         nbVies = new HBox();
         if (jeu.getNbVies().get() != 1) {
             for (int i=0; i<jeu.getNbVies().get(); i++) {
-                nbVies.getChildren().add(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/heart.png")))));
+                nbVies.getChildren().add(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/heart.png")))));
             }
         }
         prochainePieceLabel = new Label("prochaine :");

@@ -1,12 +1,9 @@
 package tetris.logique;
 
-import tetris.IPiece;
-
-
 /**
  * Les pièces sont définies par un nom
  */
-public class Piece implements IPiece {
+public class Piece {
 
     private String nom;
     private final int[][] coords;

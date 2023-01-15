@@ -65,7 +65,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         scene = new Scene(root, 1280, 720);
 
         // Logo
-        logo = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/titre.png"))));
+        logo = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/titre.png"))));
 
         // Boutons
         start = new Button();
