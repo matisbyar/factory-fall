@@ -26,6 +26,8 @@ import tetris.parametres.Preferences;
 import tetris.parametres.Ressources;
 import tetris.stockage.ScoreManager;
 import tetris.stockage.Session;
+import tetris.vues.helpers.HelperPieceExterieur;
+import tetris.vues.helpers.HelperVuePlateau;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -45,9 +47,9 @@ public class VueJeu extends Stage implements Menu {
     private VBox conteneurGauche;
 
     // Vues personnelles (créées par l'équipe)
-    private VuePlateau vuePlateau;
-    private VuePieceExterieur vueProchainePiece;
-    private VuePieceExterieur vuePieceSauvegardee;
+    private HelperVuePlateau vuePlateau;
+    private HelperPieceExterieur vueProchainePiece;
+    private HelperPieceExterieur vuePieceSauvegardee;
     private VueControles vueControles;
 
     // Objets de la logique du jeu
@@ -100,9 +102,9 @@ public class VueJeu extends Stage implements Menu {
         stockage = jeu.getStockage();
 
         // javaFX
-        vuePlateau = new VuePlateau(p);
-        vueProchainePiece = new VuePieceExterieur(prochainePiece);
-        vuePieceSauvegardee = new VuePieceExterieur(stockage);
+        vuePlateau = new HelperVuePlateau(p);
+        vueProchainePiece = new HelperPieceExterieur(prochainePiece);
+        vuePieceSauvegardee = new HelperPieceExterieur(stockage);
         vueControles = new VueControles();
 
         startJeu = new Button();

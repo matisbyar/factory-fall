@@ -1,4 +1,4 @@
-package tetris.vues;
+package tetris.vues.helpers;
 
 import javafx.geometry.Pos;
 import tetris.logique.Plateau;
@@ -7,11 +7,11 @@ import tetris.logique.Plateau;
  * La VuePlateau est une classe qui hérite de VueGrille.
  * Elle est utilisée pour afficher toute la grille du jeu.
  *
- * @see VueGrille
+ * @see HelperGrille
  */
-public class VuePlateau extends VueGrille {
+public class HelperVuePlateau extends HelperGrille {
 
-    public VuePlateau(Plateau p) {
+    public HelperVuePlateau(Plateau p) {
         super(p);
         styliser();
     }
