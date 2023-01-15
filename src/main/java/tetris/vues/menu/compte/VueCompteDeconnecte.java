@@ -25,7 +25,6 @@ import tetris.vues.helpers.BoiteCombinee;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Objects;
 
 public class VueCompteDeconnecte extends Stage implements Menu {
