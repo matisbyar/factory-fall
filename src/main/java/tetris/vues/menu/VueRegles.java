@@ -87,6 +87,39 @@ public class VueRegles extends Stage implements Menu {
 
     public void styliser() {
         root.setBackground(Preferences.getInstance().getBackground());
+        for (int i = 0; i < regles.getChildren().size(); i++) {
+            ((HBox) regles.getChildren().get(i)).setPadding(new Insets(15, 10, 15, 10));
+            ((Label) ((HBox) regles.getChildren().get(i)).getChildren().get(1)).setFont(Ressources.getInstance().getPolice(20));
+            ((Label)((HBox) regles.getChildren().get(i)).getChildren().get(1)).setPadding(new Insets(0, 5, 0, 5));
+            ((HBox) regles.getChildren().get(i)).getChildren().get(1).setStyle("-fx-text-fill: white");
+        }
+
+        regles.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        regles.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        regles.setMaxHeight(500);
+        infoScore.setMaxHeight(500);
+        infoScore.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        infoScore.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        conteneur.setPadding(new Insets(20));
+
+        for (int i = 0; i < infoScore.getChildren().size(); i++) {
+            if (i == 0) {
+                ((Label) ((VBox)infoScore.getChildren().get(i)).getChildren().get(0)).setFont(Ressources.getInstance().getPolice(30));
+                ((VBox)infoScore.getChildren().get(i)).setAlignment(Pos.CENTER);
+                ((VBox) infoScore.getChildren().get(i)).setPadding(new Insets(10));
+                ((VBox)infoScore.getChildren().get(i)).getChildren().get(0).setStyle("-fx-text-fill: white");
+            } else if (i == infoScore.getChildren().size()-1) {
+                ((Label)infoScore.getChildren().get(i)).setFont(Ressources.getInstance().getPolice(15));
+                ((Label) infoScore.getChildren().get(i)).setPadding(new Insets(10));
+                infoScore.getChildren().get(i).setStyle("-fx-text-fill: white");
+            } else {
+                ((Label)infoScore.getChildren().get(i)).setFont(Ressources.getInstance().getPolice(24));
+                ((Label) infoScore.getChildren().get(i)).setPadding(new Insets(10));
+                infoScore.getChildren().get(i).setStyle("-fx-text-fill: white");
+            }
+        }
     }
 
 
