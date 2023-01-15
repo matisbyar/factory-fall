@@ -2,8 +2,6 @@ package tetris.vues;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -21,21 +19,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import tetris.IJeu;
 import tetris.TetrisIHM;
-import tetris.logique.AuthPlayer;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
-import tetris.stockage.PlayerManager;
 import tetris.stockage.ScoreManager;
-import tetris.stockage.Security;
 import tetris.stockage.Session;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class VueJeu extends Stage {
@@ -70,7 +62,7 @@ public class VueJeu extends Stage {
      * Le StackPane sp permet de superposer les éléments de l'IHM. Ici, il superpose le plateau de jeu et l'icone de pause.
      */
     private StackPane sp;
-    private final ImageView imgPause = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/pause.png"))));
+    private final ImageView imgPause = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/pause.png"))));
 
     public VueJeu(String modeDeJeu) {
         nomjoueur = Session.getInstance().isConnected() ? Session.getInstance().getLogin() : "Anonyme";
@@ -116,7 +108,7 @@ public class VueJeu extends Stage {
         nbVies = new HBox();
         if (jeu.getNbVies().get() != 1) {
             for (int i=0; i<jeu.getNbVies().get(); i++) {
-                nbVies.getChildren().add(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/heart.png")))));
+                nbVies.getChildren().add(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/heart.png")))));
             }
         }
         prochainePieceLabel = new Label("prochaine :");

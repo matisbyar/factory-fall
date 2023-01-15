@@ -109,7 +109,7 @@ public class VuePersonnaliser extends Stage implements Menu {
         flecheGauche = new Button();
         flecheDroite = new Button();
 
-        imageStylePiece = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + preferences.getStylePiece() + "/L.jpg"))));
+        imageStylePiece = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/" + preferences.getStylePiece() + "/L.jpg"))));
         cadenas = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/cadenas.png"))));
         speaker = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/speaker.png")), 45, 45, true, true));
 

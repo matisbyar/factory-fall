@@ -22,14 +22,14 @@ public class Preferences {
      */
     private String stylePiece = "conteneur";
     private int stylePieceActuel = 0;
-    private ImageView imagePiecePreference = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + stylePiece + "/L.jpg"))));
+    private ImageView imagePiecePreference = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/" + stylePiece + "/L.jpg"))));
 
     /**
      * La préférence du fond.
      */
     private String background = "1";
     private int backgroundActuel = 0;
-    private Image imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/" + background + ".png")));
+    private Image imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/background/" + background + ".png")));
 
     private boolean muted = false;
 
@@ -44,11 +44,11 @@ public class Preferences {
     public void reinitialiser() {
         stylePiece = "conteneur";
         stylePieceActuel = 0;
-        imagePiecePreference = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + stylePiece + "/L.jpg"))));
+        imagePiecePreference = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/" + stylePiece + "/L.jpg"))));
 
         backgroundActuel = 0;
         background = "industrial";
-        imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/" + background + ".png")));
+        imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/background/" + background + ".png")));
 
 
         muted = false;
@@ -83,7 +83,7 @@ public class Preferences {
             case 2 -> this.setStylePiece("default");
         }
         // Met à jour l'image
-        imagePiecePreference.setImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + stylePiece + "/L.jpg"))));
+        imagePiecePreference.setImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/" + stylePiece + "/L.jpg"))));
     }
 
     public Image getImagePiecePreference() {
@@ -102,11 +102,11 @@ public class Preferences {
         }
         switch (backgroundActuel) {
             case 0 ->
-                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/1.png")));
+                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/background/1.png")));
             case 1 ->
-                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/3.png")));
+                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/background/3.png")));
             case 2 ->
-                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/2.png")));
+                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/background/2.png")));
         }
     }
 

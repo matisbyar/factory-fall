@@ -15,8 +15,8 @@ import java.util.Objects;
 public class VueGrille extends GridPane {
 
     String dossierImg;
-    Image vide = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/vide.png")));
-    Image vide_clair = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/vide_clair.png")));
+    Image vide = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/vide.png")));
+    Image vide_clair = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/vide_clair.png")));
     final Image imgS, imgI, imgJ, imgL, imgO, imgT, imgZ;
 
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -29,13 +29,13 @@ public class VueGrille extends GridPane {
         if (Ressources.getInstance().isLocked("pieces")) {
             dossierImg = "conteneur";
         }
-        imgS = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + dossierImg + "/S.jpg")));
-        imgI = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + dossierImg + "/I.jpg")));
-        imgJ = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + dossierImg + "/J.jpg")));
-        imgL = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + dossierImg + "/L.jpg")));
-        imgO = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + dossierImg + "/O.jpg")));
-        imgT = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + dossierImg + "/T.jpg")));
-        imgZ = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/" + dossierImg + "/Z.jpg")));
+        imgS = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/" + dossierImg + "/S.jpg")));
+        imgI = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/" + dossierImg + "/I.jpg")));
+        imgJ = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/" + dossierImg + "/J.jpg")));
+        imgL = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/" + dossierImg + "/L.jpg")));
+        imgO = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/" + dossierImg + "/O.jpg")));
+        imgT = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/" + dossierImg + "/T.jpg")));
+        imgZ = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/" + dossierImg + "/Z.jpg")));
     }
 
     public void initialiser() {
