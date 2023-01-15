@@ -36,8 +36,8 @@ public class VueRegles extends Stage implements Menu {
         style = new VBox();
 
         but = new Label("OBJECTIF - Mettez votre sens de l'organisation et votre endurance\nà l'épreuve en dégageant le plus de lignes possible.\n");
-        completionLigne = new Label("EFFACER LES LIGNES - Manipulez les pièces qui tombent pour les\nassembler dans le tableau. Pour effacer une ligne, remplissez\n toutes les cases d'une même ligne.\n");
-        gainScore = new Label("POINTS DE SCORE - Gagnez des points en supprimant des lignes.\nDégagez plusieurs lignes à la fois pour augmenter vos chances \nde marquer des points.\n");
+        completionLigne = new Label("EFFACER LES LIGNES - Manipulez les pièces qui tombent pour les\nassembler dans le tableau. Pour effacer une ligne, remplissez\ntoutes les cases d'une même ligne.\n");
+        gainScore = new Label("POINTS DE SCORE - Gagnez des points en supprimant des lignes.\nDégagez plusieurs lignes à la fois pour augmenter vos chances\nde marquer des points.\n");
         prochainePiece = new Label("PIECE SUIVANTE - Prévisualisez la prochaine pièce afin\nd'anticiper et d'augmenter vos chances de marquer des points.\n");
         pieceSauvegardee = new Label("PIECE SAUVEGARDÉE - Stocke la pièce qui tombe dans un conteneur.\nPièce qui pourra être réutilisée par la suite.\n");
         gameOver = new Label("GAME OVER - Empilez les pièces trop haut et le jeu est terminé!\n");
@@ -50,8 +50,8 @@ public class VueRegles extends Stage implements Menu {
         }
 
         titre = new Label("Scores :");
-        softDrop = new Label("Descente simple 1 point x ligne");
-        hardDrop = new Label("Descente rapide 2 point x ligne ");
+        softDrop = new Label("Descente simple : 1 point x ligne");
+        hardDrop = new Label("Descente rapide : 2 point x ligne ");
         singleLine = new Label("Une ligne : 100 points ");
         doubleLine = new Label("Deux lignes : 300 points  ");
         tripleLine = new Label("Trois lignes : 500 points");
