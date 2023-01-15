@@ -2,8 +2,6 @@ package tetris.vues;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -21,29 +19,22 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import tetris.IJeu;
 import tetris.TetrisIHM;
-import tetris.logique.AuthPlayer;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
-import tetris.stockage.PlayerManager;
 import tetris.stockage.ScoreManager;
-import tetris.stockage.Security;
 import tetris.stockage.Session;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
-public class VueJeu extends Stage {
+public class VueJeu extends Stage implements Menu {
     // Objets issus de JavaFX pour l'IHM du jeu
     private boolean jeuEnPause = false;
     private Scene scene;
-    private Stage primaryStage;
-    private BorderPane borderPane;
+    private BorderPane root;
     private VBox informationsJoueur;
     private ActionListener descenteAuto;
     private Button startJeu;
@@ -88,10 +79,14 @@ public class VueJeu extends Stage {
     }
 
     public void demarrerPartie() {
+        root = new BorderPane();
+        scene = new Scene(root, 1280, 720);
+
         // Initialisations des objets nécessaires
         // classes de la logique du jeu
         Musique.stopMusicMainMenu();
         Musique.playMusicGame();
+
         jeu = new Jeu(nomjoueur, nbViesInitial);
         jeu.jeuEnCoursProperty().setValue(false);
         p = jeu.getPlateau();
@@ -99,9 +94,6 @@ public class VueJeu extends Stage {
         stockage = jeu.getStockage();
 
         // javaFX
-        borderPane = new BorderPane();
-        primaryStage = new Stage();
-
         vuePlateau = new VuePlateau(p);
         vueProchainePiece = new VuePieceExterieur(prochainePiece);
         vuePieceSauvegardee = new VuePieceExterieur(stockage);
@@ -129,12 +121,10 @@ public class VueJeu extends Stage {
         // Gestion Plateau/Bouton Pause
         sp = new StackPane(imgPause, vuePlateau);
 
-        scene = new Scene(borderPane, 1280, 720);
-
         // Affectations et constitution de vues
-        borderPane.setLeft(conteneurGauche);
-        borderPane.setCenter(sp);
-        borderPane.setRight(conteneurDroit);
+        root.setLeft(conteneurGauche);
+        root.setCenter(sp);
+        root.setRight(conteneurDroit);
 
         // Initialisation des grilles
         vuePlateau.initialiser();
@@ -152,8 +142,7 @@ public class VueJeu extends Stage {
         imgPause.setVisible(false);
 
         // Affichage définitif
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        afficherScene();
     }
 
     /**
@@ -225,8 +214,7 @@ public class VueJeu extends Stage {
                 vueGameOver.arreterJeuProperty().addListener((observableValue12, aBoolean12, t112) -> {
                     if (vueGameOver.arreterJeuProperty().getValue()) {
                         vueGameOver.close();
-                        primaryStage.close();
-                        VueMenuPrincipal.getInstance().show();
+                        VueMenuPrincipal.getInstance().setScene(VueMenuPrincipal.getInstance().getSceneMenuPrincipal());
                     }
                 });
 
@@ -253,7 +241,6 @@ public class VueJeu extends Stage {
      * Relance la partie, en réinitialisant l'état du jeu
      */
     private void relancerPartie() {
-        primaryStage.close();
         startJeu.setDisable(false);
         sp.getChildren().clear();
         demarrerPartie();
@@ -271,12 +258,12 @@ public class VueJeu extends Stage {
         scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 
         // BorderPane
-        borderPane.getStyleClass().add("borderPane");
-        borderPane.getLeft().getStyleClass().add("leftPane");
-        borderPane.getRight().getStyleClass().add("rightPane");
-        borderPane.getCenter().getStyleClass().add("centerPane");
-        borderPane.setBackground(Preferences.getInstance().getBackground());
-        borderPane.setPadding(new Insets(10, 10, 10, 10));
+        root.getStyleClass().add("borderPane");
+        root.getLeft().getStyleClass().add("leftPane");
+        root.getRight().getStyleClass().add("rightPane");
+        root.getCenter().getStyleClass().add("centerPane");
+        root.setBackground(Preferences.getInstance().getBackground());
+        root.setPadding(new Insets(10, 10, 10, 10));
 
         // VuePlateu
         vuePlateau.getStyleClass().add("vuePlateau");
@@ -359,6 +346,11 @@ public class VueJeu extends Stage {
         // Image Pause
         imgPause.setPreserveRatio(true);
         imgPause.setFitWidth(150);
+    }
+
+    @Override
+    public void afficherScene() {
+        VueMenuPrincipal.getInstance().setScene(scene);
     }
 
 }

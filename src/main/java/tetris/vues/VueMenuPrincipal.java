@@ -109,6 +109,10 @@ public class VueMenuPrincipal extends Stage implements Menu {
         creerBindings();
     }
 
+    public Scene getSceneMenuPrincipal() {
+        return this.scene;
+    }
+
     /**
      * Applique tous les styles souhaités aux objets JavaFX
      */
@@ -171,7 +175,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
     private void creerBindings() {
         start.setOnAction(actionEvent -> {
             vueSelectionJeu.mettreAJourFond();
-            this.setScene(vueSelectionJeu.getScene());
+            vueSelectionJeu.afficherScene();
         });
         compte.setOnAction(actionEvent -> {
             vueCompteConnecte.mettreAJour();

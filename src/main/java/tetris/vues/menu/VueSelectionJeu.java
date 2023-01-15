@@ -37,7 +37,7 @@ public class VueSelectionJeu extends Stage implements Menu {
         modeNormal = new Button("Normal");
         modeAventure = new Button("Aventure");
         modeNormal.setTooltip(new Tooltip("Mode classique : Difficulté normale"));
-        modeAventure.setTooltip(new Tooltip("Mode aventure : Difficulté facileVous disposez de 3 vies, lorsque vousen perdez une, le plateau de jeu se vide"));
+        modeAventure.setTooltip(new Tooltip("Mode aventure : Difficulté facile\nVous disposez de 3 vies, lorsque vous\nen perdez une, le plateau de jeu se vide"));
 
         choix = new HBox(modeNormal, modeAventure);
         root.setCenter(choix);
@@ -83,9 +83,7 @@ public class VueSelectionJeu extends Stage implements Menu {
 
     @Override
     public void afficherScene() {
-        this.setScene(scene);
-        mettreAJourFond();
-
+        VueMenuPrincipal.getInstance().setScene(scene);
     }
 
     public void mettreAJourFond() {
