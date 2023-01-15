@@ -235,9 +235,6 @@ public class VueClassement extends Stage implements Menu {
             classementFiltre.add(date, 3, 0);
             classementFiltre.add(heure, 4, 0);
             for (int j = 1; j < 11 && j <= topScores.size()  ; j++) {
-                if(estConnecte){
-                    System.out.println("lol");
-                }
                 String login = estConnecte ? topScores.get(j - 1).getLogin() : "Anonyme";
                 listToGridPane(topScores, j, login, classementFiltre);
             }
