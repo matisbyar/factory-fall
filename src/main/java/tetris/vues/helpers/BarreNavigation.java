@@ -7,7 +7,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import tetris.TetrisIHM;
 import tetris.parametres.Ressources;
-import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 
 import java.util.Objects;
@@ -57,7 +56,6 @@ public class BarreNavigation extends BorderPane {
         this.setCenter(titre);
         this.setLeft(retour);
         this.setRight(aligneur);
-
     }
 
     private void styliser() {
@@ -85,6 +83,7 @@ public class BarreNavigation extends BorderPane {
     private void retour() {
         retour.setOnAction(event -> {
             VueMenuPrincipal.getInstance().setScene(vuePrecedente);
+            VueMenuPrincipal.getInstance().mettreAJour();
         });
     }
 }

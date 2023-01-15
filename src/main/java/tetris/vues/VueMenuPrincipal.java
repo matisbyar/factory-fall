@@ -169,7 +169,6 @@ public class VueMenuPrincipal extends Stage implements Menu {
     }
 
 
-
     /**
      * Fonction qui créer tous les bindings in line utile pour l'ensemble des boutons du menu
      */
@@ -181,7 +180,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         compte.setOnAction(actionEvent -> {
             vueCompteConnecte.mettreAJour();
             vueCompteDeconnecte.mettreAJour();
-            if(Session.getInstance().isConnected()) vueCompteConnecte.afficherScene();
+            if (Session.getInstance().isConnected()) vueCompteConnecte.afficherScene();
             else vueCompteDeconnecte.afficherScene();
         });
         regles.setOnAction(actionEvent -> {
@@ -314,6 +313,10 @@ public class VueMenuPrincipal extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
+        root.setBackground(Preferences.getInstance().getBackground());
+    }
+
+    public void mettreAJour() {
         root.setBackground(Preferences.getInstance().getBackground());
     }
 }
