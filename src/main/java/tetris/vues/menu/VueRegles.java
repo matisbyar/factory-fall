@@ -13,7 +13,7 @@ public class VueRegles extends Stage implements Menu {
     private final BorderPane root;
     private final Scene scene;
 
-    public VueRegles(VueMenuPrincipal vueMenuPrincipal) {
+    public VueRegles() {
         // Initialisations
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
@@ -25,7 +25,7 @@ public class VueRegles extends Stage implements Menu {
         // ...
 
         // Affichage
-        root.setTop(new BarreNavigation("Règles", vueMenuPrincipal, this));
+        root.setTop(new BarreNavigation("Règles", VueMenuPrincipal.getInstance(), this));
         this.setScene(scene);
     }
 

@@ -33,28 +33,34 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class VueMenuPrincipal extends Stage implements Menu {
+    private static VueMenuPrincipal INSTANCE;
 
     private final BorderPane root;
     private final Scene scene;
-    //Objects.requireNonNull(TetrisIHM.class.getResourceAsStream())
 
     private final ImageView logo;
     private final Button start, regles, personnaliser, compte, classement, quitter;
 
-    //Elements du menu connexion joueur
     private final VBox boutons;
     private final HBox actions;
 
     // Sous-vues
-    VueCompteDeconnecte vueCompteDeconnecte;
-    VueCompteConnecte vueCompteConnecte;
-    VuePersonnaliser vuePersonnaliser;
-    VueClassement vueClassement;
-    VueRegles vueRegles;
-    VueSelectionJeu vueSelectionJeu;
+    private VueCompteDeconnecte vueCompteDeconnecte;
+    private VueCompteConnecte vueCompteConnecte;
+    private VuePersonnaliser vuePersonnaliser;
+    private VueClassement vueClassement;
+    private VueRegles vueRegles;
+    private VueSelectionJeu vueSelectionJeu;
 
+    public static VueMenuPrincipal getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new VueMenuPrincipal();
+            INSTANCE.init();
+        }
+        return INSTANCE;
+    }
 
-    public VueMenuPrincipal(EventHandler<ActionEvent> actionQuitter) {
+    private VueMenuPrincipal() {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
 
@@ -70,7 +76,6 @@ public class VueMenuPrincipal extends Stage implements Menu {
         compte = new Button();
 
         actions = new HBox(compte, quitter);
-
         boutons = new VBox(logo, start, regles, classement, personnaliser);
 
         // Affectations
@@ -78,24 +83,30 @@ public class VueMenuPrincipal extends Stage implements Menu {
         root.setBottom(actions);
         root.setBackground(Preferences.getInstance().getBackgroundMenu());
 
-        vueCompteDeconnecte = new VueCompteDeconnecte(this);
-        vueCompteConnecte = new VueCompteConnecte(this);
-        vuePersonnaliser = new VuePersonnaliser(this);
-        vueClassement = new VueClassement(this);
-        vueRegles = new VueRegles(this);
-        vueSelectionJeu = new VueSelectionJeu(this);
-
-        setButtonConnecterJoueurCliqueListener(joueurConnecte);
-        setButtonCreerJoueurCliqueListener(nouveauJoueurCree);
-        setButtonQuitterListener(actionQuitter);
-
         if (!Preferences.getInstance().getMusiqueMute()) Musique.playMusicMainMenu();
 
         styliser();
-        creerBindings();
 
         this.setScene(scene);
         this.show();
+    }
+
+    /**
+     * Méthode permettant d'initialiser les attributs nécessitant que la vueMenuPrincipal
+     * soit d'ores et déjà créée (à cause de getInstance).
+     */
+    public void init() {
+        vueCompteDeconnecte = new VueCompteDeconnecte();
+        vueCompteConnecte = new VueCompteConnecte();
+        vuePersonnaliser = new VuePersonnaliser();
+        vueClassement = new VueClassement();
+        vueRegles = new VueRegles();
+        vueSelectionJeu = new VueSelectionJeu();
+
+        setButtonConnecterJoueurCliqueListener(joueurConnecte);
+        setButtonCreerJoueurCliqueListener(nouveauJoueurCree);
+
+        creerBindings();
     }
 
     /**
@@ -292,6 +303,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
     public void setButtonQuitterListener(EventHandler<ActionEvent> quitterAction) {
         quitter.setOnAction(quitterAction);
     }
+
 
     @Override
     public void afficherScene() {

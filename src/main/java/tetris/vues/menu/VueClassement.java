@@ -39,7 +39,7 @@ public class VueClassement extends Stage implements Menu {
 
     private final ToggleButton afficherTopScore, afficherFiltre;
 
-    public VueClassement(VueMenuPrincipal vueMenuPrincipal) {
+    public VueClassement() {
         // Initialisations
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
@@ -66,7 +66,7 @@ public class VueClassement extends Stage implements Menu {
 
         // Affichage
         root.setCenter(vbScores);
-        root.setTop(new BarreNavigation("Classements", vueMenuPrincipal, this));
+        root.setTop(new BarreNavigation("Classements", VueMenuPrincipal.getInstance(), this));
 
         this.setScene(scene);
     }

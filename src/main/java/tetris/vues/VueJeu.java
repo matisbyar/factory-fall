@@ -53,7 +53,6 @@ public class VueJeu extends Stage {
     private VBox conteneurGauche;
 
     // Vues personnelles (créées par l'équipe)
-    private VueMenuPrincipal vueMenuPrincipal;
     private VuePlateau vuePlateau;
     private VuePieceExterieur vueProchainePiece;
     private VuePieceExterieur vuePieceSauvegardee;
@@ -73,8 +72,7 @@ public class VueJeu extends Stage {
     private StackPane sp;
     private final ImageView imgPause = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/pause.png"))));
 
-    public VueJeu(String modeDeJeu, VueMenuPrincipal vueMenuPrincipal) {
-        this.vueMenuPrincipal = vueMenuPrincipal;
+    public VueJeu(String modeDeJeu) {
         nomjoueur = Session.getInstance().isConnected() ? Session.getInstance().getLogin() : "Anonyme";
 
         switch (modeDeJeu) {
@@ -228,7 +226,7 @@ public class VueJeu extends Stage {
                     if (vueGameOver.arreterJeuProperty().getValue()) {
                         vueGameOver.close();
                         primaryStage.close();
-                        vueMenuPrincipal.show();
+                        VueMenuPrincipal.getInstance().show();
                     }
                 });
 

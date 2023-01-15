@@ -25,16 +25,14 @@ public class VueSelectionJeu extends Stage implements Menu {
     private final BorderPane root;
     private final Scene scene;
     private VueJeu vueJeu;
-    private VueMenuPrincipal vueMenuPrincipal;
 
     private Button modeNormal;
     private Button modeAventure;
     private HBox choix;
 
-    public VueSelectionJeu(VueMenuPrincipal vueMenuPrincipal) {
+    public VueSelectionJeu() {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
-        this.vueMenuPrincipal = vueMenuPrincipal;
 
         modeNormal = new Button("Normal");
         modeAventure = new Button("Aventure");
@@ -47,7 +45,7 @@ public class VueSelectionJeu extends Stage implements Menu {
         creerBindings();
         styliser();
 
-        root.setTop(new BarreNavigation("Mode de Jeu", vueMenuPrincipal, this));
+        root.setTop(new BarreNavigation("Mode de Jeu", VueMenuPrincipal.getInstance(), this));
         this.setScene(scene);
     }
 
@@ -55,13 +53,13 @@ public class VueSelectionJeu extends Stage implements Menu {
         modeNormal.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                vueJeu = new VueJeu("NORMAL", vueMenuPrincipal);
+                vueJeu = new VueJeu("NORMAL");
             }
         });
         modeAventure.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                vueJeu = new VueJeu("AVENTURE", vueMenuPrincipal);
+                vueJeu = new VueJeu("AVENTURE");
             }
         });
     }

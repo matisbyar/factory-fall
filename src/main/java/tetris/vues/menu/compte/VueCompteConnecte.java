@@ -33,9 +33,8 @@ public class VueCompteConnecte extends Stage implements Menu {
 
     VueModificationCompte vueModificationCompte = new VueModificationCompte(this);
     Button modifier = new Button("Modifier le compte");
-    VueMenuPrincipal vueMenuPrincipal;
 
-    public VueCompteConnecte(VueMenuPrincipal vueMenuPrincipal) {
+    public VueCompteConnecte() {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
 
@@ -47,8 +46,8 @@ public class VueCompteConnecte extends Stage implements Menu {
         departementjoueur = new Label("departement");
 
         if (Session.getInstance().isConnected()) {
-       nomjoueur.setText(Session.getInstance().getLogin());
-       departementjoueur.setText(Session.getInstance().getDepartement());
+            nomjoueur.setText(Session.getInstance().getLogin());
+            departementjoueur.setText(Session.getInstance().getDepartement());
         }
 
         classement = new GridPane();
@@ -56,18 +55,7 @@ public class VueCompteConnecte extends Stage implements Menu {
         information = new HBox(nomjoueur,departementjoueur);
         actions   =   new HBox(modifier,déconnecté);
 
-
-
-
         vbScores = new VBox(information, classement, actions);
-
-
-        this.vueMenuPrincipal = vueMenuPrincipal;
-
-
-
-
-
 
         recupererClassement();
 
@@ -76,7 +64,7 @@ public class VueCompteConnecte extends Stage implements Menu {
         creerBindings();
 
         // Affichage
-        root.setTop(new BarreNavigation("Compte", vueMenuPrincipal, this));
+        root.setTop(new BarreNavigation("Compte", VueMenuPrincipal.getInstance(), this));
         root.setCenter(vbScores);
 
         this.setScene(scene);
@@ -91,13 +79,10 @@ public class VueCompteConnecte extends Stage implements Menu {
         nomjoueur.setStyle("-fx-text-fill: white;");
         nomjoueur.setAlignment(Pos.BOTTOM_CENTER);
 
-
         //departementjoueur
         departementjoueur.setFont(Ressources.getInstance().getPolice(30));
         departementjoueur.setStyle("-fx-text-fill: white;");
         departementjoueur.setAlignment(Pos.CENTER);
-
-
 
         // Hbox des boutons
         actions.setAlignment(Pos.CENTER);
@@ -115,13 +100,11 @@ public class VueCompteConnecte extends Stage implements Menu {
         déconnecté.getStyleClass().add("bouton");
         déconnecté.setPrefWidth(200);
 
-
         //Classement
         classement.setHgap(20);
         classement.setVgap(20);
         classement.setAlignment(Pos.TOP_CENTER);
         classement.setGridLinesVisible(true);
-
 
         for (int i = 0; i < classement.getChildren().size(); i++) {
             classement.getChildren().get(i).setStyle("-fx-text-fill: white");
@@ -130,15 +113,10 @@ public class VueCompteConnecte extends Stage implements Menu {
         // Scene
         scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 
-
-
         // Classement (VBox)
         vbScores.getStyleClass().add("classement");
         vbScores.setAlignment(Pos.TOP_CENTER);
         vbScores.setPadding(new Insets(30));
-
-
-
 
         //information HBox
         information.setAlignment(Pos.BOTTOM_LEFT);
@@ -150,7 +128,7 @@ public class VueCompteConnecte extends Stage implements Menu {
     public void creerBindings() {
         modifier.setOnAction(event -> {
             vueModificationCompte.mettreAJour();
-            vueMenuPrincipal.setScene(vueModificationCompte.getScene());
+            VueMenuPrincipal.getInstance().setScene(vueModificationCompte.getScene());
         });
         déconnecté.setOnAction(event->{
             Session.getInstance().disconnect();
@@ -201,7 +179,7 @@ public class VueCompteConnecte extends Stage implements Menu {
 
     @Override
     public void afficherScene() {
-        vueMenuPrincipal.afficherScene();
+        VueMenuPrincipal.getInstance().afficherScene();
         this.setScene(scene);
         mettreAJour();
     }

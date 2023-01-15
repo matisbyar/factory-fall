@@ -39,7 +39,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     private final PasswordField motDePasseConnexion, motDePasseCreation, motDePasseCreationConfirmation;
     private final Button boutonConnexion, boutonCreation;
 
-    public VueCompteDeconnecte(VueMenuPrincipal vueMenuPrincipal) {
+    public VueCompteDeconnecte() {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
 
@@ -75,7 +75,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         setDisable();
 
         root.setCenter(option);
-        root.setTop(new BarreNavigation("Compte", vueMenuPrincipal, this));
+        root.setTop(new BarreNavigation("Compte", VueMenuPrincipal.getInstance(), this));
 
         this.setScene(scene);
     }

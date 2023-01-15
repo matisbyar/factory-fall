@@ -24,7 +24,8 @@ public class TetrisIHM extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        new VueMenuPrincipal(quitter);
+        VueMenuPrincipal vueMenuPrincipal = VueMenuPrincipal.getInstance();
+        vueMenuPrincipal.setButtonQuitterListener(quitter);
     }
 
     @Override
@@ -32,4 +33,5 @@ public class TetrisIHM extends Application {
         SQLUtils.getInstance().closeConnection();
         super.stop();
     }
+
 }

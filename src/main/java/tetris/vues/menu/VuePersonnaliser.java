@@ -99,7 +99,7 @@ public class VuePersonnaliser extends Stage implements Menu {
         }
     };
 
-    public VuePersonnaliser(VueMenuPrincipal vueMenuPrincipal) {
+    public VuePersonnaliser() {
         // Instanciation
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
@@ -136,7 +136,7 @@ public class VuePersonnaliser extends Stage implements Menu {
         root.setBottom(muteBtn);
 
         root.setCenter(personnalisations);
-        root.setTop(new BarreNavigation("Personnaliser", vueMenuPrincipal, this));
+        root.setTop(new BarreNavigation("Personnaliser", VueMenuPrincipal.getInstance(), this));
 
         this.setScene(scene);
     }
