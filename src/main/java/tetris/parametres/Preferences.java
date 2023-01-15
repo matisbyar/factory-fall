@@ -113,6 +113,10 @@ public class Preferences {
         }
     }
 
+    public void changerMusique() {
+        Musique.btnMute();
+    }
+
     public Background getBackground() {
         return new Background(new BackgroundImage(imageBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
     }
