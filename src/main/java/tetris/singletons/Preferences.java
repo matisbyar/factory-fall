@@ -31,11 +31,6 @@ public class Preferences {
     private int backgroundActuel = 0;
     private Image imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/" + background + ".png")));
 
-    /**
-     * Le fond (à l'intérieur des menus)
-     */
-    private Background backgroundMenu = new Background(new BackgroundImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/industrial-accueil.png"))), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
-
     private boolean muted = false;
 
     public static Preferences getInstance() {
@@ -55,7 +50,6 @@ public class Preferences {
         background = "industrial";
         imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/" + background + ".png")));
 
-        backgroundMenu = new Background(new BackgroundImage(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/industrial-accueil.png"))), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
 
         muted = false;
     }
@@ -110,7 +104,7 @@ public class Preferences {
             case 0 ->
                     imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/industrial.png")));
             case 1 ->
-                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/classic.jpg")));
+                    imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/classic.png")));
             case 2 ->
                     imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/original.jpg")));
         }
@@ -118,10 +112,6 @@ public class Preferences {
 
     public Background getBackground() {
         return new Background(new BackgroundImage(imageBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
-    }
-
-    public Background getBackgroundMenu() {
-        return backgroundMenu;
     }
 
     public void setMusiqueMute(boolean etat) {

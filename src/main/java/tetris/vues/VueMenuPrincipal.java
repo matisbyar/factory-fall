@@ -81,7 +81,7 @@ public class VueMenuPrincipal extends Stage implements Menu {
         // Affectations
         root.setCenter(boutons);
         root.setBottom(actions);
-        root.setBackground(Preferences.getInstance().getBackgroundMenu());
+        root.setBackground(Preferences.getInstance().getBackground());
 
         if (!Preferences.getInstance().getMusiqueMute()) Musique.playMusicMainMenu();
 
@@ -308,5 +308,6 @@ public class VueMenuPrincipal extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
+        root.setBackground(Preferences.getInstance().getBackground());
     }
 }
