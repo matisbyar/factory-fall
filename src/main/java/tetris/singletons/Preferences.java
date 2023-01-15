@@ -27,7 +27,7 @@ public class Preferences {
     /**
      * La préférence du fond.
      */
-    private String background = "industrial";
+    private String background = "1";
     private int backgroundActuel = 0;
     private Image imageBackground = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("img/background/" + background + ".png")));
 
