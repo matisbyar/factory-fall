@@ -60,7 +60,7 @@ public class BarreNavigation extends BorderPane {
 
     }
 
-    protected void styliser() {
+    private void styliser() {
         this.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 
         this.getStyleClass().add("barre-navigation");
@@ -82,7 +82,7 @@ public class BarreNavigation extends BorderPane {
      * Permet de définir le comportement du bouton retour.
      * S'adapte en fonction de la vue précédente et la vue actuelle
      */
-    public void retour() {
+    private void retour() {
         retour.setOnAction(event -> {
             vuePrecedente.afficherScene();
             vueActuelle.afficherScene();

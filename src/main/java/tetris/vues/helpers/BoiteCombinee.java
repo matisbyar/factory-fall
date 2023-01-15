@@ -16,7 +16,7 @@ public class BoiteCombinee extends ComboBox {
      * @param choix    La liste des choix que propose la boîte
      * @param nomBoite Le nom qui apparait dans la cellule de la boîte (la seule visible quand elle n'est pas ouverte)
      */
-    public BoiteCombinee(List choix, String nomBoite) {
+    private BoiteCombinee(List choix, String nomBoite) {
         super();
         this.setValue(nomBoite);
         this.getItems().addAll(choix);
@@ -32,7 +32,7 @@ public class BoiteCombinee extends ComboBox {
         this.setVisibleRowCount(nbChoixVisibles);
     }
 
-    protected void styliser() {
+    private void styliser() {
         this.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
         this.getStyleClass().add("boite-combinee");
     }
