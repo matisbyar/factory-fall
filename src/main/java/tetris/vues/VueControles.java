@@ -10,7 +10,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import tetris.TetrisIHM;
-import tetris.singletons.Ressources;
+import tetris.parametres.Ressources;
 
 import java.util.ArrayList;
 import java.util.List;

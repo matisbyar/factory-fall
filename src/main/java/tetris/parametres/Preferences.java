@@ -1,4 +1,4 @@
-package tetris.singletons;
+package tetris.parametres;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

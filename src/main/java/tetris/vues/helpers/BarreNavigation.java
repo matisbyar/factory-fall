@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import tetris.TetrisIHM;
-import tetris.singletons.Ressources;
+import tetris.parametres.Ressources;
 import tetris.vues.Menu;
 
 import java.util.Objects;

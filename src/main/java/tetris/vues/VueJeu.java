@@ -21,8 +21,9 @@ import tetris.IJeu;
 import tetris.TetrisIHM;
 import tetris.logique.Jeu;
 import tetris.logique.Plateau;
-import tetris.singletons.Preferences;
-import tetris.singletons.Ressources;
+import tetris.parametres.Musique;
+import tetris.parametres.Preferences;
+import tetris.parametres.Ressources;
 import tetris.stockage.ScoreManager;
 import tetris.stockage.Session;
 

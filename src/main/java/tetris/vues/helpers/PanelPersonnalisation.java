@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import tetris.TetrisIHM;
-import tetris.singletons.Ressources;
+import tetris.parametres.Ressources;
 
 import java.util.Objects;
 

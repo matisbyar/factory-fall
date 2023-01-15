@@ -12,8 +12,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import tetris.singletons.Preferences;
-import tetris.singletons.Ressources;
+import tetris.parametres.Musique;
+import tetris.parametres.Preferences;
+import tetris.parametres.Ressources;
 
 public class VueGameOver extends Stage implements Menu {
 
