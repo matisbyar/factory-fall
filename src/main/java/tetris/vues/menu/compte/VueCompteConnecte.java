@@ -28,7 +28,7 @@ public class VueCompteConnecte extends Stage implements Menu {
     private final GridPane classement;
     private final VBox  vbScores;
     private final HBox information,actions;
-    private  final Button modifiéprofil,déconnecté;
+    private  final Button modifierprofil, deconnecter;
     private final Label nomjoueur,departementjoueur;
 
     VueModificationCompte vueModificationCompte = new VueModificationCompte(this);
@@ -40,8 +40,8 @@ public class VueCompteConnecte extends Stage implements Menu {
 
         nomjoueur = new Label("nom joueur");
 
-        modifiéprofil = new Button();
-        déconnecté = new Button();
+        modifierprofil = new Button();
+        deconnecter = new Button();
 
         departementjoueur = new Label("departement");
 
@@ -53,7 +53,7 @@ public class VueCompteConnecte extends Stage implements Menu {
         classement = new GridPane();
 
         information = new HBox(nomjoueur,departementjoueur);
-        actions   =   new HBox(modifier,déconnecté);
+        actions   =   new HBox(modifier, deconnecter);
 
         vbScores = new VBox(information, classement, actions);
 
@@ -95,10 +95,10 @@ public class VueCompteConnecte extends Stage implements Menu {
         modifier.getStyleClass().add("bouton");
         modifier.setPrefWidth(500);
 
-        déconnecté.setText("Déconnection");
-        déconnecté.setFont(Ressources.getInstance().getPolice(20));
-        déconnecté.getStyleClass().add("bouton");
-        déconnecté.setPrefWidth(200);
+        deconnecter.setText("Déconnection");
+        deconnecter.setFont(Ressources.getInstance().getPolice(20));
+        deconnecter.getStyleClass().add("bouton");
+        deconnecter.setPrefWidth(200);
 
         //Classement
         classement.setHgap(20);
@@ -130,7 +130,7 @@ public class VueCompteConnecte extends Stage implements Menu {
             vueModificationCompte.mettreAJour();
             VueMenuPrincipal.getInstance().setScene(vueModificationCompte.getScene());
         });
-        déconnecté.setOnAction(event->{
+        deconnecter.setOnAction(event->{
             Session.getInstance().disconnect();
             System.out.println("joueur bien deco");
 
