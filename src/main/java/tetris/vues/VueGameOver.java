@@ -31,6 +31,7 @@ public class VueGameOver extends Stage implements Menu {
         // Instanciation d'éléments JavaFX
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
+
         vBox = new VBox();
         actions = new HBox();
 
@@ -117,8 +118,7 @@ public class VueGameOver extends Stage implements Menu {
 
     @Override
     public void afficherScene() {
-        this.setScene(scene);
-        mettreAJourFond();
+        VueMenuPrincipal.getInstance().setScene(scene);
     }
 
     private void mettreAJourFond() {
