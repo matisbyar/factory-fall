@@ -16,33 +16,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Vue des contrôles du jeu.
+ */
 public class VueControles extends VBox {
 
-    Label titre;
-    ImageView flechesDirectionnelles, espace, toucheR, toucheC, toucheP, haut, echap;
-    Label flechesDirectionnellesLabel, espaceLabel, toucheRLabel, toucheCLabel, touchePLabel, hautLabel, echapLabel;
+    private final Label titre;
 
-    ArrayList<HBox> hBoxes;
-    ArrayList<ImageView> imageViews;
+    private final ArrayList<HBox> hBoxes;
+    private final ArrayList<ImageView> imageViews;
 
     public VueControles() {
         titre = new Label("Contrôles :");
 
-        flechesDirectionnelles = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/flechesDirectionnelles.png"))));
-        espace = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/espace.png"))));
-        toucheR = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/toucheR.png"))));
-        toucheC = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/toucheC.png"))));
-        toucheP = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/toucheP.png"))));
-        haut = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/haut.png"))));
-        echap = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/echap.png"))));
+        ImageView flechesDirectionnelles = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/flechesDirectionnelles.png"))));
+        ImageView espace = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/espace.png"))));
+        ImageView toucheR = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/toucheR.png"))));
+        ImageView toucheC = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/toucheC.png"))));
+        ImageView toucheP = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/toucheP.png"))));
+        ImageView haut = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/haut.png"))));
+        ImageView echap = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("icons/echap.png"))));
 
-        flechesDirectionnellesLabel = new Label("Déplacer la pièce");
-        espaceLabel = new Label("Descendre la pièce");
-        toucheRLabel = new Label("Rotation anti-horaire");
-        toucheCLabel = new Label("Sauvegarder la pièce");
-        touchePLabel = new Label("Pause");
-        hautLabel = new Label("Rotation horaire");
-        echapLabel = new Label("Quitter le jeu");
+        Label flechesDirectionnellesLabel = new Label("Déplacer la pièce");
+        Label espaceLabel = new Label("Descendre la pièce");
+        Label toucheRLabel = new Label("Rotation anti-horaire");
+        Label toucheCLabel = new Label("Sauvegarder la pièce");
+        Label touchePLabel = new Label("Pause");
+        Label hautLabel = new Label("Rotation horaire");
+        Label echapLabel = new Label("Quitter le jeu");
 
         HBox flechesDirectionnellesHBox = new HBox(flechesDirectionnelles, flechesDirectionnellesLabel);
         HBox espaceHBox = new HBox(espace, espaceLabel);
@@ -63,7 +64,7 @@ public class VueControles extends VBox {
         this.getChildren().addAll(titre, flechesDirectionnellesHBox, espaceHBox, toucheRHBox, toucheCHBox, touchePHBox, hautHBox, echapHBox);
     }
 
-    public void styliser() {
+    private void styliser() {
         // VBox
         this.setAlignment(Pos.BOTTOM_LEFT);
         this.setBackground(Background.EMPTY);

@@ -64,6 +64,11 @@ public class VueJeu extends Stage implements Menu {
     private StackPane sp;
     private final ImageView imgPause = new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/pause.png"))));
 
+    /**
+     * Constructeur de la vue du jeu.
+     *
+     * @param modeDeJeu Le mode de jeu choisi par le joueur.
+     */
     public VueJeu(String modeDeJeu) {
         nomjoueur = Session.getInstance().isConnected() ? Session.getInstance().getLogin() : "Anonyme";
 
@@ -108,7 +113,7 @@ public class VueJeu extends Stage implements Menu {
         vies = new Label("Vies : ");
         nbVies = new HBox();
         if (jeu.getNbVies().get() != 1) {
-            for (int i=0; i<jeu.getNbVies().get(); i++) {
+            for (int i = 0; i < jeu.getNbVies().get(); i++) {
                 nbVies.getChildren().add(new ImageView(new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/heart.png")))));
             }
         }
@@ -150,7 +155,7 @@ public class VueJeu extends Stage implements Menu {
      * Créé tous les listeners/bindings afin que la partie se déroule correctement.
      * Voir les commentaires respectifs à chaque listener pour plus d'informations.
      */
-    public void creerBindings() {
+    private void creerBindings() {
         // Listener sur les "inputs" (actions du joueur) lors d'une partie. Ces inputs sont les flèches du clavier
         scene.setOnKeyPressed(keyEvent -> {
             if (jeu.isJeuEnCours()) {
@@ -203,7 +208,7 @@ public class VueJeu extends Stage implements Menu {
         jeu.getRang(jeu.getPlateau()).addListener((observableValue, number, t1) -> rang.setText("rang : " + jeu.getRang(jeu.getPlateau()).getValue()));
 
         // Listener le nombre de vies restantes
-        jeu.getNbVies().addListener((observableValue, number, t1) -> nbVies.getChildren().remove(nbVies.getChildren().size()-1));
+        jeu.getNbVies().addListener((observableValue, number, t1) -> nbVies.getChildren().remove(nbVies.getChildren().size() - 1));
 
 
         // Listener pour agir en cas de fin de jeu
@@ -253,8 +258,7 @@ public class VueJeu extends Stage implements Menu {
     /**
      * Applique tous les styles souhaités aux objets JavaFX
      */
-    public void styliser() {
-
+    private void styliser() {
         // Scene
         scene.getStylesheets().add(Objects.requireNonNull(TetrisIHM.class.getResource("css/main.css")).toString());
 

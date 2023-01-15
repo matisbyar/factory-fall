@@ -16,6 +16,10 @@ import tetris.parametres.Musique;
 import tetris.parametres.Preferences;
 import tetris.parametres.Ressources;
 
+/**
+ * Vue de fin de partie. Possibilité de rejouer ou de revenir au menu principal.
+ * Affiche le score atteint.
+ */
 public class VueGameOver extends Stage implements Menu {
 
     private final Scene scene;
@@ -61,14 +65,14 @@ public class VueGameOver extends Stage implements Menu {
         this.setScene(scene);
     }
 
-    public void arreterJeu() {
+    private void arreterJeu() {
         Musique.stopMusicGame();
         Musique.playMusicMainMenu();
         arreterJeu.setValue(true);
         close();
     }
 
-    public void relancerPartie() {
+    private void relancerPartie() {
         retry.setValue(true);
         close();
     }
