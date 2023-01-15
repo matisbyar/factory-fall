@@ -269,11 +269,11 @@ public class VueCompteDeconnecte extends Stage implements Menu {
 
     public void creerBindings() {
         cgu.setOnAction(event -> {
-            try {
-                java.awt.Desktop.getDesktop().open(new File(TetrisIHM.class.getResource("pdf/CGU.pdf").toURI()));
-            } catch (IOException | URISyntaxException ex) {
-                ex.printStackTrace();
-            }
+                 try {
+                     java.awt.Desktop.getDesktop().open(new File("documents/CGU.pdf"));
+                 } catch (IOException ex) {
+                     ex.printStackTrace();
+                 }
         });
     }
 
