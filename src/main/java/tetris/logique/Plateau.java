@@ -2,9 +2,8 @@ package tetris.logique;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import tetris.IPlateau;
 
-public class Plateau implements IPlateau {
+public class Plateau {
     private final int hauteur;
     private final int largeur;
     private final Piece[][] plateau;
