@@ -29,36 +29,37 @@ public class VueCompteConnecte extends Stage implements Menu {
     private final BorderPane root;
     private final Scene scene;
     private final GridPane classement;
-    private final VBox vbScores;
+    private final VBox vbScores, container;
     private final HBox information, actions;
-    private final Button modifierProfil, deconnecter;
-    private final Label nomjoueur, departementjoueur;
+    private final Button modifier, deconnecter;
+    private final Label nomJoueur, departement;
 
     VueModificationCompte vueModificationCompte = new VueModificationCompte(this);
-    Button modifier = new Button("Modifier le compte");
 
     public VueCompteConnecte() {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
 
-        nomjoueur = new Label("Anonyme");
+        nomJoueur = new Label("Anonyme");
 
-        modifierProfil = new Button();
+        modifier = new Button("Modifier le compte");
         deconnecter = new Button();
 
-        departementjoueur = new Label("Département : ");
+        departement = new Label("Département : ");
 
         if (Session.getInstance().isConnected()) {
-            nomjoueur.setText(Session.getInstance().getLogin());
-            departementjoueur.setText("Département : " + Session.getInstance().getDepartement());
+            nomJoueur.setText(Session.getInstance().getLogin());
+            departement.setText("Département : " + Session.getInstance().getDepartement());
         }
 
         classement = new GridPane();
 
-        information = new HBox(nomjoueur, departementjoueur);
+        information = new HBox(nomJoueur, departement);
         actions = new HBox(modifier, deconnecter);
 
         vbScores = new VBox(information, classement, actions);
+
+        container = new VBox(vbScores);
 
         recupererClassement();
 
@@ -68,7 +69,7 @@ public class VueCompteConnecte extends Stage implements Menu {
 
         // Affichage
         root.setTop(new BarreNavigation("Compte", VueMenuPrincipal.getInstance(), this));
-        root.setCenter(vbScores);
+        root.setCenter(container);
 
         this.setScene(scene);
     }
@@ -78,14 +79,14 @@ public class VueCompteConnecte extends Stage implements Menu {
         root.setBackground(Preferences.getInstance().getBackground());
 
         //nomjoueur
-        nomjoueur.setFont(Ressources.getInstance().getPolice(45));
-        nomjoueur.setStyle("-fx-text-fill: white;");
-        nomjoueur.setAlignment(Pos.BOTTOM_CENTER);
+        nomJoueur.setFont(Ressources.getInstance().getPolice(45));
+        nomJoueur.setStyle("-fx-text-fill: white;");
+        nomJoueur.setAlignment(Pos.BOTTOM_CENTER);
 
         //departementjoueur
-        departementjoueur.setFont(Ressources.getInstance().getPolice(25));
-        departementjoueur.setStyle("-fx-text-fill: lightgray;");
-        departementjoueur.setAlignment(Pos.CENTER);
+        departement.setFont(Ressources.getInstance().getPolice(25));
+        departement.setStyle("-fx-text-fill: lightgray;");
+        departement.setAlignment(Pos.CENTER);
 
         // Hbox des boutons
         actions.setAlignment(Pos.CENTER);
@@ -120,11 +121,18 @@ public class VueCompteConnecte extends Stage implements Menu {
         vbScores.getStyleClass().add("classement");
         vbScores.setAlignment(Pos.TOP_CENTER);
         vbScores.setPadding(new Insets(30));
+        vbScores.setSpacing(30);
 
         //information HBox
         information.setAlignment(Pos.BOTTOM_LEFT);
         information.setSpacing(20);
         information.setPadding(new Insets(0, 0, 10, 50));
+
+        //container
+        container.setSpacing(10);
+        container.setPadding(new Insets(10));
+        container.setAlignment(Pos.CENTER);
+        container.getStyleClass().add("panel-compte");
 
     }
 
@@ -133,11 +141,7 @@ public class VueCompteConnecte extends Stage implements Menu {
             vueModificationCompte.mettreAJour();
             VueMenuPrincipal.getInstance().setScene(vueModificationCompte.getScene());
         });
-        deconnecter.setOnAction(event -> {
-            Session.getInstance().disconnect();
-            System.out.println("joueur bien deco");
-
-        });
+        deconnecter.setOnAction(event -> Session.getInstance().disconnect());
     }
 
     /**
@@ -192,7 +196,7 @@ public class VueCompteConnecte extends Stage implements Menu {
         root.setBackground(Preferences.getInstance().getBackground());
         classement.getChildren().clear();
         recupererClassement();
-        nomjoueur.setText(Session.getInstance().getLogin());
-        departementjoueur.setText(Session.getInstance().getDepartement());
+        nomJoueur.setText(Session.getInstance().getLogin());
+        departement.setText(Session.getInstance().getDepartement());
     }
 }

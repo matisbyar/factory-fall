@@ -183,7 +183,7 @@
     -fx-padding: 10px;
 }
 
-.panel-compte-deconnecte, .panel-modification-compte {
+.panel-compte-deconnecte, .panel-modification-compte, .panel-compte {
     -fx-padding: 5px 20px;
 }
 
