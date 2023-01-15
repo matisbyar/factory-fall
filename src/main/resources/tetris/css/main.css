@@ -79,11 +79,20 @@
 .bouton-clair-select {
     -fx-text-fill: black;
     -fx-background-color: white;
-    -fx-background-color: rgb(75, 75, 75);
     -fx-padding: 0 20px;
     -fx-border-radius: 0px;
     -fx-background-radius: 0px;
-    -fx-border-color: black;
+    -fx-border-color: white;
+    -fx-border-width: 3px;
+}
+
+.bouton-clair-not-selected {
+    -fx-text-fill: white;
+    -fx-background-color: black;
+    -fx-padding: 0 20px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-border-color: white;
     -fx-border-width: 3px;
 }
 
