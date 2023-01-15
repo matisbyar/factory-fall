@@ -1,4 +1,12 @@
-package tetris.vues;
+/*
+ * Copyright (c) 2023. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
+package tetris.vues.helpers;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
@@ -8,6 +16,7 @@ import javafx.stage.Screen;
 import tetris.TetrisIHM;
 import tetris.logique.Plateau;
 import tetris.parametres.Preferences;
+import tetris.vues.VueJeu;
 
 import java.util.Objects;
 
@@ -18,7 +27,7 @@ import java.util.Objects;
  *
  * @see VueJeu
  */
-public class VueGrille extends GridPane {
+public class HelperGrille extends GridPane {
 
     protected String dossierImg;
     private final Image vide = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/vide.png")));
@@ -29,7 +38,7 @@ public class VueGrille extends GridPane {
 
     Plateau p;
 
-    public VueGrille(Plateau p) {
+    public HelperGrille(Plateau p) {
         this.p = p;
         this.dossierImg = Preferences.getInstance().getStylePiece();
         if (Preferences.getInstance().isLocked("pieces")) {
@@ -51,7 +60,7 @@ public class VueGrille extends GridPane {
         // Ajoute les pièces vides dans la grille
         for (int colonne = 0; colonne < p.getPlateau().length; colonne++) {
             for (int ligne = 0; ligne < p.getPlateau()[0].length; ligne++) {
-                ImageView imagePiece = getClass() == VuePieceExterieur.class ? new ImageView() : ligne % 2 == 0 ? new ImageView(vide) : new ImageView(vide_clair);
+                ImageView imagePiece = getClass() == HelperPieceExterieur.class ? new ImageView() : ligne % 2 == 0 ? new ImageView(vide) : new ImageView(vide_clair);
 
                 imagePiece.setFitHeight((primaryScreenBounds.getHeight() * 0.0325));
                 imagePiece.setFitWidth((primaryScreenBounds.getHeight() * 0.0325));
@@ -68,7 +77,7 @@ public class VueGrille extends GridPane {
         // Ajoute les pièces dans la grille
         for (int colonne = 0; colonne < p.getPlateau().length; colonne++) {
             for (int ligne = 0; ligne < p.getPlateau()[0].length; ligne++) {
-                ImageView imagePiece = getClass() == VuePieceExterieur.class ? new ImageView() : ligne % 2 == 0 ? new ImageView(vide) : new ImageView(vide_clair);
+                ImageView imagePiece = getClass() == HelperPieceExterieur.class ? new ImageView() : ligne % 2 == 0 ? new ImageView(vide) : new ImageView(vide_clair);
 
                 imagePiece.setFitHeight((primaryScreenBounds.getHeight() * 0.0325));
                 imagePiece.setFitWidth((primaryScreenBounds.getHeight() * 0.0325));
