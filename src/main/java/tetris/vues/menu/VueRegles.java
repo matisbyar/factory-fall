@@ -50,8 +50,8 @@ public class VueRegles extends Stage implements Menu {
         }
 
         titre = new Label("Scores :");
-        softDrop = new Label("Descente simple 1point x ligne");
-        hardDrop = new Label("Descente rapide 2point x ligne ");
+        softDrop = new Label("Descente simple 1 point x ligne");
+        hardDrop = new Label("Descente rapide 2 point x ligne ");
         singleLine = new Label("Une ligne : 100 points ");
         doubleLine = new Label("Deux lignes : 300 points  ");
         tripleLine = new Label("Trois lignes : 500 points");
