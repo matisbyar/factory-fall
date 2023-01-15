@@ -68,9 +68,9 @@ public class BarreNavigation extends BorderPane {
         aligneur.getStyleClass().add("bouton-clair");
         titre.getStyleClass().add("titre");
 
-        titre.setFont(Ressources.getInstance().getPolice(70));
-        retour.setFont(Ressources.getInstance().getPolice(50));
-        aligneur.setFont(Ressources.getInstance().getPolice(50));
+        titre.setFont(Ressources.getPolice(70));
+        retour.setFont(Ressources.getPolice(50));
+        aligneur.setFont(Ressources.getPolice(50));
 
         HBox.setMargin(retour, new javafx.geometry.Insets(0, 50, 0, 0));
         HBox.setMargin(aligneur, new javafx.geometry.Insets(0, 50, 0, 0));

@@ -66,13 +66,13 @@ public class PanelPersonnalisation extends VBox {
         this.setAlignment(Pos.CENTER);
 
         titre.getStyleClass().add("titre-panel-personnalisation");
-        titre.setFont(Ressources.getInstance().getPolice(28));
+        titre.setFont(Ressources.getPolice(28));
 
         // Flèches
         gauche.getStyleClass().add("gauche");
         droite.getStyleClass().add("droite");
-        gauche.setGraphic(Ressources.getInstance().getFlecheGauche());
-        droite.setGraphic(Ressources.getInstance().getFlecheDroite());
+        gauche.setGraphic(Ressources.getFlecheGauche());
+        droite.setGraphic(Ressources.getFlecheDroite());
         gauche.setAlignment(Pos.CENTER);
         droite.setAlignment(Pos.CENTER);
 

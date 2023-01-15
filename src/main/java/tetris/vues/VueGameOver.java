@@ -86,8 +86,8 @@ public class VueGameOver extends Stage implements Menu {
         actions.setAlignment(Pos.CENTER);
         actions.setSpacing(20);
 
-        gameOver.setFont(Ressources.getInstance().getPolice(100));
-        score.setFont(Ressources.getInstance().getPolice(40));
+        gameOver.setFont(Ressources.getPolice(100));
+        score.setFont(Ressources.getPolice(40));
 
         gameOver.setStyle("-fx-text-fill: #ffffff; -fx-background-color: #000000; -fx-padding: 15px 30px");
         score.setStyle("-fx-border-color: #ffffff; -fx-border-width: 2px; -fx-text-fill: #ffffff; -fx-background-color: #000000; -fx-padding: 10px");
@@ -95,7 +95,7 @@ public class VueGameOver extends Stage implements Menu {
 
         for (Node action : actions.getChildren()) {
             action.setStyle("-fx-border-color: #000000; -fx-border-width: 2px; -fx-text-fill: #000000; -fx-background-color: #ffffff; -fx-padding: 10px");
-            ((Button) action).setFont(Ressources.getInstance().getPolice(50));
+            ((Button) action).setFont(Ressources.getPolice(50));
             ((Button) action).setPadding(new Insets(10, 10, 10, 10));
         }
     }

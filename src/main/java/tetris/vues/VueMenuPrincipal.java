@@ -140,28 +140,28 @@ public class VueMenuPrincipal extends Stage implements Menu {
 
         // Boutons
         start.setText("Jouer");
-        start.setFont(Ressources.getInstance().getPolice(32));
+        start.setFont(Ressources.getPolice(32));
         start.getStyleClass().add("bouton");
 
         regles.setText("Règles");
-        regles.setFont(Ressources.getInstance().getPolice(32));
+        regles.setFont(Ressources.getPolice(32));
         regles.getStyleClass().add("bouton");
 
         personnaliser.setText("Personnaliser");
-        personnaliser.setFont(Ressources.getInstance().getPolice(32));
+        personnaliser.setFont(Ressources.getPolice(32));
         personnaliser.getStyleClass().add("bouton");
 
 
         classement.setText("Classements");
-        classement.setFont(Ressources.getInstance().getPolice(32));
+        classement.setFont(Ressources.getPolice(32));
         classement.getStyleClass().add("bouton");
 
         compte.setText("Compte");
-        compte.setFont(Ressources.getInstance().getPolice(45));
+        compte.setFont(Ressources.getPolice(45));
         compte.getStyleClass().add("bouton-clair");
 
         quitter.setText("Quitter");
-        quitter.setFont(Ressources.getInstance().getPolice(45));
+        quitter.setFont(Ressources.getPolice(45));
         quitter.getStyleClass().add("bouton-clair");
 
         this.setResizable(false);

@@ -3,6 +3,7 @@ package tetris.vues.menu;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -15,7 +16,6 @@ import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
 
-import javafx.scene.control.Label;
 import java.util.Objects;
 
 public class VueRegles extends Stage implements Menu {
@@ -89,8 +89,8 @@ public class VueRegles extends Stage implements Menu {
         root.setBackground(Preferences.getInstance().getBackground());
         for (int i = 0; i < regles.getChildren().size(); i++) {
             ((HBox) regles.getChildren().get(i)).setPadding(new Insets(15, 10, 15, 10));
-            ((Label) ((HBox) regles.getChildren().get(i)).getChildren().get(1)).setFont(Ressources.getInstance().getPolice(20));
-            ((Label)((HBox) regles.getChildren().get(i)).getChildren().get(1)).setPadding(new Insets(0, 5, 0, 5));
+            ((Label) ((HBox) regles.getChildren().get(i)).getChildren().get(1)).setFont(Ressources.getPolice(20));
+            ((Label) ((HBox) regles.getChildren().get(i)).getChildren().get(1)).setPadding(new Insets(0, 5, 0, 5));
             ((HBox) regles.getChildren().get(i)).getChildren().get(1).setStyle("-fx-text-fill: white");
         }
 
@@ -106,16 +106,16 @@ public class VueRegles extends Stage implements Menu {
 
         for (int i = 0; i < infoScore.getChildren().size(); i++) {
             if (i == 0) {
-                ((Label) ((VBox)infoScore.getChildren().get(i)).getChildren().get(0)).setFont(Ressources.getInstance().getPolice(30));
-                ((VBox)infoScore.getChildren().get(i)).setAlignment(Pos.CENTER);
+                ((Label) ((VBox) infoScore.getChildren().get(i)).getChildren().get(0)).setFont(Ressources.getPolice(30));
+                ((VBox) infoScore.getChildren().get(i)).setAlignment(Pos.CENTER);
                 ((VBox) infoScore.getChildren().get(i)).setPadding(new Insets(10));
                 ((VBox)infoScore.getChildren().get(i)).getChildren().get(0).setStyle("-fx-text-fill: white");
             } else if (i == infoScore.getChildren().size()-1) {
-                ((Label)infoScore.getChildren().get(i)).setFont(Ressources.getInstance().getPolice(15));
+                ((Label) infoScore.getChildren().get(i)).setFont(Ressources.getPolice(15));
                 ((Label) infoScore.getChildren().get(i)).setPadding(new Insets(10));
                 infoScore.getChildren().get(i).setStyle("-fx-text-fill: white");
             } else {
-                ((Label)infoScore.getChildren().get(i)).setFont(Ressources.getInstance().getPolice(24));
+                ((Label) infoScore.getChildren().get(i)).setFont(Ressources.getPolice(24));
                 ((Label) infoScore.getChildren().get(i)).setPadding(new Insets(10));
                 infoScore.getChildren().get(i).setStyle("-fx-text-fill: white");
             }

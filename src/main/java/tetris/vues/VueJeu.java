@@ -280,45 +280,45 @@ public class VueJeu extends Stage implements Menu {
 
         // Pseudo
         pseudo.setTextFill(Color.WHITE);
-        pseudo.setFont(Ressources.getInstance().getPolice(52));
+        pseudo.setFont(Ressources.getPolice(52));
         pseudo.setAlignment(Pos.TOP_RIGHT);
 
         // Score
         score.getStyleClass().add("score");
-        score.setFont(Ressources.getInstance().getPolice(30));
+        score.setFont(Ressources.getPolice(30));
         score.setTextFill(Color.WHITE);
         score.setAlignment(Pos.TOP_RIGHT);
 
         //nbLignes
         nbLignes.getStyleClass().add("nbLignes");
-        nbLignes.setFont(Ressources.getInstance().getPolice(30));
+        nbLignes.setFont(Ressources.getPolice(30));
         nbLignes.setTextFill(Color.WHITE);
         nbLignes.setAlignment(Pos.TOP_RIGHT);
 
         // Rang
         rang.setTextFill(Color.WHITE);
-        rang.setFont(Ressources.getInstance().getPolice(30));
+        rang.setFont(Ressources.getPolice(30));
         rang.setAlignment(Pos.TOP_RIGHT);
 
         // Vies
         vies.setTextFill(Color.WHITE);
-        vies.setFont(Ressources.getInstance().getPolice(30));
+        vies.setFont(Ressources.getPolice(30));
         vies.setAlignment(Pos.TOP_RIGHT);
         nbVies.setAlignment(Pos.TOP_RIGHT);
 
         // Label Prochaine pièce
         prochainePieceLabel.setTextFill(Color.WHITE);
-        prochainePieceLabel.setFont(Ressources.getInstance().getPolice(25));
+        prochainePieceLabel.setFont(Ressources.getPolice(25));
         prochainePieceLabel.setAlignment(Pos.TOP_LEFT);
 
         //Label Piece sauvegardée
         pieceSauvegardeeLabel.setTextFill(Color.WHITE);
-        pieceSauvegardeeLabel.setFont(Ressources.getInstance().getPolice(25));
+        pieceSauvegardeeLabel.setFont(Ressources.getPolice(25));
         pieceSauvegardeeLabel.setAlignment(Pos.TOP_RIGHT);
 
         // StartJeu
         startJeu.setText("Start");
-        startJeu.setFont(Ressources.getInstance().getPolice(40));
+        startJeu.setFont(Ressources.getPolice(40));
         startJeu.setStyle("-fx-background-color: black; -fx-text-fill: white");
         startJeu.getStyleClass().add("bouttonStart");
 

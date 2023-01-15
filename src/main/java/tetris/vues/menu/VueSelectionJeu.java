@@ -57,9 +57,9 @@ public class VueSelectionJeu extends Stage implements Menu {
 
         root.setBackground(Preferences.getInstance().getBackground());
 
-        modeNormal.setFont(Ressources.getInstance().getPolice(32));
+        modeNormal.setFont(Ressources.getPolice(32));
         modeNormal.getStyleClass().add("bouton-clair");
-        modeAventure.setFont(Ressources.getInstance().getPolice(32));
+        modeAventure.setFont(Ressources.getPolice(32));
         modeAventure.getStyleClass().add("bouton-clair");
 
         modeNormal.getTooltip().setShowDuration(new Duration(10000));

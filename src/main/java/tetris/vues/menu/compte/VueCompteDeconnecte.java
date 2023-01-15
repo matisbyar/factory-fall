@@ -107,8 +107,8 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         // Titre
         titreConnexion.getStyleClass().add("titre-compte-deconnecte");
         titreCreation.getStyleClass().add("titre-compte-deconnecte");
-        titreConnexion.setFont(Ressources.getInstance().getPolice(32));
-        titreCreation.setFont(Ressources.getInstance().getPolice(32));
+        titreConnexion.setFont(Ressources.getPolice(32));
+        titreCreation.setFont(Ressources.getPolice(32));
         titreConnexion.setAlignment(Pos.CENTER);
         titreCreation.setAlignment(Pos.CENTER);
         titreConnexion.setPrefWidth(champsConnexion.getPrefWidth());
@@ -134,11 +134,11 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         boutonCreation.setAlignment(Pos.CENTER);
         boutonConnexion.setPrefWidth(champsConnexion.getPrefWidth());
         boutonCreation.setPrefWidth(champsCreation.getPrefWidth());
-        boutonConnexion.setFont(Ressources.getInstance().getPolice(20));
-        boutonCreation.setFont(Ressources.getInstance().getPolice(20));
+        boutonConnexion.setFont(Ressources.getPolice(20));
+        boutonCreation.setFont(Ressources.getPolice(20));
         cgu.setText("en vous inscrivant, vous acceptez nos CGU");
         cgu.getStyleClass().add("bouton-blanc-fond-noir");
-        cgu.setFont(Ressources.getInstance().getPolice(15));
+        cgu.setFont(Ressources.getPolice(15));
         cgu.setAlignment(Pos.CENTER);
 
         styliserChamps(champsConnexion);
@@ -150,9 +150,9 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         erreurCreation.setVisible(false);
         erreurCreation.setStyle("-fx-text-fill: red");
         erreurConnexion.setStyle("-fx-text-fill: red");
-        erreurConnexion.setFont(Ressources.getInstance().getPolice(16));
+        erreurConnexion.setFont(Ressources.getPolice(16));
         erreurConnexion.setAlignment(Pos.CENTER);
-        erreurCreation.setFont(Ressources.getInstance().getPolice(16));
+        erreurCreation.setFont(Ressources.getPolice(16));
         erreurCreation.setAlignment(Pos.CENTER);
 
         ((VBox) champsConnexion.getChildren().get(2)).setAlignment(Pos.CENTER);
@@ -172,7 +172,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
             if (enfant instanceof TextField) {
                 ((TextField) enfant).setAlignment(Pos.CENTER);
                 ((TextField) enfant).setPrefWidth(champsCreation.getPrefWidth() * 0.75);
-                ((TextField) enfant).setFont(Ressources.getInstance().getPolice(20));
+                ((TextField) enfant).setFont(Ressources.getPolice(20));
             } else if (enfant instanceof BoiteCombinee) {
                 ((BoiteCombinee) enfant).setPrefWidth(champsCreation.getPrefWidth() * 0.75);
 

@@ -78,7 +78,7 @@ public class VueClassement extends Stage implements Menu {
         classementFiltre.getStyleClass().add("classement");
 
         for (int i = 0; i < classementTopScore.getChildren().size() - classementTopScore.getColumnCount(); i++) {
-            ((Label) classementTopScore.getChildren().get(i)).setFont(Ressources.getInstance().getPolice(20));
+            ((Label) classementTopScore.getChildren().get(i)).setFont(Ressources.getPolice(20));
             classementTopScore.getChildren().get(i).getStyleClass().remove(0);
             classementTopScore.getChildren().get(i).getStyleClass().add("textClassement");
         }
@@ -88,12 +88,12 @@ public class VueClassement extends Stage implements Menu {
         }
 
         afficherTopScore.getStyleClass().add("bouton-clair-select");
-        afficherTopScore.setFont(Ressources.getInstance().getPolice(20));
+        afficherTopScore.setFont(Ressources.getPolice(20));
 
         boutons.setAlignment(Pos.CENTER);
 
         afficherFiltre.getStyleClass().add("bouton-clair-not-selected");
-        afficherFiltre.setFont(Ressources.getInstance().getPolice(20));
+        afficherFiltre.setFont(Ressources.getPolice(20));
 
         boutons.setPadding(new Insets(0, 0, 50, 0));
 
@@ -165,7 +165,7 @@ public class VueClassement extends Stage implements Menu {
         List<Score> topScore = ScoreManager.getInstance().getTopScores();
         if (topScore.isEmpty()) {
             Label erreur = new Label("Aucun score enregistré");
-            erreur.setFont(Ressources.getInstance().getPolice(25));
+            erreur.setFont(Ressources.getPolice(25));
             classementTopScore.add(erreur, 0, 0);
         } else {
             Label loginLabel = new Label("Login");
@@ -173,11 +173,11 @@ public class VueClassement extends Stage implements Menu {
             Label score = new Label("Score");
             Label date = new Label("Date");
             Label heure = new Label("Heure");
-            loginLabel.setFont(Ressources.getInstance().getPolice(25));
-            score.setFont(Ressources.getInstance().getPolice(25));
-            date.setFont(Ressources.getInstance().getPolice(25));
-            num.setFont(Ressources.getInstance().getPolice(25));
-            heure.setFont(Ressources.getInstance().getPolice(25));
+            loginLabel.setFont(Ressources.getPolice(25));
+            score.setFont(Ressources.getPolice(25));
+            date.setFont(Ressources.getPolice(25));
+            num.setFont(Ressources.getPolice(25));
+            heure.setFont(Ressources.getPolice(25));
             classementTopScore.add(num, 0, 0);
             classementTopScore.add(loginLabel, 1, 0);
             classementTopScore.add(score, 2, 0);
@@ -204,7 +204,7 @@ public class VueClassement extends Stage implements Menu {
         List<Score> topScores = estConnecte ? ScoreManager.getInstance().getTopScoresParDepartement(Session.getInstance().getDepartement()) : ScoreManager.getInstance().getTopScoresAnonyme();
         if (topScores.isEmpty()) {
             Label erreur = new Label("Aucun score enregistré");
-            erreur.setFont(Ressources.getInstance().getPolice(25));
+            erreur.setFont(Ressources.getPolice(25));
             classementFiltre.add(erreur, 0, 0);
         } else {
             Label loginLabel = new Label("Login");
@@ -212,11 +212,11 @@ public class VueClassement extends Stage implements Menu {
             Label score = new Label("Score");
             Label date = new Label("Date");
             Label heure = new Label("Heure");
-            loginLabel.setFont(Ressources.getInstance().getPolice(25));
-            score.setFont(Ressources.getInstance().getPolice(25));
-            date.setFont(Ressources.getInstance().getPolice(25));
-            num.setFont(Ressources.getInstance().getPolice(25));
-            heure.setFont(Ressources.getInstance().getPolice(25));
+            loginLabel.setFont(Ressources.getPolice(25));
+            score.setFont(Ressources.getPolice(25));
+            date.setFont(Ressources.getPolice(25));
+            num.setFont(Ressources.getPolice(25));
+            heure.setFont(Ressources.getPolice(25));
             classementTopScore.add(num, 0, 0);
             classementTopScore.add(loginLabel, 1, 0);
             classementTopScore.add(score, 2, 0);
@@ -248,11 +248,11 @@ public class VueClassement extends Stage implements Menu {
         Label score = new Label(String.valueOf(scores.get(indice - 1).getScore()));
         Label date = new Label(new SimpleDateFormat("dd/MM/yyyy").format(scores.get(indice - 1).getHorodatage()));
         Label heure = new Label(new SimpleDateFormat("HH:mm").format(scores.get(indice - 1).getHorodatage()));
-        loginLabel.setFont(Ressources.getInstance().getPolice(20));
-        score.setFont(Ressources.getInstance().getPolice(20));
-        date.setFont(Ressources.getInstance().getPolice(20));
-        num.setFont(Ressources.getInstance().getPolice(20));
-        heure.setFont(Ressources.getInstance().getPolice(20));
+        loginLabel.setFont(Ressources.getPolice(20));
+        score.setFont(Ressources.getPolice(20));
+        date.setFont(Ressources.getPolice(20));
+        num.setFont(Ressources.getPolice(20));
+        heure.setFont(Ressources.getPolice(20));
         gridPane.add(num, 0, indice);
         gridPane.add(loginLabel, 1, indice);
         gridPane.add(score, 2, indice);

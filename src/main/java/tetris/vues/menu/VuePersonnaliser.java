@@ -13,7 +13,6 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
 import tetris.singletons.Preferences;
-import tetris.singletons.Ressources;
 import tetris.vues.Menu;
 import tetris.vues.Musique;
 import tetris.vues.VueMenuPrincipal;
@@ -117,7 +116,7 @@ public class VuePersonnaliser extends Stage implements Menu {
         muteBtn = new Button();
         muteBtn.setOnAction(e -> Musique.btnMute());
 
-        if (Ressources.getInstance().isLocked("pieces")) {
+        if (Preferences.getInstance().isLocked("pieces")) {
             locked = new StackPane(imageStylePiece, cadenas);
         } else {
             locked = new StackPane(cadenas, imageStylePiece);
@@ -158,7 +157,7 @@ public class VuePersonnaliser extends Stage implements Menu {
 
     public void switchCadenas(String typePerso) {
         ObservableList<Node> childs = this.locked.getChildren();
-        if (Ressources.getInstance().isLocked(typePerso)) {
+        if (Preferences.getInstance().isLocked(typePerso)) {
             if (!childs.get(childs.size() - 1).equals(cadenas)) {
                 if (childs.size() > 1) {
                     Node topNode = childs.get(childs.size() - 1);

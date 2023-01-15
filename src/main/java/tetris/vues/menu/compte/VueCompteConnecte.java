@@ -79,11 +79,11 @@ public class VueCompteConnecte extends Stage implements Menu {
         root.setBackground(Preferences.getInstance().getBackground());
 
         //nomjoueur
-        pseudo.setFont(Ressources.getInstance().getPolice(45));
+        pseudo.setFont(Ressources.getPolice(45));
         pseudo.setStyle("-fx-text-fill: white;");
 
         //departementjoueur
-        departement.setFont(Ressources.getInstance().getPolice(25));
+        departement.setFont(Ressources.getPolice(25));
         departement.setStyle("-fx-text-fill: lightgray;");
         departement.setPadding(new Insets(10, 0, 0, 0));
 
@@ -94,12 +94,12 @@ public class VueCompteConnecte extends Stage implements Menu {
 
         //bouton
         modifier.setText("Modifier votre profil");
-        modifier.setFont(Ressources.getInstance().getPolice(20));
+        modifier.setFont(Ressources.getPolice(20));
         modifier.getStyleClass().add("bouton");
         modifier.setPrefWidth(500);
 
         deconnecter.setText("Déconnexion");
-        deconnecter.setFont(Ressources.getInstance().getPolice(20));
+        deconnecter.setFont(Ressources.getPolice(20));
         deconnecter.getStyleClass().add("bouton-rouge");
         deconnecter.setPrefWidth(200);
 
@@ -150,7 +150,7 @@ public class VueCompteConnecte extends Stage implements Menu {
             List<Score> scores = ScoreManager.getInstance().getTopScoreParLogin(Session.getInstance().getLogin());
             if (scores.isEmpty()) {
                 Label erreur = new Label("Aucun score enregistré");
-                erreur.setFont(Ressources.getInstance().getPolice(25));
+                erreur.setFont(Ressources.getPolice(25));
                 classement.add(erreur, 0, 0);
 
             } else {
@@ -159,10 +159,10 @@ public class VueCompteConnecte extends Stage implements Menu {
                 Label date = new Label("Date");
                 Label heure = new Label("Heure");
 
-                score.setFont(Ressources.getInstance().getPolice(25));
-                date.setFont(Ressources.getInstance().getPolice(25));
+                score.setFont(Ressources.getPolice(25));
+                date.setFont(Ressources.getPolice(25));
 
-                heure.setFont(Ressources.getInstance().getPolice(25));
+                heure.setFont(Ressources.getPolice(25));
                 classement.add(score, 0, 0);
                 classement.add(date, 1, 0);
                 classement.add(heure, 2, 0);
@@ -172,9 +172,9 @@ public class VueCompteConnecte extends Stage implements Menu {
                     Label Date = new Label(new SimpleDateFormat("dd/MM/yyyy").format(scores.get(indice - 1).getHorodatage()));
                     Label Heure = new Label(new SimpleDateFormat("HH:mm").format(scores.get(indice - 1).getHorodatage()));
 
-                    Score.setFont(Ressources.getInstance().getPolice(20));
-                    Date.setFont(Ressources.getInstance().getPolice(20));
-                    Heure.setFont(Ressources.getInstance().getPolice(20));
+                    Score.setFont(Ressources.getPolice(20));
+                    Date.setFont(Ressources.getPolice(20));
+                    Heure.setFont(Ressources.getPolice(20));
                     classement.add(Score, 0, indice);
                     classement.add(Date, 1, indice);
                     classement.add(Heure, 2, indice);

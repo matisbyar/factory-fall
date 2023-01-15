@@ -133,27 +133,27 @@ public class VueModificationCompte extends Stage implements Menu {
         effacer.setPrefWidth(300);
         supprimer.setPrefWidth(300);
 
-        labelInformations.setFont(Ressources.getInstance().getPolice(20));
-        labelMotDePasse.setFont(Ressources.getInstance().getPolice(20));
+        labelInformations.setFont(Ressources.getPolice(20));
+        labelMotDePasse.setFont(Ressources.getPolice(20));
         labelInformations.getStyleClass().add("titre");
         labelMotDePasse.getStyleClass().add("titre");
 
         message.setVisible(false);
-        message.setFont(Ressources.getInstance().getPolice(20));
+        message.setFont(Ressources.getPolice(20));
 
-        champPseudo.setFont(Ressources.getInstance().getPolice(20));
-        champMotDePasse.setFont(Ressources.getInstance().getPolice(20));
-        champMotDePasseConfirmation.setFont(Ressources.getInstance().getPolice(20));
-        champMotDePasseModification.setFont(Ressources.getInstance().getPolice(20));
+        champPseudo.setFont(Ressources.getPolice(20));
+        champMotDePasse.setFont(Ressources.getPolice(20));
+        champMotDePasseConfirmation.setFont(Ressources.getPolice(20));
+        champMotDePasseModification.setFont(Ressources.getPolice(20));
 
         champPseudo.getStyleClass().add("champ");
         champMotDePasse.getStyleClass().add("champ");
         champMotDePasseConfirmation.getStyleClass().add("champ");
         champMotDePasseModification.getStyleClass().add("champ");
 
-        valider.setFont(Ressources.getInstance().getPolice(20));
-        effacer.setFont(Ressources.getInstance().getPolice(20));
-        supprimer.setFont(Ressources.getInstance().getPolice(20));
+        valider.setFont(Ressources.getPolice(20));
+        effacer.setFont(Ressources.getPolice(20));
+        supprimer.setFont(Ressources.getPolice(20));
 
         valider.getStyleClass().add("bouton");
         effacer.getStyleClass().add("bouton-rouge");
