@@ -5,7 +5,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tetris.TetrisIHM;
 import tetris.logique.Score;
@@ -26,10 +29,10 @@ public class VueCompteConnecte extends Stage implements Menu {
     private final BorderPane root;
     private final Scene scene;
     private final GridPane classement;
-    private final VBox  vbScores;
-    private final HBox information,actions;
-    private  final Button modifiéprofil,déconnecté;
-    private final Label nomjoueur,departementjoueur;
+    private final VBox vbScores;
+    private final HBox information, actions;
+    private final Button modifierProfil, deconnecter;
+    private final Label nomjoueur, departementjoueur;
 
     VueModificationCompte vueModificationCompte = new VueModificationCompte(this);
     Button modifier = new Button("Modifier le compte");
@@ -38,22 +41,22 @@ public class VueCompteConnecte extends Stage implements Menu {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
 
-        nomjoueur = new Label("nom joueur");
+        nomjoueur = new Label("Anonyme");
 
-        modifiéprofil = new Button();
-        déconnecté = new Button();
+        modifierProfil = new Button();
+        deconnecter = new Button();
 
-        departementjoueur = new Label("departement");
+        departementjoueur = new Label("Département : ");
 
         if (Session.getInstance().isConnected()) {
             nomjoueur.setText(Session.getInstance().getLogin());
-            departementjoueur.setText(Session.getInstance().getDepartement());
+            departementjoueur.setText("Département : " + Session.getInstance().getDepartement());
         }
 
         classement = new GridPane();
 
-        information = new HBox(nomjoueur,departementjoueur);
-        actions   =   new HBox(modifier,déconnecté);
+        information = new HBox(nomjoueur, departementjoueur);
+        actions = new HBox(modifier, deconnecter);
 
         vbScores = new VBox(information, classement, actions);
 
@@ -80,8 +83,8 @@ public class VueCompteConnecte extends Stage implements Menu {
         nomjoueur.setAlignment(Pos.BOTTOM_CENTER);
 
         //departementjoueur
-        departementjoueur.setFont(Ressources.getInstance().getPolice(30));
-        departementjoueur.setStyle("-fx-text-fill: white;");
+        departementjoueur.setFont(Ressources.getInstance().getPolice(25));
+        departementjoueur.setStyle("-fx-text-fill: lightgray;");
         departementjoueur.setAlignment(Pos.CENTER);
 
         // Hbox des boutons
@@ -89,16 +92,16 @@ public class VueCompteConnecte extends Stage implements Menu {
         actions.setSpacing(50);
         actions.setPadding(new Insets(10, 10, 10, 10));
 
-        //boutton
-        modifier.setText("Modifié votre profil");
+        //bouton
+        modifier.setText("Modifier votre profil");
         modifier.setFont(Ressources.getInstance().getPolice(20));
         modifier.getStyleClass().add("bouton");
         modifier.setPrefWidth(500);
 
-        déconnecté.setText("Déconnection");
-        déconnecté.setFont(Ressources.getInstance().getPolice(20));
-        déconnecté.getStyleClass().add("bouton");
-        déconnecté.setPrefWidth(200);
+        deconnecter.setText("Déconnexion");
+        deconnecter.setFont(Ressources.getInstance().getPolice(20));
+        deconnecter.getStyleClass().add("bouton");
+        deconnecter.setPrefWidth(200);
 
         //Classement
         classement.setHgap(20);
@@ -130,7 +133,7 @@ public class VueCompteConnecte extends Stage implements Menu {
             vueModificationCompte.mettreAJour();
             VueMenuPrincipal.getInstance().setScene(vueModificationCompte.getScene());
         });
-        déconnecté.setOnAction(event->{
+        deconnecter.setOnAction(event -> {
             Session.getInstance().disconnect();
             System.out.println("joueur bien deco");
 
@@ -172,7 +175,8 @@ public class VueCompteConnecte extends Stage implements Menu {
                     Heure.setFont(Ressources.getInstance().getPolice(20));
                     classement.add(Score, 0, indice);
                     classement.add(Date, 1, indice);
-                    classement.add(Heure, 2, indice); }
+                    classement.add(Heure, 2, indice);
+                }
             }
         }
     }
