@@ -181,19 +181,20 @@ public class VueMenuPrincipal extends Stage implements Menu {
         compte.setOnAction(actionEvent -> {
             vueCompteConnecte.mettreAJour();
             vueCompteDeconnecte.mettreAJour();
-            this.setScene(Session.getInstance().isConnected() ? vueCompteConnecte.getScene() : vueCompteDeconnecte.getScene());
+            if(Session.getInstance().isConnected()) vueCompteConnecte.afficherScene();
+            else vueCompteDeconnecte.afficherScene();
         });
         regles.setOnAction(actionEvent -> {
             vueRegles.mettreAJourFond();
-            this.setScene(vueRegles.getScene());
+            vueRegles.afficherScene();
         });
         personnaliser.setOnAction(actionEvent -> {
             vuePersonnaliser.mettreAJourFond();
-            this.setScene(vuePersonnaliser.getScene());
+            vuePersonnaliser.afficherScene();
         });
         classement.setOnAction(actionEvent -> {
             vueClassement.mettreAJour();
-            this.setScene(vueClassement.getScene());
+            vueClassement.afficherScene();
         });
     }
 
