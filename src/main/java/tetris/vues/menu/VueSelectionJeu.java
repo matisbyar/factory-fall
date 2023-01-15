@@ -1,7 +1,5 @@
 package tetris.vues.menu;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,18 +48,8 @@ public class VueSelectionJeu extends Stage implements Menu {
     }
 
     private void creerBindings() {
-        modeNormal.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                vueJeu = new VueJeu("NORMAL");
-            }
-        });
-        modeAventure.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                vueJeu = new VueJeu("AVENTURE");
-            }
-        });
+        modeNormal.setOnAction(actionEvent -> vueJeu = new VueJeu("NORMAL"));
+        modeAventure.setOnAction(actionEvent -> vueJeu = new VueJeu("AVENTURE"));
     }
 
     public void styliser() {
