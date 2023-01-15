@@ -11,14 +11,21 @@ import tetris.parametres.Preferences;
 
 import java.util.Objects;
 
+/**
+ * Vue de la grille de jeu. Elle est composée de 20 lignes et 10 colonnes.
+ * Chaque case de la grille est une ImageView.
+ * La grille est affichée dans la classe VueJeu.
+ *
+ * @see VueJeu
+ */
 public class VueGrille extends GridPane {
 
-    String dossierImg;
-    Image vide = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/vide.png")));
-    Image vide_clair = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/vide_clair.png")));
-    final Image imgS, imgI, imgJ, imgL, imgO, imgT, imgZ;
+    protected String dossierImg;
+    private final Image vide = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/vide.png")));
+    private final Image vide_clair = new Image(Objects.requireNonNull(TetrisIHM.class.getResourceAsStream("images/vide_clair.png")));
+    private final Image imgS, imgI, imgJ, imgL, imgO, imgT, imgZ;
 
-    Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+    private final Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
     Plateau p;
 
