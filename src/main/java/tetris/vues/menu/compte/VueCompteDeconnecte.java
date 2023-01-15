@@ -23,6 +23,9 @@ import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
 import tetris.vues.helpers.BoiteCombinee;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Objects;
 
 public class VueCompteDeconnecte extends Stage implements Menu {
@@ -37,7 +40,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     private final TextField pseudoConnexion, pseudoCreation;
     private final BoiteCombinee departementCreation;
     private final PasswordField motDePasseConnexion, motDePasseCreation, motDePasseCreationConfirmation;
-    private final Button boutonConnexion, boutonCreation;
+    private final Button boutonConnexion, boutonCreation, cgu;
 
     public VueCompteDeconnecte() {
         root = new BorderPane();
@@ -45,11 +48,13 @@ public class VueCompteDeconnecte extends Stage implements Menu {
 
         option = new HBox();
 
+
         champsConnexion = new VBox();
         champsCreation = new VBox();
 
         boutonConnexion = new Button();
         boutonCreation = new Button();
+        cgu = new Button();
 
         pseudoConnexion = new TextField();
         pseudoCreation = new TextField();
@@ -66,13 +71,14 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         erreurCreation = new Label();
 
         champsConnexion.getChildren().addAll(titreConnexion, new VBox(pseudoConnexion, motDePasseConnexion), new VBox(erreurConnexion, boutonConnexion));
-        champsCreation.getChildren().addAll(titreCreation, new VBox(pseudoCreation, departementCreation, motDePasseCreation, motDePasseCreationConfirmation), new VBox(erreurCreation, boutonCreation));
+        champsCreation.getChildren().addAll(titreCreation, new VBox(pseudoCreation, departementCreation, motDePasseCreation, motDePasseCreationConfirmation), cgu, new VBox(erreurCreation, boutonCreation));
 
         option.getChildren().addAll(champsConnexion, champsCreation);
 
         // Styles et bindings
         styliser();
         setDisable();
+        creerBindings();
 
         root.setCenter(option);
         root.setTop(new BarreNavigation("Compte", VueMenuPrincipal.getInstance(), this));
@@ -131,6 +137,10 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         boutonCreation.setPrefWidth(champsCreation.getPrefWidth());
         boutonConnexion.setFont(Ressources.getInstance().getPolice(20));
         boutonCreation.setFont(Ressources.getInstance().getPolice(20));
+        cgu.setText("en vous inscrivant, vous acceptez nos CGU");
+        cgu.getStyleClass().add("bouton-blanc-fond-noir");
+        cgu.setFont(Ressources.getInstance().getPolice(15));
+        cgu.setAlignment(Pos.CENTER);
 
         styliserChamps(champsConnexion);
         styliserChamps(champsCreation);
@@ -147,7 +157,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         erreurCreation.setAlignment(Pos.CENTER);
 
         ((VBox) champsConnexion.getChildren().get(2)).setAlignment(Pos.CENTER);
-        ((VBox) champsCreation.getChildren().get(2)).setAlignment(Pos.CENTER);
+        ((VBox) champsCreation.getChildren().get(3)).setAlignment(Pos.CENTER);
     }
 
     /**
@@ -170,7 +180,6 @@ public class VueCompteDeconnecte extends Stage implements Menu {
             }
         }
     }
-
 
     /**
      * Empêche l'utilisateur de renseigner des champs de connexion s'il a déjà écrit dans des champs d'inscription, et vice-versa.
@@ -258,6 +267,16 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         boutonCreation.setOnAction(joueurCree);
     }
 
+    public void creerBindings() {
+        cgu.setOnAction(event -> {
+                 try {
+                     java.awt.Desktop.getDesktop().open(new File("documents/CGU.pdf"));
+                 } catch (IOException ex) {
+                     ex.printStackTrace();
+                 }
+        });
+    }
+
     /**
      * Récupère le pseudo de l'utilisateur
      *
@@ -302,7 +321,6 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
-
         mettreAJour();
     }
 
@@ -315,5 +333,4 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         motDePasseConnexion.clear();
         root.setBackground(Preferences.getInstance().getBackground());
     }
-
 }
