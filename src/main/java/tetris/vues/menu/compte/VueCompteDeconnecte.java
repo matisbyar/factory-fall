@@ -18,11 +18,16 @@ import tetris.TetrisIHM;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
 import tetris.stockage.DepartementManager;
+import tetris.stockage.Session;
 import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
 import tetris.vues.helpers.BoiteCombinee;
 
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Objects;
 
 public class VueCompteDeconnecte extends Stage implements Menu {
@@ -37,7 +42,11 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     private final TextField pseudoConnexion, pseudoCreation;
     private final BoiteCombinee departementCreation;
     private final PasswordField motDePasseConnexion, motDePasseCreation, motDePasseCreationConfirmation;
-    private final Button boutonConnexion, boutonCreation;
+    private final Button boutonConnexion, boutonCreation,cgu;
+
+
+
+
 
     public VueCompteDeconnecte() {
         root = new BorderPane();
@@ -45,11 +54,14 @@ public class VueCompteDeconnecte extends Stage implements Menu {
 
         option = new HBox();
 
+
+
         champsConnexion = new VBox();
         champsCreation = new VBox();
 
         boutonConnexion = new Button();
         boutonCreation = new Button();
+        cgu = new Button();
 
         pseudoConnexion = new TextField();
         pseudoCreation = new TextField();
@@ -66,13 +78,14 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         erreurCreation = new Label();
 
         champsConnexion.getChildren().addAll(titreConnexion, new VBox(pseudoConnexion, motDePasseConnexion), new VBox(erreurConnexion, boutonConnexion));
-        champsCreation.getChildren().addAll(titreCreation, new VBox(pseudoCreation, departementCreation, motDePasseCreation, motDePasseCreationConfirmation), new VBox(erreurCreation, boutonCreation));
+        champsCreation.getChildren().addAll(titreCreation, new VBox(pseudoCreation, departementCreation, motDePasseCreation, motDePasseCreationConfirmation),cgu , new VBox(erreurCreation, boutonCreation));
 
         option.getChildren().addAll(champsConnexion, champsCreation);
 
         // Styles et bindings
         styliser();
         setDisable();
+        creerBindings();
 
         root.setCenter(option);
         root.setTop(new BarreNavigation("Compte", VueMenuPrincipal.getInstance(), this));
@@ -131,6 +144,11 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         boutonCreation.setPrefWidth(champsCreation.getPrefWidth());
         boutonConnexion.setFont(Ressources.getInstance().getPolice(20));
         boutonCreation.setFont(Ressources.getInstance().getPolice(20));
+        cgu.setText("en vous inscrivant, vous acceptez nos CGU");
+        cgu.getStyleClass().add("bouton-blanc-fond-noir");
+        cgu.setFont(Ressources.getInstance().getPolice(15));
+        cgu.setAlignment(Pos.CENTER);
+
 
         styliserChamps(champsConnexion);
         styliserChamps(champsCreation);
@@ -147,7 +165,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         erreurCreation.setAlignment(Pos.CENTER);
 
         ((VBox) champsConnexion.getChildren().get(2)).setAlignment(Pos.CENTER);
-        ((VBox) champsCreation.getChildren().get(2)).setAlignment(Pos.CENTER);
+        ((VBox) champsCreation.getChildren().get(3)).setAlignment(Pos.CENTER);
     }
 
     /**
@@ -256,6 +274,16 @@ public class VueCompteDeconnecte extends Stage implements Menu {
      */
     public void setButtonCreerJoueurCliqueListener(EventHandler<ActionEvent> joueurCree) {
         boutonCreation.setOnAction(joueurCree);
+    }
+
+    public void creerBindings() {
+        cgu.setOnAction(event -> {
+                 try {
+                     java.awt.Desktop.getDesktop().open(new File(TetrisIHM.class.getResource("pdf/CGU.pdf").toURI()));
+                 } catch (IOException | URISyntaxException ex) {
+                     ex.printStackTrace();
+                 }
+    });
     }
 
     /**
