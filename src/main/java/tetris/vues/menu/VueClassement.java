@@ -2,18 +2,15 @@ package tetris.vues.menu;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.*;
-
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import tetris.IJeu;
 import tetris.TetrisIHM;
 import tetris.logique.Score;
 import tetris.singletons.Preferences;
@@ -80,7 +77,6 @@ public class VueClassement extends Stage implements Menu {
         classementTopScore.getStyleClass().add("classement");
         classementFiltre.getStyleClass().add("classement");
 
-
         for (int i = 0; i < classementTopScore.getChildren().size() - classementTopScore.getColumnCount(); i++) {
             ((Label) classementTopScore.getChildren().get(i)).setFont(Ressources.getInstance().getPolice(20));
             classementTopScore.getChildren().get(i).getStyleClass().remove(0);
@@ -115,7 +111,7 @@ public class VueClassement extends Stage implements Menu {
      */
     private void changementDeClassement() {
         boolean connecter = Session.getInstance().isConnected();
-        if (afficherTopScore.isSelected() && !vbScores.getChildren().contains(classementTopScore) && !connecter ) {
+        if (afficherTopScore.isSelected() && !vbScores.getChildren().contains(classementTopScore) && !connecter) {
             afficherTopScore.getStyleClass().remove("bouton-clair");
             afficherFiltre.getStyleClass().remove("bouton-clair-select");
 
@@ -124,8 +120,7 @@ public class VueClassement extends Stage implements Menu {
 
             vbScores.getChildren().remove(classementFiltre);
             vbScores.getChildren().add(classementTopScore);
-        }
-        else if (afficherFiltre.isSelected() && !vbScores.getChildren().contains(classementFiltre) && !connecter) {
+        } else if (afficherFiltre.isSelected() && !vbScores.getChildren().contains(classementFiltre) && !connecter) {
             afficherTopScore.getStyleClass().remove("bouton-clair-select");
             afficherFiltre.getStyleClass().remove("bouton-clair");
 
@@ -134,8 +129,7 @@ public class VueClassement extends Stage implements Menu {
 
             vbScores.getChildren().remove(classementTopScore);
             vbScores.getChildren().add(classementFiltre);
-        }
-        else if (afficherTopScore.isSelected() && !vbScores.getChildren().contains(classementTopScore) && connecter ){
+        } else if (afficherTopScore.isSelected() && !vbScores.getChildren().contains(classementTopScore) && connecter) {
             afficherTopScore.getStyleClass().remove("bouton-clair");
             afficherFiltre.getStyleClass().remove("bouton-clair-select");
 
@@ -144,8 +138,7 @@ public class VueClassement extends Stage implements Menu {
 
             vbScores.getChildren().remove(classementFiltre);
             vbScores.getChildren().add(classementTopScore);
-        }
-        else if (afficherFiltre.isSelected() && !vbScores.getChildren().contains(classementFiltre) && connecter){
+        } else if (afficherFiltre.isSelected() && !vbScores.getChildren().contains(classementFiltre) && connecter) {
             afficherTopScore.getStyleClass().remove("bouton-clair-select");
             afficherFiltre.getStyleClass().remove("bouton-clair");
 
@@ -234,7 +227,7 @@ public class VueClassement extends Stage implements Menu {
             classementFiltre.add(score, 2, 0);
             classementFiltre.add(date, 3, 0);
             classementFiltre.add(heure, 4, 0);
-            for (int j = 1; j < 11 && j <= topScores.size()  ; j++) {
+            for (int j = 1; j < 11 && j <= topScores.size(); j++) {
                 String login = estConnecte ? topScores.get(j - 1).getLogin() : "Anonyme";
                 listToGridPane(topScores, j, login, classementFiltre);
             }
@@ -283,6 +276,5 @@ public class VueClassement extends Stage implements Menu {
         root.setBackground(Preferences.getInstance().getBackground());
         rafraichirClassements();
         afficherFiltre.setText(Session.getInstance().isConnected() ? "Top Département" : "Top Anonymes");
-
     }
 }

@@ -18,12 +18,10 @@ import tetris.TetrisIHM;
 import tetris.singletons.Preferences;
 import tetris.singletons.Ressources;
 import tetris.stockage.DepartementManager;
-import tetris.stockage.Session;
 import tetris.vues.Menu;
 import tetris.vues.VueMenuPrincipal;
 import tetris.vues.helpers.BarreNavigation;
 import tetris.vues.helpers.BoiteCombinee;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -42,18 +40,13 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     private final TextField pseudoConnexion, pseudoCreation;
     private final BoiteCombinee departementCreation;
     private final PasswordField motDePasseConnexion, motDePasseCreation, motDePasseCreationConfirmation;
-    private final Button boutonConnexion, boutonCreation,cgu;
-
-
-
-
+    private final Button boutonConnexion, boutonCreation, cgu;
 
     public VueCompteDeconnecte() {
         root = new BorderPane();
         scene = new Scene(root, 1280, 720);
 
         option = new HBox();
-
 
 
         champsConnexion = new VBox();
@@ -78,7 +71,7 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         erreurCreation = new Label();
 
         champsConnexion.getChildren().addAll(titreConnexion, new VBox(pseudoConnexion, motDePasseConnexion), new VBox(erreurConnexion, boutonConnexion));
-        champsCreation.getChildren().addAll(titreCreation, new VBox(pseudoCreation, departementCreation, motDePasseCreation, motDePasseCreationConfirmation),cgu , new VBox(erreurCreation, boutonCreation));
+        champsCreation.getChildren().addAll(titreCreation, new VBox(pseudoCreation, departementCreation, motDePasseCreation, motDePasseCreationConfirmation), cgu, new VBox(erreurCreation, boutonCreation));
 
         option.getChildren().addAll(champsConnexion, champsCreation);
 
@@ -149,7 +142,6 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         cgu.setFont(Ressources.getInstance().getPolice(15));
         cgu.setAlignment(Pos.CENTER);
 
-
         styliserChamps(champsConnexion);
         styliserChamps(champsCreation);
         champsConnexion.setMinHeight(champsConnexion.getPrefHeight());
@@ -188,7 +180,6 @@ public class VueCompteDeconnecte extends Stage implements Menu {
             }
         }
     }
-
 
     /**
      * Empêche l'utilisateur de renseigner des champs de connexion s'il a déjà écrit dans des champs d'inscription, et vice-versa.
@@ -278,12 +269,12 @@ public class VueCompteDeconnecte extends Stage implements Menu {
 
     public void creerBindings() {
         cgu.setOnAction(event -> {
-                 try {
-                     java.awt.Desktop.getDesktop().open(new File(TetrisIHM.class.getResource("pdf/CGU.pdf").toURI()));
-                 } catch (IOException | URISyntaxException ex) {
-                     ex.printStackTrace();
-                 }
-    });
+            try {
+                java.awt.Desktop.getDesktop().open(new File(TetrisIHM.class.getResource("pdf/CGU.pdf").toURI()));
+            } catch (IOException | URISyntaxException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     /**
@@ -330,7 +321,6 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     @Override
     public void afficherScene() {
         this.setScene(scene);
-
         mettreAJour();
     }
 
@@ -343,5 +333,4 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         motDePasseConnexion.clear();
         root.setBackground(Preferences.getInstance().getBackground());
     }
-
 }
