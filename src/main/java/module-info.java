@@ -6,6 +6,6 @@ module tetris {
     requires javafx.media;
 
 
-    opens tetris to javafx.fxml;
-    exports tetris;
+    opens factoryfall to javafx.fxml;
+    exports factoryfall;
 }
