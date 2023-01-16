@@ -24,7 +24,7 @@ public class StockageScoreDatabase {
             else st.setNull(5, Types.VARCHAR);
             st.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Une erreur est survenue avec l'insertion.");
         }
     }
 
@@ -39,7 +39,7 @@ public class StockageScoreDatabase {
             st.setInt(3, element.getId());
             st.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Une erreur est survenue avec la mise à jour.");
         }
     }
 
@@ -54,7 +54,7 @@ public class StockageScoreDatabase {
             st.setString(2, Score.getGameCode());
             st.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Une erreur est survenue avec la suppression.");
         }
     }
 
@@ -68,7 +68,7 @@ public class StockageScoreDatabase {
             st.setInt(1, id);
             st.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Une erreur est survenue avec la suppression.");
         }
     }
 
@@ -93,7 +93,7 @@ public class StockageScoreDatabase {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Une erreur est survenue avec la récupération.");
         }
         return scoresList;
     }
@@ -119,7 +119,7 @@ public class StockageScoreDatabase {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Une erreur est survenue avec la récupération.");
         }
         return score;
     }
@@ -152,7 +152,7 @@ public class StockageScoreDatabase {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Une erreur est survenue avec la récupération.");
         }
         return scoresList;
     }
@@ -184,7 +184,7 @@ public class StockageScoreDatabase {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Une erreur est survenue avec la récupération.");
         }
         return scoreList;
     }
@@ -211,7 +211,7 @@ public class StockageScoreDatabase {
                 i++;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Une erreur est survenue avec la récupération.");
         }
         return topScores;
     }
@@ -243,14 +243,14 @@ public class StockageScoreDatabase {
 
             return topscore;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Une erreur est survenue avec la récupération.");
         }
         return topscore;
     }
 
 
     public List<Score> GetTopScoreAnonyme() {
-        List<Score> topscoreanonyme = new ArrayList<>();
+        List<Score> topScoresAnonymes = new ArrayList<>();
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
         String req = "SELECT score, horodatage, login FROM Scores WHERE login IS NULL AND codejeu='TETRIS'  ORDER BY score DESC";
@@ -266,19 +266,14 @@ public class StockageScoreDatabase {
                     Timestamp time = result.getTimestamp("horodatage");
                     Score score = new Score(scoreValue, time);
                     score.setLogin(login);
-                    topscoreanonyme.add(score);
+                    topScoresAnonymes.add(score);
                     i++;
                 }
-
-
-                return topscoreanonyme;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Une erreur est survenue avec la récupération.");
         }
-        return topscoreanonyme;
+        return topScoresAnonymes;
     }
-
-
 }
 
