@@ -201,5 +201,11 @@ public class VueCompteConnecte extends Stage implements Menu {
         recupererClassement();
         pseudo.setText(Session.getInstance().getLogin());
         departement.setText("Département : " + Session.getInstance().getDepartement());
+        if (Session.getInstance().isConnected()) {
+            modifier.setDisable(false);
+            modifier.setVisible(true);
+            deconnecter.setText("Déconnexion");
+            deconnecter.setStyle("-fx-text-fill: red; -fx-border-color: red;");
+        }
     }
 }
