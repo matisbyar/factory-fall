@@ -8,18 +8,6 @@
 
 package factoryfall.vues.menu.compte;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import factoryfall.FactoryFall;
 import factoryfall.logique.AuthPlayer;
 import factoryfall.parametres.Preferences;
@@ -32,6 +20,18 @@ import factoryfall.vues.Menu;
 import factoryfall.vues.VueMenuPrincipal;
 import factoryfall.vues.helpers.BarreNavigation;
 import factoryfall.vues.helpers.BoiteCombinee;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -210,9 +210,19 @@ public class VueModificationCompte extends Stage implements Menu {
         });
 
         supprimer.setOnAction(action -> {
-            PlayerManager.getInstance().deletePlayer(Session.getInstance().getLogin());
-            Session.getInstance().disconnect();
-            afficherMessage("Compte supprimé", Color.GREEN);
+            AuthPlayer j = PlayerManager.getInstance().getPlayer(Session.getInstance().getLogin());
+            try {
+                if (!Security.checkPassword(champMotDePasseModification.getText(), j.getSalt(), j.getHashedPassword())) {
+                    afficherMessage("Entrez votre mot de passe avant de supprimer votre compte", Color.RED);
+                } else {
+                    PlayerManager.getInstance().deletePlayer(Session.getInstance().getLogin());
+                    Session.getInstance().disconnect();
+                    afficherMessage("Compte supprimé", Color.GREEN);
+                }
+            } catch (NoSuchAlgorithmException | InvalidKeyException e) {
+                afficherMessage("Une erreur est survenue.", Color.ORANGE);
+                System.out.println("Une erreur est survenue.");
+            }
         });
     }
 
