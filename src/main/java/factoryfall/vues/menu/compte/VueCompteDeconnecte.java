@@ -314,8 +314,8 @@ public class VueCompteDeconnecte extends Stage implements Menu {
     }
 
     public void afficherErreurCreation(String message) {
-        ((Label) ((VBox) champsCreation.getChildren().get(2)).getChildren().get(0)).setText(message);
-        ((VBox) champsCreation.getChildren().get(2)).getChildren().get(0).setVisible(true);
+        ((Label) ((VBox) champsCreation.getChildren().get(3)).getChildren().get(0)).setText(message);
+        ((VBox) champsCreation.getChildren().get(3)).getChildren().get(0).setVisible(true);
     }
 
     @Override

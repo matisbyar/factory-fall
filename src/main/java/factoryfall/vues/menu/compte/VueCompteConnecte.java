@@ -1,5 +1,14 @@
 package factoryfall.vues.menu.compte;
 
+import factoryfall.FactoryFall;
+import factoryfall.logique.Score;
+import factoryfall.parametres.Preferences;
+import factoryfall.parametres.Ressources;
+import factoryfall.stockage.ScoreManager;
+import factoryfall.stockage.Session;
+import factoryfall.vues.Menu;
+import factoryfall.vues.VueMenuPrincipal;
+import factoryfall.vues.helpers.BarreNavigation;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,15 +19,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import factoryfall.FactoryFall;
-import factoryfall.logique.Score;
-import factoryfall.parametres.Preferences;
-import factoryfall.parametres.Ressources;
-import factoryfall.stockage.ScoreManager;
-import factoryfall.stockage.Session;
-import factoryfall.vues.Menu;
-import factoryfall.vues.VueMenuPrincipal;
-import factoryfall.vues.helpers.BarreNavigation;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -139,7 +139,13 @@ public class VueCompteConnecte extends Stage implements Menu {
             vueModificationCompte.mettreAJour();
             VueMenuPrincipal.getInstance().setScene(vueModificationCompte.getScene());
         });
-        deconnecter.setOnAction(event -> Session.getInstance().disconnect());
+        deconnecter.setOnAction(event -> {
+            Session.getInstance().disconnect();
+            deconnecter.setText("Déconnecté");
+            deconnecter.setStyle("-fx-text-fill: green; -fx-border-color: green;");
+            modifier.setDisable(true);
+            modifier.setVisible(false);
+        });
     }
 
     /**
