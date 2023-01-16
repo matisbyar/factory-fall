@@ -1,13 +1,13 @@
-package tetris;
+package factoryfall;
 
+import factoryfall.stockage.SQLUtils;
+import factoryfall.vues.VueMenuPrincipal;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import tetris.stockage.SQLUtils;
-import tetris.vues.VueMenuPrincipal;
 
-public class TetrisIHM extends Application {
+public class FactoryFall extends Application {
 
     private final EventHandler<ActionEvent> quitter = actionEvent -> {
         try {
