@@ -1,5 +1,13 @@
 package factoryfall.vues.menu.compte;
 
+import factoryfall.FactoryFall;
+import factoryfall.parametres.Preferences;
+import factoryfall.parametres.Ressources;
+import factoryfall.stockage.DepartementManager;
+import factoryfall.vues.Menu;
+import factoryfall.vues.VueMenuPrincipal;
+import factoryfall.vues.helpers.BarreNavigation;
+import factoryfall.vues.helpers.BoiteCombinee;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -14,14 +22,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import factoryfall.FactoryFall;
-import factoryfall.parametres.Preferences;
-import factoryfall.parametres.Ressources;
-import factoryfall.stockage.DepartementManager;
-import factoryfall.vues.Menu;
-import factoryfall.vues.VueMenuPrincipal;
-import factoryfall.vues.helpers.BarreNavigation;
-import factoryfall.vues.helpers.BoiteCombinee;
 
 import java.io.File;
 import java.io.IOException;
@@ -136,7 +136,8 @@ public class VueCompteDeconnecte extends Stage implements Menu {
         boutonCreation.setPrefWidth(champsCreation.getPrefWidth());
         boutonConnexion.setFont(Ressources.getPolice(20));
         boutonCreation.setFont(Ressources.getPolice(20));
-        cgu.setText("en vous inscrivant, vous acceptez nos CGU");
+        cgu.setText("En vous inscrivant, vous acceptez nos CGU.");
+        cgu.setStyle("-fx-underline: true;");
         cgu.getStyleClass().add("bouton-blanc-fond-noir");
         cgu.setFont(Ressources.getPolice(15));
         cgu.setAlignment(Pos.CENTER);
