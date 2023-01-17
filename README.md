@@ -1,4 +1,4 @@
-<img src="https://gitlabinfo.iutmontp.univ-montp2.fr/sae-tetris/main/-/blob/main/src/main/resources/factoryfall/images/titre.png" alt="Logo Factory Fall">
+<img src="src/main/resources/factoryfall/images/titre.png" alt="Logo Factory Fall">
 
 # Factory Fall
 ## Description
