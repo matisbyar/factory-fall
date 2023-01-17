@@ -10,9 +10,6 @@ public class ScoreManager {
     private static ScoreManager instance = null;
     private final StockageScoreDatabase stockage = new StockageScoreDatabase();
 
-    private ScoreManager() {
-    }
-
     public static ScoreManager getInstance() {
         if (instance == null) instance = new ScoreManager();
         return instance;
@@ -22,12 +19,6 @@ public class ScoreManager {
         Score s = new Score(score, nbLignes);
         s.setLogin(login);
         stockage.create(s);
-    }
-
-    public void updateScore(int id, int score) {
-        // Score s = stockage.getById(id);
-        //s.setScore(score);
-        // stockage.update(s);
     }
 
     public void deleteScoreById(int id) {
