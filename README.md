@@ -1,6 +1,6 @@
-![[src/main/ressources/factoryfall/images/titre.png]]
+<img src="https://gitlabinfo.iutmontp.univ-montp2.fr/sae-tetris/main/-/blob/main/src/main/resources/factoryfall/images/titre.png" alt="Logo Factory Fall">
+
 # Factory Fall
----
 ## Description
 La SAÉ du troisième semestre du BUT Informatique nous invite à programmer un jeu d'arcade de notre choix, en suivant les méthodes de travail en équipe AGILE.
 
