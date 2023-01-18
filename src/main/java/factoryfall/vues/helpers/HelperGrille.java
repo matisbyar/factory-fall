@@ -62,8 +62,8 @@ public class HelperGrille extends GridPane {
             for (int ligne = 0; ligne < p.getPlateau()[0].length; ligne++) {
                 ImageView imagePiece = getClass() == HelperPieceExterieur.class ? new ImageView() : ligne % 2 == 0 ? new ImageView(vide) : new ImageView(vide_clair);
 
-                imagePiece.setFitHeight((primaryScreenBounds.getHeight() * 0.0325));
-                imagePiece.setFitWidth((primaryScreenBounds.getHeight() * 0.0325));
+                imagePiece.setFitHeight((primaryScreenBounds.getHeight() * 0.03));
+                imagePiece.setFitWidth((primaryScreenBounds.getHeight() * 0.03));
 
                 this.add(imagePiece, ligne, colonne);
             }
@@ -79,8 +79,8 @@ public class HelperGrille extends GridPane {
             for (int ligne = 0; ligne < p.getPlateau()[0].length; ligne++) {
                 ImageView imagePiece = getClass() == HelperPieceExterieur.class ? new ImageView() : ligne % 2 == 0 ? new ImageView(vide) : new ImageView(vide_clair);
 
-                imagePiece.setFitHeight((primaryScreenBounds.getHeight() * 0.0325));
-                imagePiece.setFitWidth((primaryScreenBounds.getHeight() * 0.0325));
+                imagePiece.setFitHeight((primaryScreenBounds.getHeight() * 0.03));
+                imagePiece.setFitWidth((primaryScreenBounds.getHeight() * 0.03));
 
                 String nomPiece = p.getPlateau()[colonne][ligne].getNom();
                 switch (nomPiece) {
