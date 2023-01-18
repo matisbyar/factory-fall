@@ -7,6 +7,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Cette classe opère toutes les requêtes à effectuer dans la base de données relevant des scores.
+ * Elle suit le modèle CRUD pour les requêtes, en plus de requêtes personnalisées.
+ *
+ * <p> Les requêtes sont préparées pour éviter les injections SQL.
+ *
+ * @see factoryfall.stockage.ScoreManager
+ */
 public class StockageScoreDatabase {
 
     public void create(Score element) {

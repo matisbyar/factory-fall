@@ -1,16 +1,18 @@
 package factoryfall.parametres;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
 import factoryfall.FactoryFall;
 import factoryfall.logique.Score;
 import factoryfall.stockage.ScoreManager;
 import factoryfall.stockage.Session;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 
 import java.util.Objects;
 
 /**
+ * La classe Preferences est un singleton qui permet de gérer les préférences de l'utilisateur.
+ * <br>
  * Exemple d'utilisation : Preferences.getInstance().getStylePiece();
  */
 public class Preferences {
@@ -53,16 +55,7 @@ public class Preferences {
         background = "industrial";
         imageBackground = new Image(Objects.requireNonNull(FactoryFall.class.getResourceAsStream("images/background/" + background + ".png")));
 
-
         muted = false;
-    }
-
-    public String getStylePiece() {
-        return stylePiece;
-    }
-
-    public void setStylePiece(String stylePiece) {
-        this.stylePiece = stylePiece;
     }
 
     /**
@@ -89,10 +82,11 @@ public class Preferences {
         imagePiecePreference.setImage(new Image(Objects.requireNonNull(FactoryFall.class.getResourceAsStream("images/" + stylePiece + "/L.jpg"))));
     }
 
-    public Image getImagePiecePreference() {
-        return imagePiecePreference.getImage();
-    }
-
+    /**
+     * Change le fond en fonction de l'état
+     *
+     * @param etat + ou - pour changer le fond (flèches de gauche ou droite)
+     */
     public void changerFond(String etat) {
         switch (etat) {
             case "+" -> backgroundActuel++;
@@ -113,22 +107,21 @@ public class Preferences {
         }
     }
 
+    /**
+     * Méthode qui est utilisable pour changer la musique. Pour le moment, l'action ne fait qu'arrêter la musique. Vous pouvez vous inspirer de la méthode :
+     *
+     * @see Preferences#changerImage(String) : méthode qui permet de changer l'image de la pièce en fonction du style choisi.
+     */
     public void changerMusique() {
         Musique.btnMute();
     }
 
-    public Background getBackground() {
-        return new Background(new BackgroundImage(imageBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
-    }
-
-    public void setMusiqueMute(boolean etat) {
-        muted = etat;
-    }
-
-    public boolean getMusiqueMute() {
-        return muted;
-    }
-
+    /**
+     * Vérifie que la pièce de personnalisation est débloquable par le joueur en fonction de son meilleur score
+     *
+     * @param typePerso le type de personnalisation à vérifier
+     * @return true si le joueur peut débloquer la personnalisation, false sinon
+     */
     public boolean isLocked(String typePerso) {
         Preferences preferences = Preferences.getInstance();
         Session joueur = Session.getInstance();
@@ -162,5 +155,29 @@ public class Preferences {
             default:
                 return false;
         }
+    }
+
+    public String getStylePiece() {
+        return stylePiece;
+    }
+
+    public void setStylePiece(String stylePiece) {
+        this.stylePiece = stylePiece;
+    }
+
+    public Background getBackground() {
+        return new Background(new BackgroundImage(imageBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1280, 720, false, false, false, false)));
+    }
+
+    public void setMusiqueMute(boolean etat) {
+        muted = etat;
+    }
+
+    public boolean getMusiqueMute() {
+        return muted;
+    }
+
+    public Image getImagePiecePreference() {
+        return imagePiecePreference.getImage();
     }
 }

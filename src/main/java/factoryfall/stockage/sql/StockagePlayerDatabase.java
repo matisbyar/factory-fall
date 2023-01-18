@@ -10,6 +10,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Cette classe opère toutes les requêtes à effectuer dans la base de données relevant des joueurs.
+ * Elle suit le modèle CRUD pour les requêtes, en plus de requêtes personnalisées.
+ *
+ * <p> Les requêtes sont préparées pour éviter les injections SQL.
+ *
+ * @see factoryfall.stockage.PlayerManager
+ */
 public class StockagePlayerDatabase {
 
     public void create(AuthPlayer element) {
@@ -75,7 +83,7 @@ public class StockagePlayerDatabase {
                     byte[] salt = result.getBytes("selHachage");
                     String numDepartement = result.getString("numDepartement");
 
-                    player = new AuthPlayer(login,numDepartement, password, salt);
+                    player = new AuthPlayer(login, numDepartement, password, salt);
 
                 }
             }
@@ -100,7 +108,7 @@ public class StockagePlayerDatabase {
                 String password = result.getString("mdpHache");
                 byte[] salt = result.getBytes("selHachage");
                 String numdepartement = result.getString("numDepartement");
-                AuthPlayer player = new AuthPlayer(login,numdepartement, password, salt);
+                AuthPlayer player = new AuthPlayer(login, numdepartement, password, salt);
 
                 playerList.add(player);
             }

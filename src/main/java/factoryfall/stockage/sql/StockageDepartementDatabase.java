@@ -10,18 +10,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Cette classe opère toutes les requêtes à effectuer dans la base de données relevant des départements.
+ * <p> Les requêtes sont préparées pour éviter les injections SQL.
+ *
+ * @see factoryfall.stockage.DepartementManager
+ */
 public class StockageDepartementDatabase {
 
-
-    public void update(String login, String newdepartement) {
+    public void update(String login, String nouveauDepartement) {
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "UPDATE JOUEURS_TETRIS SET departement = ? WHERE login = ?";
+        String req = "UPDATE JOUEURS SET numDepartement = ? WHERE login = ?";
         try (
                 PreparedStatement st = connection.prepareStatement(req)
         ) {
             st.setString(1, login);
-            st.setString(2, newdepartement);
+            st.setString(2, nouveauDepartement);
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

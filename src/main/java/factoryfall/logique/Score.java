@@ -6,7 +6,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import java.sql.Timestamp;
 
 /**
- * Selon votre fonctionnement vous 'navez peut-etre pas de classe Score, mais voilà comment le notre fonctionne avec la BD.'
+ * La classe Score représente un score dans le jeu. Elle est utilisée pour stocker les scores dans la base de données.
+ * Elle est aussi utilisée pour afficher les scores dans le tableau de scores.
+ * <br>
+ * Un score est composé d'un nombre de points, d'un nombre de lignes complétées, d'un horodatage et d'un login.
+ *
+ * @see factoryfall.stockage.ScoreManager
  */
 public class Score {
 
@@ -15,7 +20,7 @@ public class Score {
     private IntegerProperty nbLignes;
     private Timestamp horodatage;
     private String login;
-    private static final String gameCode = "TETRIS"; //CodeJeu: Motron: 'TRON' | Tetris : 'TETRIS' | DonkeyKong : 'DK'
+    private static final String gameCode = "TETRIS";
 
     private Score() {
         this.score = new SimpleIntegerProperty(0);
