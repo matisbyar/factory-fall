@@ -40,13 +40,14 @@ public class StockagePlayerDatabase {
     public void update(AuthPlayer element) {
         SQLUtils utils = SQLUtils.getInstance();
         Connection connection = utils.getConnection();
-        String req = "UPDATE JOUEURS SET mdpHache = ?, selHachage = ? WHERE login = ?";
+        String req = "UPDATE JOUEURS SET mdpHache = ?, selHachage = ?, numDepartement = ? WHERE login = ?";
         try (
                 PreparedStatement st = connection.prepareStatement(req)
         ) {
-            st.setString(3, element.getLogin());
+            st.setString(4, element.getLogin());
             st.setString(1, element.getHashedPassword());
             st.setBytes(2, element.getSalt());
+            st.setString(3, element.getDepartement());
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -37,6 +37,7 @@ public class PlayerManager {
         byte[] salt = Security.getSalt();
         p.setSalt(salt);
         p.setPassword(password);
+        p.setDepartement(departement);
         stockage.update(p);
     }
 

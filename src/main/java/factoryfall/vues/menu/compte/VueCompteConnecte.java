@@ -137,7 +137,7 @@ public class VueCompteConnecte extends Stage implements Menu {
     public void creerBindings() {
         modifier.setOnAction(event -> {
             vueModificationCompte.mettreAJour();
-            VueMenuPrincipal.getInstance().setScene(vueModificationCompte.getScene());
+            vueModificationCompte.afficherScene();
         });
         deconnecter.setOnAction(event -> {
             Session.getInstance().disconnect();

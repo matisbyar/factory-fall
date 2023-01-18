@@ -234,7 +234,8 @@ public class VueModificationCompte extends Stage implements Menu {
 
     @Override
     public void afficherScene() {
-        this.setScene(scene);
+        VueMenuPrincipal.getInstance().setScene(scene);
+        mettreAJour();
     }
 
     public void mettreAJour() {
