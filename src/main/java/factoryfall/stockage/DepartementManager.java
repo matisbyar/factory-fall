@@ -1,11 +1,15 @@
 package factoryfall.stockage;
 
-
 import factoryfall.logique.Departement;
 import factoryfall.stockage.sql.StockageDepartementDatabase;
 
 import java.util.List;
 
+/**
+ * La classe ScoreManager est un singleton qui permet de gérer les scores dans la base de données.
+ *
+ * @see StockageDepartementDatabase
+ */
 public class DepartementManager {
 
     private static DepartementManager instance = null;
@@ -18,7 +22,6 @@ public class DepartementManager {
         if (instance == null) instance = new DepartementManager();
         return instance;
     }
-
 
     public void updateDepartement(String login, String newdepartement) {
         stockage.update(login, newdepartement);

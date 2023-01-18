@@ -5,6 +5,11 @@ import factoryfall.stockage.sql.StockagePlayerDatabase;
 
 import java.util.List;
 
+/**
+ * La classe PlayerManager est un singleton qui permet de gérer les scores dans la base de données.
+ *
+ * @see StockagePlayerDatabase
+ */
 public class PlayerManager {
 
     private static PlayerManager instance = null;

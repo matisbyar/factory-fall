@@ -1,7 +1,14 @@
 package factoryfall.stockage;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
+/**
+ * Classe utilitaire pour la gestion de la base de données. Elle établit la connexion avec la base de données et est utilisée pour effectuer des requêtes.
+ * Comme il peut y avoir qu'une seule instance de la connexion à la base de données, cette classe suit le patron de conception Singleton.
+ */
 public class SQLUtils {
 
     private static SQLUtils instance = null;
@@ -29,6 +36,9 @@ public class SQLUtils {
         return connection;
     }
 
+    /**
+     * Ferme la connexion à la base de données. Nécessaire à chaque fois que le jeu est arrêté.
+     */
     public void closeConnection() {
         String req = "COMMIT";
         try (PreparedStatement st = connection.prepareStatement(req)) {
@@ -38,26 +48,5 @@ public class SQLUtils {
             e.printStackTrace();
         }
         instance = null;
-    }
-
-    /**
-     * Ce main sert juste à tester si votre connection fonctionne correctement.
-     * Vous pourrez le supprimer après.
-     */
-    public static void main(String[] args) {
-        SQLUtils utils = SQLUtils.getInstance();
-        Connection connection = utils.getConnection();
-        System.out.println(connection);
-
-        try (
-                Statement st = connection.createStatement();
-                ResultSet rs = st.executeQuery("SELECT * FROM SCORES")
-        ) {
-            while (rs.next()) {
-                System.out.println(rs.getInt("codeScore"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }

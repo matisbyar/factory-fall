@@ -5,6 +5,11 @@ import factoryfall.stockage.sql.StockageScoreDatabase;
 
 import java.util.List;
 
+/**
+ * La classe ScoreManager est un singleton qui permet de gérer les scores dans la base de données.
+ *
+ * @see StockageScoreDatabase
+ */
 public class ScoreManager {
 
     private static ScoreManager instance = null;
@@ -46,6 +51,7 @@ public class ScoreManager {
     public List<Score> getTopScores() {
         return stockage.getTopScores();
     }
+
     public List<Score> getTopScore() { return  stockage.getTopScores();}
 
     public List<Score> getTopScoresAnonyme() {
