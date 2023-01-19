@@ -23,7 +23,10 @@ public class PlayerManager {
         byte[] salt = Security.getSalt(); //Génération d'un sel de hachage 
         p.setSalt(salt); //Application du sel au nouveau joueur.
         p.setPassword(password); //Hachage du mot de passe avec le sel.
-        p.setDepartement(departement);
+
+        if (departement.equals("XX")) p.setDepartement(null);
+        else p.setDepartement(departement);
+
         stockage.create(p);
     }
 
