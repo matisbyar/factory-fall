@@ -23,4 +23,4 @@ Alexis occupe le rôle de **Product Owner**. C'est lui qui fait l'interface entr
 Matis occupe le rôle de **Scrum Master**. Il est le "gardien" de la méthode agile et veille à ce que l'équipe la suit. 
 
 ## Documentation
-L'ensemble du code est documenté. Vous pourrez également retrouver des informations complémentaires sur la rubrique "Wiki".
+L'ensemble du code est documenté. Vous pourrez également retrouver des informations complémentaires sur la rubrique <a href="https://gitlabinfo.iutmontp.univ-montp2.fr/sae-tetris/main/-/wikis/home">Wiki</a>.
